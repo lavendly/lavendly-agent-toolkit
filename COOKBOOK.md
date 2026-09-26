@@ -29,7 +29,7 @@ Narrate it quietly. Vertical.
 4. `create_workflow` with one shot of 6 s.
 5. `attach_track` voiceover with the script (synthesis first, hosted file if
    the server says `url required`), `attach_track` music with a one-line arc
-   and `ducking: true` at 0.38, `update_track` captions to `pop`,
+   and `ducking: true` at 0.38, `update_track` captions to `tiktok`,
    `set_clip_native_audio` to `off`.
 6. `estimate_cost`. Says: "One scene, <model>, 12 credits of 140. Go ahead?"
    Waits.
@@ -48,7 +48,7 @@ is free.
 - Ask for a voice by name (alloy, echo, fable, onyx, nova, shimmer) if you
   care; otherwise you get alloy and the agent tells you.
 - "No captions" turns them off. "Landscape" switches the caption style to
-  minimal.
+  `youtube`.
 - Anything over 12 s becomes a multi-clip proposal, not a stretched shot.
 
 ---

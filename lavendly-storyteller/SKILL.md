@@ -79,8 +79,9 @@ Exact JSON for every call: [references/mcp-calls.md](references/mcp-calls.md).
   the arc in one prompt: opening, build, release.
 - Native audio `off` for a narrated shot. Use `mix` at about 0.6 only when a
   character speaks on screen and the user wants that dialogue heard.
-- Captions on by default: `subtitleStyle: "pop"` for vertical and social
-  formats, `minimal` for 16:9, `off` when the user declines captions.
+- Captions on by default: `subtitleStyle: "tiktok"` for vertical and social
+  formats, `youtube` for 16:9, `off` when the user declines captions. The
+  full set is `off`, `tiktok`, `reels`, `youtube`, `caption`.
 
 ### Cost
 

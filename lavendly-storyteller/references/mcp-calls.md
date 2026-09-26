@@ -108,11 +108,11 @@ Keep `ducking: true` (drops the music 8 dB under the voice) and the volume.
 {
   "workflow_id": "<id>",
   "track_id": "<voiceover track id>",
-  "subtitleStyle": "pop"
+  "subtitleStyle": "tiktok"
 }
 ```
 
-Values: `off`, `pop`, `tiktok`, `minimal`. The same call adjusts `volume`
+Values: `off`, `tiktok`, `reels`, `youtube`, `caption`. The same call adjusts `volume`
 (0 to 2), `muted`, `ducking`, and the trim window (`startTime`, `duration`).
 
 ## 9. `set_clip_native_audio`

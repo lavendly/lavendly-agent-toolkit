@@ -86,7 +86,7 @@ decision. `storyteller` and `multi-clip` hand their generated scenes to
 
 The skill is prompt-side: it lives in your agent's skill loader and shapes the
 call sequence, the decisions and the taste. The MCP is action-side: it exposes
-the 29 Lavendly tools and moves bits. A skill can constrain which tools to call
+the Lavendly tools and moves bits. A skill can constrain which tools to call
 and how, but it can never add a tool, remove one, or replace `get_status` as
 the source of truth for what works right now. Full tool list and install
 guides: https://docs.lavendly.ai/mcp/overview

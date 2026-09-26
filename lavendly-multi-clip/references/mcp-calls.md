@@ -77,11 +77,11 @@ later clip. Fallback: `url` to one hosted file, same volume and ducking.
 {
   "workflow_id": "<id>",
   "track_id": "<voiceover track id>",
-  "subtitleStyle": "pop"
+  "subtitleStyle": "tiktok"
 }
 ```
 
-Values: `off`, `pop`, `tiktok`, `minimal`.
+Values: `off`, `tiktok`, `reels`, `youtube`, `caption`.
 
 ## `set_clip_native_audio`, every clip
 
