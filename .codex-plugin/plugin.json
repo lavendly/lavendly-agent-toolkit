@@ -1,0 +1,42 @@
+{
+  "name": "lavendly",
+  "version": "0.1.0",
+  "description": "Lavendly agent skills: narrated shorts, consistent multi-shot sequences, budget guardrails, the quality loop, and publishing through the Lavendly MCP.",
+  "author": {
+    "name": "Lavendly",
+    "url": "https://lavendly.ai"
+  },
+  "homepage": "https://lavendly.ai",
+  "repository": "https://github.com/lavendly/skills",
+  "license": "MIT",
+  "keywords": [
+    "lavendly",
+    "ai-video",
+    "video-generation",
+    "mcp",
+    "storytelling",
+    "multi-clip",
+    "cost-control",
+    "quality-check",
+    "publishing"
+  ],
+  "skills": "./",
+  "interface": {
+    "displayName": "Lavendly",
+    "shortDescription": "Make short AI films with the Lavendly MCP, cheaply and on the first try",
+    "longDescription": "Lavendly Skills give Codex an operating manual for the Lavendly MCP: probe capabilities and credits first, write anchored shot prompts, attach one voice and one score, estimate before spending, check every scene, render for free, and publish only after an explicit yes. Five skills: storyteller, multi-clip, cost-aware, review, publish.",
+    "developerName": "Lavendly",
+    "category": "Design",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://lavendly.ai",
+    "defaultPrompt": [
+      "Make a 5 second narrated clip of a lighthouse keeper at dawn",
+      "Three shots of the same character crossing a market, a bridge, and a station",
+      "Check the quality of my last workflow and render it",
+      "Schedule my rendered video to YouTube tomorrow at 9 am"
+    ]
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "$schema": "https://cursor.com/schemas/cursor-plugin/plugin.json",
+  "name": "lavendly",
+  "displayName": "Lavendly",
+  "version": "0.1.0",
+  "description": "Lavendly agent skills: narrated shorts, consistent multi-shot sequences, budget guardrails, the quality loop, and publishing through the Lavendly MCP.",
+  "author": {
+    "name": "Lavendly",
+    "url": "https://lavendly.ai"
+  },
+  "publisher": "Lavendly",
+  "homepage": "https://lavendly.ai",
+  "repository": "https://github.com/lavendly/skills",
+  "license": "MIT",
+  "category": "ai-content",
+  "keywords": [
+    "lavendly",
+    "ai-video",
+    "video-generation",
+    "mcp",
+    "storytelling",
+    "multi-clip",
+    "cost-control",
+    "quality-check",
+    "publishing"
+  ]
+}

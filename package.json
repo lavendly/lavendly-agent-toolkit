@@ -1,0 +1,50 @@
+{
+  "name": "@lavendly/skills",
+  "version": "0.1.0",
+  "description": "Agent skills for Lavendly: operating manuals that teach AI coding agents how to make good films with the Lavendly MCP.",
+  "license": "MIT",
+  "homepage": "https://lavendly.ai",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lavendly/skills.git"
+  },
+  "bugs": {
+    "url": "https://github.com/lavendly/skills/issues"
+  },
+  "bin": {
+    "lavendly-skills": "bin/install.js"
+  },
+  "files": [
+    "bin/",
+    "lavendly-storyteller/",
+    "lavendly-multi-clip/",
+    "lavendly-cost-aware/",
+    "lavendly-review/",
+    "lavendly-publish/",
+    "README.md",
+    "INSTALL.md",
+    "INSTALL_FOR_AGENTS.md",
+    "COOKBOOK.md",
+    "CHANGELOG.md",
+    "LICENSE",
+    "VERSION"
+  ],
+  "scripts": {
+    "validate": "node scripts/validate.mjs",
+    "test": "node scripts/validate.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "lavendly",
+    "agent-skills",
+    "mcp",
+    "ai-video",
+    "claude-code",
+    "cursor",
+    "codex",
+    "video-generation",
+    "storytelling"
+  ]
+}
