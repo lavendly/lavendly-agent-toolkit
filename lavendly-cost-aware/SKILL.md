@@ -1,6 +1,6 @@
 ---
 name: lavendly-cost-aware
-version: 0.1.0
+version: 0.2.0
 priority: high
 description: |
   Budget guardrails for every Lavendly MCP run, attended or unattended: pre-flight on status, ledger and monthly usage; estimate before any spend; the cheapest model that meets the brief; strict retry and idempotency discipline; one-line announcements and reports. Loads on top of a domain skill and wins every spend decision.

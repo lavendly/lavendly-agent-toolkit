@@ -2,12 +2,13 @@
 
 ## What this is
 
-Five agent skills that teach an AI coding agent how to make good films with
+Six agent skills that teach an AI coding agent how to make good films with
 the Lavendly MCP (https://mcp.lavendly.ai/mcp). The MCP is the tool catalog.
 A skill is the operating manual: call sequence, decision rules, stop
 conditions, taste.
 
 ```
+lavendly-director      15 to 90 s, hero lock, camera, light, sound, the cut, repair
 lavendly-storyteller   one shot, 5 to 12 s, voice + one music bed + captions
 lavendly-multi-clip    2 to 6 shots, anchors pasted verbatim, one score
 lavendly-cost-aware    priority high, wins every spend decision

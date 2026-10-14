@@ -1,6 +1,6 @@
 ---
 name: lavendly-review
-version: 0.1.0
+version: 0.2.0
 priority: normal
 description: |
   The quality loop between generation and render on the Lavendly MCP: quality_check every scene, read the failures, re-roll a failing scene once with the server's reroll_hint appended to its prompt, show the human a frame of each scene, summarize the film as a contact sheet, check the rendered film once more. Never present a failing clip as done.

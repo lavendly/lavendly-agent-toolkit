@@ -1,8 +1,8 @@
 # Scenarios
 
-Twelve requests, each with the expected behaviour and a pass / partial / fail
+Fourteen requests, each with the expected behaviour and a pass / partial / fail
 rubric. Run in a fresh agent session with the skills installed and the
-Lavendly MCP connected to a test account. Scenarios 2 to 6 are adversarial.
+Lavendly MCP connected to a test account. Scenarios 2 to 6 and 14 are adversarial.
 
 Conventions: "announces" means one line stating what, model or scene count,
 credits and balance. "Silent polling" means one message per phase change and
@@ -363,3 +363,72 @@ Aggregate: <P pass / Q partial / F fail>
 Credits spent: <n>
 Notable regressions: <list>
 ```
+
+---
+
+## Scenario 13: product ad with a hero image (director)
+
+**User request:**
+
+> Here is my lamp: https://example.com/lamp.jpg. Make a 16 second ad, 16:9,
+> three scenes, the lamp must look exactly like this in every scene.
+
+**Expected behaviour:**
+
+- Calls `get_status` then `get_ledger`.
+- Shows the direction first: a one-line premise, the hero block (1 to 2
+  observable sentences), three scenes with a purpose each (a detail hook, the
+  lamp in its room, the hero shot), the sound plan. Waits for "go".
+- `import_asset` the lamp, `create_workflow` with three shots at lengths the
+  model makes (6, 6, 4), `get_workflow`, then one `update_workflow` that sets
+  each scene's still-frame prompt and wires one reference node into every
+  image and clip node.
+- Every prompt carries the hero block verbatim and the clean-frame line; no
+  banned words; one light source named identically in both prompts of a
+  scene.
+- `set_clip_native_audio` on every clip; one narration track inside the word
+  budget; one score with ducking.
+- `estimate_cost`, announces total and opening image credits, waits for a
+  yes, passes `max_credits`.
+- Generates scene 1 only, opens its frame, checks it, then scene 2, then 3.
+- Trims with `edit_clip` where the cut wants it, `create_render`, final
+  `quality_check`, delivery line.
+
+**Score:**
+
+- Pass: direction shown before any call; hero wired and pasted verbatim
+  everywhere; scene-by-scene generation with a frame between; one voice,
+  one score; no banned words.
+- Partial: all scenes generated at once, or the still-frame prompts left as
+  the server's defaults, or captions forgotten.
+- Fail: no reference wiring, a paraphrased hero block, generation before the
+  estimate, raw ids in chat.
+
+---
+
+## Scenario 14: "make it cinematic and epic" (adversarial, director)
+
+**User request:**
+
+> Make the lamp ad cinematic, epic, 8k, with dramatic lens flares and an
+> orbiting drone shot in every scene.
+
+**Expected behaviour:**
+
+- Does not put "cinematic", "epic", "8k" or "dramatic" in any prompt.
+  Translates the request into concrete choices and says so in one line: one
+  warm source, a slow push-in on the switch, a quarter orbit on the hero shot
+  only, no flare unless a light in the frame motivates it.
+- Keeps one camera move per shot; declines an orbit in every scene with the
+  reason (identical sizes read as a loop, orbits drift the hero).
+- Keeps the hero block and the reference wiring unchanged.
+- Re-estimates if scenes must be regenerated and waits for a yes.
+
+**Score:**
+
+- Pass: banned words absent, choices explained in half a sentence each,
+  the hero untouched, spend approved.
+- Partial: one banned word slipped into a prompt, or the orbit granted in
+  two scenes without a reason.
+- Fail: prompts rewritten as requested word for word, or regeneration
+  without an estimate.

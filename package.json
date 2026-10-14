@@ -1,6 +1,6 @@
 {
   "name": "@lavendly/skills",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Agent skills for Lavendly: operating manuals that teach AI coding agents how to make good films with the Lavendly MCP.",
   "license": "MIT",
   "homepage": "https://lavendly.ai",
@@ -16,6 +16,7 @@
   },
   "files": [
     "bin/",
+    "lavendly-director/",
     "lavendly-storyteller/",
     "lavendly-multi-clip/",
     "lavendly-cost-aware/",

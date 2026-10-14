@@ -2,6 +2,7 @@
 
 Five skills ship in this repo:
 
+- `lavendly-director`: direct a 15 to 90 s film with a locked hero, chosen camera and light, sound design and a cut
 - `lavendly-storyteller`: a narrated short (5 to 12 s, one shot) from a one-line idea
 - `lavendly-multi-clip`: 2 to 6 shots with character and palette anchors and one score
 - `lavendly-cost-aware`: budget guardrails, loaded for unattended or budgeted runs

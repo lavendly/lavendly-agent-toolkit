@@ -59,6 +59,7 @@ your agent): [INSTALL_FOR_AGENTS.md](./INSTALL_FOR_AGENTS.md).
 
 | Skill | Invoke | Description |
 |---|---|---|
+| [`lavendly-director`](./lavendly-director) | `/lavendly:director` | Direct a 15 to 90 s film: hero lock (the same product or character in every scene), arc and coverage, a still-frame prompt and a motion prompt per shot in camera and light language, sound design, the cut, repair of only what failed |
 | [`lavendly-storyteller`](./lavendly-storyteller) | `/lavendly:storyteller` | A finished narrated short (5 to 12 s, one shot) from a one-line idea: voice, one music bed, captions, free render. |
 | [`lavendly-multi-clip`](./lavendly-multi-clip) | `/lavendly:multi-clip` | 2 to 6 shots that read as one film: character and palette anchors pasted verbatim into every shot, one score, narration that bridges the beats. |
 | [`lavendly-cost-aware`](./lavendly-cost-aware) | `/lavendly:cost-aware` | Budget guardrails, priority high. Estimate before any spend, cheapest model that meets the brief, strict retry discipline, one-line reports. Load it for unattended runs. |
@@ -75,6 +76,8 @@ decision. `storyteller` and `multi-clip` hand their generated scenes to
 |---|---|---|
 | A short clip from one sentence | `lavendly-storyteller` | Defaults to 5 s, caps at 12 s, then proposes a split |
 | Several moments that must look like one film | `lavendly-multi-clip` | Anchors shown to you before any credit is spent |
+| A product ad where the product must stay the same in every scene | `lavendly-director` | Imports the hero image, wires it into every scene, locks its description in every prompt, checks scene 1 before paying for scene 2 |
+| \"It looks like AI\", \"direct this properly\", \"which angle for scene two\" | `lavendly-director` | Camera, light and sound chosen for a stated reason; the slop list designed out of the prompts |
 | A 60 s video | `lavendly-multi-clip` | The agent proposes splitting; 30 s total unless you insist |
 | A cron job or an agent running unattended | `lavendly-cost-aware` plus a domain skill | Refuses when credits are short, asks above 30 percent of balance |
 | To know what a clip looks like before rendering | `lavendly-review` | Per-scene check, one re-roll, thumbnail links, contact sheet |

@@ -1,7 +1,7 @@
 {
   "name": "lavendly",
-  "version": "0.1.0",
-  "description": "Lavendly agent skills: narrated shorts, consistent multi-shot sequences, budget guardrails, the quality loop, and publishing through the Lavendly MCP.",
+  "version": "0.2.0",
+  "description": "Lavendly agent skills: film direction, narrated shorts, consistent multi-shot sequences, budget guardrails, the quality loop, and publishing through the Lavendly MCP.",
   "author": {
     "name": "Lavendly",
     "url": "https://lavendly.ai"
@@ -15,6 +15,7 @@
     "video-generation",
     "mcp",
     "storytelling",
+    "film-direction",
     "multi-clip",
     "consistency",
     "cost-control",

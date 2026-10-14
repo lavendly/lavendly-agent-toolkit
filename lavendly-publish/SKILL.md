@@ -1,6 +1,6 @@
 ---
 name: lavendly-publish
-version: 0.1.0
+version: 0.2.0
 priority: normal
 description: |
   Post or schedule a rendered Lavendly film to a connected channel through the Lavendly MCP: list channels, pick one, write a platform-fit title and caption, note that AI disclosure is automatic, confirm channel, title and time in one message, then publish_video or schedule_video with an ISO 8601 time in the user's timezone. Nothing posts without an explicit yes.
