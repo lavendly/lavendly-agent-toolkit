@@ -1,11 +1,11 @@
 ---
 name: lavendly-multi-clip
-version: 0.1.0
+version: 0.2.0
 priority: normal
 description: |
   Produce a 2 to 6 shot sequence that reads as one film with the Lavendly MCP: write a character anchor and a palette anchor, show them, wait for go, paste them verbatim at the top of every shot prompt, attach one voiceover and one score for the whole film, estimate and get approval, generate, check every scene, render for free.
   Use when: "three shots of", "a sequence where", "the same character in", "scene one, scene two", "a 20 second video about", or any brief with two or more beats or longer than 12 seconds.
-  Chain: lavendly-storyteller covers a single beat under 12 s; lavendly-review runs the per-scene quality loop after generation; lavendly-publish posts; lavendly-cost-aware, when loaded, wins every spend decision.
+  Chain: lavendly-director when the directing matters; lavendly-storyteller covers one beat under 12 s; lavendly-review runs the per-scene quality loop after generation; lavendly-publish posts; lavendly-cost-aware, when loaded, wins every spend decision.
   NOT for: one-shot clips (lavendly-storyteller), films over 30 s unless the user insists (propose two workflows), talking-head dialogue films, or briefs that depend on media pasted into the chat (the user uploads it to the Asset Library first).
 argument-hint: "[beats, 2 to 6] [seconds per shot] [voice] [language]"
 ---

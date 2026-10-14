@@ -8,9 +8,14 @@
     {
       "name": "lavendly",
       "source": "./",
-      "description": "Agent skills for Lavendly, the node-based AI video platform: narrated shorts, consistent multi-shot sequences, budget guardrails, the quality loop, and publishing through the Lavendly MCP.",
-      "version": "0.1.0",
+      "description": "Agent skills for Lavendly, the node-based AI video platform: film direction (hero lock, camera, light, sound, the cut), narrated shorts, consistent multi-shot sequences, budget guardrails, the quality loop, and publishing through the Lavendly MCP.",
+      "version": "0.2.0",
       "skills": [
+        {
+          "name": "director",
+          "path": "lavendly-director",
+          "invoke": "/lavendly:director"
+        },
         {
           "name": "storyteller",
           "path": "lavendly-storyteller",

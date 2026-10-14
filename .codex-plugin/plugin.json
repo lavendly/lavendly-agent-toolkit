@@ -1,6 +1,6 @@
 {
   "name": "lavendly",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Lavendly agent skills: narrated shorts, consistent multi-shot sequences, budget guardrails, the quality loop, and publishing through the Lavendly MCP.",
   "author": {
     "name": "Lavendly",

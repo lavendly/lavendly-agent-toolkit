@@ -1,11 +1,11 @@
 ---
 name: lavendly-storyteller
-version: 0.1.0
+version: 0.2.0
 priority: normal
 description: |
   Produce a finished narrated short (5 to 12 seconds, one shot) from a one-line idea with the Lavendly MCP: probe status and credits, create one workflow, attach one voiceover and one music bed, estimate and get approval, generate, check quality, render for free, deliver the link.
   Use when: "make me a short video of", "a 5 second clip of", "narrate this", "quick reel", "turn this sentence into a video", or any brief with one moment and no more than one shot.
-  Chain: hand off to lavendly-multi-clip when the brief has two or more beats or asks for more than 12 seconds; lavendly-review owns the quality loop after generation; lavendly-publish owns posting; lavendly-cost-aware, when loaded, wins every spend decision.
+  Chain: hand off to lavendly-director when the look matters; to lavendly-multi-clip when the brief has two or more beats or asks for more than 12 seconds; lavendly-review owns the quality loop after generation; lavendly-publish owns posting; lavendly-cost-aware, when loaded, wins every spend decision.
   NOT for: multi-shot sequences (lavendly-multi-clip), publishing or scheduling (lavendly-publish), editing an existing canvas node by node, or any brief that depends on media pasted into the chat (the user uploads it to the Asset Library first).
 argument-hint: "[one-line idea] [duration 5..12] [voice] [language]"
 ---

@@ -32,6 +32,8 @@ const TOOLS = new Set([
   'list_projects', 'create_project',
   'import_asset',
   'estimate_cost', 'generate_scene', 'get_generation_status',
+  // Edit group (shared/mcpCatalog.mjs): the Studio timeline from the MCP
+  'edit_clip', 'split_clip', 'move_clip',
   'get_workflow_audio', 'attach_track', 'update_track', 'detach_track', 'set_clip_native_audio',
   'create_render', 'get_render', 'list_renders', 'list_all_renders',
   'quality_check', 'get_scene_frame',
@@ -57,6 +59,14 @@ const FIELDS = new Set([
   'insufficient_credits', 'version_conflict', 'workflow_conflict', 'invalid_args',
   'workflow_not_found', 'clip_not_found', 'track_not_found', 'job_not_found', 'tool_error',
   'http_status',
+  // lavendly-director: edit_clip edits and response (editsSchema, PATCH /nodes/:id/edits)
+  'start_ms', 'end_ms', 'fade_in_ms', 'fade_out_ms', 'timeline_start',
+  // split_clip and move_clip arguments
+  'at_sec', 'timeline_start_sec',
+  // generate_scene / create_render spend cap and its refusal code
+  'max_credits', 'quote_exceeded',
+  // estimate_cost and quality_check response keys
+  'opening_image_credits', 'story_pass',
 ]);
 
 const failures = [];
