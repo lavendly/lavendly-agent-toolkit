@@ -99,6 +99,7 @@ makes them impossible.
 | Changing identity | a paraphrased hero block | the block verbatim, the reference wired |
 | Grain, bloom, flare, haze, teal-orange | "cinematic" | delete the word; name the one light source |
 | Random slow motion | "dramatic", "epic" | the speed stated: "at walking pace" |
+| An object nobody asked for (a golden key in a hollow tree) | an unnamed space: a hollow, a doorway, a box, a table, a pair of hands | say what is inside or on it, or "only light, nothing else" |
 
 ## Narration budget
 
