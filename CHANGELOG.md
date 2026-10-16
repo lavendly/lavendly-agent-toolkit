@@ -26,10 +26,9 @@ Added:
 Changed:
 
 - Every skill corrected against the platform as it runs: a score or
-  narration covers the film only when wired to every clip (or attached with
-  `scope` film where the server offers it); levels set at attach time,
-  `update_track` volume as a percent; chained frame urls prefixed with
-  `/api`; one-scene films burn no captions; real voice names; `split_clip`
+  narration covers the film only when wired to every clip; levels set at
+  attach time, `update_track` volume as a percent; chained frame urls
+  prefixed with `/api`; real voice names; `split_clip`
   relative to the clip; clips play back to back; references never on Veo
   3.1 Lite; import and listing limits; the idempotency window is 24 hours.
 - `lavendly-director`: motion prompts describe the change plus a lock
@@ -65,10 +64,27 @@ Fixed:
   the skill folders from the root. Skills are invoked as
   `/lavendly:lavendly-<name>`.
 - The Cursor and Codex manifests described five skills; they now list six.
-- Use the newer platform checks where `get_schema` lists them: the server
-  cut check on `quality_check`, the stored scene plan
-  (`set_scene_plan`, `get_scene_plan`), measured film loudness, and rendered
-  dissolves (overlap with `move_clip`, matching fades with `edit_clip`).
+- Four platform features are live and the skills use them: the cut check
+  (`quality_check` with `previous_node_id`, `same_scene`, `present`; findings
+  with why and fix) in the director's and review's level B checks; the
+  stored scene plan (`set_scene_plan` after `create_workflow`,
+  `get_scene_plan` in a later session) in the director and series
+  sequences; measured loudness (every export normalized to -14 LUFS, true
+  peak -1.5 dBTP, reported by `get_render` and the film's `quality_check`);
+  rendered dissolves (every clip placed with `move_clip`, the later one
+  overlapping the earlier, matching fades with `edit_clip`). Statements that
+  dissolves are not rendered or loudness is not measured are removed; wipes
+  are still not rendered.
+- `attach_track` `scope` film is live and is the default for a film-wide
+  score or narration: attach with `"scope": "film"`, confirm with
+  `get_workflow_audio`, and add `update_workflow` edges only for a clip the
+  attach missed (an older server, a clip split later).
+- One-scene films: a single clip goes through the full stitch when it has a
+  captioned voiceover (word timings and a `subtitleStyle` other than off) or
+  any picture edit other than volume and mute, so captions burn and trims,
+  fades, crop, speed and colour apply. A single clip with neither ships as
+  the raw clip. The storyteller's one-shot narrated short burns captions
+  again.
 
 - `lavendly-director`: the intent card and continuity modes (strict,
   flexible, discontinuous) with priorities by video type, so ads, demos,

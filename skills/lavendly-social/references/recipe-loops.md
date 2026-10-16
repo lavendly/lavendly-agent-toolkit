@@ -21,7 +21,7 @@ spoken line loop.
 
 | Method | How | Best for | Seam risk |
 |---|---|---|---|
-| A. Cyclic action | One clip, locked camera, a motion that returns to its start (a swing, a wave in and out, a rotation of a symmetric object, a breath); trim to exactly one cycle, then a copy of that node after it (method D), because a film of one clip node applies no trim | Satisfying, ambient | Medium: check first and last frames |
+| A. Cyclic action | One clip, locked camera, a motion that returns to its start (a swing, a wave in and out, a rotation of a symmetric object, a breath); trim to exactly one cycle (a one-clip film applies the trim) | Satisfying, ambient | Medium: check first and last frames |
 | B. Ping-pong | The clip, then a copy of it reversed (`edit_clip` reverse) | Motions that read both ways: a push-in then pull-out, a breathing animal, drifting snow, a swaying plant | Low; avoid motions with obvious direction (pouring, falling, walking) |
 | C. Story loop | Plan the last shot's end state to equal shot 1's start state (the door closes as it was at the start) and the last line to run into the first | Jokes, POV, storytime | Medium: depends on the match |
 | D. Repeat | Copies of the clip node with the same `data.video_url` and trim, one after another (`edit_clip` loop is accepted but ignored by the export) | A runtime longer than one cycle; any loop that is one clip | Same as the cycle |
@@ -42,9 +42,10 @@ spoken line loop.
 
 ## 4. Structures
 
-A film with one clip node renders on the single-scene path: no trim, no
-fades, no reverse, no captions. Every loop here keeps two or more clip
-nodes (the copy of method A, the reversed copy of method B).
+A film with one clip node applies trim, fades, reverse and captions too:
+any of them sends it through the full stitch; with none it ships the raw
+clip. Method B holds two clip nodes by construction (the clip and its
+reversed copy).
 
 ### 6 s (method A, one cycle)
 

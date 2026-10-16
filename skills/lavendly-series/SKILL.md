@@ -48,7 +48,7 @@ what carries between episodes and the production around them.
 | 5 | show | Bible, format, pilot plan, budget; wait for "go" |
 | 6 | `create_project` | One project for the show; its description holds the short bible |
 | 7 | `import_asset` | Every recurring reference, once (character sheets, head close-ups, places, style plate); keep the hosted urls in the bible |
-| 8 | director steps | Episode 1 with `create_workflow` (`project_id`, the episode name), references wired, sound, estimate, scene-by-scene generation, checks, render |
+| 8 | director steps | Episode 1 with `create_workflow` (`project_id`, the episode name); `set_scene_plan` per clip node (`heading` equal to the plan's heading, `present` from the closed cast, `hands_off`) before any generation; references wired, sound, estimate, scene-by-scene generation, checks (each cut with `previous_node_id`), render |
 | 9 | `update_workflow` | After delivery: the episode's `description` gets its story-so-far line and its end state; `get_workflow` to read it back |
 
 ### The next episode
@@ -56,11 +56,11 @@ what carries between episodes and the production around them.
 | Step | Call | Purpose |
 |---|---|---|
 | 1 | `list_projects`, `list_workflows` | The show's project; its episodes by name |
-| 2 | `get_workflow` | The last episode: its description (story so far, end state), its reference nodes' hosted urls, its node prompts |
+| 2 | `get_workflow`, `get_scene_plan` | The last episode: its description (story so far, end state), its reference nodes' hosted urls, its node prompts, and its stored scene plan (last heading, who was present, the final hand-off) |
 | 3 | `get_scene_frame` | The last clip, frame last: the starting state of every recurring person and object |
 | 4 | write | The episode plan on the format skeleton: only the free fields change; starting states from step 3; the story-so-far line it adds |
 | 5 | show | The plan and the cost; wait for "go" (or the operator's cap in an unattended run) |
-| 6 | director steps | `create_workflow` with the show's `project_id`, the same references by url, the same voice and score brief, generate, check, render |
+| 6 | director steps | `create_workflow` with the show's `project_id`; `set_scene_plan` for this episode before generating; the same references by url, the same voice and score brief, generate, check, render |
 | 7 | `update_workflow` | Write this episode's story-so-far line and end state into its description |
 | 8 | lavendly-publish | Schedule or post only after an explicit yes |
 
@@ -129,7 +129,8 @@ what carries between episodes and the production around them.
   2.6 and 2.7: 4; most others: 2). Never Veo 3.1 Lite for a series with
   reference images.
 - If the user keeps a Film Bible for the show in the app, the server adds
-  its consistency block to every clip; still write the locked descriptions
+  its consistency block to every clip (in a scene with a stored plan, the
+  plan's "In frame" line replaces its cast line); still write the locked descriptions
   into the still prompts (opening images are made from text). Ask once
   whether one exists; the MCP cannot read it.
 

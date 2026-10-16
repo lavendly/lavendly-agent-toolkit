@@ -28,10 +28,10 @@ van for a year.
 - Cutting: `edit_clip` trim (source milliseconds), `split_clip` (seconds
   into the clip, not film time) to remove pauses and filler, the unwanted
   piece's node removed with `update_workflow` (clips play back to back, so
-  no gap remains; `move_clip` only reorders), `edit_clip` crop to reframe
+  no gap remains; `move_clip` sets the order), `edit_clip` crop to reframe
   16:9 to vertical.
-- A film of one clip node applies no trim, crop or captions: keep at least
-  two pieces in every clip.
+- A film of one clip node applies the trim and the crop too: any picture
+  edit other than volume and mute sends it through the full stitch.
 - Captions: burned captions come only from a voiceover Lavendly
   synthesized. The speech in imported footage gets none from the MCP. Tell
   the user to switch on the platform's auto-captions when posting (TikTok,

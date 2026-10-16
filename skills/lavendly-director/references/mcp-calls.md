@@ -69,6 +69,31 @@ the group (type `group`, `data.memberIds`), the image node (type
 `videoGenerator`, id starting with `vid_`). The clip ids are the `node_id`
 and `clip_id` values for everything below.
 
+## `set_scene_plan`: the plan stored with the film
+
+Right after `get_workflow`, before any `generate_scene`:
+
+```json
+{
+  "workflow_id": "<id>",
+  "scenes": {
+    "vid_1": { "heading": "workshop, late afternoon", "present": ["Mia", "the brass lamp"], "hands_off": "Mia lifts the lamp toward the window" },
+    "vid_2": { "heading": "workshop, late afternoon", "present": ["Mia", "the brass lamp"], "hands_off": "the lamp lit on the sill" }
+  }
+}
+```
+
+Keys are clip node ids. `heading` up to 80 characters (the plan's heading
+word for word), `present` up to 8 entries of up to 60, `hands_off` up to
+200. An entry replaces that scene's plan, `null` removes it, scenes left out
+are kept. When a planned scene is generated, its prompt opens with
+"Scene: <heading>" and, when `present` is not empty, "In frame: <present>,
+exactly one of each. Nobody else enters the frame, and no second copy, twin
+or reflection of them." That line replaces the Film Bible's film-wide cast
+line in that scene, so list everyone who should be seen. `hands_off` is
+stored, not put in the prompt. `get_scene_plan` with `workflow_id` returns
+`{ workflow_id, version, scenes }`; read it first in any later session.
+
 ## `update_workflow`: opening prompts and the hero wiring
 
 One call. Send the full `nodes` and `edges` arrays back (the server replaces
@@ -134,6 +159,7 @@ have no mode set; set every clip.
   "workflow_id": "<id>",
   "clip_id": "vid_1",
   "kind": "voiceover",
+  "scope": "film",
   "text": "Three words at the start.\nSix more as the room comes in.\nA last line on the hero shot.",
   "voice": "<voice id from get_status, or omit for the default>",
   "subtitleStyle": "off",
@@ -159,7 +185,7 @@ characters per voiceover (longer is cut), priced per character.
 
 Captions burn only from a synthesized voiceover (`text`, which keeps word
 timings) with an explicit `subtitleStyle` (`off`, `tiktok`, `reels`,
-`youtube`, `caption`), one style per film, on a film of two or more scenes.
+`youtube`, `caption`), one style per film; a one-scene film burns them too.
 A voiceover attached by `url`, native dialogue and imported speech get none.
 
 ## `attach_track`: one score
@@ -169,6 +195,7 @@ A voiceover attached by `url`, native dialogue and imported speech get none.
   "workflow_id": "<id>",
   "clip_id": "vid_1",
   "kind": "music",
+  "scope": "film",
   "mood": "Warm, sparse felt piano over a low string pad. Opens on a single held note as the switch clicks, builds gently through the room, lands on one sustained chord for the hero shot. Instrumental, never busy.",
   "duration": 18,
   "ducking": true,
@@ -188,22 +215,23 @@ a voiceover (the default 100 is unity), and when a level must change later
 pass `update_track` `volume` in percent (35 for a music bed, 100 for unity),
 never 0.35.
 
-## Make the score and the narration film-wide: `update_workflow`
+## Make the score and the narration film-wide: `scope` film
 
-`attach_track` has no `scope` argument on the server today, and the MCP
-drops an unknown argument without an error. So the default is always: attach,
-add the edges below with `update_workflow`, then call `get_workflow_audio`
-and confirm the track reaches every clip. Once `get_schema` lists `scope` on
-`attach_track`, `"scope": "film"` is a shortcut for the edges; confirm with
-`get_workflow_audio` all the same.
+A score or a narration plays across the film only when its node has an edge
+to every clip node (type videoGenerator). Attach it with `"scope": "film"`:
+the server adds an edge from the new node to every clip in the workflow and
+lists them in the response's `clip_ids`. Then call `get_workflow_audio` and
+confirm the track reaches every clip. Without `scope` (default `"clip"`) the
+node is wired to one clip only: mixed into that clip alone, and a track
+longer than the clip freezes that clip's last frame for the rest of the
+track. `scope` wires the clips that exist at attach time; a clip added or
+split later needs its own edge.
 
-`attach_track` wires its new node to one clip only. A score or a narration
-plays across the film only when its node has an edge to every clip node
-(type videoGenerator). Left on one clip it is mixed into that clip alone, and
-a track longer than the clip freezes that clip's last frame for the rest of
-the track. After the attach, `get_workflow`, then send the full `nodes` and
-`edges` arrays back with one more edge per other clip, copied from the edge
-`attach_track` made (same shape, new `id` and `target`):
+Only if `get_workflow_audio` shows the track on fewer clips (an older or
+self-hosted server that drops the argument), add the edges yourself:
+`get_workflow`, then `update_workflow` with the full `nodes` and `edges`
+arrays and one more edge per other clip, copied from the edge `attach_track`
+made (same shape, new `id` and `target`):
 
 ```json
 {
@@ -273,8 +301,27 @@ re-roll a bad opening image, change the image node's prompt and clear its
 ```
 
 Reads `pass`, `score`, `failures`, `reroll_hint`, `story_pass`. A false
-`story_pass` alone is advisory: open the frame before spending. For the
-rendered film, omit `node_id`.
+`story_pass` alone is advisory: open the frame before spending.
+
+The cut into a scene, once both scenes are generated:
+
+```json
+{ "workflow_id": "<id>", "node_id": "vid_2", "previous_node_id": "vid_1", "same_scene": true, "present": ["Mia", "the brass lamp"] }
+```
+
+Adds `cut: { previous_node_id, same_scene, cut_pass, findings, boundary,
+notes }`. Each finding: `severity` (high, medium, low), `family`, `kind`
+(identity, cast, state, light, geography, repeat), `detail`, `why`, `fix`,
+`mode` and `confidence` (0.6). `cut_pass` is false when any finding is
+high; the cut never flips `pass`, and `skip_vlm` skips it. `same_scene`
+defaults to true; false keeps only identity (for names in `present`) and
+repeat. A bad earlier scene answers with a `previous_` code
+(`previous_node_not_found`, `previous_not_generated`).
+
+For the rendered film, omit `node_id`; the answer adds `loudness`
+(`integrated_lufs`, `true_peak_dbtp`, `lra`, `target_lufs`,
+`target_true_peak_dbtp`). Below -20 or above -10 LUFS, or a true peak above
+-1 dBTP, adds a warning to `failures`; it never flips `pass`.
 
 ## `edit_clip`: the cut
 
@@ -290,10 +337,37 @@ rendered film, omit `node_id`.
 `fade_in_ms` on the incoming one make a dip to black. `split_clip` with
 `at_sec` (seconds into the clip, rate-aware, not film time) cuts one clip
 into two halves; the second half gets no audio edges. `move_clip` with
-`timeline_start_sec` only changes the order: clips play back to back and a
-gap is never rendered. Applied in the export: trim, speed, volume, mute,
+`timeline_start_sec` sets the order; a gap is never rendered (clips play
+back to back) and an overlap renders only as a dissolve. Applied in the export: trim, speed, volume, mute,
 fades, crop, rotate, flip, reverse, color; `loop`, `resize`, `stabilize` and
 `lut_id` are accepted but ignored.
+
+## A dissolve: `move_clip` plus two fades
+
+Trim first (a left trim moves `timeline_start`). Then:
+
+1. Give every video clip a position, in film order: `move_clip` the first
+   to 0 and each next one to the previous start plus the previous clip's
+   `duration` (from `get_workflow`, or from the `edit_clip` answer). A clip
+   with no position renders after every clip that has one.
+2. `move_clip` the later clip of the pair to the earlier one's start plus
+   its `duration` minus the overlap, and every clip after it earlier by the
+   same overlap, so no gap opens (a render finished in the browser plays a
+   gap as black).
+3. `edit_clip` the earlier clip with `fade_out_ms` and the later clip with
+   `fade_in_ms`, both equal to the overlap in ms (within 50 ms).
+
+For `vid_2` at 6 s lasting 6 s and a 1 s dissolve into `vid_3`:
+
+```json
+{ "workflow_id": "<id>", "node_id": "vid_3", "timeline_start_sec": 11 }
+{ "workflow_id": "<id>", "node_id": "vid_2", "edits": { "fade_out_ms": 1000 } }
+{ "workflow_id": "<id>", "node_id": "vid_3", "edits": { "fade_in_ms": 1000 } }
+```
+
+The export blends picture and sound over the overlap and the film is the
+timeline length (shorter by the overlap). An overlap without matching
+fades plays back to back; fades without an overlap are a dip to black.
 
 ## `get_scene_frame`: chaining a continuing shot
 
@@ -311,5 +385,7 @@ describe the end state in words instead.
 { "workflow_id": "<id>", "idempotency_key": "render-<workflow id>" }
 ```
 
-Free; it reuses the generated clips. Poll `get_render` until done; then
-`quality_check` without `node_id` once, then deliver the link.
+Free; it reuses the generated clips. Every export is normalized to -14 LUFS
+with a -1.5 dBTP true peak ceiling. Poll `get_render` until done; its result
+carries `loudness` (`normalized`, `integrated_lufs`, `true_peak_dbtp`,
+`lra`). Then `quality_check` without `node_id` once, then deliver the link.

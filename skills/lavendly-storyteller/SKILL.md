@@ -13,10 +13,10 @@ argument-hint: "[one-line idea] [duration 4..12] [voice] [language]"
 # Lavendly Storyteller
 
 Turn one line into a finished narrated short: one shot, one voice, one music
-bed, a free render, a link. About twelve tool calls on a good day. A
-one-scene film renders on its own path: it ships the raw clip at the
-model's own size (no export normalisation), with no burned captions and no
-picture edits (only clip volume and mute). Say so when captions come up.
+bed, captions, a free render, a link. About twelve tool calls on a good day.
+A one-scene film with a captioned voiceover, or with any picture edit other
+than volume and mute, goes through the full stitch: captions burn and the
+edits apply. With neither it ships the raw clip at the model's own size.
 
 ## Before anything else
 
@@ -36,10 +36,10 @@ picture edits (only clip volume and mute). Say so when captions come up.
 | 3 | write | The script (see Narration) and the shot prompt (see Prompt) |
 | 4 | `create_workflow` | `name`, `shots: [{prompt, duration}]` with a duration the model makes (see Duration), top-level `videoModel` only when Duration says so, `project_name` when the user named one, `idempotency_key` |
 | 5 | read the record | The clip id is the id of the scene's video node (type videoGenerator); call `get_workflow` if unsure |
-| 6 | say | One line: a one-scene film ships without burned captions; when captions matter, offer two scenes (lavendly-multi-clip) |
+| 6 | decide | The caption style (see Audio): `tiktok` for vertical and social, `youtube` for 16:9, `off` only when the user declines captions |
 | 7 | `set_clip_native_audio` | `{mode: "off"}` unless the shot has on-screen dialogue |
 | 8 | `estimate_cost` | One approval line: the clip credits plus the voice and music credits (paid when attached, not in the estimate), the total and the balance after; wait for the yes; refuse when `sufficient` is false |
-| 9 | `attach_track` voiceover | After the yes: `kind: "voiceover"`, `text`, `voice` only when one was picked (see Narration), no `volume`, `idempotency_key` |
+| 9 | `attach_track` voiceover | After the yes: `kind: "voiceover"`, `text`, `subtitleStyle` from step 6, `voice` only when one was picked (see Narration), no `volume`, `idempotency_key` |
 | 10 | `attach_track` music | `kind: "music"`, `mood` and `duration` equal to the clip, `ducking: true`, volume 0.35 to 0.4, `idempotency_key` |
 | 11 | `generate_scene` | `workflow_id` only (it is the one scene), `idempotency_key` |
 | 12 | `get_generation_status` | Poll silently, report phase changes only |
@@ -92,9 +92,11 @@ Exact JSON for every call: [references/mcp-calls.md](references/mcp-calls.md).
   the arc in one prompt: opening, build, release.
 - Native audio `off` for a narrated shot. Use `mix` at about 0.6 only when a
   character speaks on screen and the user wants that dialogue heard.
-- No captions on a one-scene film: the single-scene render burns none,
-  whatever `subtitleStyle` says. When the user wants captions, offer the
-  moment as two scenes and hand off to lavendly-multi-clip.
+- Captions on by default: `subtitleStyle` `tiktok` for vertical and social
+  formats, `youtube` for 16:9, `off` when the user declines. The full set is
+  `off`, `tiktok`, `reels`, `youtube`, `caption`. They burn from the
+  synthesized voiceover's word timings, on this one-scene film too; a
+  voiceover attached by `url` gets none.
 
 ### Cost
 

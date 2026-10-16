@@ -31,9 +31,9 @@ idempotency key.
 | You see | It means | Do |
 |---|---|---|
 | The last frame freezes at the end | narration ran past the picture | cut the line to `floor(seconds x 2.5)` words or fewer, re-attach |
-| The first scene freezes while the voice or score plays on | the track is wired to the first clip only | `update_workflow`: an edge from the track's node to every clip ([mcp-calls.md](mcp-calls.md)) |
+| The first scene freezes while the voice or score plays on | the track is wired to the first clip only | Attach with `"scope": "film"`; for a clip it missed, `update_workflow`: an edge from the track's node to that clip ([mcp-calls.md](mcp-calls.md)) |
 | The voice fights a clip's own sound | the clip is `native` under narration | set that clip to `mix` at 0.3, or `off` |
-| Captions missing | no narration, a voiceover by `url`, style `off`, or a one-scene film | captions come only from a synthesized voiceover on a film of two or more scenes; `update_track` with a `subtitleStyle` |
+| Captions missing | no narration, a voiceover by `url`, or style `off` | captions come only from a synthesized voiceover (a one-scene film too); `update_track` with a `subtitleStyle` |
 | A spoken price reads wrong in captions | digits in the script | spell numbers out in speech; captions follow the words |
 | Garbled subtitles inside a Veo clip | Veo sometimes burns its own | "(no subtitles)" after each spoken line; burn captions from narration |
 

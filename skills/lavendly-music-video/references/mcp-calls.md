@@ -65,6 +65,7 @@ in each motion prompt).
   "workflow_id": "<id>",
   "clip_id": "vid_1",
   "kind": "music",
+  "scope": "film",
   "url": "<hosted url of the song>",
   "duration": 30,
   "volume": 1,
@@ -80,23 +81,21 @@ the BPM in the brief: never promise exact tempo; the user confirms the
 downbeats after listening. If the server answers `url required`, the user
 makes the track in the app's Asset Library and you attach it by `url`.
 
-## The song across the whole film: `update_workflow`
+## The song across the whole film: `scope` film
 
-`attach_track` has no `scope` argument on the server today, and the MCP
-drops an unknown argument without an error. So the default is always: attach
-the song, add the edges below with `update_workflow` (to every clip and every
-split piece), then call `get_workflow_audio` and confirm the song reaches
-every clip. Once `get_schema` lists `scope` on `attach_track`,
-`"scope": "film"` is a shortcut for the edges (split pieces made later still
-need their edge); confirm with `get_workflow_audio` all the same.
+The song plays as the film's music only when its node has an edge to every
+clip (type videoGenerator). Attach it with `"scope": "film"` (the example
+above): the server adds an edge from the song's node to every clip in the
+workflow and lists them in the response's `clip_ids`. Then call
+`get_workflow_audio` and confirm the song reaches every clip. Without
+`scope` the node is wired to the first clip only: mixed into clip 1 alone,
+and the export freezes clip 1's last frame for the rest of the song.
 
-`attach_track` wires the song's node to the first clip only. It plays as the
-film's music only when its node has an edge to every clip (type
-videoGenerator). Left on clip 1 it is mixed into clip 1 alone, and the
-export freezes clip 1's last frame for the rest of the song. After the
-attach, `get_workflow`, then send the full `nodes` and `edges` arrays back
-with one more edge per other clip, copied from the edge `attach_track` made
-(same shape, new `id` and `target`):
+Only if `get_workflow_audio` shows the song on fewer clips (an older or
+self-hosted server that drops the argument), add the edges yourself:
+`get_workflow`, then `update_workflow` with the full `nodes` and `edges`
+arrays and one more edge per other clip, copied from the edge `attach_track`
+made (same shape, new `id` and `target`):
 
 ```json
 {
@@ -110,8 +109,9 @@ with one more edge per other clip, copied from the edge `attach_track` made
 }
 ```
 
-Split pieces are new clip nodes with no audio edges: wire the song to them
-too, after every split, and check `get_workflow_audio` before the render.
+`scope` wires the clips that exist at attach time. Split pieces are new clip
+nodes with no audio edges: wire the song to them with `update_workflow`
+after every split, and check `get_workflow_audio` before the render.
 
 The block: a song attached by `url` gets a 30 s block unless `duration` is
 passed (5 to 120 on attach); above 120 s raise it with `update_track`
@@ -191,9 +191,13 @@ The timeline box becomes the trim window divided by the speed.
 ## Order every clip
 
 The export plays clips back to back in timeline order; the trims alone set
-the cut times, and a timeline gap is never rendered. `move_clip` only sets
-the order: give each clip its slot's start so the order and the Studio
-timeline match the cut list:
+the cut times, and a timeline gap is never rendered. `move_clip` sets the
+order: give each clip its slot's start so the order and the Studio
+timeline match the cut list. A start before the previous clip's end is an
+overlap: with `fade_out_ms` on the earlier clip and `fade_in_ms` on the
+later, both equal to the overlap, it renders as a dissolve (the film gets
+shorter by the overlap, so later slots move up by it); without those fades
+the clips play back to back:
 
 ```json
 { "workflow_id": "<id>", "node_id": "vid_3", "timeline_start_sec": 7.97 }

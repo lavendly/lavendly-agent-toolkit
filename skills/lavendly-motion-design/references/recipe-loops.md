@@ -18,11 +18,12 @@ honest methods below.
 | C. Occlusion seam | invisible when both ends are a near-uniform frame | the clip starts inside a uniform field (white cloud, darkness, a colour) and ends pushing into one | subjects that cannot fill the frame |
 | D. Dip | through black, clean but visible | a slow mood loop where a breath is fine | a loop meant to be invisible |
 
-A film with one clip node renders on the single-scene path: no trim, no
-fade, no reverse, no colour edit. Method A always has two or more nodes;
-methods B, C and D need a second node (a copy of the clip with the same
-`data.video_url`, no generation credits) before any trim or fade applies.
-`edit_clip` `loop` is accepted but ignored by the export.
+A film with one clip node applies trim, fade, reverse and colour edits too:
+any picture edit other than volume and mute sends it through the full
+stitch, and with none it ships the raw clip. Method A always has two or
+more nodes by construction; methods B, C and D work on one node. A copy of
+the clip (same `data.video_url`) costs no generation credits. `edit_clip`
+`loop` is accepted but ignored by the export.
 
 ## 2. Method A, step by step (the default)
 
@@ -89,9 +90,9 @@ the last is not filled, the seam will show; use method A on the same clip.
 
 ### Dip (method D)
 
-`fade_in_ms` and `fade_out_ms` of 300 to 600: on the first and the last
-of two copies of the clip (a single clip node applies no fade). The loop
-breathes through black. Honest, simple, visible.
+`fade_in_ms` and `fade_out_ms` of 300 to 600 on the clip (on the first
+and the last node when the loop uses copies). The loop breathes through
+black. Honest, simple, visible.
 
 ## 4. Hook and payoff
 

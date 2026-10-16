@@ -33,10 +33,9 @@ Example: a moss forest seen at the scale of an ant.
 | 1b | 5 to 10 | Medium | Ground level | macro | the glide continues, rising slightly | past a red mushroom the size of a tree |
 | 1c | 10 to 15 | Close-up | Slightly low | macro | the glide eases to a stop | arriving at one dew drop holding the whole forest upside down |
 
-Generate: one 15 s clip. A film of one clip ships raw: no trim, fade,
-colour edit or captions apply on the single-scene path. When the piece
-needs any of them, split it once with `split_clip` so the film holds two
-clips.
+Generate: one 15 s clip. A trim, a fade, a colour edit or captions send
+the one-clip film through the full stitch and apply; with none of them it
+ships the raw clip.
 
 ### 30 s: one take, or three shots
 

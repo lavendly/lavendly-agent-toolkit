@@ -141,6 +141,7 @@ charged.
   "workflow_id": "<id>",
   "clip_id": "vid_1",
   "kind": "voiceover",
+  "scope": "film",
   "text": "Pip has a lantern.\nBut where is the first star?\nThere it is. Goodnight, Pip.",
   "voice": "<an ElevenLabs voice from the list below, or omit for Rachel>",
   "subtitleStyle": "youtube",
@@ -153,6 +154,7 @@ charged.
   "workflow_id": "<id>",
   "clip_id": "vid_1",
   "kind": "music",
+  "scope": "film",
   "mood": "Celesta, harp and felt piano at about 70 BPM, soft and unhurried; a solo cello enters at the turn; slows and resolves on one held harp chord on the last page. Instrumental.",
   "duration": 15,
   "ducking": true,
@@ -181,7 +183,7 @@ characters per voiceover (longer is cut), priced per character.
 
 Captions burn only from a synthesized voiceover (`text`, which keeps word
 timings) with an explicit `subtitleStyle` (`off`, `tiktok`, `reels`,
-`youtube`, `caption`), one style per film, on a film of two or more scenes.
+`youtube`, `caption`), one style per film; a one-scene film burns them too.
 A voiceover attached by `url`, native dialogue and imported speech get none.
 
 Levels: attach-time music `volume` 0 to 2 is read as a fraction (0.35
@@ -191,22 +193,23 @@ a voiceover (the default 100 is unity), and when a level must change later
 pass `update_track` `volume` in percent (35 for a music bed, 100 for unity),
 never 0.35.
 
-## Make the score and the narration film-wide: `update_workflow`
+## Make the score and the narration film-wide: `scope` film
 
-`attach_track` has no `scope` argument on the server today, and the MCP
-drops an unknown argument without an error. So the default is always: attach,
-add the edges below with `update_workflow`, then call `get_workflow_audio`
-and confirm the track reaches every clip. Once `get_schema` lists `scope` on
-`attach_track`, `"scope": "film"` is a shortcut for the edges; confirm with
-`get_workflow_audio` all the same.
+A score or a narration plays across the film only when its node has an edge
+to every clip node (type videoGenerator). Attach it with `"scope": "film"`:
+the server adds an edge from the new node to every clip in the workflow and
+lists them in the response's `clip_ids`. Then call `get_workflow_audio` and
+confirm the track reaches every clip. Without `scope` (default `"clip"`) the
+node is wired to one clip only: mixed into that clip alone, and a track
+longer than the clip freezes that clip's last frame for the rest of the
+track. `scope` wires the clips that exist at attach time; a clip added or
+split later needs its own edge.
 
-`attach_track` wires its new node to one clip only. A score or a narration
-plays across the film only when its node has an edge to every clip node
-(type videoGenerator). Left on one clip it is mixed into that clip alone, and
-a track longer than the clip freezes that clip's last frame for the rest of
-the track. After the attach, `get_workflow`, then send the full `nodes` and
-`edges` arrays back with one more edge per other clip, copied from the edge
-`attach_track` made (same shape, new `id` and `target`):
+Only if `get_workflow_audio` shows the track on fewer clips (an older or
+self-hosted server that drops the argument), add the edges yourself:
+`get_workflow`, then `update_workflow` with the full `nodes` and `edges`
+arrays and one more edge per other clip, copied from the edge `attach_track`
+made (same shape, new `id` and `target`):
 
 ```json
 {
@@ -305,12 +308,20 @@ Read `pass`, `score`, `failures`, `reroll_hint`, `story_pass`. Without
 - `speed` (0.1 to 8) can stretch a hold slightly; check the clip after, as
   a slowed generated clip may look less smooth.
 - `split_clip` with `at_sec` (seconds into the clip, not film time) when
-  one clip holds two beats; `move_clip` with `timeline_start_sec` only
-  reorders: clips play back to back and a gap is never rendered.
-- Applied in a film of two or more scenes: trim, speed, volume, mute,
-  fades, crop, rotate, flip, reverse, color. `loop`, `resize`, `stabilize`
-  and `lut_id` are accepted but ignored. A one-scene film applies none of the
-  picture edits (only clip volume and mute) and burns no captions.
+  one clip holds two beats; `move_clip` with `timeline_start_sec` sets the
+  order: clips play back to back and a gap is never rendered.
+- A dissolve (a soft page change between scenes): give every video clip a
+  position in film order with `move_clip` (a clip with no position renders
+  after the positioned ones), move the later clip and every clip after it
+  earlier by the overlap, then `fade_out_ms` on the earlier clip and
+  `fade_in_ms` on the later, both equal to the overlap (within 50 ms). The
+  export blends picture and sound over it. An overlap without matching
+  fades plays back to back.
+- Applied by the export: trim, speed, volume, mute, fades, crop, rotate,
+  flip, reverse, color. `loop`, `resize`, `stabilize` and `lut_id` are
+  accepted but ignored. A one-scene film applies them too: any picture edit
+  other than volume and mute, or a captioned voiceover, sends it through the
+  full stitch; with neither it ships the raw clip.
 
 ## 14. `create_render`, `get_render`
 

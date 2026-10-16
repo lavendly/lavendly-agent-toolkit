@@ -13,6 +13,7 @@ a playlist of clips.
   "workflow_id": "<id>",
   "clip_id": "<first clip id>",
   "kind": "music",
+  "scope": "film",
   "url": "<hosted url of the song>",
   "duration": 30,
   "volume": 1,
@@ -27,10 +28,12 @@ a playlist of clips.
   before the song starts (section 4), never over it.
 - Never a second music track, never one per scene. A remix of the song for
   the bridge is a new upload of the whole edit, not a second track.
-- `attach_track` wires the song to the first clip only. Add an edge from
-  the song's node to every other clip with `update_workflow`
-  ([mcp-calls.md](mcp-calls.md)); left on clip 1 the song freezes clip 1's
-  last frame for the rest of the track. Split pieces need the edge too.
+- `"scope": "film"` wires the song to every clip that exists at attach
+  time; confirm with `get_workflow_audio`. Only if it reaches fewer clips
+  (an older server that drops the argument), add the edges with
+  `update_workflow` ([mcp-calls.md](mcp-calls.md)); left on clip 1 the song
+  freezes clip 1's last frame for the rest of the track. Split pieces made
+  later need their edge with `update_workflow`.
 - `duration` is the block: the song is cut at its end (a `url` song
   defaults to 30 s). Set it to the film's length.
 - The source in-point is `edit_clip` `trim` `start_ms` on the song's node:

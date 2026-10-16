@@ -111,23 +111,26 @@ Rules:
 
 | Plan element | How it reaches the platform |
 |---|---|
-| Heading, purpose, action, outcome, framing | The still-frame prompt and the motion prompt of that scene; the heading and who is present open every motion prompt of the scene |
+| Heading, who is present, hand-off | `set_scene_plan` right after `create_workflow` and `get_workflow`, keyed by each video node id: `heading` (the plan's heading, up to 80 characters), `present` (up to 8 names of up to 60), `hands_off` (up to 200). The server opens that scene's prompt with "Scene: <heading>" and "In frame: <present>, exactly one of each. Nobody else enters the frame, and no second copy, twin or reflection of them."; in a planned scene this replaces the Film Bible's film-wide cast line. `hands_off` is stored for the next session, not put in the prompt |
+| Purpose, action, outcome, framing | The still-frame prompt and the motion prompt of that scene |
 | Locked descriptions | Pasted verbatim into both prompts; the hero reference node wired into every clip and image node |
 | Strict continuation across a cut | `get_scene_frame` with frame set to last on the earlier scene (not trimmed at its end: last reads the raw clip); `/api` plus the returned path becomes the next scene's image node url through `update_workflow`, before `generate_scene` |
 | Light and place | Named identically in every prompt of the scene |
-| Sound and timing | `set_clip_native_audio`, `attach_track`, `update_workflow` edges to every clip, `update_track` (startTime, volume in percent, ducking) |
-| Transition and duration | `edit_clip` trims and fades, `split_clip`, `move_clip` |
-| Dependencies | Scene order in `create_workflow`, and `move_clip` when the cut needs a different order (it reorders; clips play back to back) |
+| Sound and timing | `set_clip_native_audio`, `attach_track` with `"scope": "film"` (checked with `get_workflow_audio`), `update_track` (startTime, volume in percent, ducking) |
+| Transition and duration | `edit_clip` trims and fades, `split_clip`, `move_clip` (an overlap with matching fades is a dissolve) |
+| Dependencies | Scene order in `create_workflow`, and `move_clip` when the cut needs a different order (gaps close: clips play back to back) |
 
 Check `get_schema` for the frame option before relying on it; on a server
 without it, describe the end state of the earlier shot at the start of the
 next motion prompt instead.
 
-Where `get_schema` lists `set_scene_plan`, store each shot's heading, who is
-present and its hand-off with it right after `create_workflow` (keyed by the
-video node id); the server then opens that scene's prompt with the heading
-and the cast. Read it back with `get_scene_plan` in a later session instead
-of rebuilding the plan from memory.
+Store the plan before the first `generate_scene`: the heading in
+`set_scene_plan` is the plan's heading word for word, and `present` lists
+exactly who is seen, including a person who continues from the previous
+shot. Scenes left out of a call are kept and `null` removes one, so a
+changed shot is one entry. In a later session, `get_scene_plan` first and
+plan from what it returns, never from memory. The same headings decide
+`same_scene` on the cut check: same heading, true; new heading, false.
 
 ## 6. When the plan changes
 

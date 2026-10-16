@@ -67,12 +67,12 @@ brief: never promise exact tempo, and have the user confirm the downbeats.
 | 8 | `create_workflow` | `shots` in timeline order, one `aspect`, one `videoModel`, `idempotency_key` |
 | 9 | `get_workflow`, `update_workflow` | Still prompts on image nodes; references within the cap with a role sentence each |
 | 10 | `set_clip_native_audio` | `off` on every clip; an ambience-only clip in a breakdown or intro at `mix` 0.3 to 0.5 ([references/one-track-rule.md](references/one-track-rule.md)) |
-| 11 | `attach_track`, `update_workflow` | The song, once: `kind` music, `url`, `duration` equal to the film, volume 1, `ducking` false; then `update_workflow` edges from it to every clip and every split piece so it plays film-wide, confirmed with `get_workflow_audio` (`scope` on `attach_track` is only a shortcut once `get_schema` lists it) ([references/one-track-rule.md](references/one-track-rule.md)) |
+| 11 | `attach_track`, `get_workflow_audio` | The song, once: `kind` music, `"scope": "film"`, `url`, `duration` equal to the film, volume 1, `ducking` false; confirm with `get_workflow_audio` that it reaches every clip; only if it does not, `update_workflow` edges to the missing clips; split pieces made later always get their edge ([references/one-track-rule.md](references/one-track-rule.md)) |
 | 12 | `estimate_cost` | One line: clips, model, credits, balance after; wait for yes |
 | 13 | `generate_scene` | The first chorus shot first (it carries the look), check it, then in order |
 | 14 | `get_generation_status`, `get_scene_frame` | Silent polling; a frame per scene |
 | 15 | `quality_check` | Per scene; style held to the section's look; no lettering in frame |
-| 16 | `edit_clip`, `split_clip`, `move_clip` | Trims to the exact cut lengths (clips play back to back, so trims set every cut); speed to fit a move to a bar; split a long take into pieces (`at_sec` from the clip's start); `move_clip` only orders |
+| 16 | `edit_clip`, `split_clip`, `move_clip` | Trims to the exact cut lengths (clips play back to back, so trims set every cut); speed to fit a move to a bar; split a long take into pieces (`at_sec` from the clip's start); `move_clip` sets the order (an overlap renders only as a dissolve, with matching fades) |
 | 17 | `create_render`, `get_render` | Free |
 | 18 | `quality_check`, `get_workflow_audio` | One music track, every clip `off` or a chosen ambience; ask the user to confirm sync at three named times |
 

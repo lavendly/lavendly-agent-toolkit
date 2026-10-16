@@ -26,9 +26,9 @@ and renders are free: fix sync in the edit before any re-roll.
 | Two musics at once | Clips kept their generated sound | `off` on every clip; "silent, no music generated" |
 | Cuts land late or early everywhere | Wrong downbeat or BPM | Ask the user to confirm both; recompute; retrim (free) |
 | Cuts drift later through the song | Lengths added after rounding, or a tempo change | Compute from absolute times; ask about tempo changes and section times |
-| One cut feels off | A slot length wrong | Retrim that clip and its neighbour (the trims set the cuts; `move_clip` only orders) |
+| One cut feels off | A slot length wrong | Retrim that clip and its neighbour (the trims set the cuts; `move_clip` sets the order) |
 | The song starts on the wrong part | The upload starts earlier than the section | `edit_clip` `trim` `start_ms` on the song's node (the source in-point), or an excerpt starting one bar before the section |
-| The first clip freezes while the song plays on | The song is wired to the first clip only | `update_workflow`: an edge from the song's node to every clip and every split piece |
+| The first clip freezes while the song plays on | The song is wired to the first clip only | Attach with `"scope": "film"`; for a clip or split piece it missed, `update_workflow`: an edge from the song's node to that clip |
 | The song stops abruptly at the end | The film ends mid-phrase | End the cut on the last hit, or ask for an excerpt with its natural tail |
 | Mouths do not match the vocal | No lip sync route | Hide the mouth; singing close-ups one beat at most |
 | The artist looks different per section | Text-only opening images, no references | References on Seedance or Wan; the locked description in every still |

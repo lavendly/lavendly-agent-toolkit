@@ -48,7 +48,7 @@ it never replaces the director's checks.
 | 8 | `create_workflow` | `shots` with the motion prompts and model lengths, one `aspect`, one `videoModel`, `project_name` when named, `idempotency_key` |
 | 9 | `get_workflow`, `update_workflow` | Still prompts onto the image nodes; references wired within the model's cap, each with its role sentence ([references/mcp-calls.md](references/mcp-calls.md)) |
 | 10 | `set_clip_native_audio` | `native` on dialogue and sound-led shots, `mix` under narration, `off` where only the score plays |
-| 11 | `attach_track`, `update_workflow` | One score for the film; narration only when the card says the story has a narrator; then `update_workflow` edges from both to every clip so they run film-wide, confirmed with `get_workflow_audio` (`scope` only once `get_schema` lists it) ([references/mcp-calls.md](references/mcp-calls.md)) |
+| 11 | `attach_track`, `get_workflow_audio` | One score for the film; narration only when the card says the story has a narrator; both with `"scope": "film"`, confirmed with `get_workflow_audio` to reach every clip (only if not, `update_workflow` edges to the missing clips) ([references/mcp-calls.md](references/mcp-calls.md)) |
 | 12 | `estimate_cost` | One line: shots, model, clip and opening image credits, total, balance after; wait for yes |
 | 13 | `generate_scene` | Scene 1, check it, then the hardest performance shot, then the rest in order |
 | 14 | `get_generation_status`, `get_scene_frame` | Silent polling; frame per scene; ledger from the landed frame; chain frames for continuous action |

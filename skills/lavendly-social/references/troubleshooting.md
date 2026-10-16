@@ -10,8 +10,8 @@ a new idempotency key.
 | The hook is spoken after a pause | The voice track does not start at 0 | `update_track` `startTime` 0; cut any lead-in words |
 | Captions hidden under the platform's buttons | Captions burn at the bottom on an MCP render; the brand-kit position does not reach it | Keep the picture's key content in the upper two thirds |
 | No captions on spoken lines | Native speech and imported footage have no word timings | Platform auto-captions at upload, or the app; a synthesized voiceover gets captions |
-| Captions missing on the voiceover | Attached by `url`, `subtitleStyle` missing or `off`, or a film of one clip node | Synthesize from `text`; `update_track` with `tiktok` or `reels`; two or more clips |
-| The first clip freezes while the voice or bed plays on | The track is wired to the first clip only | `update_workflow`: an edge from the track's node to every clip ([mcp-calls.md](mcp-calls.md)) |
+| Captions missing on the voiceover | Attached by `url`, or `subtitleStyle` missing or `off` | Synthesize from `text`; `update_track` with `tiktok` or `reels` |
+| The first clip freezes while the voice or bed plays on | The track is wired to the first clip only | Attach with `"scope": "film"`; for a clip it missed, `update_workflow`: an edge from the track's node to that clip ([mcp-calls.md](mcp-calls.md)) |
 | The presenter's mouth moves under the attached voice | A silent model drew speech | "Her lips stay closed; she listens and nods" or frame the mouth out (profile, hands, back); re-roll |
 | Lip sync drifts on a spoken line | The line is too long for the clip | One sentence, about 2 words per second, medium close-up, locked camera; split the line over two clips |
 | The voice of a native-speech host changes between clips | Each clip voices itself | Identical delivery words in every clip; fewer speaking clips; the rest as b-roll |
@@ -22,7 +22,7 @@ a new idempotency key.
 | A reference image fails on a Veo 3.1 Lite clip | Veo 3.1 Lite takes no references | Remove the edges or use Veo 3.1 Fast |
 | `invalid_args` naming the duration | Length not in the model's list (Veo 5 s, HeyGen 4 s) | Next allowed length; trim |
 | The video is letterboxed | The first clip is another shape | Every clip 9:16; one workflow per shape |
-| An imported clip does not appear | The node is not a videoGenerator node with `video_url` | Check it in `get_workflow`; fix the node with `update_workflow`; `move_clip` only reorders |
+| An imported clip does not appear | The node is not a videoGenerator node with `video_url` | Check it in `get_workflow`; fix the node with `update_workflow`; `move_clip` only places a clip that is already in the render |
 | Import refused | Over 64 MB by URL, about 11 MB inline, or over 3 minutes | Asset Library upload in the app; cut the source into parts of 3 minutes or less |
 | An invalid edits error on a trim | The window is outside the media's length | Read the clip's length; trim inside it |
 | A crop looks soft | A 16:9 1080p source cropped to vertical keeps 608 px of width | Say so; prefer vertical sources; crop less (a 3:4 or 1:1 version) |

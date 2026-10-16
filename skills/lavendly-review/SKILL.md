@@ -34,7 +34,7 @@ neighbour; this skill catches that too.
 
 | Step | Call | Purpose |
 |---|---|---|
-| 1 | `get_workflow` | Collect the scene nodes (type videoGenerator) in order, with their prompts |
+| 1 | `get_workflow`, `get_scene_plan` | Collect the scene nodes (type videoGenerator) in order, with their prompts; the stored plan gives each scene's heading and who is present |
 | 2 | `quality_check` per scene | `node_id`; `expect_audio: true` only where the clip should carry sound; `skip_vlm: true` only in fast mode |
 | 3 | read | `pass`, `score` 0 to 10, `failures`, `reroll_hint` |
 | 4 | announce | For a failing scene: "Scene <beat> failed: <failures>. One re-roll costs <credits>. Go ahead?" (lavendly-cost-aware rules apply) |
@@ -43,12 +43,12 @@ neighbour; this skill catches that too.
 | 7 | `get_generation_status` | Poll silently until the scene lands |
 | 8 | `quality_check` again | Same scene. Passed: continue. Failed again: stop re-rolling; ask |
 | 9 | `get_scene_frame` per scene | One thumbnail link per scene |
-| 10 | `get_scene_frame` per cut | Last frame of each scene and first frame of the next; compare against each other and the intent (cut checks) |
+| 10 | `quality_check` per cut, `get_scene_frame` | `node_id`, `previous_node_id` (the scene before), `same_scene` (same heading), `present`; read `cut_pass` and the findings; then the last frame of each scene and the first of the next against each other and the intent (cut checks); both frames opened before any re-roll on a high finding |
 | 11 | `get_workflow_audio` | Ducking, one score, voice overlaps, narration length (audio checks) |
 | 12 | findings | Rank by severity; apply free fixes (edit, audio, transition); re-roll only per steps 4 to 8; re-check the scene and both its cuts |
 | 13 | contact sheet | One table: beat, duration, score, status, open findings, link. Wait for the user's look |
 | 14 | `create_render` | Only when no Critical or High finding is open, or the user accepted one knowingly; free; `idempotency_key`; poll `get_render` |
-| 15 | `quality_check` on the film | No `node_id`, `expect_audio: true`; then the whole-video checks; report the score, open findings and the link |
+| 15 | `quality_check` on the film | No `node_id`, `expect_audio: true`; then the whole-video checks; report the score, the measured `loudness`, open findings and the link |
 
 Exact JSON: [references/mcp-calls.md](references/mcp-calls.md).
 
@@ -79,20 +79,21 @@ Full table with re-roll prompt wording:
 
 ### Cuts, audio and the whole video
 
-- Newer servers check the cut and measure loudness themselves; use them
-  where `get_schema` lists them
-  ([references/sequence-checks.md](references/sequence-checks.md)).
-- Older servers check each scene against its own prompt only. The cut checks
-  and the whole-video checks are yours: open the frames, compare, judge
-  against the intent and the continuity mode. The lists are in
+- The server checks each scene against its own prompt, each cut on two
+  frames (`previous_node_id`) and the film's loudness. The cut check is
+  advisory at confidence 0.6: report each finding with its why and fix, and
+  open both frames before paying for a re-roll on a high one. The
+  judgment checks are yours: open the frames, compare, judge against the
+  intent and the continuity mode. The lists are in
   [references/sequence-checks.md](references/sequence-checks.md).
 - Strict continuity checks every hand-off; flexible checks identity, light
   and readable place inside a scene; discontinuous checks motifs and
   rhythm. Do not flag a deliberate choice as an error; do flag a choice the
   viewer cannot follow.
-- Audio: only what the audio summary shows can be verified. Perceived
-  loudness is not measured by any tool; when a join sounds doubtful, say so
-  and ask the user to listen.
+- Audio: every export is normalized to -14 LUFS (true peak -1.5 dBTP) and
+  the film's `quality_check` returns the measured `loudness`; report it.
+  The balance between layers and a single loud moment are not measured:
+  when a join sounds doubtful, say so and ask the user to listen.
 - Captions: the render result cannot confirm they were burned (a failed
   burn ships uncaptioned). Say "captions requested" and ask the user to
   check; never "captions are on".
@@ -103,8 +104,9 @@ Full table with re-roll prompt wording:
 
 - One row per finding: severity, where (scene beat or cut), the issue, why it matters
   for this video, the fix, the fix type (edit, audio, transition, re-roll),
-  confidence (high when a tool reported it or both frames show it, medium
-  on one mid frame, low without a frame).
+  confidence (high when a deterministic check reported it or both frames
+  show it, medium on one mid frame or the cut check alone, low without a
+  frame).
 - Severity: Critical (fails its purpose, essential information missing,
   technical failure), High (damages comprehension or quality), Medium
   (noticeably weaker), Low (polish). Show Low only when nothing ranks above.
@@ -113,7 +115,8 @@ Full table with re-roll prompt wording:
   frame.
 - Smallest fix first: trim, split, reorder or speed with `edit_clip`,
   `split_clip`, `move_clip`; audio with `update_track` and
-  `set_clip_native_audio`; a dip to black with fades; a re-roll last.
+  `set_clip_native_audio`; a dip to black or a dissolve with fades; a
+  re-roll last.
 - After any fix, re-check the scene, both of its cuts, and after the next
   render the whole video. Until then it is "applied, not yet checked".
 

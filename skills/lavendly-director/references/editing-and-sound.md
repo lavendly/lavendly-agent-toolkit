@@ -24,7 +24,7 @@ specificity), narration (what the eye cannot see). Every shot adds new
 information, action, mood or rhythm; a redundant shot is cut before it is
 paid for.
 
-## 3. Cuts Lavendly can make today
+## 3. Cuts Lavendly can make
 
 | Cut | How | Note |
 |---|---|---|
@@ -32,8 +32,11 @@ paid for.
 | Cut on action | end the motion prompt mid-move, start the next with the same move | "the hand is still withdrawing as the next shot opens" |
 | Match cut | matched framing or shape across two still-frame prompts | Before and after, a comparison |
 | Dip to black | `fade_out_ms` on the outgoing clip, `fade_in_ms` on the incoming | Passage of time, a chapter |
-Dissolves, wipes, J-cuts and L-cuts are not rendered; do not promise them.
-Clips play back to back in order, a timeline gap is never rendered, and a
+| Dissolve | `move_clip` the later clip to start before the earlier ends, then `fade_out_ms` on the earlier and `fade_in_ms` on the later, both equal to the overlap ([mcp-calls.md](mcp-calls.md)) | A soft change of place or time; picture and sound blend over the overlap |
+
+Wipes, J-cuts and L-cuts are not rendered; do not promise them.
+Clips play back to back in order, a timeline gap is never rendered (an
+overlap is, only as a dissolve), and a
 voice track's `startTime` is a position on its mix clock (the film for a
 track wired to every clip, the clip's start for a per-clip track), so a
 clip's sound cannot be slid under its neighbour. Choose a transition for

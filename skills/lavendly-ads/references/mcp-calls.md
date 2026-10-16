@@ -117,6 +117,7 @@ no mode.
   "workflow_id": "<id>",
   "clip_id": "vid_1",
   "kind": "voiceover",
+  "scope": "film",
   "text": "One drop.\nIt sinks in before you count to five.\nSoft, not sticky.\nTry it tonight. Link below.",
   "voice": "<an ElevenLabs voice from the list below, or omit for Rachel>",
   "subtitleStyle": "reels",
@@ -129,6 +130,7 @@ no mode.
   "workflow_id": "<id>",
   "clip_id": "vid_1",
   "kind": "music",
+  "scope": "film",
   "mood": "Minimal warm electronic pulse around 100 BPM, soft plucked synth and a felt kick. Opens almost silent under the drop, builds one layer per scene, lands on a single held chord under the packshot. Instrumental.",
   "duration": 15,
   "ducking": true,
@@ -160,7 +162,7 @@ characters per voiceover (longer is cut), priced per character.
 
 Captions burn only from a synthesized voiceover (`text`, which keeps word
 timings) with an explicit `subtitleStyle` (`off`, `tiktok`, `reels`,
-`youtube`, `caption`), one style per film, on a film of two or more scenes.
+`youtube`, `caption`), one style per film; a one-scene film burns them too.
 A voiceover attached by `url`, native dialogue and imported speech get none.
 
 Levels: attach-time music `volume` 0 to 2 is read as a fraction (0.35
@@ -170,22 +172,23 @@ a voiceover (the default 100 is unity), and when a level must change later
 pass `update_track` `volume` in percent (35 for a music bed, 100 for unity),
 never 0.35.
 
-## Make the score and the narration film-wide: `update_workflow`
+## Make the score and the narration film-wide: `scope` film
 
-`attach_track` has no `scope` argument on the server today, and the MCP
-drops an unknown argument without an error. So the default is always: attach,
-add the edges below with `update_workflow`, then call `get_workflow_audio`
-and confirm the track reaches every clip. Once `get_schema` lists `scope` on
-`attach_track`, `"scope": "film"` is a shortcut for the edges; confirm with
-`get_workflow_audio` all the same.
+A score or a narration plays across the film only when its node has an edge
+to every clip node (type videoGenerator). Attach it with `"scope": "film"`:
+the server adds an edge from the new node to every clip in the workflow and
+lists them in the response's `clip_ids`. Then call `get_workflow_audio` and
+confirm the track reaches every clip. Without `scope` (default `"clip"`) the
+node is wired to one clip only: mixed into that clip alone, and a track
+longer than the clip freezes that clip's last frame for the rest of the
+track. `scope` wires the clips that exist at attach time; a clip added or
+split later needs its own edge.
 
-`attach_track` wires its new node to one clip only. A score or a narration
-plays across the film only when its node has an edge to every clip node
-(type videoGenerator). Left on one clip it is mixed into that clip alone, and
-a track longer than the clip freezes that clip's last frame for the rest of
-the track. After the attach, `get_workflow`, then send the full `nodes` and
-`edges` arrays back with one more edge per other clip, copied from the edge
-`attach_track` made (same shape, new `id` and `target`):
+Only if `get_workflow_audio` shows the track on fewer clips (an older or
+self-hosted server that drops the argument), add the edges yourself:
+`get_workflow`, then `update_workflow` with the full `nodes` and `edges`
+arrays and one more edge per other clip, copied from the edge `attach_track`
+made (same shape, new `id` and `target`):
 
 ```json
 {
@@ -266,7 +269,12 @@ redrawn: re-roll with a smaller move or open on the packshot.
 speed, crop, then fades. Cut model warm-up (the first 300 to 600 ms often
 settles) and tails. A slow-motion hold: trim a still stretch and set
 `speed` to 0.25 to 0.5. Hard cuts between clips; a dip to black is
-`fade_out_ms` on one clip and `fade_in_ms` on the next. No dissolves.
+`fade_out_ms` on one clip and `fade_in_ms` on the next. A dissolve: give
+every video clip a position in film order with `move_clip` (an
+unpositioned clip renders after the positioned ones), move the later clip
+and every clip after it earlier by the overlap, then `fade_out_ms` on the
+earlier and `fade_in_ms` on the later equal to the overlap (within 50 ms).
+Wipes are not rendered.
 
 ## `create_render`, `get_render`
 

@@ -7,8 +7,7 @@ clip node `vid_<suffix>`; read the real ids from `get_workflow`.
 
 ## 1. Probes (free, once per session)
 
-`get_status`, `get_ledger`; `get_schema` before relying on dissolves, scene
-plans or loudness (they exist only where it lists them).
+`get_status`, `get_ledger`; `get_schema` when an argument is in doubt.
 
 ## 2. `import_asset`: packshots, plates, the user's art
 
@@ -99,6 +98,7 @@ motif, `off` for silent models, music edits and reversed loop segments.
   "workflow_id": "<id>",
   "clip_id": "vid_1",
   "kind": "music",
+  "scope": "film",
   "mood": "A rising three-note marimba figure over soft felt piano, landing on a resolved major chord at 4 s, then a short natural decay into silence. Instrumental.",
   "duration": 6,
   "ducking": true,
@@ -128,7 +128,7 @@ characters per voiceover (longer is cut), priced per character.
 
 Captions burn only from a synthesized voiceover (`text`, which keeps word
 timings) with an explicit `subtitleStyle` (`off`, `tiktok`, `reels`,
-`youtube`, `caption`), one style per film, on a film of two or more scenes.
+`youtube`, `caption`), one style per film; a one-scene film burns them too.
 A voiceover attached by `url`, native dialogue and imported speech get none.
 
 Levels: attach-time music `volume` 0 to 2 is read as a fraction (0.35
@@ -138,22 +138,23 @@ a voiceover (the default 100 is unity), and when a level must change later
 pass `update_track` `volume` in percent (35 for a music bed, 100 for unity),
 never 0.35.
 
-## Make the score and the narration film-wide: `update_workflow`
+## Make the score and the narration film-wide: `scope` film
 
-`attach_track` has no `scope` argument on the server today, and the MCP
-drops an unknown argument without an error. So the default is always: attach,
-add the edges below with `update_workflow`, then call `get_workflow_audio`
-and confirm the track reaches every clip. Once `get_schema` lists `scope` on
-`attach_track`, `"scope": "film"` is a shortcut for the edges; confirm with
-`get_workflow_audio` all the same.
+A score or a narration plays across the film only when its node has an edge
+to every clip node (type videoGenerator). Attach it with `"scope": "film"`:
+the server adds an edge from the new node to every clip in the workflow and
+lists them in the response's `clip_ids`. Then call `get_workflow_audio` and
+confirm the track reaches every clip. Without `scope` (default `"clip"`) the
+node is wired to one clip only: mixed into that clip alone, and a track
+longer than the clip freezes that clip's last frame for the rest of the
+track. `scope` wires the clips that exist at attach time; a clip added or
+split later needs its own edge.
 
-`attach_track` wires its new node to one clip only. A score or a narration
-plays across the film only when its node has an edge to every clip node
-(type videoGenerator). Left on one clip it is mixed into that clip alone, and
-a track longer than the clip freezes that clip's last frame for the rest of
-the track. After the attach, `get_workflow`, then send the full `nodes` and
-`edges` arrays back with one more edge per other clip, copied from the edge
-`attach_track` made (same shape, new `id` and `target`):
+Only if `get_workflow_audio` shows the track on fewer clips (an older or
+self-hosted server that drops the argument), add the edges yourself:
+`get_workflow`, then `update_workflow` with the full `nodes` and `edges`
+arrays and one more edge per other clip, copied from the edge `attach_track`
+made (same shape, new `id` and `target`):
 
 ```json
 {
@@ -227,11 +228,19 @@ describe the end state in words instead.
   `"color": { "brightness": 0.05, "saturation": 0.9 }`. Brightness is an
   offset (0 neutral); contrast and saturation are multipliers (1 neutral);
   hue is degrees. `loop`, `resize`, `stabilize` and `lut_id` are accepted
-  but ignored by the export, and a one-scene film applies no picture edit.
+  but ignored by the export. A one-scene film applies the rest too (any
+  picture edit sends it through the full stitch).
 - A step change in speed: `split_clip`, then a different `speed` on each
   half.
 - Dip to black: `fade_out_ms` on the outgoing clip, `fade_in_ms` on the
   incoming one.
+- Dissolve: give every video clip a position in film order with
+  `move_clip` (a clip with no position renders after the positioned ones),
+  then move the later clip and every clip after it earlier by the overlap
+  (`timeline_start_sec`), then `fade_out_ms` on the earlier clip and
+  `fade_in_ms` on the later, both equal to the overlap (within 50 ms). The
+  export blends picture and sound over it; the film is the timeline length.
+  An overlap without matching fades plays back to back.
 
 ## 9. The ping-pong loop (recipe-loops method A)
 

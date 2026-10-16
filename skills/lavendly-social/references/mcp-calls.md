@@ -77,10 +77,10 @@ show it as already generated: zero clip credits. Read the node id back from
 `get_workflow`. Never call `generate_scene` on this node: it would generate
 over the import.
 
-A workflow with exactly one clip node renders on the single-scene path: no
-trim, no crop, no burned captions (only clip volume and mute apply). Before
-the render the film must hold two or more clip nodes: split the moment once
-at a sentence end with `split_clip`, or add a second clip.
+A workflow with exactly one clip node goes through the full stitch when it
+has a picture edit other than volume and mute (a trim, a crop) or a
+captioned voiceover, so the trim, the crop and the captions apply. With
+neither, it ships the raw clip.
 
 ## `edit_clip`: cut the moment, reframe to vertical
 
@@ -113,8 +113,8 @@ on 1080p exports; say so.
 `at_sec` is seconds into the clip's own box (rate-aware), not film time.
 Split at the start and end of a pause, then remove the middle piece's node
 with `update_workflow` (full `nodes` and `edges` arrays). Clips play back to
-back in order, so the pieces join with no gap; `move_clip` only reorders
-and never adds or closes space. The second half of a split gets no audio
+back in order, so the pieces join with no gap; `move_clip` sets the order
+and never adds space (an overlap renders only as a dissolve). The second half of a split gets no audio
 edges: re-wire any track that must cover it.
 
 Each piece must stay at least 0.25 s long. For a generated 8 s take, the
@@ -145,6 +145,7 @@ of one family, or check one frame of each before generating the rest.
   "workflow_id": "<id>",
   "clip_id": "vid_1",
   "kind": "voiceover",
+  "scope": "film",
   "text": "POV: it's your first day and the oven is already on fire.",
   "voice": "jessica",
   "subtitleStyle": "tiktok",
@@ -171,7 +172,7 @@ characters per voiceover (longer is cut), priced per character.
 
 Captions burn only from a synthesized voiceover (`text`, which keeps word
 timings) with an explicit `subtitleStyle` (`off`, `tiktok`, `reels`,
-`youtube`, `caption`), one style per film, on a film of two or more scenes.
+`youtube`, `caption`), one style per film; a one-scene film burns them too.
 A voiceover attached by `url`, native dialogue and imported speech get none.
 
 ## `attach_track`: the bed
@@ -181,6 +182,7 @@ A voiceover attached by `url`, native dialogue and imported speech get none.
   "workflow_id": "<id>",
   "clip_id": "vid_1",
   "kind": "music",
+  "scope": "film",
   "mood": "Bright, light-footed bed: muted electric guitar plucks and a soft kick at about 120 BPM, steady from the first second, a two-beat stop just before the payoff, then one last bar.",
   "duration": 15,
   "ducking": true,
@@ -200,22 +202,23 @@ a voiceover (the default 100 is unity), and when a level must change later
 pass `update_track` `volume` in percent (35 for a music bed, 100 for unity),
 never 0.35.
 
-## Make the score and the narration film-wide: `update_workflow`
+## Make the score and the narration film-wide: `scope` film
 
-`attach_track` has no `scope` argument on the server today, and the MCP
-drops an unknown argument without an error. So the default is always: attach,
-add the edges below with `update_workflow`, then call `get_workflow_audio`
-and confirm the track reaches every clip. Once `get_schema` lists `scope` on
-`attach_track`, `"scope": "film"` is a shortcut for the edges; confirm with
-`get_workflow_audio` all the same.
+A score or a narration plays across the film only when its node has an edge
+to every clip node (type videoGenerator). Attach it with `"scope": "film"`:
+the server adds an edge from the new node to every clip in the workflow and
+lists them in the response's `clip_ids`. Then call `get_workflow_audio` and
+confirm the track reaches every clip. Without `scope` (default `"clip"`) the
+node is wired to one clip only: mixed into that clip alone, and a track
+longer than the clip freezes that clip's last frame for the rest of the
+track. `scope` wires the clips that exist at attach time; a clip added or
+split later needs its own edge.
 
-`attach_track` wires its new node to one clip only. A score or a narration
-plays across the film only when its node has an edge to every clip node
-(type videoGenerator). Left on one clip it is mixed into that clip alone, and
-a track longer than the clip freezes that clip's last frame for the rest of
-the track. After the attach, `get_workflow`, then send the full `nodes` and
-`edges` arrays back with one more edge per other clip, copied from the edge
-`attach_track` made (same shape, new `id` and `target`):
+Only if `get_workflow_audio` shows the track on fewer clips (an older or
+self-hosted server that drops the argument), add the edges yourself:
+`get_workflow`, then `update_workflow` with the full `nodes` and `edges`
+arrays and one more edge per other clip, copied from the edge `attach_track`
+made (same shape, new `id` and `target`):
 
 ```json
 {
@@ -271,8 +274,6 @@ Play a copy backwards (a ping-pong loop): the same copy, then:
 ```
 
 `reverse` reverses the copy's audio too: set that clip to `off` or mute it.
-Two clip nodes also keep the film on the multi-scene path, where edits and
-captions apply.
 
 ## Render and check
 

@@ -46,9 +46,9 @@ Example: Bloop, a water-droplet mascot for a refill shop.
 |---|---|---|---|---|---|---|---|---|
 | 1 | 0 to 6 | Medium wide | Eye level | normal | locked-off | Bloop hops into place, waves, points at the bottle and holds the signature pose | 6 | 6 |
 
-A one-scene film renders on its own path: no burned captions and no
-`edit_clip` picture edits (only clip volume and mute). When the greeting
-needs captions or a trim, make it two scenes of the same length.
+A one-scene film still burns captions from a synthesized voiceover and
+applies `edit_clip` trims and fades: either sends it through the full
+stitch. With neither it ships the raw clip.
 
 ### 15 s: hello, the product, the gesture
 
