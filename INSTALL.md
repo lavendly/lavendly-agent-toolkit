@@ -1,6 +1,6 @@
-# Install Lavendly Skills
+# Install Lavendly Agent Toolkit
 
-Five skills ship in this repo:
+Six skills ship in this repo:
 
 - `lavendly-director`: direct a 15 to 90 s film with a locked hero, chosen camera and light, sound design and a cut
 - `lavendly-storyteller`: a narrated short (5 to 12 s, one shot) from a one-line idea
@@ -30,7 +30,7 @@ Cross-agent. Detects Claude Code, Cursor, Codex and other hosts that load
 `SKILL.md` folders, and writes each skill to the right path.
 
 ```bash
-npx skills add lavendly/skills
+npx skills add lavendly/lavendly-agent-toolkit
 ```
 
 ## Option 2: `gh skill install`
@@ -38,7 +38,7 @@ npx skills add lavendly/skills
 GitHub CLI v2.90 or newer:
 
 ```bash
-gh skill install lavendly/skills
+gh skill install lavendly/lavendly-agent-toolkit
 ```
 
 ## Option 3: Claude Code marketplace
@@ -46,23 +46,23 @@ gh skill install lavendly/skills
 Claude Code only. Inside Claude Code:
 
 ```
-/plugin marketplace add lavendly/skills
+/plugin marketplace add lavendly/lavendly-agent-toolkit
 /plugin install lavendly@lavendly
 ```
 
-This reads `.claude-plugin/marketplace.json` and registers the five skills as
-`/lavendly:storyteller`, `/lavendly:multi-clip`, `/lavendly:cost-aware`,
-`/lavendly:review` and `/lavendly:publish`.
+This reads `.claude-plugin/marketplace.json` and registers the six skills as
+`/lavendly:lavendly-storyteller`, `/lavendly:lavendly-multi-clip`, `/lavendly:lavendly-cost-aware`,
+`/lavendly:lavendly-review` and `/lavendly:lavendly-publish`.
 
-## Option 4: `@lavendly/skills` installer
+## Option 4: `@lavendly/agent-toolkit` installer
 
 Zero-dependency Node script. Copies each skill folder into `~/.claude/skills/`.
 
 ```bash
-npx -y @lavendly/skills install                 # all five
-npx -y @lavendly/skills install storyteller      # one or more, by short name
-npx -y @lavendly/skills install --dir ./.cursor/skills   # another target
-npx -y @lavendly/skills --list                  # what is available
+npx -y @lavendly/agent-toolkit install                 # all six
+npx -y @lavendly/agent-toolkit install storyteller      # one or more, by short name
+npx -y @lavendly/agent-toolkit install --dir ./.cursor/skills   # another target
+npx -y @lavendly/agent-toolkit --list                  # what is available
 ```
 
 Re-running replaces an existing copy of the same skill, so this is also the
@@ -86,7 +86,7 @@ generates anything.
 
 | Method | Update |
 |---|---|
-| `npx skills` | re-run `npx skills add lavendly/skills` |
-| `gh skill install` | `gh skill update lavendly/skills` |
+| `npx skills` | re-run `npx skills add lavendly/lavendly-agent-toolkit` |
+| `gh skill install` | `gh skill update lavendly/lavendly-agent-toolkit` |
 | Claude Code marketplace | `/plugin update lavendly@lavendly` |
-| `@lavendly/skills` | re-run `npx -y @lavendly/skills install` |
+| `@lavendly/agent-toolkit` | re-run `npx -y @lavendly/agent-toolkit install` |

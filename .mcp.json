@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "lavendly": {
+      "type": "http",
+      "url": "https://mcp.lavendly.ai/mcp"
+    }
+  }
+}

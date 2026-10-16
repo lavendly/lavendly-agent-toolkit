@@ -1,4 +1,4 @@
-# Contributing to Lavendly Skills
+# Contributing to Lavendly Agent Toolkit
 
 Every skill is one folder with a `SKILL.md` and an optional `references/`
 directory, per the [Agent Skills specification](https://agentskills.io/specification.md).

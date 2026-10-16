@@ -1,4 +1,4 @@
-# Lavendly Skills: Cookbook
+# Lavendly Agent Toolkit: Cookbook
 
 Three recipes. Each one is what you say, what the agent does, and where the
 money goes. Tool names are the live MCP names; everything the agent says to

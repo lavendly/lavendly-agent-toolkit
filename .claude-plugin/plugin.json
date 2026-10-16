@@ -1,13 +1,14 @@
 {
   "name": "lavendly",
+  "displayName": "Lavendly Agent Toolkit",
   "version": "0.2.0",
-  "description": "Lavendly agent skills: film direction, narrated shorts, consistent multi-shot sequences, budget guardrails, the quality loop, and publishing through the Lavendly MCP.",
+  "description": "Lavendly agent toolkit: six skills (film direction, narrated shorts, consistent multi-shot sequences, budget guardrails, the quality loop, publishing) and the Lavendly MCP connection, sign in on first use.",
   "author": {
     "name": "Lavendly",
     "url": "https://lavendly.ai"
   },
   "homepage": "https://lavendly.ai",
-  "repository": "https://github.com/lavendly/skills",
+  "repository": "https://github.com/lavendly/lavendly-agent-toolkit",
   "license": "MIT",
   "keywords": [
     "lavendly",
@@ -21,5 +22,7 @@
     "cost-control",
     "quality-check",
     "publishing"
-  ]
+  ],
+  "skills": "./",
+  "documentationUrl": "https://docs.lavendly.ai/mcp/overview"
 }

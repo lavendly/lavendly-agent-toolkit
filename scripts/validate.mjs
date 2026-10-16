@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Structural validator for lavendly/skills. Node 18 or newer, no dependencies.
+// Structural validator for lavendly/lavendly-agent-toolkit. Node 18 or newer, no dependencies.
 //
 // Checks:
 //   1. every lavendly-*/ folder has SKILL.md with frontmatter: name equals the
@@ -13,7 +13,7 @@
 //   5. no em dash (U+2014) or en dash (U+2013) in any tracked text file, and
 //      no " -- " used as a dash in markdown prose
 //   6. VERSION matches every manifest, package.json and CHANGELOG
-//   7. marketplace.json lists every skill folder, paths exist, invoke names match
+//   7. every plugin manifest loads the skill folders from the root
 //
 // Exit code 1 with a list of failures, 0 when clean.
 
@@ -182,6 +182,16 @@ if (marketplacePlugin) {
   } else ok('.claude-plugin/marketplace.json version matches');
 }
 
+// The plugin's MCP connection: .mcp.json (Claude Code, Codex) and mcp.json
+// (the portable Agent Plugins file Cursor reads) name the same server.
+const MCP_URL = 'https://mcp.lavendly.ai/mcp';
+for (const f of ['.mcp.json', 'mcp.json']) {
+  const j = readJson(f);
+  const url = j?.mcpServers?.lavendly?.url;
+  if (url !== MCP_URL) fail(`${f}: mcpServers.lavendly.url is "${url}", expected ${MCP_URL}`);
+  else ok(`${f} points at ${MCP_URL}`);
+}
+
 const changelogPath = join(ROOT, 'CHANGELOG.md');
 if (existsSync(changelogPath)) {
   if (!readText(changelogPath).includes(`## ${VERSION}`)) fail(`CHANGELOG.md has no "## ${VERSION}" entry`);
@@ -287,27 +297,17 @@ for (const dirName of skillDirs) {
   }
 }
 
-// marketplace lists every skill folder; every listed path exists
-if (marketplacePlugin) {
-  const entries = Array.isArray(marketplacePlugin.skills) ? marketplacePlugin.skills : [];
-  const listedPaths = new Set(entries.map((s) => s.path));
-  for (const entry of entries) {
-    if (!entry.path || !existsSync(join(ROOT, entry.path, 'SKILL.md'))) {
-      fail(`.claude-plugin/marketplace.json: skill path "${entry.path}" has no SKILL.md`);
-    }
-    if (entry.path !== `lavendly-${entry.name}`) {
-      fail(`.claude-plugin/marketplace.json: skill "${entry.name}" path "${entry.path}" should be "lavendly-${entry.name}"`);
-    }
-    if (entry.invoke !== `/lavendly:${entry.name}`) {
-      fail(`.claude-plugin/marketplace.json: skill "${entry.name}" invoke "${entry.invoke}" should be "/lavendly:${entry.name}"`);
-    }
-  }
-  for (const dirName of skillDirs) {
-    if (!listedPaths.has(dirName)) fail(`.claude-plugin/marketplace.json: skill folder ${dirName} is not listed`);
-  }
-  if (entries.length && failures.filter((f) => f.includes('marketplace.json')).length === 0) {
-    ok(`.claude-plugin/marketplace.json lists ${entries.length} skills`);
-  }
+// The plugin manifests load the skill folders from the repository root, so
+// every lavendly-* folder ships in the plugin. (A marketplace entry `skills`
+// list is not used: Claude Code wants plain paths there, and the manifest
+// already covers it.)
+for (const name of ['.claude-plugin/plugin.json', '.cursor-plugin/plugin.json', '.codex-plugin/plugin.json']) {
+  const m = manifests[name];
+  if (m && m.skills !== './') fail(`${name}: skills should be "./" (the skill folders live at the root)`);
+  else if (m) ok(`${name} loads skills from ./`);
+}
+if (marketplacePlugin && 'skills' in marketplacePlugin) {
+  fail('.claude-plugin/marketplace.json: drop plugins[0].skills; the plugin manifest lists the skills');
 }
 
 // ---------------------------------------------------------------------------

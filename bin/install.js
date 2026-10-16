@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 'use strict';
-// @lavendly/skills installer. Node 18 or newer, no dependencies.
+// @lavendly/agent-toolkit installer. Node 18 or newer, no dependencies.
 //
-//   lavendly-skills install [skill...]     copy skill folders into ~/.claude/skills/
-//   lavendly-skills install --dir <path>   copy into another directory
-//   lavendly-skills --list                 list the skills in this package
+//   lavendly-agent-toolkit install [skill...]     copy skill folders into ~/.claude/skills/
+//   lavendly-agent-toolkit install --dir <path>   copy into another directory
+//   lavendly-agent-toolkit --list                 list the skills in this package
 //
 // Skills are named by folder (lavendly-storyteller) or by short name
 // (storyteller). With no names, every skill is installed. An existing copy of
@@ -55,17 +55,17 @@ function summary(skillDir) {
 
 function usage() {
   const v = readVersion();
-  console.log(`@lavendly/skills ${v}
+  console.log(`@lavendly/agent-toolkit ${v}
 
 Usage:
-  lavendly-skills install [skill...] [--dir <path>]
-  lavendly-skills --list
-  lavendly-skills --help
+  lavendly-agent-toolkit install [skill...] [--dir <path>]
+  lavendly-agent-toolkit --list
+  lavendly-agent-toolkit --help
 
 Examples:
-  npx -y @lavendly/skills install
-  npx -y @lavendly/skills install storyteller cost-aware
-  npx -y @lavendly/skills install --dir ./.cursor/skills
+  npx -y @lavendly/agent-toolkit install
+  npx -y @lavendly/agent-toolkit install storyteller cost-aware
+  npx -y @lavendly/agent-toolkit install --dir ./.cursor/skills
 
 Default target: ${DEFAULT_TARGET}
 Skill names accept the short form (storyteller) or the folder (lavendly-storyteller).`);
@@ -94,7 +94,7 @@ function main(argv) {
     return 0;
   }
   if (args.includes('--list') || args[0] === 'list') {
-    console.log(`Skills in @lavendly/skills ${readVersion()}:`);
+    console.log(`Skills in @lavendly/agent-toolkit ${readVersion()}:`);
     for (const s of available) {
       const line = summary(s);
       console.log(`  ${s}${line ? '  ' + line : ''}`);
