@@ -14,6 +14,8 @@ entities themselves, not because it looks attractive on its own.
 ## 1. Before generation: the plan
 
 - [ ] The intent card is written and the user saw it.
+- [ ] Every shot has a heading (place and time); time jumps inside one
+      place have their own heading and a way to read them.
 - [ ] Every shot has a purpose; a shot with none is cut.
 - [ ] Each "from" matches the previous shot's "to"
       ([sequence-plan.md](sequence-plan.md)).
@@ -70,6 +72,8 @@ says when a row applies.
 | N+1 adds something; it does not repeat N | All |
 | The cut lands on a motion, a beat or a line end, not mid-word | All |
 | Sound across the cut: no abrupt drop, no clash of two voices, ambience carries within a place | All |
+| Two people talking: each keeps their side of the frame, eyelines meet, reverse shots mirror in size and height | Strict, flexible |
+| The person speaking the line is the one in frame with a moving mouth, and is the speaker the plan names | All with dialogue |
 | Motifs the card names recur as planned | Discontinuous |
 
 Distinguish a choice from an error with the three questions in

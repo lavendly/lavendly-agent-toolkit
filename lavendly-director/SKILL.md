@@ -37,7 +37,7 @@ agent that judgment and the exact calls that carry it into Lavendly.
 |---|---|---|
 | 1 | `get_status`, `get_ledger` | Capabilities, credits |
 | 2 | write | Intent card: type, objective, structure, must show, ending, sound, continuity mode, the hero's locked description ([references/video-types.md](references/video-types.md)) |
-| 3 | write | Sequence plan: 3 to 6 scenes, each with purpose, action and outcome, what it takes from the previous shot and hands to the next, plus the continuity ledger ([references/sequence-plan.md](references/sequence-plan.md)) |
+| 3 | write | Sequence plan: 3 to 6 scenes, each with a heading (place and time), purpose, action and outcome, what it takes from the previous shot and hands to the next, plus the continuity ledger ([references/sequence-plan.md](references/sequence-plan.md)) |
 | 4 | write | Per shot: a still-frame prompt (the opening) and a motion prompt (the clip), in the structure from [references/prompt-anchors.md](references/prompt-anchors.md) |
 | 5 | show | The intent card, the shot list and the hero description to the user; wait for "go" |
 | 6 | `import_asset` | The hero image and any style plate the user supplied (public URL or Asset Library); returns the hosted url |
@@ -144,6 +144,12 @@ agent that judgment and the exact calls that carry it into Lavendly.
   gets an exit on screen or an explanation. A new scene starts fresh.
   Models add and drop extras on their own: name who is in frame in every
   motion prompt of the scene.
+- Two people talking keep their sides of the frame, eyelines meet, and the
+  one speaking is the one in frame
+  ([references/sequence-plan.md](references/sequence-plan.md) section 4).
+- An episode of a series also follows the series bible: recurring cast,
+  places, format and the story so far
+  ([references/series-continuity.md](references/series-continuity.md)).
 - After scene 1 lands, open its frame before paying for scene 2. If the hero
   drifted there, fix scene 1 first; every later scene inherits it.
 - The physical checks (hands, contact, shadows, reflections, object state)
@@ -263,7 +269,8 @@ full checklist is
 ## Reference docs
 
 - [references/video-types.md](references/video-types.md): the intent card, continuity modes, priorities by type, choice or error.
-- [references/sequence-plan.md](references/sequence-plan.md): the shot rows, dependencies, the continuity ledger, how the plan reaches the platform.
+- [references/sequence-plan.md](references/sequence-plan.md): headings, the shot rows, dependencies, the continuity ledger, two people talking, how the plan reaches the platform.
+- [references/series-continuity.md](references/series-continuity.md): the series bible, recurring references, carrying state between episodes.
 - [references/mcp-calls.md](references/mcp-calls.md): exact call shapes, the hero wiring, trims.
 - [references/prompt-anchors.md](references/prompt-anchors.md): the two prompt structures, banned words, slop list, narration budget.
 - [references/camera-language.md](references/camera-language.md): shot sizes, angles, composition, movement.

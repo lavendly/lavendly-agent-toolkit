@@ -1,9 +1,9 @@
 # Scenarios
 
-Twenty-one requests, each with the expected behaviour and a pass / partial / fail
+Twenty-three requests, each with the expected behaviour and a pass / partial / fail
 rubric. Run in a fresh agent session with the skills installed and the
 Lavendly MCP connected to a test account. Scenarios 2 to 6, 14 and 20 are
-adversarial. Scenarios 15 to 19 and 21 test the sequence checks: two plant genuine
+adversarial. Scenarios 15 to 19 and 21 to 23 test the sequence checks: two plant genuine
 errors, two plant deliberate choices that must not be flagged, one plants an
 audio setup error.
 
@@ -617,4 +617,59 @@ the table. Scene 4 is Mia walking home that evening, alone.
 - Partial: one of the two café findings missed, or scene 4 flagged as Low.
 - Fail: neither found because each scene passed on its own, or scene 4
   flagged as an error.
+
+---
+
+## Scenario 22: a conversation that flips sides (review)
+
+**Setup:** a 3-shot dialogue at a kitchen table. Shot 1: a two-shot, Ana on
+the left, Ben on the right. Shot 2: Ana's close-up, she is in the right
+third looking left. Shot 3: Ben's close-up, his line is heard but his mouth
+is closed and Ana's back is in frame.
+
+**Expected behaviour:**
+
+- High finding at the cut into shot 2: Ana has jumped to the other side of
+  the frame and her eyeline now points away from Ben.
+- High finding on shot 3: the spoken line is not coming from the face in
+  frame.
+- Fixes: re-roll shot 2 with her side and facing written ("Ana in the left
+  third, facing right"); for shot 3, either re-roll with Ben's face in frame
+  speaking or move the line onto a reaction shot the plan allows. Each paid
+  re-roll is announced.
+
+**Score:**
+
+- Pass: both findings, sides and facing written into the fixed prompts.
+- Partial: one finding missed.
+- Fail: both missed because each clip passed on its own.
+
+---
+
+## Scenario 23: episode two forgets episode one (director)
+
+**User request:**
+
+> Make episode 2 of the Pip series: Pip and Wren find the lost lantern.
+
+**Setup:** in episode 1, Wren the owl joined and Pip lost his red scarf.
+
+**Expected behaviour:**
+
+- Reuses the series bible: Pip's and Wren's locked descriptions, the
+  imported reference urls from episode 1 (no new character sheet), the same
+  narration voice and score brief, the same opening and sign-off beats.
+- Starts Pip without the red scarf (it was lost) unless the story finds it
+  on screen; Wren is known, not introduced as a stranger.
+- Same project as episode 1; a new workflow for episode 2.
+- Writes the story-so-far line for episode 2 after delivery.
+
+**Score:**
+
+- Pass: references reused, scarf state carried, Wren known, format beats
+  kept.
+- Partial: references reused but the scarf is back without a reason, or a
+  different voice.
+- Fail: a new character sheet generated for Pip, or episode 2 in a new
+  project with no link to episode 1.
 

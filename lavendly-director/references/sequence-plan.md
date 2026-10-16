@@ -19,6 +19,7 @@ tutorial step.
 
 | Field | Example (tutorial) | Example (ad) |
 |---|---|---|
+| Heading | Kitchen counter, morning | Study, late afternoon |
 | Purpose | Show where the filter cartridge sits | Hook: the click of the switch |
 | Subject, action, outcome | Hand lifts the lid; the empty slot is visible | Thumb presses the switch; the shade glows |
 | Framing and move | Medium top-down, locked-off | Extreme close-up, slow push-in |
@@ -30,6 +31,13 @@ tutorial step.
 | Sound and timing | Narration 9 words over 4 s; native clicks | Native switch click at 1 s; score starts at 2 s |
 | Transition out | Hard cut on the hand's motion | Hard cut |
 | Duration | 4 s | 4 s |
+
+The heading names the place and the time in a few words. Shots with the
+same heading are one scene; a new heading is a new scene. A time jump in
+the same place gets its own heading ("Café table, evening" after "Café
+table, afternoon"), and the video must make the jump readable (light,
+a dip to black, a line). The cast, light and object-state rules apply
+within a heading and reset at the next one.
 
 The two "from" and "to" columns are the contract between neighbours. When
 shot 3's "from" does not match shot 2's "to", fix the plan before paying for
@@ -82,11 +90,28 @@ Rules:
   video makes clear) starts its cast fresh: nobody needs an exit to be
   absent from it.
 
-## 4. Carrying the plan into Lavendly
+## 4. Two people talking
+
+- Fix each speaker's side of the frame for the whole scene and write it in
+  both prompts of every shot: "Mia on the left, facing right; Tom on the
+  right, facing left". The camera stays on one side of the line between
+  them; crossing it needs a visible move.
+- Reverse shots mirror each other: if Mia's close-up has her in the left
+  third looking right, Tom's has him in the right third looking left, at
+  the same size and height.
+- Eyelines meet: each speaker looks toward the side of the frame where the
+  other one sits, at the other's eye height.
+- One spoken line per clip, by the person whose face is in frame, with the
+  speaker named in the motion prompt. Never let a clip carry a line for
+  someone who is off screen unless the plan says it is heard over a
+  listener's reaction.
+- Cover the listener too: a reaction shot is often the strongest cut.
+
+## 5. Carrying the plan into Lavendly
 
 | Plan element | How it reaches the platform |
 |---|---|
-| Purpose, action, outcome, framing | The still-frame prompt and the motion prompt of that scene |
+| Heading, purpose, action, outcome, framing | The still-frame prompt and the motion prompt of that scene; the heading and who is present open every motion prompt of the scene |
 | Locked descriptions | Pasted verbatim into both prompts; the hero reference node wired into every clip and image node |
 | Strict continuation across a cut | `get_scene_frame` with frame set to last on the earlier scene; that image becomes the next scene's image node url through `update_workflow`, before `generate_scene` |
 | Light and place | Named identically in every prompt of the scene |
@@ -98,7 +123,7 @@ Check `get_schema` for the frame option before relying on it; on a server
 without it, describe the end state of the earlier shot at the start of the
 next motion prompt instead.
 
-## 5. When the plan changes
+## 6. When the plan changes
 
 A change to a locked description, to a step's outcome, or to the order of
 dependent shots makes every later shot that relied on it stale. List the

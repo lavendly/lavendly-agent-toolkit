@@ -26,7 +26,14 @@ Added:
   person who appears is introduced and a person who leaves exits or is
   explained; a new scene starts fresh. In the plan, the ledger, the cut
   checks and the whole-video checks of both skills.
-- Seven eval scenarios (15 to 21): planted errors, deliberate choices that
+- Scene headings (place and time) in the plan: shots with one heading are
+  one scene; a time jump in the same place gets its own heading.
+- Two people talking: fixed sides of the frame, meeting eyelines, mirrored
+  reverse shots, the speaker is the face in frame.
+- `lavendly-director/references/series-continuity.md`: the series bible,
+  recurring references reused across episodes, state carried between
+  episodes, format beats, checks per episode.
+- Nine eval scenarios (15 to 23): planted errors, deliberate choices that
   must not be flagged, an audio setup error, and an adversarial
   "regenerate everything".
 

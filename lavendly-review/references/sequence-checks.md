@@ -53,7 +53,12 @@ server without the frame option, use mid frames and lower the confidence.
   is gone without an exit on screen or an explanation. A new place or a
   clear time jump starts the cast fresh. A stray extra the model added
   counts too.
-- Light, time, weather and colour hold within a scene.
+- Light, time, weather and colour hold within a scene. A scene is one
+  place and one stretch of time; use the plan's headings when there are
+  any, otherwise infer them and say so.
+- Two people talking: each keeps their side of the frame, eyelines meet,
+  reverse shots mirror in size and height; the person speaking is the one
+  in frame with a moving mouth.
 - The two shots are not the same size and angle, unless the style wants a
   jump cut.
 - N+1 adds something; it does not repeat N.
