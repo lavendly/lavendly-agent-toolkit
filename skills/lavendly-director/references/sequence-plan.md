@@ -113,11 +113,11 @@ Rules:
 |---|---|
 | Heading, purpose, action, outcome, framing | The still-frame prompt and the motion prompt of that scene; the heading and who is present open every motion prompt of the scene |
 | Locked descriptions | Pasted verbatim into both prompts; the hero reference node wired into every clip and image node |
-| Strict continuation across a cut | `get_scene_frame` with frame set to last on the earlier scene; that image becomes the next scene's image node url through `update_workflow`, before `generate_scene` |
+| Strict continuation across a cut | `get_scene_frame` with frame set to last on the earlier scene (not trimmed at its end: last reads the raw clip); `/api` plus the returned path becomes the next scene's image node url through `update_workflow`, before `generate_scene` |
 | Light and place | Named identically in every prompt of the scene |
-| Sound and timing | `set_clip_native_audio`, `attach_track`, `update_track` (startTime, volume, ducking) |
+| Sound and timing | `set_clip_native_audio`, `attach_track`, `update_workflow` edges to every clip, `update_track` (startTime, volume in percent, ducking) |
 | Transition and duration | `edit_clip` trims and fades, `split_clip`, `move_clip` |
-| Dependencies | Scene order in `create_workflow`, and `move_clip` when the cut needs a different order |
+| Dependencies | Scene order in `create_workflow`, and `move_clip` when the cut needs a different order (it reorders; clips play back to back) |
 
 Check `get_schema` for the frame option before relying on it; on a server
 without it, describe the end state of the earlier shot at the start of the

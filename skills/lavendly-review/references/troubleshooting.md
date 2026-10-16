@@ -63,7 +63,7 @@ parallel job for the same scene.
 Read the failures. A missing audio stream means the tracks did not mix: check
 `get_workflow_audio`, fix the track (`update_track`, or re-attach), render
 again with a new `idempotency_key` (free; the same key would replay the old
-render for 5 minutes). A visual failure on the film
+render for 24 hours). A visual failure on the film
 names a scene: go back to that scene's loop.
 
 ## The user says "just render it" with a failing scene

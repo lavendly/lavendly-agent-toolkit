@@ -1,7 +1,7 @@
 {
   "name": "lavendly",
   "version": "0.2.0",
-  "description": "Lavendly agent toolkit: six skills (film direction, narrated shorts, consistent multi-shot sequences, budget guardrails, the quality loop, publishing) and the Lavendly MCP connection, sign in on first use.",
+  "description": "Lavendly agent toolkit: seventeen skills for every kind of video (direction, ads, cinematic, music videos, animation and 3D, motion design, explainers, social, places, series, consistent characters, model choice, budget, quality, publishing) and the Lavendly MCP connection, sign in on first use.",
   "author": {
     "name": "Lavendly",
     "url": "https://lavendly.ai"
@@ -25,7 +25,7 @@
   "interface": {
     "displayName": "Lavendly Agent Toolkit",
     "shortDescription": "Make short AI videos with Lavendly from Codex, checked and on budget",
-    "longDescription": "The Lavendly Agent Toolkit gives Codex the Lavendly MCP (sign in on first use) and six skills that operate it: direct a 15 to 90 s video with a locked hero and a shot plan, make a narrated short or a consistent multi-shot sequence, keep spend inside a budget, check every scene, cut and the whole video before rendering, and publish only after an explicit yes.",
+    "longDescription": "The Lavendly Agent Toolkit gives Codex the Lavendly MCP (sign in on first use) and seventeen skills: a director for the process, craft skills for model choice and consistent characters, genre skills for ads, cinematic film, music videos, animation and 3D, motion design, explainers, social formats, places and lifestyle, and series, plus budget guardrails, the quality loop and publishing.",
     "developerName": "Lavendly",
     "category": "Design",
     "capabilities": [
@@ -35,9 +35,9 @@
     "websiteURL": "https://lavendly.ai",
     "defaultPrompt": [
       "Direct a 20 second ad for my lamp, same lamp in every shot",
-      "Make a 5 second narrated clip of a lighthouse keeper at dawn",
-      "Three shots of the same character crossing a market, a bridge, and a station",
-      "Check the quality of my last workflow and render it"
+      "A 30 second claymation bedtime story about a bear who can't sleep",
+      "A 15 second POV TikTok about a new barista",
+      "Make episode 4 of my kids series"
     ]
   }
 }

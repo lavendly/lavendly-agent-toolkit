@@ -41,6 +41,8 @@ an error. A tutorial showing a result before its step is always an error.
 For each cut between scene N and scene N+1, open the last frame of N and
 the first frame of N+1 (`get_scene_frame`, frame last then first). On a
 server without the frame option, use mid frames and lower the confidence.
+Frame last reads the raw clip, not the trimmed window: when scene N is
+trimmed at its end, judge that cut on the rendered film instead.
 
 - The same entity looks the same: face, product, wardrobe, colour.
 - Position, posture and object state carry over, or the story explains the
@@ -94,12 +96,13 @@ true, the mid frame of each scene in order, and `get_workflow_audio`.
 
 | Check | Fix |
 |---|---|
-| Music ducked under narration and dialogue | `update_track` ducking true; music volume 0.3 to 0.4 under voice |
+| Music ducked under narration and dialogue | `update_track` ducking true, `volume` 35 (a percent, never 0.35); film-wide music ducks only under a voiceover also wired to every clip |
+| Score and narration reach every clip | `update_workflow`: an edge from each to every clip; a track on one clip only freezes that clip's last frame for the rest of the track |
 | One score, not one per scene | `detach_track` the extras |
-| Narration and native dialogue do not overlap | `set_clip_native_audio` to mix or off, or `update_track` startTime |
+| Narration and native dialogue do not overlap | `set_clip_native_audio` to mix or off, or a rewritten line (`startTime` moves the whole track on its mix clock) |
 | Narration fits its picture (about 2.3 words per second) | A shorter line attached again (synthesis is paid) |
 | A clip's own audio jumps in level against its neighbours | `edit_clip` volume |
-| A hard edge at the start or the end | `edit_clip` `fade_in_ms` or `fade_out_ms` |
+| A hard edge at the start or the end | `edit_clip` `fade_in_ms` or `fade_out_ms`; for the score, on the music node (a clip fade does not fade a film-wide score) |
 
 Perceived loudness, clipping and the balance between layers are not
 measured by any tool today. Say when a moment is in doubt and ask the user

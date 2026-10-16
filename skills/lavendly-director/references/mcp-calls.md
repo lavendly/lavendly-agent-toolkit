@@ -137,7 +137,24 @@ have no mode set; set every clip.
 
 One track carries the whole script, one line per scene, inside the 2.3 words
 per second budget of the scene it covers. `subtitleStyle` from `off`,
-`tiktok`, `reels`, `youtube`, `caption`.
+`tiktok`, `reels`, `youtube`, `caption`. No `volume` on a voiceover.
+
+Voices: no `voice` means Rachel, the default. Read `get_status`
+`models.tts_voices`. When it lists ElevenLabs voices (direct ElevenLabs),
+pass a premade id: Rachel 21m00Tcm4TlvDq8ikWAM, Adam pNInz6obpgDQGcFmaJgB,
+Bella EXAVITQu4vr4xnSDxMaL, Antoni ErXwobaYiN019PkySvjV, Elli
+MF3mGyEYCl7XYWbV9V6O, Josh TxGEqnHWrfWFTfGW9XjX, Arnold VR6AewLTigWG4xSOukaG,
+Sam yoZ06aMxZJJ28mfd3POQ. When it lists the OpenAI names (alloy, echo,
+fable, onyx, nova, shimmer), voice runs on ElevenLabs through OpenRouter and
+every one of those names plays as Rachel: pass one of sarah, george, adam,
+alice, bella, bill, brian, callum, charlie, chris, daniel, eric, harry,
+jessica, laura, liam, lily, matilda, river, roger, will. Script up to 4,000
+characters per voiceover (longer is cut), priced per character.
+
+Captions burn only from a synthesized voiceover (`text`, which keeps word
+timings) with an explicit `subtitleStyle` (`off`, `tiktok`, `reels`,
+`youtube`, `caption`), one style per film, on a film of two or more scenes.
+A voiceover attached by `url`, native dialogue and imported speech get none.
 
 ## `attach_track`: one score
 
@@ -154,8 +171,57 @@ per second budget of the scene it covers. `subtitleStyle` from `off`,
 }
 ```
 
-`duration` close to the film's length (5 to 120). Fallback when the server
-answers `url required`: the same call with `url` set to a hosted file.
+`duration` equal to the film's length (5 to 120); the block cuts the score
+at its end. `mood` or `url` is required. Fallback when the server answers
+`url required`: the same call with `url` set to a hosted file.
+
+Levels: attach-time music `volume` 0 to 2 is read as a fraction (0.35
+becomes 35 percent). A voiceover's `volume` and every `update_track`
+`volume` are stored as a percent with no conversion: never pass `volume` on
+a voiceover (the default 100 is unity), and when a level must change later
+pass `update_track` `volume` in percent (35 for a music bed, 100 for unity),
+never 0.35.
+
+## Make the score and the narration film-wide: `update_workflow`
+
+Where `get_schema` lists `scope` on `attach_track`, pass `"scope": "film"`
+when you attach the score and a film-wide narration: the server wires the
+new node to every clip and the edges below are not needed. Otherwise add
+them by hand.
+
+`attach_track` wires its new node to one clip only. A score or a narration
+plays across the film only when its node has an edge to every clip node
+(type videoGenerator). Left on one clip it is mixed into that clip alone, and
+a track longer than the clip freezes that clip's last frame for the rest of
+the track. After the attach, `get_workflow`, then send the full `nodes` and
+`edges` arrays back with one more edge per other clip, copied from the edge
+`attach_track` made (same shape, new `id` and `target`):
+
+```json
+{
+  "workflow_id": "<id>",
+  "nodes": [ "<every node, unchanged>" ],
+  "edges": [
+    "<every existing edge>",
+    { "id": "<music node id>->vid_2", "source": "<music node id>", "target": "vid_2" },
+    { "id": "<music node id>->vid_3", "source": "<music node id>", "target": "vid_3" },
+    { "id": "<voiceover node id>->vid_2", "source": "<voiceover node id>", "target": "vid_2" },
+    { "id": "<voiceover node id>->vid_3", "source": "<voiceover node id>", "target": "vid_3" }
+  ]
+}
+```
+
+A voice line that belongs to one scene stays on that clip only. Film-wide
+music ducks only under film-wide voices, never under a per-scene line.
+
+Then a clean ending: the block (`duration`) cuts the score at its end, and a
+fade on the last clip does not fade a film-wide score. Fade the music node
+itself:
+
+```json
+{ "workflow_id": "<id>", "node_id": "<music node id>", "edits": { "fade_out_ms": 1500 } }
+```
+
 
 ## `estimate_cost`, then approval
 
@@ -179,6 +245,10 @@ line in `per_scene` plus its opening image; on `create_render`, the approved
 ```json
 { "workflow_id": "<id>", "node_id": "vid_1", "max_credits": 40, "idempotency_key": "gen-<workflow id>-vid_1" }
 ```
+
+`node_id` must be a clip node (type videoGenerator): an image node answers
+`node_not_found`. There is no image-only generation on the MCP; an opening
+image is made only with its clip and paid with it.
 
 Then `get_generation_status` every 5 to 10 seconds, silently. When scene 1
 lands, `get_scene_frame` with `node_id` `vid_1`, look, `quality_check`, and
@@ -210,8 +280,22 @@ rendered film, omit `node_id`.
 
 `trim` is in source milliseconds. `fade_out_ms` on the outgoing clip and
 `fade_in_ms` on the incoming one make a dip to black. `split_clip` with
-`at_sec` cuts one clip into two halves; `move_clip` with `timeline_start_sec`
-places a clip. The server keeps `timeline_start` and `duration` in sync.
+`at_sec` (seconds into the clip, rate-aware, not film time) cuts one clip
+into two halves; the second half gets no audio edges. `move_clip` with
+`timeline_start_sec` only changes the order: clips play back to back and a
+gap is never rendered. Applied in the export: trim, speed, volume, mute,
+fades, crop, rotate, flip, reverse, color; `loop`, `resize`, `stabilize` and
+`lut_id` are accepted but ignored.
+
+## `get_scene_frame`: chaining a continuing shot
+
+`get_scene_frame` returns `frame_url` as a path like
+`/v1/storage/images/thumb_<id>.jpg`. Prefix it with `/api` before writing it
+to the next image node's `data.url` (`/api/v1/storage/images/thumb_<id>.jpg`);
+the path without `/api` is dropped and the clip runs without a first frame.
+Never use an absolute https url. Frame last reads the raw clip, not the
+trimmed window: chain only from a scene that is not trimmed at its end, or
+describe the end state in words instead.
 
 ## `create_render`, `get_render`
 

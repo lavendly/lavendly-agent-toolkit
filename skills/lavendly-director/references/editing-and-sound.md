@@ -32,11 +32,12 @@ paid for.
 | Cut on action | end the motion prompt mid-move, start the next with the same move | "the hand is still withdrawing as the next shot opens" |
 | Match cut | matched framing or shape across two still-frame prompts | Before and after, a comparison |
 | Dip to black | `fade_out_ms` on the outgoing clip, `fade_in_ms` on the incoming | Passage of time, a chapter |
-| J-cut | the next scene's sound starts under the current picture | Narration placed with `update_track` `startTime` |
-| L-cut | the previous scene's sound continues under the next picture | Native sound kept, narration delayed |
-
-Dissolves and wipes are not rendered yet; do not promise them. Choose a
-transition for meaning, not novelty.
+Dissolves, wipes, J-cuts and L-cuts are not rendered; do not promise them.
+Clips play back to back in order, a timeline gap is never rendered, and a
+voice track's `startTime` is a position on its mix clock (the film for a
+track wired to every clip, the clip's start for a per-clip track), so a
+clip's sound cannot be slid under its neighbour. Choose a transition for
+meaning, not novelty.
 
 ## 4. Rhythm and duration
 

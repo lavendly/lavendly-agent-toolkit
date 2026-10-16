@@ -10,8 +10,9 @@ the skill reads. Placeholders are in angle brackets.
 {}
 ```
 
-Read: provider readiness per domain, voice configuration (default voice,
-available voice ids), capability flags. Free. Call once per session.
+Read: provider readiness per domain, voice configuration (`voice.provider`,
+`models.tts_voices`), capability flags. It lists no video models. Free. Call
+once per session.
 
 ## 2. `get_ledger`
 
@@ -29,7 +30,7 @@ Read: `available` credits, plan, pending reservations. Free.
   "shots": [
     {
       "prompt": "<shot prompt, anchors first, action last>",
-      "duration": 5
+      "duration": 8
     }
   ],
   "project_name": "<only when the user named a project>",
@@ -43,10 +44,12 @@ response is the persisted workflow with its id and nodes. The clip id you need
 for audio and quality calls is the id of the videoGenerator node.
 
 The server also reads an optional top-level `aspect` such as `"9:16"` next to
-`shots`. It is not listed in the MCP input schema, so check `get_schema` before
-relying on it, and otherwise leave the default.
+`shots` (default `"16:9"`), and a top-level `videoModel` (default Auto, Veo
+3.1 Lite). A `videoModel` inside a shot is ignored. For a length Auto does
+not make, add `"videoModel": "bytedance/seedance-2.0-mini"`.
 
-Duration on a shot defaults to 5 when omitted.
+Duration on a shot defaults to 5 when omitted, which Auto does not make:
+always write it. The server sends it as written, never snapped.
 
 ## 5. `get_workflow` (only if the create response was truncated)
 
@@ -62,10 +65,23 @@ Duration on a shot defaults to 5 when omitted.
   "clip_id": "<videoGenerator node id>",
   "kind": "voiceover",
   "text": "Steam lifts off the portafilter. The first drops fall, dark and slow.",
-  "voice": "alloy",
   "idempotency_key": "vo-<workflow id>"
 }
 ```
+
+No `voice` means Rachel, the default. Never pass `volume` on a voiceover: it
+is stored as a percent, so 1 means 1 percent; the default 100 is unity.
+
+Voices: read `get_status` `models.tts_voices`. When it lists ElevenLabs
+voices (direct ElevenLabs), pass a premade id: Rachel 21m00Tcm4TlvDq8ikWAM,
+Adam pNInz6obpgDQGcFmaJgB, Bella EXAVITQu4vr4xnSDxMaL, Antoni
+ErXwobaYiN019PkySvjV, Elli MF3mGyEYCl7XYWbV9V6O, Josh TxGEqnHWrfWFTfGW9XjX,
+Arnold VR6AewLTigWG4xSOukaG, Sam yoZ06aMxZJJ28mfd3POQ. When it lists the
+OpenAI names (alloy, echo, fable, onyx, nova, shimmer), voice runs on
+ElevenLabs through OpenRouter and every one of those names plays as Rachel:
+pass one of sarah, george, adam, alice, bella, bill, brian, callum, charlie,
+chris, daniel, eric, harry, jessica, laura, liam, lily, matilda, river,
+roger, will. Script up to 4,000 characters, priced per character.
 
 Fallback when the server answers `url required`:
 
@@ -75,14 +91,13 @@ Fallback when the server answers `url required`:
   "clip_id": "<videoGenerator node id>",
   "kind": "voiceover",
   "url": "https://<hosted mp3, wav or m4a from the Asset Library>",
-  "text": "<the same script, for captions>",
-  "voice": "alloy",
   "idempotency_key": "vo-<workflow id>"
 }
 ```
 
-Response: the new track with its id (needed for `update_track`) and the source
-node the server placed on the canvas. Text is stored up to 800 characters.
+A voiceover attached by `url` has no word timings, so it never gets burned
+captions. Response: the new track with its id (needed for `update_track`)
+and the source node the server placed on the canvas.
 
 ## 7. `attach_track` music, synthesis form first
 
@@ -92,28 +107,34 @@ node the server placed on the canvas. Text is stored up to 800 characters.
   "clip_id": "<videoGenerator node id>",
   "kind": "music",
   "mood": "quiet solo piano, opening on a held chord, a small lift as the cup fills, release into room tone",
-  "duration": 5,
+  "duration": 8,
   "ducking": true,
   "volume": 0.38,
   "idempotency_key": "mus-<workflow id>"
 }
 ```
 
-Fallback: replace `mood` and `duration` with `url` pointing at a hosted file.
-Keep `ducking: true` (drops the music 8 dB under the voice) and the volume.
+`mood` (or `url`) is required; there is no default mood. `duration` is the
+block length (5 to 120 s): the score is cut at the block end, so make it the
+clip's length. On a 4 s clip attach with 5, then `update_track` `duration` 4. Attach-time music `volume` 0 to 2 is read as a fraction (0.38
+becomes 38 percent). The provider (ElevenLabs Music or Lyria 3, see
+`get_status` `music.provider`) may not follow a tempo in the brief.
 
-## 8. `update_track` captions
+Fallback: replace `mood` with `url` pointing at a hosted file and keep
+`duration`. Keep `ducking: true` (drops the music to about a third under the
+voice) and the volume.
 
-```json
-{
-  "workflow_id": "<id>",
-  "track_id": "<voiceover track id>",
-  "subtitleStyle": "tiktok"
-}
-```
+## 8. No captions on one scene
 
-Values: `off`, `tiktok`, `reels`, `youtube`, `caption`. The same call adjusts `volume`
-(0 to 2), `muted`, `ducking`, and the trim window (`startTime`, `duration`).
+A workflow with exactly one clip renders on the single-scene path: no
+burned captions and no `edit_clip` picture edits (only clip volume and mute
+apply). Do not call `update_track` for captions here. When captions matter,
+offer two scenes and hand off to lavendly-multi-clip.
+
+`update_track` still adjusts `muted`, `ducking`, `duration` (the block
+length) and `startTime` (where the track starts on the clip, not a source
+in-point). Its `volume` is stored as a percent: pass 35 for a music bed, 100
+for unity, never 0.35.
 
 ## 9. `set_clip_native_audio`
 
@@ -242,5 +263,5 @@ failed render at most twice with the same key.
 
 Returns the hosted Lavendly url. Media pasted into the chat never reaches
 the agent; the user uploads it at https://lavendly.ai/AssetLibrary or gives
-a public URL. Limits match the app uploader: image 25 MB, video 300 MB and
-3 minutes, music 50 MB and 10 minutes.
+a public URL. Limits by `url`: image 25 MB, video 64 MB and 3 minutes,
+music 50 MB and 10 minutes; inline `data` about 11 MB.

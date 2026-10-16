@@ -59,9 +59,9 @@ One camera move per shot, constraints stated positively, no banned words.
 | 3 | write | One prompt per beat on the template; one narration line per beat |
 | 4 | `create_workflow` | `name`, `shots` in beat order (each `prompt`, `duration`), `project_name` when named, `idempotency_key` |
 | 5 | read the record | Clip ids are the videoGenerator node ids, in order; `get_workflow` if unsure |
-| 6 | `attach_track` voiceover | On the first clip, `text` is the whole script, `voice`, `idempotency_key` |
+| 6 | `attach_track` voiceover | On the first clip, `text` is the whole script, `voice` only when picked, `subtitleStyle`, no `volume`, `idempotency_key` |
 | 7 | `attach_track` music | On the first clip, one score: `mood` as an arc and `duration` equal to the film, `ducking: true`, volume 0.35 to 0.4, `idempotency_key` |
-| 8 | `update_track` | Captions on the voiceover track: `subtitleStyle` |
+| 8 | `update_workflow`, `edit_clip` | Make both tracks film-wide (skip the edges when steps 6 and 7 passed `scope` film, offered where `get_schema` lists it): full `nodes` and `edges` with an edge from the voiceover node and from the music node to every other clip; then the music node's `fade_out_ms` |
 | 9 | `set_clip_native_audio` | `{mode: "off"}` on every clip; `mix` at about 0.6 only on a clip with on-screen dialogue the user wants heard |
 | 10 | `estimate_cost` | Announce in one line (scene count, model, credits, balance), get approval, refuse when `sufficient` is false |
 | 11 | `generate_scene` | No `node_id`: every ungenerated scene; `idempotency_key` |
@@ -77,12 +77,14 @@ Exact JSON: [references/mcp-calls.md](references/mcp-calls.md).
 
 ### Length and count
 
-- 2 to 6 shots. Each shot 3 to 8 s, default 5. Total under 30 s unless the
+- 2 to 6 shots. The server sends each duration as written, so use the
+  model's exact lengths: on Auto (Veo 3.1 Lite) 4, 6 or 8 s, default 4; on a
+  model named with `videoModel`, a length from its list. Total under 30 s unless the
   user asks for more; then propose two workflows and say why (attention and
   cost).
 - Seven or more beats: group them into at most six shots and show the
   grouping before creating anything.
-- A 60 s request: propose 6 shots of 5 s as one film, or two films. Do not
+- A 60 s request: propose 6 shots of 8 s as one film, or two films. Do not
   build 12 shots silently.
 
 ### Narration
@@ -92,13 +94,28 @@ Exact JSON: [references/mcp-calls.md](references/mcp-calls.md).
   carry the rest.
 - The lines must bridge: each one hands off to the next image. Present tense,
   concrete, no "in this video", no "imagine".
-- Default voice `alloy`; choices alloy, echo, fable, onyx, nova, shimmer.
+- Default voice Rachel: omit `voice`. The OpenAI names (alloy, echo, fable,
+  onyx, nova, shimmer) all play as Rachel; never offer them as different
+  voices. Other voices: the ElevenLabs list in
+  [references/mcp-calls.md](references/mcp-calls.md). Script up to 4,000
+  characters, priced per character.
+- Captions burn only from this synthesized voiceover, with an explicit
+  `subtitleStyle` (`tiktok`, `reels`, `youtube` or `caption`; `off` when
+  declined), one style per film.
 
 ### Music
 
-- One score for the whole film, attached once on the first clip. Never a
-  different track per scene. Describe the arc in one prompt: opening, build,
-  release. `ducking: true`, volume 0.35 to 0.4, instrumental.
+- One score for the whole film, attached once on the first clip, then
+  wired to every clip. Never a different track per scene. Describe the arc in
+  one prompt: opening, build, release. `ducking: true`, volume 0.35 to 0.4
+  at attach time, instrumental, `duration` equal to the film.
+- A track wired to clip 1 only is mixed into clip 1: a long score or
+  narration freezes clip 1's last frame for the rest of the track, and the
+  score ducks only under a voiceover that is also film-wide. Wire both.
+- The block cuts the score at its end; end it with `fade_out_ms` on the
+  music node. A fade on the last clip does not fade a film-wide score.
+- Change a level later only with `update_track` `volume` in percent (35 for
+  the bed, 100 for unity), never 0.35. Never pass a voiceover `volume`.
 
 ### Native audio
 
@@ -122,8 +139,8 @@ Exact JSON: [references/mcp-calls.md](references/mcp-calls.md).
 plus `duration` on servers that carry the synthesis update. Try that form
 first. If the server answers `url required`, ask the user to generate the
 voice and the music in the Lavendly app (Asset Library) and attach the hosted
-files by `url`, still one voiceover and one score on the first clip. Say it
-once.
+files by `url`, still one voiceover and one score wired to every clip. A
+voiceover by `url` gets no captions. Say it once.
 
 ## When to stop
 

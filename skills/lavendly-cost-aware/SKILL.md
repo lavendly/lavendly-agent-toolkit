@@ -20,7 +20,7 @@ voice; it decides whether the call happens and with which model.
 
 | Step | Call | Read | Rule |
 |---|---|---|---|
-| 1 | `get_status` | provider readiness, models | Never claim or deny a capability from memory |
+| 1 | `get_status` | provider readiness, voice and music config (it lists no video models) | Never claim or deny a capability from memory |
 | 2 | `get_ledger` | available credits, pending reservations | Available minus pending is the working balance |
 | 3 | `get_monthly_usage` | `fraction_used` | Above 0.85: refuse non-critical generation, report |
 | 4 | `estimate_cost` | `total`, `remaining`, `per_scene`, `sufficient` | Announce; ask above 30 percent of balance; refuse when `sufficient` is false |
@@ -52,11 +52,15 @@ use 10 percent of the working balance and say so in the report.
 
 ## Model preference
 
-- Prefer the cheapest model that meets the brief. Read the model per scene
-  from `estimate_cost.per_scene` and the model list from `get_status`.
-- If the catalog exposes a model option on `create_workflow` (check
-  `get_schema`), pass the cheapest fit there. Never invent a model id, and
-  never claim a model exists without `get_status` in this session.
+- Prefer the cheapest model that meets the brief. Model ids and prices come
+  from the table in [references/mcp-calls.md](references/mcp-calls.md);
+  `estimate_cost.per_scene` shows the model each scene will use. No tool
+  lists video models.
+- Pass the cheapest fit as the top-level `videoModel` on `create_workflow`.
+  Never invent a model id: the server does not check it, quotes an unknown
+  id at a flat 14 credits per block and sends it to the provider as is.
+- Durations are sent as written, never snapped: use the model's exact
+  lengths (Auto makes 4, 6 or 8 s).
 - Shots without faces: the cheapest model is almost always enough. Shots with
   people: step up one tier only when the cheapest shows visible artifacts on
   `quality_check`.
@@ -88,9 +92,9 @@ the estimate before it fires.
   report, not a guess.
 - Skip the run entirely when `fraction_used` is above 0.85 or the cap is
   below the estimate. Report why in one line.
-- Use `list_workflows` before creating: an identical name from the same day
-  means a prior run may have partly succeeded. Continue it instead of
-  duplicating.
+- Use `list_workflows` before creating (it returns every workflow, newest
+  first, no filter): an identical name from the same day means a prior run
+  may have partly succeeded. Continue it instead of duplicating.
 - Report after each render, one line, then stop.
 
 ## Reporting format

@@ -63,7 +63,7 @@ your change to the fresh copy, write once. Never overwrite blind.
 The call may have gone through. Do not repeat it with a new key. Call
 `get_generation_status` (or `get_render` with the job id) to rejoin the
 running job. If you must resend, resend with the identical
-`idempotency_key`: the server returns the same response for 5 minutes.
+`idempotency_key`: the server returns the same response for 24 hours.
 
 ## The user attached a file in chat
 

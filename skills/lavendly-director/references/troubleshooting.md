@@ -5,7 +5,7 @@ a new idempotency key.
 
 | You see | It means | Do |
 |---|---|---|
-| `url required` from `attach_track` | this server does not synthesize voice or music | ask the user to make it in the app's Asset Library, attach the hosted file by `url`, keep `text` for captions |
+| `url required` from `attach_track` | this server does not synthesize voice or music | ask the user to make it in the app's Asset Library, attach the hosted file by `url`; a voiceover by `url` gets no captions |
 | `invalid_args` naming the duration on `generate_scene` | the model does not make that length (Veo: 4, 6, 8) | set the clip's duration to the next length up with `update_workflow`, trim later with `edit_clip` |
 | a 400 naming too many references | the model takes fewer references than wired (Veo: 2) | keep the hero and at most one style plate on that clip; remove the other reference edges |
 | `insufficient_credits` or `sufficient` false | the balance cannot cover the quote | stop, say what is missing, propose a cheaper model or fewer scenes |
@@ -21,5 +21,5 @@ a new idempotency key.
 | the clip shows a phone UI, a timestamp, a recorder dot | the prompt said "phone video" or "footage" without the clean-frame line | add "clean frame with no on-screen graphics, no timestamps" and re-roll |
 | the product appears twice, or mirrored | a reflection or "another" in the prompt | name the one object, bound the reflection ("a faint reflection in the table, nothing else"), re-roll |
 | the opening image shows the payoff | the still-frame prompt described the action | rewrite it as the start state; the clip animates from the start |
-| captions missing on the film | the voiceover has no word timings or the style is `off` | `update_track` with a `subtitleStyle`; if timings are missing, the server transcribes on render |
+| captions missing on the film | the voiceover was attached by `url` (no word timings), its `subtitleStyle` is missing or `off`, or the film has one scene | `update_track` with a `subtitleStyle`; a `url` voiceover needs re-attaching from `text`; a one-scene film burns no captions |
 | media the user pasted in the chat | it never reaches you as bytes or a url | ask for an Asset Library upload or a public URL, then `import_asset` |

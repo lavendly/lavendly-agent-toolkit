@@ -1,7 +1,7 @@
 {
   "name": "@lavendly/agent-toolkit",
   "version": "0.2.0",
-  "description": "Lavendly agent toolkit: a Claude Code, Cursor and Codex plugin with six skills and the Lavendly MCP connection.",
+  "description": "Lavendly agent toolkit: a Claude Code, Codex, Gemini CLI and Cursor plugin with seventeen video skills and the Lavendly MCP connection.",
   "license": "MIT",
   "homepage": "https://lavendly.ai",
   "repository": {
@@ -52,6 +52,11 @@
     "storytelling",
     "claude-code-plugin",
     "cursor-plugin",
-    "codex-plugin"
+    "codex-plugin",
+    "ads",
+    "animation",
+    "music-video",
+    "cinematic",
+    "3d"
   ]
 }

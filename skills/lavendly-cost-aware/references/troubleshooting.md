@@ -79,5 +79,7 @@ for the yes. Then render. Say in one line why the pause exists.
 
 ## Unknown model id in the brief
 
-`get_status` did not list it. Say so, show the closest listed model with its
-per-scene credits from `estimate_cost`, and wait. Never pass an unlisted id.
+It is not in the table in [mcp-calls.md](mcp-calls.md). Say so, show the
+closest listed model with its per-scene credits from `estimate_cost`, and
+wait. Never pass an unlisted id: the server would quote it at a flat 14 per
+block and send it to the provider unchecked.
