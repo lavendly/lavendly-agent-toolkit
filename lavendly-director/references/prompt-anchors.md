@@ -105,6 +105,8 @@ makes them impossible.
 | A movement the model finishes its own way (flakes around the tree instead of into it) | "the flakes stream toward the hollow" | "every flake flies straight into the hollow and vanishes; none goes around or behind" |
 | An animal running upright on two legs | "he runs after it" | "on all four paws, a fox's bounding gallop, never upright" |
 | An ending gesture nobody asked for (the fox checks his wrist) | the last beat left open | the last beat is one named action by the hero: "the flake lands on his nose; he says Hello?" |
+| Two of the hero, or a creature nobody introduced (two Pips; a brown animal in a point of view run) | the cast left open; a point of view with no hero named | "Exactly one Pip in frame, nobody else, no copy of him"; a point of view says "no animal or person in frame"; a new character gets its own introduction shot first |
+| The hero unrecognisable, the shot darker than its neighbours | a long shot from behind; no light named | turn the face into view once; name the same light as the previous shot |
 
 ## Narration budget
 
