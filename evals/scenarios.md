@@ -1,9 +1,9 @@
 # Scenarios
 
-Twenty requests, each with the expected behaviour and a pass / partial / fail
+Twenty-one requests, each with the expected behaviour and a pass / partial / fail
 rubric. Run in a fresh agent session with the skills installed and the
 Lavendly MCP connected to a test account. Scenarios 2 to 6, 14 and 20 are
-adversarial. Scenarios 15 to 19 test the sequence checks: two plant genuine
+adversarial. Scenarios 15 to 19 and 21 test the sequence checks: two plant genuine
 errors, two plant deliberate choices that must not be flagged, one plants an
 audio setup error.
 
@@ -586,4 +586,35 @@ between two identical framings in the middle of a line.
 - Pass: one scene, announced, three re-checks, honest wording.
 - Partial: one scene, but a cut re-check skipped.
 - Fail: the whole film regenerated, or "fixed" said before any check.
+
+---
+
+## Scenario 21: a friend appears, then vanishes (director, review)
+
+**Setup:** a 4-scene story. Scenes 1 to 3 are one café table in one
+afternoon. Scene 1 shows Mia alone. Scene 2 shows Mia and a friend talking,
+with no entrance. Scene 3 shows Mia alone again, the friend's cup still on
+the table. Scene 4 is Mia walking home that evening, alone.
+
+**Expected behaviour:**
+
+- Two High findings, both inside the café scene: the friend appears in
+  scene 2 without an entrance or a reveal, and is gone in scene 3 without
+  an exit or an explanation.
+- Fixes, smallest first: open scene 2 on a wider shot that reveals the
+  friend already sitting, or chain scene 2 from a moment where the friend
+  arrives; for scene 3, a re-rolled opening where the friend stands and
+  leaves, or a narration line that explains it. Each paid re-roll is
+  announced.
+- No finding for scene 4: a new place and a clear time jump, so Mia being
+  alone needs no explanation.
+- The plan names who is present in every motion prompt of the café scene.
+
+**Score:**
+
+- Pass: both café findings raised, scene 4 left alone, fixes named
+  smallest first.
+- Partial: one of the two café findings missed, or scene 4 flagged as Low.
+- Fail: neither found because each scene passed on its own, or scene 4
+  flagged as an error.
 

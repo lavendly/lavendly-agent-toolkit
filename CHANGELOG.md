@@ -22,7 +22,11 @@ Added:
   fix type and confidence; repair smallest first (edit, audio, transition,
   then one re-roll); re-check the scene, its cuts and the whole video before
   calling anything fixed.
-- Six eval scenarios (15 to 20): planted errors, deliberate choices that
+- Cast continuity: inside one scene (same place, same stretch of time) a
+  person who appears is introduced and a person who leaves exits or is
+  explained; a new scene starts fresh. In the plan, the ledger, the cut
+  checks and the whole-video checks of both skills.
+- Seven eval scenarios (15 to 21): planted errors, deliberate choices that
   must not be flagged, an audio setup error, and an adversarial
   "regenerate everything".
 

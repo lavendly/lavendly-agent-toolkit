@@ -137,7 +137,13 @@ agent that judgment and the exact calls that carry it into Lavendly.
   the exit motion at the start of the new motion prompt so velocity carries
   over the cut ([references/sequence-plan.md](references/sequence-plan.md)).
 - The ledger records what each landed frame shows (state, position,
-  facing), not what the prompt asked for. The next prompt starts from it.
+  facing, who is present), not what the prompt asked for. The next prompt
+  starts from it.
+- Inside one scene (same place, same stretch of time) the people present
+  carry over. A newcomer gets an entrance or a reveal; someone who leaves
+  gets an exit on screen or an explanation. A new scene starts fresh.
+  Models add and drop extras on their own: name who is in frame in every
+  motion prompt of the scene.
 - After scene 1 lands, open its frame before paying for scene 2. If the hero
   drifted there, fix scene 1 first; every later scene inherits it.
 - The physical checks (hands, contact, shadows, reflections, object state)

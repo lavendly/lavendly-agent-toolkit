@@ -25,6 +25,7 @@ tutorial step.
 | From the previous shot | The jug is on the counter, lid closed | Opens the film |
 | To the next shot | Lid open, slot empty, cartridge in the other hand | The lamp is lit, room still dark |
 | Entities in frame | Jug (ledger row J), cartridge (C) | Lamp (hero, ledger row L) |
+| Cast change | None | None (a hand enters at 1 s, introduced by the motion) |
 | Must the viewer already know | What the cartridge looks like (shot 1) | Nothing |
 | Sound and timing | Narration 9 words over 4 s; native clicks | Native switch click at 1 s; score starts at 2 s |
 | Transition out | Hard cut on the hand's motion | Hard cut |
@@ -55,8 +56,8 @@ Entity  Locked description (verbatim in prompts)          State after last lande
 L lamp  Brass arc lamp, linen drum shade, black cord...   lit, shade warm                  right third, switch toward camera
 H hand  Woman's right hand, short clear nails, rolled...  resting on the switch            enters from left
 
-Place   Light source and direction        Time, weather   Geography
-Study   Window camera left, soft, warm    Late afternoon  Desk along the window, shelf behind
+Place   Light source and direction        Time, weather   Geography                            Present
+Study   Window camera left, soft, warm    Late afternoon  Desk along the window, shelf behind  L, H
 ```
 
 Rules:
@@ -71,6 +72,15 @@ Rules:
   column.
 - Gaze and attention: when a person looks at something off screen, the next
   shot shows what they look at, or the plan says why not.
+- Who is in the scene: a scene is one place and one stretch of time. Inside
+  it, the people (and the hero object) present stay the same from shot to
+  shot unless the video shows why. A person who appears mid-scene is
+  introduced: an entrance on screen, a door or a voice, someone turning to
+  them, or a wider shot that reveals they were there all along. A person who
+  was there and is gone in the next shot leaves on screen, or a later shot
+  or a line explains it. A new scene (another place, or a time jump the
+  video makes clear) starts its cast fresh: nobody needs an exit to be
+  absent from it.
 
 ## 4. Carrying the plan into Lavendly
 

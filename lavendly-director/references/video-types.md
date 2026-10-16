@@ -31,8 +31,8 @@ decide, and state the assumption in one line.
 
 | Mode | Use for | Enforce | Allow |
 |---|---|---|---|
-| Strict | One continuous action or place, dialogue, product handling, a tutorial step that spans shots | Identity, position, screen direction, object state, light direction, time of day across every cut | Changes the story explains on screen |
-| Flexible | Most ads, explainers, documentaries, travel, social stories | Identity of the hero and named entities, light world within a scene, readable geography inside a scene | New places, time jumps, cutaways between scenes |
+| Strict | One continuous action or place, dialogue, product handling, a tutorial step that spans shots | Identity, position, who is present, screen direction, object state, light direction, time of day across every cut | Changes the story explains on screen |
+| Flexible | Most ads, explainers, documentaries, travel, social stories | Identity of the hero and named entities, light world within a scene, readable geography and who is present inside a scene | New places, time jumps, cutaways between scenes |
 | Discontinuous | Music videos, montages, mood pieces, dream sequences, rapid-cut ads | The motifs the card names (palette, a recurring object, the artist's look) and the rhythm | Location, wardrobe, scale and time changing on every cut |
 
 A video can switch mode by section: a strict product demo inside a

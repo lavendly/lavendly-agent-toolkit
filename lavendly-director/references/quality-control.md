@@ -64,6 +64,7 @@ says when a row applies.
 | Screen direction holds: an exit right enters left when the action continues | Strict |
 | The place, spatial relationships and camera side are readable after the cut | Strict; flexible within a scene |
 | No missing action: the viewer can tell how N's end became N+1's start | Strict, flexible |
+| Same scene, same people: nobody appears without an entrance or a reveal, nobody vanishes without an exit or an explanation; a new place or a clear time jump resets this | Strict, flexible |
 | Light, time, weather and colour hold within a scene | Strict, flexible |
 | The two shots are not the same size and angle (a jump cut) unless the card wants one | All, except styles that use jump cuts |
 | N+1 adds something; it does not repeat N | All |
@@ -85,6 +86,9 @@ the audio summary (`get_workflow_audio`). Then judge:
 - [ ] Someone who has not read the plan can follow it on one viewing.
 - [ ] Every "must show" item is on screen long enough to register.
 - [ ] Information arrives in order: nothing is used before it is introduced.
+- [ ] Every person is introduced the first time they appear, and every
+      absence inside a continuing scene is explained by an exit, a line or a
+      later shot.
 - [ ] Questions, promises and demonstrations raised early are resolved.
 - [ ] Pace suits the type: no shot so short its action is lost, none held
       after its information is spent, no run of shots that feel the same.

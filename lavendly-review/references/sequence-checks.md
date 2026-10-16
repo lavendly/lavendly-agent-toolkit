@@ -15,7 +15,7 @@ brief and the scenes, and state them in one line before reporting anything.
 | Mode | Typical videos | Cut checks that apply |
 |---|---|---|
 | Strict | One continuous action or place, dialogue, product handling, a tutorial step across shots | All of section 2 |
-| Flexible | Ads, explainers, documentaries, travel, social stories | Identity, light within a scene, readable place within a scene, nothing missing |
+| Flexible | Ads, explainers, documentaries, travel, social stories | Identity, light within a scene, readable place within a scene, who is present within a scene, nothing missing |
 | Discontinuous | Music videos, montages, mood pieces, rapid-cut ads | Motifs, rhythm, sound across the cut |
 
 | Type | Check first |
@@ -48,6 +48,11 @@ server without the frame option, use mid frames and lower the confidence.
 - Screen direction holds when the action continues across the cut.
 - The place and the spatial relationships stay readable.
 - Nothing is missing: the viewer can tell how N's end became N+1's start.
+- Same scene, same people: inside one place and one stretch of time,
+  nobody appears without an entrance or a reveal, and nobody who was there
+  is gone without an exit on screen or an explanation. A new place or a
+  clear time jump starts the cast fresh. A stray extra the model added
+  counts too.
 - Light, time, weather and colour hold within a scene.
 - The two shots are not the same size and angle, unless the style wants a
   jump cut.
@@ -66,6 +71,8 @@ true, the mid frame of each scene in order, and `get_workflow_audio`.
 - A first-time viewer can follow it.
 - Everything that must be shown is on screen long enough to register.
 - Information arrives in order; nothing is used before it is introduced.
+- Every person is introduced the first time they appear; every absence
+  inside a continuing scene is explained.
 - What the opening promised or asked is resolved.
 - Pace suits the type: no shot too short to read, none held after its
   information is spent, no run of shots that feel the same.
