@@ -45,9 +45,13 @@ Files each host reads:
 
 ## Other hosts: skills, then the MCP
 
-Antigravity reads skills from `.agents/skills/` in a workspace and from
-`~/.gemini/config/skills/` for every workspace. `npx skills ... --agent
-antigravity` writes the first, `install --host antigravity` the second.
+Antigravity reads skills from `.agents/skills/` in a workspace, and from
+`~/.gemini/antigravity/skills/` (the IDE) or
+`~/.gemini/antigravity-cli/skills/` (the CLI) for every workspace.
+`npx skills add ... --agent antigravity` writes the workspace folder;
+`install --host antigravity` or `--host antigravity-cli` writes the global
+one. The repository must be reachable: while it is private, install from a
+local clone (`npx skills add ./lavendly-agent-toolkit --agent antigravity`).
 
 ### 1. The skills
 
@@ -65,7 +69,7 @@ Other ways:
 gh skill install lavendly/lavendly-agent-toolkit          # GitHub CLI 2.90+
 npx skills add lavendly/lavendly-agent-toolkit --agent antigravity   # Antigravity, this workspace
 amp skill add lavendly/lavendly-agent-toolkit --global    # Amp
-npx -y @lavendly/agent-toolkit install --host antigravity # also claude, codex, cursor, gemini, amp
+npx -y @lavendly/agent-toolkit install --host antigravity # also antigravity-cli, claude, codex, cursor, gemini, amp
 npx -y @lavendly/agent-toolkit install --dir <skills dir> # any folder
 npx -y @lavendly/agent-toolkit --list                     # what is available
 ```

@@ -29,7 +29,9 @@ const HOSTS = {
   codex: { dir: ['.codex', 'skills'], mcp: `codex mcp add lavendly --url ${MCP_URL}` },
   cursor: { dir: ['.cursor', 'skills'], mcp: `~/.cursor/mcp.json: { "mcpServers": { "lavendly": { "url": "${MCP_URL}" } } }` },
   gemini: { dir: ['.gemini', 'skills'], mcp: `gemini mcp add --scope user --transport http lavendly ${MCP_URL}` },
-  antigravity: { dir: ['.gemini', 'config', 'skills'], mcp: `Antigravity > Manage MCP Servers > View raw config: { "mcpServers": { "lavendly": { "serverUrl": "${MCP_URL}" } } }` },
+  // Antigravity paths as the skills CLI (vercel-labs/skills) defines them.
+  antigravity: { dir: ['.gemini', 'antigravity', 'skills'], mcp: `Antigravity > Manage MCP Servers > View raw config: { "mcpServers": { "lavendly": { "serverUrl": "${MCP_URL}" } } }` },
+  'antigravity-cli': { dir: ['.gemini', 'antigravity-cli', 'skills'], mcp: `Antigravity CLI MCP config: { "mcpServers": { "lavendly": { "serverUrl": "${MCP_URL}" } } }` },
   amp: { dir: ['.config', 'agents', 'skills'], mcp: `amp mcp add lavendly ${MCP_URL}` },
 };
 

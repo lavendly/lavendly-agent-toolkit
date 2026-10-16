@@ -10,7 +10,7 @@ Added:
 
 - Antigravity: skills through `npx skills add ... --agent antigravity` or
   `install --host antigravity`, and its MCP config line. The installer
-  takes `--host claude|codex|cursor|gemini|antigravity|amp`, writes to that
+  takes `--host claude|codex|cursor|gemini|antigravity|antigravity-cli|amp`, writes to that
   agent's skills folder and prints its MCP setup line.
 - `.github/workflows/publish.yml`: publishes `@lavendly/agent-toolkit` to
   npm on a `v<VERSION>` release with the `NPM_API_KEY` secret; a manual run
