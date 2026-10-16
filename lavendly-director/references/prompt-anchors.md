@@ -100,6 +100,13 @@ makes them impossible.
 | Grain, bloom, flare, haze, teal-orange | "cinematic" | delete the word; name the one light source |
 | Random slow motion | "dramatic", "epic" | the speed stated: "at walking pace" |
 | An object nobody asked for (a golden key in a hollow tree) | an unnamed space: a hollow, a doorway, a box, a table, a pair of hands | say what is inside or on it, or "only light, nothing else" |
+| A second copy of a small object (two snowflakes, which one is he following?) | "a snowflake drifts away" with no count | "the one snowflake, the only light in the air" |
+| The object on the wrong side (the flake in front of the fox when it should be behind) | no depth order stated | "passes behind his head and shrinks away between the trunks" |
+| A movement the model finishes its own way (flakes around the tree instead of into it) | "the flakes stream toward the hollow" | "every flake flies straight into the hollow and vanishes; none goes around or behind" |
+| An animal running upright on two legs | "he runs after it" | "on all four paws, a fox's bounding gallop, never upright" |
+| An ending gesture nobody asked for (the fox checks his wrist) | the last beat left open | the last beat is one named action by the hero: "the flake lands on his nose; he says Hello?" |
+| Two of the hero, or a creature nobody introduced (two Pips; a brown animal in a point of view run) | the cast left open; a point of view with no hero named | "Exactly one Pip in frame, nobody else, no copy of him"; a point of view says "no animal or person in frame"; a new character gets its own introduction shot first |
+| The hero unrecognisable, the shot darker than its neighbours | a long shot from behind; no light named | turn the face into view once; name the same light as the previous shot |
 
 ## Narration budget
 

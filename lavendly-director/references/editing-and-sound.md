@@ -113,3 +113,24 @@ scene.
 - Music supports and leaves room for the voice.
 - No clipping, abrupt cutoff or unexplained silence.
 - Every audible event has a plausible source or a deliberate design reason.
+
+## Rules learned on Pip of Whisperpine (2026-10-16)
+
+- Every third shot is an insert of 3 or 4 s that changes the angle: a point
+  of view, a macro on paws or hands, a view from above. Inserts cost little
+  and are what makes a sequence feel like a film rather than a slideshow.
+- A change of place gets a bridging shot that shows the new place before
+  the hero acts in it. A change of light (day to dusk) gets a time-passage
+  shot (the sun sinking, the sky changing) in one continuous take, never a
+  cut from gold to blue.
+- Carry the body: when a shot continues the previous one, the hero starts
+  in the pose the previous shot ended in. Use continue mode for every shot
+  whose first moment is the previous shot's last moment.
+- Native sound under narration: the clip's own audio bed (Veo often adds
+  music of its own) is the sound that fights the narrator, not the score.
+  Under a narrated line set the clip's native level low (0.2 to 0.3) or off,
+  keep native only on the shots whose sound is the point (a sneeze, ice,
+  a spoken line), and keep one score at 0.2 to 0.25 with ducking on.
+- The last shot answers the scene's small question and asks a bigger one,
+  with one named action by the hero.
+
