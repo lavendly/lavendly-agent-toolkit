@@ -1,8 +1,8 @@
 #!/usr/bin/env node
-// Structural validator for lavendly/skills. Node 18 or newer, no dependencies.
+// Structural validator for lavendly/lavendly-agent-toolkit. Node 18 or newer, no dependencies.
 //
 // Checks:
-//   1. every lavendly-*/ folder has SKILL.md with frontmatter: name equals the
+//   1. every skills/lavendly-*/ folder has SKILL.md with frontmatter: name equals the
 //      folder, version equals VERSION, description carries "Use when:",
 //      "Chain:" and "NOT for:", argument-hint present
 //   2. SKILL.md is under 300 lines
@@ -13,7 +13,7 @@
 //   5. no em dash (U+2014) or en dash (U+2013) in any tracked text file, and
 //      no " -- " used as a dash in markdown prose
 //   6. VERSION matches every manifest, package.json and CHANGELOG
-//   7. marketplace.json lists every skill folder, paths exist, invoke names match
+//   7. every plugin manifest finds the skills in skills/
 //
 // Exit code 1 with a list of failures, 0 when clean.
 
@@ -166,7 +166,21 @@ const manifests = {
   '.cursor-plugin/plugin.json': readJson('.cursor-plugin/plugin.json'),
   '.codex-plugin/plugin.json': readJson('.codex-plugin/plugin.json'),
   'package.json': readJson('package.json'),
+  'gemini-extension.json': readJson('gemini-extension.json'),
 };
+
+// The portable Agent Plugins manifest (https://agent-plugins.org): a closed
+// schema with $schema and name only.
+{
+  const p = readJson('plugin.json');
+  if (p) {
+    const keys = Object.keys(p).sort().join(',');
+    if (p.$schema !== 'https://agent-plugins.org/schemas/1.0.0/plugin.schema.json') fail('plugin.json: $schema must be the Agent Plugins 1.0.0 plugin schema');
+    else if (p.name !== 'lavendly') fail('plugin.json: name must be "lavendly"');
+    else if (keys !== '$schema,name') fail(`plugin.json: only $schema and name are allowed, found ${keys}`);
+    else ok('plugin.json is a portable Agent Plugins manifest');
+  }
+}
 
 for (const [name, json] of Object.entries(manifests)) {
   if (!json) continue;
@@ -182,6 +196,22 @@ if (marketplacePlugin) {
   } else ok('.claude-plugin/marketplace.json version matches');
 }
 
+// The plugin's MCP connection: .mcp.json (Claude Code, Codex) and mcp.json
+// (the portable Agent Plugins file Cursor reads) name the same server.
+const MCP_URL = 'https://mcp.lavendly.ai/mcp';
+for (const f of ['.mcp.json', 'mcp.json']) {
+  const j = readJson(f);
+  const url = j?.mcpServers?.lavendly?.url;
+  if (url !== MCP_URL) fail(`${f}: mcpServers.lavendly.url is "${url}", expected ${MCP_URL}`);
+  else ok(`${f} points at ${MCP_URL}`);
+}
+{
+  const g = readJson('gemini-extension.json');
+  const url = g?.mcpServers?.lavendly?.httpUrl;
+  if (url !== MCP_URL) fail(`gemini-extension.json: mcpServers.lavendly.httpUrl is "${url}", expected ${MCP_URL}`);
+  else ok(`gemini-extension.json points at ${MCP_URL}`);
+}
+
 const changelogPath = join(ROOT, 'CHANGELOG.md');
 if (existsSync(changelogPath)) {
   if (!readText(changelogPath).includes(`## ${VERSION}`)) fail(`CHANGELOG.md has no "## ${VERSION}" entry`);
@@ -192,18 +222,19 @@ if (existsSync(changelogPath)) {
 // Skill folders
 // ---------------------------------------------------------------------------
 
-const skillDirs = readdirSync(ROOT, { withFileTypes: true })
+const SKILLS_ROOT = join(ROOT, 'skills');
+const skillDirs = (existsSync(SKILLS_ROOT) ? readdirSync(SKILLS_ROOT, { withFileTypes: true }) : [])
   .filter((d) => d.isDirectory() && d.name.startsWith('lavendly-'))
   .map((d) => d.name)
   .sort();
 
-if (skillDirs.length === 0) fail('no lavendly-*/ skill folders found');
+if (skillDirs.length === 0) fail('no skills/lavendly-*/ skill folders found');
 
 const readme = existsSync(join(ROOT, 'README.md')) ? readText(join(ROOT, 'README.md')) : '';
 if (!readme) fail('README.md missing');
 
 for (const dirName of skillDirs) {
-  const dir = join(ROOT, dirName);
+  const dir = join(SKILLS_ROOT, dirName);
   const skillPath = join(dir, 'SKILL.md');
   if (!existsSync(skillPath)) {
     fail(`${dirName}/SKILL.md missing`);
@@ -279,35 +310,25 @@ for (const dirName of skillDirs) {
   // README mentions the skill
   if (readme && !readme.includes(dirName)) fail(`README.md does not mention ${dirName}`);
 
-  // package.json files list includes the folder
+}
+
+// package.json ships the whole skills/ folder
+{
   const pkg = manifests['package.json'];
-  if (pkg && Array.isArray(pkg.files)) {
-    const listed = pkg.files.some((f) => f.replace(/\/$/, '') === dirName);
-    if (!listed) fail(`package.json files does not include ${dirName}/`);
+  if (pkg && Array.isArray(pkg.files) && !pkg.files.some((f) => f.replace(/\/$/, '') === 'skills')) {
+    fail('package.json files does not include skills/');
   }
 }
 
-// marketplace lists every skill folder; every listed path exists
-if (marketplacePlugin) {
-  const entries = Array.isArray(marketplacePlugin.skills) ? marketplacePlugin.skills : [];
-  const listedPaths = new Set(entries.map((s) => s.path));
-  for (const entry of entries) {
-    if (!entry.path || !existsSync(join(ROOT, entry.path, 'SKILL.md'))) {
-      fail(`.claude-plugin/marketplace.json: skill path "${entry.path}" has no SKILL.md`);
-    }
-    if (entry.path !== `lavendly-${entry.name}`) {
-      fail(`.claude-plugin/marketplace.json: skill "${entry.name}" path "${entry.path}" should be "lavendly-${entry.name}"`);
-    }
-    if (entry.invoke !== `/lavendly:${entry.name}`) {
-      fail(`.claude-plugin/marketplace.json: skill "${entry.name}" invoke "${entry.invoke}" should be "/lavendly:${entry.name}"`);
-    }
-  }
-  for (const dirName of skillDirs) {
-    if (!listedPaths.has(dirName)) fail(`.claude-plugin/marketplace.json: skill folder ${dirName} is not listed`);
-  }
-  if (entries.length && failures.filter((f) => f.includes('marketplace.json')).length === 0) {
-    ok(`.claude-plugin/marketplace.json lists ${entries.length} skills`);
-  }
+// Every host finds the skills in skills/ (the Agent Plugins default, Cursor,
+// Gemini CLI, Claude Code). A manifest may name it explicitly, nothing else.
+for (const name of ['.claude-plugin/plugin.json', '.cursor-plugin/plugin.json', '.codex-plugin/plugin.json']) {
+  const m = manifests[name];
+  if (m && m.skills !== undefined && m.skills !== './skills/') fail(`${name}: skills should be "./skills/" or left out`);
+  else if (m) ok(`${name} finds skills in skills/`);
+}
+if (marketplacePlugin && 'skills' in marketplacePlugin) {
+  fail('.claude-plugin/marketplace.json: drop plugins[0].skills; the plugin manifest lists the skills');
 }
 
 // ---------------------------------------------------------------------------

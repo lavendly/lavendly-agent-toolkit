@@ -1,0 +1,10 @@
+{
+  "name": "lavendly",
+  "version": "0.2.0",
+  "description": "Lavendly agent toolkit: six skills (film direction, narrated shorts, consistent multi-shot sequences, budget guardrails, the quality loop, publishing) and the Lavendly MCP connection, sign in on first use.",
+  "mcpServers": {
+    "lavendly": {
+      "httpUrl": "https://mcp.lavendly.ai/mcp"
+    }
+  }
+}

@@ -1,72 +1,111 @@
-# Install Lavendly Skills
+# Install the Lavendly Agent Toolkit
 
-Five skills ship in this repo:
+The toolkit is two things an agent needs together:
 
-- `lavendly-director`: direct a 15 to 90 s film with a locked hero, chosen camera and light, sound design and a cut
-- `lavendly-storyteller`: a narrated short (5 to 12 s, one shot) from a one-line idea
-- `lavendly-multi-clip`: 2 to 6 shots with character and palette anchors and one score
-- `lavendly-cost-aware`: budget guardrails, loaded for unattended or budgeted runs
-- `lavendly-review`: the quality loop before any render or post
-- `lavendly-publish`: posting and scheduling to connected channels
+- **The Lavendly MCP** at `https://mcp.lavendly.ai/mcp`: the tools.
+- **Six skills** in `skills/`: how to use the tools well.
 
-They compose: `cost-aware` overrides every spend decision, `review` runs after
-generation, `publish` runs only after a successful render and an explicit yes.
+| Skill | What it does |
+|---|---|
+| `lavendly-director` | Direct a 15 to 90 s video: intent, hero lock, shot plan, sound, the cut, checks |
+| `lavendly-storyteller` | A narrated short (5 to 12 s, one shot) from a one-line idea |
+| `lavendly-multi-clip` | 2 to 6 shots with character and palette anchors and one score |
+| `lavendly-cost-aware` | Budget guardrails, loaded for unattended or budgeted runs |
+| `lavendly-review` | The quality loop: each scene, each cut, the whole video |
+| `lavendly-publish` | Posting and scheduling to connected channels |
 
-## Prerequisites
+Sign-in: the hosted MCP signs you in with your Lavendly account the first
+time a tool is used (OAuth). No key to paste. For unattended runs, see
+[Unattended runs](#unattended-runs).
 
-1. A Lavendly account and an API key from **Dashboard > Settings > API keys**.
-2. The Lavendly MCP registered in your agent. Hosted endpoint:
-   `https://mcp.lavendly.ai/mcp` with header `Authorization: Bearer <key>`.
-   Local alternative: `npx -y @lavendly/mcp` with `LAVENDLY_API_KEY` in the
-   environment. Per-agent instructions: https://docs.lavendly.ai/mcp/overview
-3. Node.js 18 or newer for the `npx` methods.
+## Hosts with plugins: one install
 
-The skills contain no secrets and never read your key. The key belongs to the
-MCP client configuration only.
+These hosts install the skills and register the MCP in one step.
 
-## Option 1: `npx skills`
+| Host | Install | Then |
+|---|---|---|
+| Claude Code | `/plugin marketplace add lavendly/lavendly-agent-toolkit`, then `/plugin install lavendly@lavendly` | `/mcp`, pick `lavendly`, sign in |
+| Codex | `codex plugin marketplace add lavendly/lavendly-agent-toolkit`, then `codex plugin add lavendly@lavendly` | sign in when Codex asks |
+| Gemini CLI | `gemini extensions install https://github.com/lavendly/lavendly-agent-toolkit` | `/mcp auth lavendly` |
+| Cursor | **Customize**, add this repository as a plugin (team marketplace or a local clone), install | sign in when Cursor asks |
+| Any Agent Plugins host | point it at this repository; it reads `plugin.json`, `skills/` and `mcp.json` | sign in when the host asks |
 
-Cross-agent. Detects Claude Code, Cursor, Codex and other hosts that load
-`SKILL.md` folders, and writes each skill to the right path.
+Skills are invoked by name: in Claude Code `/lavendly:lavendly-director`; in
+other hosts the agent picks them from their descriptions, or you name them.
+
+Files each host reads:
+
+| Host | Manifest | MCP | Skills |
+|---|---|---|---|
+| Claude Code | `.claude-plugin/plugin.json`, `.claude-plugin/marketplace.json` | `.mcp.json` | `skills/` |
+| Codex | `.codex-plugin/plugin.json`, `.agents/plugins/marketplace.json` | `.mcp.json` | `skills/` |
+| Gemini CLI | `gemini-extension.json` | `gemini-extension.json` | `skills/` |
+| Cursor | `.cursor-plugin/plugin.json` | `mcp.json` | `skills/` |
+| Agent Plugins | `plugin.json` | `mcp.json` | `skills/` |
+
+## Other hosts: skills, then the MCP
+
+Antigravity reads skills from `.agents/skills/` in a workspace, and from
+`~/.gemini/antigravity/skills/` (the IDE) or
+`~/.gemini/antigravity-cli/skills/` (the CLI) for every workspace.
+`npx skills add ... --agent antigravity` writes the workspace folder;
+`install --host antigravity` or `--host antigravity-cli` writes the global
+one. The repository must be reachable: while it is private, install from a
+local clone (`npx skills add ./lavendly-agent-toolkit --agent antigravity`).
+
+### 1. The skills
+
+Cross-agent installer. It detects Antigravity, Amp, VS Code with Copilot,
+Windsurf, OpenCode, Cline and the hosts above, and writes each skill where
+that host looks:
 
 ```bash
-npx skills add lavendly/skills
+npx skills add lavendly/lavendly-agent-toolkit
 ```
 
-## Option 2: `gh skill install`
-
-GitHub CLI v2.90 or newer:
+Other ways:
 
 ```bash
-gh skill install lavendly/skills
+gh skill install lavendly/lavendly-agent-toolkit          # GitHub CLI 2.90+
+npx skills add lavendly/lavendly-agent-toolkit --agent antigravity   # Antigravity, this workspace
+amp skill add lavendly/lavendly-agent-toolkit --global    # Amp
+npx -y @lavendly/agent-toolkit install --host antigravity # also antigravity-cli, claude, codex, cursor, gemini, amp
+npx -y @lavendly/agent-toolkit install --dir <skills dir> # any folder
+npx -y @lavendly/agent-toolkit --list                     # what is available
 ```
 
-## Option 3: Claude Code marketplace
+### 2. The MCP
 
-Claude Code only. Inside Claude Code:
+| Host | Add the server |
+|---|---|
+| Antigravity | **Manage MCP Servers > View raw config**: `{ "mcpServers": { "lavendly": { "serverUrl": "https://mcp.lavendly.ai/mcp" } } }`; if it does not offer a sign-in, add `"headers": { "Authorization": "Bearer <key>" }` |
+| Amp | `amp mcp add lavendly https://mcp.lavendly.ai/mcp` |
+| VS Code (Copilot agent mode) | `.vscode/mcp.json`: `{ "servers": { "lavendly": { "type": "http", "url": "https://mcp.lavendly.ai/mcp" } } }` |
+| Windsurf | `~/.codeium/windsurf/mcp_config.json`: `{ "mcpServers": { "lavendly": { "serverUrl": "https://mcp.lavendly.ai/mcp" } } }` |
+| OpenCode | `opencode.json`: `{ "mcp": { "lavendly": { "type": "remote", "url": "https://mcp.lavendly.ai/mcp", "enabled": true } } }` |
+| Claude Code without the plugin | `claude mcp add --transport http lavendly https://mcp.lavendly.ai/mcp` |
+| Anything else | a remote (streamable HTTP) MCP server at `https://mcp.lavendly.ai/mcp`; per-agent notes at https://docs.lavendly.ai/mcp/overview |
 
-```
-/plugin marketplace add lavendly/skills
-/plugin install lavendly@lavendly
-```
+Sign in when the host asks. A host without OAuth support needs the API key
+form below.
 
-This reads `.claude-plugin/marketplace.json` and registers the five skills as
-`/lavendly:storyteller`, `/lavendly:multi-clip`, `/lavendly:cost-aware`,
-`/lavendly:review` and `/lavendly:publish`.
+## Unattended runs
 
-## Option 4: `@lavendly/skills` installer
-
-Zero-dependency Node script. Copies each skill folder into `~/.claude/skills/`.
+OAuth needs a person at a browser. For cron jobs, CI or a headless agent,
+create an API key in **Dashboard > Settings > API keys** and send it as a
+header. Keep it in the host's MCP config or a secret store, never in a skill
+file or a chat.
 
 ```bash
-npx -y @lavendly/skills install                 # all five
-npx -y @lavendly/skills install storyteller      # one or more, by short name
-npx -y @lavendly/skills install --dir ./.cursor/skills   # another target
-npx -y @lavendly/skills --list                  # what is available
+claude mcp add --transport http lavendly https://mcp.lavendly.ai/mcp \
+  --header "Authorization: Bearer <key>"
+amp mcp add lavendly --header "Authorization=Bearer <key>" https://mcp.lavendly.ai/mcp
 ```
 
-Re-running replaces an existing copy of the same skill, so this is also the
-update path.
+Hosts without a header option can run the local server instead:
+`npx -y @lavendly/mcp` with `LAVENDLY_API_KEY` in its environment.
+
+Load `lavendly-cost-aware` for any run nobody watches.
 
 ## Verify
 
@@ -86,7 +125,9 @@ generates anything.
 
 | Method | Update |
 |---|---|
-| `npx skills` | re-run `npx skills add lavendly/skills` |
-| `gh skill install` | `gh skill update lavendly/skills` |
-| Claude Code marketplace | `/plugin update lavendly@lavendly` |
-| `@lavendly/skills` | re-run `npx -y @lavendly/skills install` |
+| Claude Code | `/plugin update lavendly@lavendly` |
+| Codex | `codex plugin marketplace upgrade`, then reinstall the plugin |
+| Gemini CLI | `gemini extensions update lavendly` |
+| `npx skills` | re-run `npx skills add lavendly/lavendly-agent-toolkit` |
+| `gh skill install` | `gh skill update lavendly/lavendly-agent-toolkit` |
+| `@lavendly/agent-toolkit` | re-run `npx -y @lavendly/agent-toolkit install` (replaces existing copies) |

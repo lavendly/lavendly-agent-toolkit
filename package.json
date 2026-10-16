@@ -1,34 +1,37 @@
 {
-  "name": "@lavendly/skills",
+  "name": "@lavendly/agent-toolkit",
   "version": "0.2.0",
-  "description": "Agent skills for Lavendly: operating manuals that teach AI coding agents how to make good films with the Lavendly MCP.",
+  "description": "Lavendly agent toolkit: a Claude Code, Cursor and Codex plugin with six skills and the Lavendly MCP connection.",
   "license": "MIT",
   "homepage": "https://lavendly.ai",
   "repository": {
     "type": "git",
-    "url": "https://github.com/lavendly/skills.git"
+    "url": "https://github.com/lavendly/lavendly-agent-toolkit.git"
   },
   "bugs": {
-    "url": "https://github.com/lavendly/skills/issues"
+    "url": "https://github.com/lavendly/lavendly-agent-toolkit/issues"
   },
   "bin": {
-    "lavendly-skills": "bin/install.js"
+    "lavendly-agent-toolkit": "bin/install.js"
   },
   "files": [
     "bin/",
-    "lavendly-director/",
-    "lavendly-storyteller/",
-    "lavendly-multi-clip/",
-    "lavendly-cost-aware/",
-    "lavendly-review/",
-    "lavendly-publish/",
+    "skills/",
     "README.md",
     "INSTALL.md",
     "INSTALL_FOR_AGENTS.md",
     "COOKBOOK.md",
     "CHANGELOG.md",
     "LICENSE",
-    "VERSION"
+    "VERSION",
+    ".claude-plugin/",
+    ".cursor-plugin/",
+    ".codex-plugin/",
+    ".agents/",
+    ".mcp.json",
+    "mcp.json",
+    "plugin.json",
+    "gemini-extension.json"
   ],
   "scripts": {
     "validate": "node scripts/validate.mjs",
@@ -46,6 +49,9 @@
     "cursor",
     "codex",
     "video-generation",
-    "storytelling"
+    "storytelling",
+    "claude-code-plugin",
+    "cursor-plugin",
+    "codex-plugin"
   ]
 }

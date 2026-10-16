@@ -1,0 +1,9 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/mcp.schema.json",
+  "mcpServers": {
+    "lavendly": {
+      "type": "streamable-http",
+      "url": "https://mcp.lavendly.ai/mcp"
+    }
+  }
+}

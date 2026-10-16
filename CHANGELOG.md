@@ -8,6 +8,36 @@ covers every skill and manifest (see `VERSION`).
 
 Added:
 
+- Antigravity: skills through `npx skills add ... --agent antigravity` or
+  `install --host antigravity`, and its MCP config line. The installer
+  takes `--host claude|codex|cursor|gemini|antigravity|antigravity-cli|amp`, writes to that
+  agent's skills folder and prints its MCP setup line.
+- `.github/workflows/publish.yml`: publishes `@lavendly/agent-toolkit` to
+  npm on a `v<VERSION>` release with the `NPM_API_KEY` secret; a manual run
+  is a dry run unless told otherwise.
+- Skills moved to `skills/lavendly-<name>/`, the default location of the
+  Agent Plugins standard, Cursor, Gemini CLI, Codex and Claude Code.
+- A portable Agent Plugins manifest (`plugin.json`) and a Gemini CLI
+  extension (`gemini-extension.json`). INSTALL.md covers Claude Code, Codex,
+  Gemini CLI, Cursor, Agent Plugins hosts, and Amp, VS Code, Windsurf and
+  OpenCode (skills plus one MCP line each).
+- The repository is a plugin for Claude Code, Cursor and Codex: installing it
+  connects the Lavendly MCP (`.mcp.json`, and `mcp.json` for Cursor; sign in
+  on first use, no key to paste) and loads the six skills. A Codex repo
+  marketplace (`.agents/plugins/marketplace.json`).
+- Renamed to the Lavendly Agent Toolkit: repository
+  `lavendly/lavendly-agent-toolkit`, npm package `@lavendly/agent-toolkit`
+  (the old `@lavendly/skills` name on npm is the app repo's earlier
+  three-skill package).
+
+Fixed:
+
+- `.claude-plugin/marketplace.json` listed skills in a shape Claude Code
+  rejects (`plugins.0.skills: Invalid input`); the plugin manifests now load
+  the skill folders from the root. Skills are invoked as
+  `/lavendly:lavendly-<name>`.
+- The Cursor and Codex manifests described five skills; they now list six.
+
 - `lavendly-director`: the intent card and continuity modes (strict,
   flexible, discontinuous) with priorities by video type, so ads, demos,
   tutorials, explainers, documentaries, music videos, social clips and

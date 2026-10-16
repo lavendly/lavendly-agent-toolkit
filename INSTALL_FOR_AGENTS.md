@@ -17,33 +17,38 @@ Detect the host and pick the matching path:
 Then run one of:
 
 ```bash
-npx skills add lavendly/skills
+npx skills add lavendly/lavendly-agent-toolkit
 ```
 
 ```bash
-npx -y @lavendly/skills install --dir <skills path>
+npx -y @lavendly/agent-toolkit install --dir <skills path>
 ```
 
-Confirm that five folders exist, each with a `SKILL.md`:
-`lavendly-storyteller`, `lavendly-multi-clip`, `lavendly-cost-aware`,
+Confirm that six folders exist, each with a `SKILL.md`:
+`lavendly-director`, `lavendly-storyteller`, `lavendly-multi-clip`, `lavendly-cost-aware`,
 `lavendly-review`, `lavendly-publish`.
 
 ## Step 2: connect the MCP
 
-Ask the user for a Lavendly API key from **Dashboard > Settings > API keys**.
-Do not paste the key into chat and do not store it in any skill file. Register
-the hosted server:
+If the user installed the toolkit as a plugin (Claude Code, Cursor, Codex),
+the `lavendly` MCP server is already registered: ask the user to sign in
+when the host prompts (in Claude Code, `/mcp`, then `lavendly`). Skip to the
+next step.
+
+Otherwise, register the hosted server. For a person at the keyboard, the
+host's OAuth sign-in is enough:
+
+```bash
+claude mcp add --transport http lavendly https://mcp.lavendly.ai/mcp
+```
+
+For an unattended run, ask the user for a Lavendly API key from
+**Dashboard > Settings > API keys**. Do not paste the key into chat and do
+not store it in any skill file:
 
 ```bash
 claude mcp add --transport http lavendly https://mcp.lavendly.ai/mcp \
   --header "Authorization: Bearer <key>"
-```
-
-For Cursor, add the same URL and header under `mcpServers.lavendly` in
-`~/.cursor/mcp.json`. For a local stdio server instead:
-
-```bash
-claude mcp add lavendly --env LAVENDLY_API_KEY=<key> -- npx -y @lavendly/mcp
 ```
 
 ## Step 3: verify with `get_status`

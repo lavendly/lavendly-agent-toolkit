@@ -1,0 +1,57 @@
+name: Publish to npm
+
+# Publishes @lavendly/agent-toolkit when a GitHub release is published (tag
+# v<VERSION>), or by hand from the Actions tab. The token is the repository
+# secret NPM_API_KEY (an npm automation token with publish rights on the
+# @lavendly scope).
+#
+# Runner: GitHub-hosted by default. Hosted minutes are used up for private
+# repos in this org, so either make the repository public (hosted runners
+# are free for public repos) or register a self-hosted runner on this repo
+# and set the repository variable PUBLISH_RUNNER to its label (for example
+# self-hosted).
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Pack and check only, do not publish"
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ${{ vars.PUBLISH_RUNNER || 'ubuntu-latest' }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Validate
+        run: node scripts/validate.mjs
+
+      - name: Tag matches VERSION
+        if: github.event_name == 'release'
+        run: |
+          want="v$(cat VERSION)"
+          if [ "${GITHUB_REF_NAME}" != "$want" ]; then
+            echo "Release tag ${GITHUB_REF_NAME} does not match VERSION ($want)."
+            exit 1
+          fi
+
+      - name: Pack
+        run: npm pack --dry-run
+
+      - name: Publish
+        if: github.event_name == 'release' || inputs.dry_run == false
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_API_KEY }}

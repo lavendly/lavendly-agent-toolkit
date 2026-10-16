@@ -1,8 +1,9 @@
-# CLAUDE.md: Lavendly Skills
+# CLAUDE.md: Lavendly Agent Toolkit
 
 ## What this is
 
-Six agent skills that teach an AI coding agent how to make good films with
+A Claude Code, Cursor and Codex plugin: the Lavendly MCP connection plus six
+agent skills that teach an AI coding agent how to make good films with
 the Lavendly MCP (https://mcp.lavendly.ai/mcp). The MCP is the tool catalog.
 A skill is the operating manual: call sequence, decision rules, stop
 conditions, taste.
@@ -29,16 +30,21 @@ skills/
   CLAUDE.md                      this file
   VERSION                        the single repo-wide version
   LICENSE                        MIT
-  package.json                   @lavendly/skills, bin -> bin/install.js
+  package.json                   @lavendly/agent-toolkit, bin -> bin/install.js
   bin/install.js                 zero-dependency installer
   scripts/validate.mjs           structural checks (CI runs this)
   .github/workflows/validate-skills.yml
-  .claude-plugin/marketplace.json, plugin.json
-  .cursor-plugin/plugin.json
-  .codex-plugin/plugin.json
+  .claude-plugin/marketplace.json, plugin.json   Claude Code plugin + marketplace
+  .cursor-plugin/plugin.json     Cursor plugin
+  .codex-plugin/plugin.json      Codex plugin
+  .agents/plugins/marketplace.json   Codex repo marketplace
+  .mcp.json                      the Lavendly MCP server (Claude Code, Codex)
+  mcp.json                       the same server, portable format (Cursor)
   evals/README.md, scenarios.md  dev-only
-  lavendly-<name>/SKILL.md       one folder per skill
-  lavendly-<name>/references/    mcp-calls.md, prompt-anchors.md, troubleshooting.md
+  skills/lavendly-<name>/SKILL.md      one folder per skill
+  skills/lavendly-<name>/references/   mcp-calls.md, prompt-anchors.md, troubleshooting.md
+  plugin.json                    portable Agent Plugins manifest ($schema, name)
+  gemini-extension.json          Gemini CLI extension (the MCP; skills from skills/)
 ```
 
 ## Style rules (violations fail review)
@@ -74,7 +80,7 @@ choosing a path.
 
 ## Self-contained skills
 
-Each `lavendly-<name>/` folder installs on its own. No `../` references. Every
+Each `skills/lavendly-<name>/` folder installs on its own. No `../` references. Every
 file in `references/` is linked from that skill's `SKILL.md`, and every link
 in the folder resolves inside the folder. If two skills need the same table
 (the banned words, the camera phrases), keep two copies. Drift between copies
@@ -84,10 +90,10 @@ is acceptable as long as each skill is internally consistent.
 
 `VERSION` is the source of truth. It must equal:
 
-- `version:` in every `lavendly-*/SKILL.md` frontmatter
+- `version:` in every `skills/lavendly-*/SKILL.md` frontmatter
 - `plugins[0].version` in `.claude-plugin/marketplace.json`
 - `version` in `.claude-plugin/plugin.json`, `.cursor-plugin/plugin.json`,
-  `.codex-plugin/plugin.json`
+  `.codex-plugin/plugin.json`, `gemini-extension.json`
 - `version` in `package.json`
 
 Bump all of them in one commit on a `release/` branch. `scripts/validate.mjs`
@@ -112,7 +118,7 @@ fails on any drift.
 
 ## Adding a skill
 
-1. Create `lavendly-<name>/SKILL.md` with frontmatter `name` (equal to the
+1. Create `skills/lavendly-<name>/SKILL.md` with frontmatter `name` (equal to the
    folder), `version` (equal to `VERSION`), `priority`, a `description` that
    contains the lines `Use when:`, `Chain:` and `NOT for:`, and
    `argument-hint`.
@@ -122,9 +128,10 @@ fails on any drift.
 3. Add `references/mcp-calls.md` with the exact call shapes the skill uses.
    Add `references/troubleshooting.md` and `references/prompt-anchors.md`
    where they help.
-4. Register the skill in `.claude-plugin/marketplace.json` (`skills` array,
-   invoke `/lavendly:<name>`), the README skills table and quick reference,
-   `INSTALL.md`, and `bin/install.js` needs nothing (it discovers folders).
+4. Add the skill to the README skills table (invoke `/lavendly:<folder>`)
+   and quick reference, `INSTALL.md`, and the `files` list in
+   `package.json`. Every host loads every folder in `skills/` and
+   `bin/install.js` discovers folders, so neither needs an entry.
 5. Add at least one scenario to `evals/scenarios.md`, including one
    adversarial brief the skill must refuse or reshape.
 6. Run `node scripts/validate.mjs` until it prints no failures.

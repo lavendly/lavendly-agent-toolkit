@@ -1,13 +1,13 @@
 {
   "name": "lavendly",
   "version": "0.2.0",
-  "description": "Lavendly agent skills: narrated shorts, consistent multi-shot sequences, budget guardrails, the quality loop, and publishing through the Lavendly MCP.",
+  "description": "Lavendly agent toolkit: six skills (film direction, narrated shorts, consistent multi-shot sequences, budget guardrails, the quality loop, publishing) and the Lavendly MCP connection, sign in on first use.",
   "author": {
     "name": "Lavendly",
     "url": "https://lavendly.ai"
   },
   "homepage": "https://lavendly.ai",
-  "repository": "https://github.com/lavendly/skills",
+  "repository": "https://github.com/lavendly/lavendly-agent-toolkit",
   "license": "MIT",
   "keywords": [
     "lavendly",
@@ -15,16 +15,17 @@
     "video-generation",
     "mcp",
     "storytelling",
+    "film-direction",
     "multi-clip",
     "cost-control",
     "quality-check",
     "publishing"
   ],
-  "skills": "./",
+  "skills": "./skills/",
   "interface": {
-    "displayName": "Lavendly",
-    "shortDescription": "Make short AI films with the Lavendly MCP, cheaply and on the first try",
-    "longDescription": "Lavendly Skills give Codex an operating manual for the Lavendly MCP: probe capabilities and credits first, write anchored shot prompts, attach one voice and one score, estimate before spending, check every scene, render for free, and publish only after an explicit yes. Five skills: storyteller, multi-clip, cost-aware, review, publish.",
+    "displayName": "Lavendly Agent Toolkit",
+    "shortDescription": "Make short AI videos with Lavendly from Codex, checked and on budget",
+    "longDescription": "The Lavendly Agent Toolkit gives Codex the Lavendly MCP (sign in on first use) and six skills that operate it: direct a 15 to 90 s video with a locked hero and a shot plan, make a narrated short or a consistent multi-shot sequence, keep spend inside a budget, check every scene, cut and the whole video before rendering, and publish only after an explicit yes.",
     "developerName": "Lavendly",
     "category": "Design",
     "capabilities": [
@@ -33,10 +34,10 @@
     ],
     "websiteURL": "https://lavendly.ai",
     "defaultPrompt": [
+      "Direct a 20 second ad for my lamp, same lamp in every shot",
       "Make a 5 second narrated clip of a lighthouse keeper at dawn",
       "Three shots of the same character crossing a market, a bridge, and a station",
-      "Check the quality of my last workflow and render it",
-      "Schedule my rendered video to YouTube tomorrow at 9 am"
+      "Check the quality of my last workflow and render it"
     ]
   }
 }
