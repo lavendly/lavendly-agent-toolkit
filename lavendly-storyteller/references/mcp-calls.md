@@ -191,9 +191,13 @@ Phases: `scripting`, `generating_images`, `generating_clips`, `voice`,
 {
   "workflow_id": "<id>",
   "node_id": "<clip id>",
-  "expect_audio": true
+  "expect_audio": false
 }
 ```
+
+`expect_audio` is false for a narrated clip with native audio off: the clip
+itself is silent until the render mixes the tracks. Use true on the
+rendered film (no `node_id`).
 
 Response: `{ "pass": true, "score": 8.5, "failures": [], "reroll_hint": "" }`.
 On `pass: false`, follow lavendly-review: append `reroll_hint` to the scene

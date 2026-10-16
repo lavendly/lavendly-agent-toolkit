@@ -164,9 +164,15 @@ answers `url required`: the same call with `url` set to a hosted file.
 ```
 
 Read `total`, `opening_image_credits`, `per_scene`, `available_credits`,
-`sufficient`. Announce in one line and wait for a yes. Pass the approved
-number as `max_credits` on every generate call; the server answers
-`quote_exceeded` instead of overspending.
+`sufficient`. Announce in one line and wait for a yes:
+
+```text
+4 shots on Veo 3.1 Fast: clips 48 credits, opening images 8, total 56; narration and score charged when attached; 144 left after. Go ahead?
+```
+
+`max_credits` caps one call: on `generate_scene` for one scene, that scene's
+line in `per_scene` plus its opening image; on `create_render`, the approved
+`remaining`. The server answers `quote_exceeded` instead of overspending.
 
 ## `generate_scene`: one scene at a time
 
@@ -177,7 +183,10 @@ number as `max_credits` on every generate call; the server answers
 Then `get_generation_status` every 5 to 10 seconds, silently. When scene 1
 lands, `get_scene_frame` with `node_id` `vid_1`, look, `quality_check`, and
 only then generate scene 2. The opening image of a scene is made first when
-its image node has a prompt and no url; its price was in the estimate.
+its image node has a prompt and no url; its price was in the estimate. To
+re-roll a bad opening image, change the image node's prompt and clear its
+`data.url` with `update_workflow` (the full `nodes` array), then
+`generate_scene` for that scene: a new opening image is made, then the clip.
 
 ## `quality_check`: per scene, then the film
 

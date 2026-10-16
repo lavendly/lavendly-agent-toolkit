@@ -4,6 +4,62 @@ All notable changes to this repository are recorded here. The format follows
 Keep a Changelog; versions follow Semantic Versioning. One repo-wide version
 covers every skill and manifest (see `VERSION`).
 
+## Unreleased
+
+Added:
+
+- `lavendly-director`: the intent card and continuity modes (strict,
+  flexible, discontinuous) with priorities by video type, so ads, demos,
+  tutorials, explainers, documentaries, music videos, social clips and
+  animation are judged on their own terms (`references/video-types.md`).
+  The sequence plan with what each shot takes from the previous one and
+  hands to the next, dependencies, and the continuity ledger updated from
+  landed frames (`references/sequence-plan.md`).
+- `lavendly-review`: cut checks from the boundary frames of neighbouring
+  scenes, audio setup checks from the audio summary, whole-video checks
+  after render, all conditioned on the intent (`references/sequence-checks.md`).
+- Findings with severity (Critical, High, Medium, Low), why it matters,
+  fix type and confidence; repair smallest first (edit, audio, transition,
+  then one re-roll); re-check the scene, its cuts and the whole video before
+  calling anything fixed.
+- Cast continuity: inside one scene (same place, same stretch of time) a
+  person who appears is introduced and a person who leaves exits or is
+  explained; a new scene starts fresh. In the plan, the ledger, the cut
+  checks and the whole-video checks of both skills.
+- Scene headings (place and time) in the plan: shots with one heading are
+  one scene; a time jump in the same place gets its own heading.
+- Two people talking: fixed sides of the frame, meeting eyelines, mirrored
+  reverse shots, the speaker is the face in frame.
+- `lavendly-director/references/series-continuity.md`: the series bible,
+  recurring references reused across episodes, state carried between
+  episodes, format beats, checks per episode.
+- Fixes from a paper eval round (23 scenarios, 18 pass, 5 partial, 0 fail):
+  director plans shots by length (4, 6, 8 s under headings) and offers a
+  30 s version with the cost above 30 s; one locked light line per scene;
+  a repeated camera move goes on the one shot it serves; the estimate line
+  names opening image credits and says synthesis is charged when attached;
+  `max_credits` defined per call; never claim a match with an unopened
+  reference; model display names in chat; "Cinematic" removed from the
+  style phrases. Review trims a same-size cut onto a line end or a motion
+  before any re-roll, findings carry severity, and a re-render after a fix
+  uses a new key. Storyteller checks a narrated clip with `expect_audio`
+  false and waits at the frame before rendering. Cost-aware lists the
+  current `create_workflow` schema and the synthesis charge. Series episodes
+  find their project with `list_projects`.
+- Rubric fixes: scenarios 3, 13 and 17 match the skills; the setup-only
+  scenarios carry a user request.
+- Nine eval scenarios (15 to 23): planted errors, deliberate choices that
+  must not be flagged, an audio setup error, and an adversarial
+  "regenerate everything".
+
+Changed:
+
+- `lavendly-director` quality control is organised in three levels (asset,
+  cut, whole video) instead of by category; the hook and payoff rule now
+  depends on the video type.
+- `lavendly-review` no longer stops at per-scene checks and may apply free
+  audio fixes with `update_track`.
+
 ## 0.2.0 (2026-10-14)
 
 Added:

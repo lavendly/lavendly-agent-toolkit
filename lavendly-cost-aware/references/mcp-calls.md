@@ -55,12 +55,10 @@ Thresholds:
 ## Model preference on `create_workflow`
 
 The MCP input schema for `create_workflow` lists `name`, `description`,
-`nodes`, `edges`, `duration`, `project_id` and `project_name`, plus the
-`shots` convenience array. The server additionally reads a top-level
-`videoModel` (a model id from `get_status`) and applies it to every compiled
-shot. It is not in the published schema: confirm with `get_schema` in the
-session before passing it, and never pass a model id that `get_status` did
-not list.
+`nodes`, `edges`, `duration`, `project_id`, `project_name`,
+`idempotency_key`, the `shots` convenience array, `aspect` and `videoModel`
+(a model id from `get_status`, applied to every compiled shot). Never pass a
+model id that `get_status` did not list.
 
 ```json
 {

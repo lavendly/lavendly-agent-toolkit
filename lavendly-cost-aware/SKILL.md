@@ -44,6 +44,9 @@ use 10 percent of the working balance and say so in the report.
    Never split a generate call to slip under the check.
 5. Render is free and never re-charges. Generation is paid per clip. A
    `quality_check` re-roll is a paid generation: announce it like any other.
+   Voice and music synthesized by `attach_track` are charged when attached
+   and are not in `estimate_cost`: say so in the announcement, before the
+   attach.
 6. Refuse "render everything now" until steps 1 to 4 are done. Speed is not
    permission.
 

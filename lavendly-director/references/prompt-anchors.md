@@ -127,8 +127,7 @@ next frame. Never "in this video", "imagine", "introducing", "welcome to".
 One line, placed first in both prompts, kept identical across the film:
 
 - "Premium product film still" / "Premium product film, one continuous take"
-- "Cinematic short film, 35mm look" (the word is allowed here because the
-  phrase names a format, not a quality; never add it as praise elsewhere)
+- "Narrative short film, 35mm look"
 - "Nature documentary, clean and observational"
 - "Clean educational animation in the flat illustrated style of the reference"
 - "Photoreal vertical video, clean frame"

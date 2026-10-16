@@ -102,6 +102,26 @@ stop re-rolling that scene and ask.
 Response: a thumbnail url the signed-in user can open. One per scene, in
 order, into the contact sheet.
 
+## `get_scene_frame` per cut
+
+```json
+{ "workflow_id": "<id>", "node_id": "<scene N video node id>", "frame": "last" }
+{ "workflow_id": "<id>", "node_id": "<scene N+1 video node id>", "frame": "first" }
+```
+
+The two frames either side of the cut. `frame` takes first, mid or last
+where `get_schema` lists it; without it the call returns the mid frame.
+
+## `get_workflow_audio`
+
+```json
+{ "workflow_id": "<id>" }
+```
+
+Response: per clip, its native audio mode and the attached tracks with
+volume and ducking. The audio checks read this; they do not measure
+loudness.
+
 ## `create_render`
 
 ```json
