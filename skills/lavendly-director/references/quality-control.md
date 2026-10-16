@@ -110,13 +110,14 @@ What the agent can verify from `get_workflow_audio` and the plan:
 
 | Check | Fix with |
 |---|---|
-| Music is ducked under narration and dialogue | `update_track` ducking true; music volume 0.3 to 0.4 under voice |
+| Music is ducked under narration and dialogue | `update_track` ducking true, `volume` 35 (a percent, never 0.35); film-wide music ducks only under a voiceover that is also wired to every clip |
+| The score and the narration reach every clip | `update_workflow`: an edge from each to every clip; on one clip they freeze that clip's last frame |
 | One score for the video, not one per scene | `detach_track` the extras |
-| Narration and native dialogue do not overlap | `set_clip_native_audio` to mix or off on that clip, or move the narration with `update_track` startTime |
+| Narration and native dialogue do not overlap | `set_clip_native_audio` to mix or off on that clip, or rewrite the line so it falls on another scene |
 | Narration fits its picture (2.3 words per second) | Shorten the line and attach it again; never let it run over the next scene |
 | Native sound is on where the picture shows a source the card wants heard | `set_clip_native_audio` native |
 | A clip's own audio jumps in level against its neighbours | `edit_clip` volume on that clip |
-| Sound starts or stops on a hard edge at the video's start or end | `edit_clip` `fade_in_ms` or `fade_out_ms`, or trim the track with `update_track` |
+| Sound starts or stops on a hard edge at the video's start or end | `edit_clip` `fade_in_ms` or `fade_out_ms` on the music node (a clip fade does not fade a film-wide score); `update_track` `duration` sets the block end |
 | Silence where the card wants sound, or sound where it wants silence | Attach or detach; keep intended silence |
 
 What it cannot verify: perceived loudness, clipping and the balance between

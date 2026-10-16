@@ -3,7 +3,7 @@
 The toolkit is two things an agent needs together:
 
 - **The Lavendly MCP** at `https://mcp.lavendly.ai/mcp`: the tools.
-- **Six skills** in `skills/`: how to use the tools well.
+- **Seventeen skills** in `skills/`: how to use the tools well.
 
 | Skill | What it does |
 |---|---|
@@ -13,6 +13,17 @@ The toolkit is two things an agent needs together:
 | `lavendly-cost-aware` | Budget guardrails, loaded for unattended or budgeted runs |
 | `lavendly-review` | The quality loop: each scene, each cut, the whole video |
 | `lavendly-publish` | Posting and scheduling to connected channels |
+| `lavendly-models` | Pick the video and image model for a brief and budget, and write each shot in that model's prompt dialect; exact lengths, aspects, reference caps, sound and credits per model. |
+| `lavendly-characters` | The same person, creature, mascot, product or vehicle in every shot and video: locked description, hero sheet, reference roles, exact counts, chaining limits, voice, acting and lip sync. |
+| `lavendly-ads` | Product and brand ads by category (beauty, tech, food and drink, fashion, automotive, jewellery, home, health), UGC-style ads, before and after, launches, app promos, offers; the ad grammar. |
+| `lavendly-cinematic` | Narrative video: short film and drama, trailers, horror and thriller, sci-fi, action, romance, noir, comedy, dialogue scenes, period pieces; story structures and acting. |
+| `lavendly-music-video` | Music videos with the song as the spine: performance, narrative, abstract and visualizer, dance, lyric moments, live sessions; beat maths and the one-track rule. |
+| `lavendly-animation` | Animated films in one locked style: 3D feature look, anime, 2D cartoon, clay and stop-motion, paper cutout, watercolour, kids fables, mascots; creatures and timing. |
+| `lavendly-motion-design` | CGI product shots, abstract and surreal films, loops, satisfying and ASMR, title moods, logo-free idents, 3D environments, visual metaphors; honest about text and logos. |
+| `lavendly-explainer` | Explainers, lessons, how-tos, documentaries, history, science, news explainers within policy, staff training; script first, one picture per idea, a library of visual metaphors. |
+| `lavendly-social` | TikTok, Reels and Shorts formats: hooks, POV, trends, talking heads, day in the life, listicles, storytime, commentary, clips from footage, loops, faceless channels; platform specs and retention. |
+| `lavendly-places` | Real estate, interiors, travel, hospitality, food and recipes, fashion lookbooks, sports, events, corporate films, renovations; real places open on real photos. |
+| `lavendly-series` | Episodic video: the series bible, episode formats, recurring cast and places, story so far kept on the platform, daily and weekly runs within a budget. |
 
 Sign-in: the hosted MCP signs you in with your Lavendly account the first
 time a tool is used (OAuth). No key to paste. For unattended runs, see

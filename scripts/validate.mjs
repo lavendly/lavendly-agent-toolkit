@@ -58,6 +58,8 @@ const FIELDS = new Set([
   // server error codes (apiError envelopes)
   'insufficient_credits', 'version_conflict', 'workflow_conflict', 'invalid_args',
   'workflow_not_found', 'clip_not_found', 'track_not_found', 'job_not_found', 'tool_error',
+  // generate_scene with a node_id that is not a videoGenerator (server/index.mjs)
+  'node_not_found',
   'http_status',
   // lavendly-director: edit_clip edits and response (editsSchema, PATCH /nodes/:id/edits)
   'start_ms', 'end_ms', 'fade_in_ms', 'fade_out_ms', 'timeline_start',
@@ -67,6 +69,14 @@ const FIELDS = new Set([
   'max_credits', 'quote_exceeded',
   // estimate_cost and quality_check response keys
   'opening_image_credits', 'story_pass',
+  // edit_clip key accepted but ignored by the export (server/editsSchema.mjs)
+  'lut_id',
+  // get_scene_frame response key (server/index.mjs frame_url)
+  'frame_url',
+  // get_status models.tts_voices (server/index.mjs _status handler)
+  'tts_voices',
+  // sequence lint rule ids in whole-film quality_check (shared/sequenceLint.mjs)
+  'continue_without_link', 'ending_unnamed',
 ]);
 
 const failures = [];

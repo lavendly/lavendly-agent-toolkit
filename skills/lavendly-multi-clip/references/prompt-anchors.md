@@ -44,7 +44,7 @@ The anchors never change. Camera and action change every shot.
 
 ## Worked example: three shots, 16 s
 
-Shot 1, 5 s, market:
+Shot 1, 6 s, market:
 
 ```text
 Mara, late twenties, slight and quick, a rust-red waxed cotton coat over a grey wool sweater, black hair cut at the jaw, a brass compass on a cord around her neck.
@@ -53,7 +53,7 @@ Static wide shot, locked-off camera.
 She enters from the left between two market stalls as a vendor lifts a canvas awning.
 ```
 
-Shot 2, 5 s, bridge:
+Shot 2, 4 s, bridge:
 
 ```text
 Mara, late twenties, slight and quick, a rust-red waxed cotton coat over a grey wool sweater, black hair cut at the jaw, a brass compass on a cord around her neck.

@@ -3,9 +3,9 @@ name: lavendly-cost-aware
 version: 0.2.0
 priority: high
 description: |
-  Budget guardrails for every Lavendly MCP run, attended or unattended: pre-flight on status, ledger and monthly usage; estimate before any spend; the cheapest model that meets the brief; strict retry and idempotency discipline; one-line announcements and reports. Loads on top of a domain skill and wins every spend decision.
+  Budget guardrails for every Lavendly MCP run, attended or unattended: pre-flight on status, ledger and monthly usage; estimate before any spend; the cheapest model when the user asks for cheap or a budget demands it; strict retry and idempotency discipline; one-line announcements and reports. Loads on top of a domain skill and wins every spend approval, cap and retry decision.
   Use when: "budget", "cheap", "do not overspend", "run this every Monday", "unattended", "cron", "keep it under N credits", or whenever the agent will call generate_scene without a human reading each estimate.
-  Chain: load first, then lavendly-storyteller or lavendly-multi-clip for the film itself; lavendly-review still runs; lavendly-publish still needs an explicit yes.
+  Chain: load first, then the domain skill (storyteller, multi-clip, director or a genre skill) for the film itself; lavendly-review still runs; lavendly-publish still needs an explicit yes.
   NOT for: writing prompts or scripts (domain skills), quality judgement (lavendly-review), or publishing decisions (lavendly-publish).
 argument-hint: "[budget in credits] [mode: attended|unattended] [report target]"
 ---
@@ -20,7 +20,7 @@ voice; it decides whether the call happens and with which model.
 
 | Step | Call | Read | Rule |
 |---|---|---|---|
-| 1 | `get_status` | provider readiness, models | Never claim or deny a capability from memory |
+| 1 | `get_status` | provider readiness, voice and music config (it lists no video models) | Never claim or deny a capability from memory |
 | 2 | `get_ledger` | available credits, pending reservations | Available minus pending is the working balance |
 | 3 | `get_monthly_usage` | `fraction_used` | Above 0.85: refuse non-critical generation, report |
 | 4 | `estimate_cost` | `total`, `remaining`, `per_scene`, `sufficient` | Announce; ask above 30 percent of balance; refuse when `sufficient` is false |
@@ -31,8 +31,8 @@ use 10 percent of the working balance and say so in the report.
 
 ## Spend rules
 
-1. Estimate before any spend. `estimate_cost` runs after the workflow exists
-   and audio is attached, before `generate_scene`. Read `remaining`, not
+1. Estimate before any spend. `estimate_cost` runs after the workflow exists,
+   before any paid `attach_track` and before `generate_scene`. Read `remaining`, not
    `total`, when clips already exist: render reuses them.
 2. Announce before every paid call, one line: what, model or scene count,
    credits, balance after. Example: "Generate 3 scenes, <model>, 36 credits,
@@ -45,18 +45,28 @@ use 10 percent of the working balance and say so in the report.
 5. Render is free and never re-charges. Generation is paid per clip. A
    `quality_check` re-roll is a paid generation: announce it like any other.
    Voice and music synthesized by `attach_track` are charged when attached
-   and are not in `estimate_cost`: say so in the announcement, before the
-   attach.
+   and are not in `estimate_cost`: put their credits in the approval line
+   with the clips ("clips 46 plus voice and music 3, total 49. Go ahead?")
+   and attach them only after the yes, or before it only when the user
+   approved that spend explicitly.
 6. Refuse "render everything now" until steps 1 to 4 are done. Speed is not
    permission.
 
 ## Model preference
 
-- Prefer the cheapest model that meets the brief. Read the model per scene
-  from `estimate_cost.per_scene` and the model list from `get_status`.
-- If the catalog exposes a model option on `create_workflow` (check
-  `get_schema`), pass the cheapest fit there. Never invent a model id, and
-  never claim a model exists without `get_status` in this session.
+- The genre skill (or lavendly-models) picks the model for quality, sound,
+  references and aspect; this skill does not override that pick. It steps
+  down to the cheapest model that meets the brief only when the user asked
+  for cheap, set a budget the pick does not fit, or the run is unattended.
+  Then say what the cheaper model loses in one line. Model ids and prices
+  come from the table in [references/mcp-calls.md](references/mcp-calls.md);
+  `estimate_cost.per_scene` shows the model each scene will use. No tool
+  lists video models.
+- Pass the chosen model as the top-level `videoModel` on `create_workflow`.
+  Never invent a model id: the server does not check it, quotes an unknown
+  id at a flat 14 credits per block and sends it to the provider as is.
+- Durations are sent as written, never snapped: use the model's exact
+  lengths (Auto makes 4, 6 or 8 s).
 - Shots without faces: the cheapest model is almost always enough. Shots with
   people: step up one tier only when the cheapest shows visible artifacts on
   `quality_check`.
@@ -88,9 +98,9 @@ the estimate before it fires.
   report, not a guess.
 - Skip the run entirely when `fraction_used` is above 0.85 or the cap is
   below the estimate. Report why in one line.
-- Use `list_workflows` before creating: an identical name from the same day
-  means a prior run may have partly succeeded. Continue it instead of
-  duplicating.
+- Use `list_workflows` before creating (it returns every workflow, newest
+  first, no filter): an identical name from the same day means a prior run
+  may have partly succeeded. Continue it instead of duplicating.
 - Report after each render, one line, then stop.
 
 ## Reporting format

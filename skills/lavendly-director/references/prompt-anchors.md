@@ -6,8 +6,11 @@ Quick Start films; what is here has been generated and checked.
 
 ## The hero block
 
-1 to 2 sentences, observable only, written once, pasted verbatim into both
-prompts of every shot, followed by "from the reference".
+1 to 2 sentences, observable only, written once, pasted verbatim into every
+still-frame prompt, followed by "from the reference". Opening images are made
+from text alone, so the still-frame prompt is where the hero is drawn. The
+motion prompt names the hero by its short name and locks it; it repeats the
+full block only when the hero enters during the shot.
 
 ```text
 <Name or thing>: <shape>, <material and finish>, <colour>, <size cue>, <one distinguishing mark>.
@@ -42,16 +45,23 @@ Premium product film still. The lamp: a table lamp with a matte stone-grey mushr
 
 ## Motion prompt (the clip)
 
-Change over time. One action, one camera move, the end state stated.
+Change over time. The clip animates its own opening image, so describe what
+moves, not the picture. One action, one camera move, the end state stated,
+one lock sentence, exact counts.
 
 ```text
-<style phrase, one line>, one continuous take. <hero block> from the reference. <starting state, matching the still frame>. <0 to N s: the action, with what moves and what stays still>. <N to M s: the rest of the action>. <the one camera move, its speed and where it ends>. <light, repeated from the still frame>. <end state>. Sound: <what is heard inside the shot>. Clean frame: no text, no on-screen graphics, no timestamps.
+<style phrase, one line>, one continuous take. <0 to N s: the action, with what moves>. <N to M s: the rest of the action>. <the one camera move, its speed and where it ends>. <end state>. <lock sentence: the hero, the set and the light stay exactly as in the opening frame>. <exact count: exactly one <hero>, nobody else in frame>. Sound: <what is heard inside the shot>. Clean frame: no text, no on-screen graphics, no timestamps.
 ```
+
+When the hero enters during the shot, add the hero block after the style
+phrase so the model can draw it. When the light changes during the shot,
+describe the change ("the warm lamp light blooms over the cool window
+light").
 
 Example, the same scene:
 
 ```text
-Premium product film, one continuous take. The lamp: a table lamp with a matte stone-grey mushroom dome, a slim brass stem and a round brass base, warm light under the dome, from the reference. The lamp is off on a dark oak side table, one soft cool window light from the left. 0 to 2 s: nothing moves but dust in the window light. 2 to 3 s: a hand enters from the right and presses the brass switch at the base once. 3 to 6 s: warm light blooms under the dome and spreads across the oak, the hand withdraws, the camera pushes in slowly until the dome fills the frame. The lamp stays exactly the same object throughout. Sound: a soft brass click, room tone. Clean frame: no text, no on-screen graphics, no timestamps.
+Premium product film, one continuous take. 0 to 2 s: nothing moves but dust in the window light. 2 to 3 s: a hand enters from the right and presses the brass switch at the base once. 3 to 6 s: warm light blooms under the dome and spreads across the oak, the hand withdraws, the camera pushes in slowly until the dome fills the frame. The lamp, the oak table and the room stay exactly as in the opening frame. Exactly one lamp; the hand is the only other thing that enters. Sound: a soft brass click, room tone. Clean frame: no text, no on-screen graphics, no timestamps.
 ```
 
 Scene 2 continues in the same room: start the motion prompt with the exit
@@ -67,7 +77,8 @@ delivery, inside the motion prompt, and keep that clip's native audio on:
 He unfolds the letter and reads, half to himself, quiet and hoarse: "You said you would come back when the light was fixed." He looks up at the lens.
 ```
 
-One line per clip. The model speaks it; the words also feed the captions.
+One line per clip. The model speaks it; native dialogue gets no burned
+captions (only a synthesized voiceover does).
 
 ## Banned words in prompts
 

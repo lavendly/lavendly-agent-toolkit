@@ -144,7 +144,13 @@ retries at most, same key.
 ```
 
 No `node_id`. `expect_audio: true` when a voiceover or music track is
-attached. Report the score in one line with the video link.
+attached. Report the score in one line with the video link. Its sequence
+findings are advisory: `continue_without_link` and `ending_unnamed` cannot
+be cleared on the MCP path, so never plan a fix for them.
+
+Check that every scene landed: a scene the provider refused (a Veo 3.1 Lite
+scene with a reference wired) is skipped uncharged and the render still
+ends `done` without it. Compare the film's length with the plan.
 
 ## `get_workflow_audio`, when the failure is about sound
 

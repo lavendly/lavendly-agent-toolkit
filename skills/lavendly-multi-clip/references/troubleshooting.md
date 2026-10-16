@@ -73,7 +73,7 @@ Reload with `get_workflow` and read the videoGenerator ids again. Never guess.
 
 The job may be running. Rejoin with `get_generation_status`. If you must
 resend, use the identical `idempotency_key`; the server returns the same
-response for 5 minutes.
+response for 24 hours.
 
 ## The user attached a reference photo in chat
 

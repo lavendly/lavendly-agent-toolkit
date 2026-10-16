@@ -2,8 +2,8 @@
 
 ## What this is
 
-A Claude Code, Cursor and Codex plugin: the Lavendly MCP connection plus six
-agent skills that teach an AI coding agent how to make good films with
+A Claude Code, Cursor and Codex plugin: the Lavendly MCP connection plus
+seventeen agent skills that teach an AI coding agent how to make good films with
 the Lavendly MCP (https://mcp.lavendly.ai/mcp). The MCP is the tool catalog.
 A skill is the operating manual: call sequence, decision rules, stop
 conditions, taste.
@@ -15,7 +15,23 @@ lavendly-multi-clip    2 to 6 shots, anchors pasted verbatim, one score
 lavendly-cost-aware    priority high, wins every spend decision
 lavendly-review        quality loop after generation, before render
 lavendly-publish       posting and scheduling, only after an explicit yes
+lavendly-models        model choice, prompt dialect per model family, credits
+lavendly-characters    identity across shots and videos: sheets, references, chaining
+lavendly-ads           product and brand ads, UGC-style, before and after, promos
+lavendly-cinematic     short film, trailers, genres, dialogue, story structures
+lavendly-music-video   the song as the spine, beat maths, one track
+lavendly-animation     one locked animation style, creatures, kids fables, mascots
+lavendly-motion-design CGI product, abstract, loops, ASMR, idents, metaphors
+lavendly-explainer     explainers, how-tos, documentary, science, news within policy
+lavendly-social        short-form formats, hooks, platform specs, clips from footage
+lavendly-places        real estate, travel, food, fashion, sports, events, brand films
+lavendly-series        series bible, episode formats, recurring cast, daily runs
 ```
+
+Genre skills supply the field knowledge; lavendly-director stays the process
+owner (intent card, sequence plan, ledger, three-level checks) and routes to
+them. The research behind them is in the founder's vault
+(Video-Skills-Research-2026-10-16).
 
 ## Repository structure
 
@@ -110,11 +126,16 @@ fails on any drift.
   folders against the tool list and a short field allowlist. Adding a new
   field to a skill means adding it to the allowlist in `scripts/validate.mjs`,
   with a comment saying where it comes from.
-- `attach_track` requires a hosted `url` today. A platform change lets it
-  synthesize from `text` (voiceover) or `mood` plus `duration` (music). Skills
-  try the synthesis form first and fall back on the `url required` error.
-  Keep that note in every skill that attaches audio, once per skill, under a
-  heading named Compatibility.
+- `attach_track` synthesizes the voiceover from `text` and the music from
+  `mood` plus `duration`, or attaches a hosted `url`. Skills try synthesis
+  first and fall back to an Asset Library upload by `url` on a `url required`
+  answer. Keep that note in every skill that attaches audio, once per skill,
+  under a heading named Compatibility.
+- Platform facts the skills rely on were read from the app's code on
+  2026-10-16 (film-wide audio wiring, volume scales, frame urls, one-scene
+  renders, reference caps, voices, limits). Re-check them when the server
+  changes; the notes live in the founder's vault
+  (Video-Skills-Research-2026-10-16/05-platform-answers.md).
 
 ## Adding a skill
 

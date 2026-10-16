@@ -8,6 +8,34 @@ covers every skill and manifest (see `VERSION`).
 
 Added:
 
+- Eleven skills, from a three-part research round (the published video
+  skills, Lavendly's platform read from code, and genre craft with each
+  model's own prompting guidance):
+  - craft: `lavendly-models` (model choice, each family's prompt dialect,
+    exact lengths, aspects, reference caps, sound, credits) and
+    `lavendly-characters` (identity across shots and videos: sheets,
+    reference roles, exact counts, chaining limits, voice, acting);
+  - genres: `lavendly-ads`, `lavendly-cinematic`, `lavendly-music-video`,
+    `lavendly-animation`, `lavendly-motion-design`, `lavendly-explainer`,
+    `lavendly-social`, `lavendly-places`, `lavendly-series`, each with one
+    recipe per sub-genre (structures for 6 to 60 s, shot lists, camera,
+    light and sound, model picks with credits, prompt pairs, failure modes,
+    policy guards).
+- Eval scenarios 24 to 56 for the new skills.
+
+Changed:
+
+- Every skill corrected against the platform as it runs: a score or
+  narration covers the film only when wired to every clip (or attached with
+  `scope` film where the server offers it); levels set at attach time,
+  `update_track` volume as a percent; chained frame urls prefixed with
+  `/api`; one-scene films burn no captions; real voice names; `split_clip`
+  relative to the clip; clips play back to back; references never on Veo
+  3.1 Lite; import and listing limits; the idempotency window is 24 hours.
+- `lavendly-director`: motion prompts describe the change plus a lock
+  sentence and exact counts; each reference gets one job; routes to the
+  genre skills.
+
 - Antigravity: skills through `npx skills add ... --agent antigravity` or
   `install --host antigravity`, and its MCP config line. The installer
   takes `--host claude|codex|cursor|gemini|antigravity|antigravity-cli|amp`, writes to that
