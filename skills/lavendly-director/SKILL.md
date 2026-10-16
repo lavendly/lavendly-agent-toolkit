@@ -246,7 +246,10 @@ file by `url` and continue. `get_scene_frame` takes a frame option (first,
 mid, last) on current servers; where `get_schema` does not show it, the
 call returns the mid frame, the cut checks rest on mid frames (say the
 confidence is lower), and a continuing shot is anchored by describing the
-earlier shot's end state in its prompt.
+earlier shot's end state in its prompt. Newer servers add a cut check, a
+stored scene plan, measured loudness and rendered dissolves; use each only
+where `get_schema` lists it
+([references/quality-control.md](references/quality-control.md) section 10).
 
 ## When to stop
 

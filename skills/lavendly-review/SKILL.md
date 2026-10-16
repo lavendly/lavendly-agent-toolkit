@@ -79,7 +79,10 @@ Full table with re-roll prompt wording:
 
 ### Cuts, audio and the whole video
 
-- The server checks each scene against its own prompt only. The cut checks
+- Newer servers check the cut and measure loudness themselves; use them
+  where `get_schema` lists them
+  ([references/sequence-checks.md](references/sequence-checks.md)).
+- Older servers check each scene against its own prompt only. The cut checks
   and the whole-video checks are yours: open the frames, compare, judge
   against the intent and the continuity mode. The lists are in
   [references/sequence-checks.md](references/sequence-checks.md).

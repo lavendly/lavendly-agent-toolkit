@@ -72,6 +72,12 @@ trimmed at its end, judge that cut on the rendered film instead.
 - In discontinuous mode: the named motifs recur and the cut sits on the
   rhythm.
 
+Where `get_schema` lists `previous_node_id` on `quality_check`, run the cut
+on the server first: `node_id`, `previous_node_id`, `same_scene` (from the
+plan's headings, or your inference), `present`. Read `cut_pass` and the
+findings (kind, severity); open both frames before paying for a re-roll on
+a High finding. Where `get_scene_plan` exists, read the plan from it.
+
 ## 3. The whole video
 
 After the render: `quality_check` without `node_id` and with `expect_audio`
@@ -104,8 +110,10 @@ true, the mid frame of each scene in order, and `get_workflow_audio`.
 | A clip's own audio jumps in level against its neighbours | `edit_clip` volume |
 | A hard edge at the start or the end | `edit_clip` `fade_in_ms` or `fade_out_ms`; for the score, on the music node (a clip fade does not fade a film-wide score) |
 
-Perceived loudness, clipping and the balance between layers are not
-measured by any tool today. Say when a moment is in doubt and ask the user
+Where the render result or the film's `quality_check` carries `loudness`,
+report the integrated LUFS and true peak and any off-target warning (the
+platform aims for -14 LUFS). Without it, perceived loudness, clipping and
+the balance between layers are not measured by any tool. Say when a moment is in doubt and ask the user
 to listen to it; never report a level that was not measured. Keep intended
 silence; do not add music or effects the intent did not ask for.
 

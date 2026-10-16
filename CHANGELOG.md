@@ -65,6 +65,10 @@ Fixed:
   the skill folders from the root. Skills are invoked as
   `/lavendly:lavendly-<name>`.
 - The Cursor and Codex manifests described five skills; they now list six.
+- Use the newer platform checks where `get_schema` lists them: the server
+  cut check on `quality_check`, the stored scene plan
+  (`set_scene_plan`, `get_scene_plan`), measured film loudness, and rendered
+  dissolves (overlap with `move_clip`, matching fades with `edit_clip`).
 
 - `lavendly-director`: the intent card and continuity modes (strict,
   flexible, discontinuous) with priorities by video type, so ads, demos,

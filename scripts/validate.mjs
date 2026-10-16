@@ -39,6 +39,8 @@ const TOOLS = new Set([
   'quality_check', 'get_scene_frame',
   'list_channels', 'publish_video', 'schedule_video',
   'get_ledger', 'get_monthly_usage', 'get_status', 'get_schema',
+  // Scene plan (lavendly/lavendlyai#736): used only where get_schema lists them
+  'get_scene_plan', 'set_scene_plan',
 ]);
 
 // Field names, response keys, phases and error codes the skills may backtick.
@@ -77,6 +79,10 @@ const FIELDS = new Set([
   'tts_voices',
   // sequence lint rule ids in whole-film quality_check (shared/sequenceLint.mjs)
   'continue_without_link', 'ending_unnamed',
+  // quality_check cut check (lavendly/lavendlyai#735, merged)
+  'previous_node_id', 'same_scene', 'cut_pass',
+  // scene plan entries (lavendly/lavendlyai#736, merged)
+  'hands_off',
 ]);
 
 const failures = [];

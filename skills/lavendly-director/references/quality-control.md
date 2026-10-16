@@ -184,3 +184,18 @@ again: the repaired scene (level A), both of its cuts (level B), and the
 whole video after the next render (level C). A fix is reported as done only
 after that check ran and passed; until then it is "applied, not yet
 checked".
+
+## 10. Newer platform checks
+
+Use each only where `get_schema` lists it; otherwise the sections above
+stand as written.
+
+| Feature | How to use it | What it replaces |
+|---|---|---|
+| Cut check | `quality_check` with `node_id`, `previous_node_id` (the scene before), `same_scene` (false across headings), `present` (who or what should be in frame). Read the `cut` result: `cut_pass` and findings with kind and severity | Comparing the two boundary frames by eye; still open both frames before paying for a re-roll on a High finding |
+| Stored scene plan | `set_scene_plan` after `create_workflow`: per video node a `heading`, `present` and `hands_off`; `get_scene_plan` in a later session. The server puts the heading and who is in frame into that scene's prompt | Keeping the plan only in the conversation and pasting the cast line by hand |
+| Measured loudness | The render result and `quality_check` on the film carry `loudness` (integrated LUFS, true peak). The platform aims for -14 LUFS and -1.5 dBTP; report the numbers and any off-target warning | "Loudness is not measured"; still ask the user to listen to a doubtful join |
+| Rendered dissolves | Overlap two clips with `move_clip` (the later one starts before the earlier ends), then `edit_clip`: `fade_out_ms` on the earlier and `fade_in_ms` on the later, both equal to the overlap | "Dissolves are not rendered" |
+
+The cut check and the scene plan agree only when `same_scene` follows the
+plan's headings: same heading, true; new heading, false.

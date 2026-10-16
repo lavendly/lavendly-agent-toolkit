@@ -123,6 +123,12 @@ Check `get_schema` for the frame option before relying on it; on a server
 without it, describe the end state of the earlier shot at the start of the
 next motion prompt instead.
 
+Where `get_schema` lists `set_scene_plan`, store each shot's heading, who is
+present and its hand-off with it right after `create_workflow` (keyed by the
+video node id); the server then opens that scene's prompt with the heading
+and the cast. Read it back with `get_scene_plan` in a later session instead
+of rebuilding the plan from memory.
+
 ## 6. When the plan changes
 
 A change to a locked description, to a step's outcome, or to the order of
