@@ -21,7 +21,7 @@
     "quality-check",
     "publishing"
   ],
-  "skills": "./",
+  "skills": "./skills/",
   "interface": {
     "displayName": "Lavendly Agent Toolkit",
     "shortDescription": "Make short AI videos with Lavendly from Codex, checked and on budget",

@@ -2,7 +2,7 @@
 // Structural validator for lavendly/lavendly-agent-toolkit. Node 18 or newer, no dependencies.
 //
 // Checks:
-//   1. every lavendly-*/ folder has SKILL.md with frontmatter: name equals the
+//   1. every skills/lavendly-*/ folder has SKILL.md with frontmatter: name equals the
 //      folder, version equals VERSION, description carries "Use when:",
 //      "Chain:" and "NOT for:", argument-hint present
 //   2. SKILL.md is under 300 lines
@@ -13,7 +13,7 @@
 //   5. no em dash (U+2014) or en dash (U+2013) in any tracked text file, and
 //      no " -- " used as a dash in markdown prose
 //   6. VERSION matches every manifest, package.json and CHANGELOG
-//   7. every plugin manifest loads the skill folders from the root
+//   7. every plugin manifest finds the skills in skills/
 //
 // Exit code 1 with a list of failures, 0 when clean.
 
@@ -166,7 +166,21 @@ const manifests = {
   '.cursor-plugin/plugin.json': readJson('.cursor-plugin/plugin.json'),
   '.codex-plugin/plugin.json': readJson('.codex-plugin/plugin.json'),
   'package.json': readJson('package.json'),
+  'gemini-extension.json': readJson('gemini-extension.json'),
 };
+
+// The portable Agent Plugins manifest (https://agent-plugins.org): a closed
+// schema with $schema and name only.
+{
+  const p = readJson('plugin.json');
+  if (p) {
+    const keys = Object.keys(p).sort().join(',');
+    if (p.$schema !== 'https://agent-plugins.org/schemas/1.0.0/plugin.schema.json') fail('plugin.json: $schema must be the Agent Plugins 1.0.0 plugin schema');
+    else if (p.name !== 'lavendly') fail('plugin.json: name must be "lavendly"');
+    else if (keys !== '$schema,name') fail(`plugin.json: only $schema and name are allowed, found ${keys}`);
+    else ok('plugin.json is a portable Agent Plugins manifest');
+  }
+}
 
 for (const [name, json] of Object.entries(manifests)) {
   if (!json) continue;
@@ -191,6 +205,12 @@ for (const f of ['.mcp.json', 'mcp.json']) {
   if (url !== MCP_URL) fail(`${f}: mcpServers.lavendly.url is "${url}", expected ${MCP_URL}`);
   else ok(`${f} points at ${MCP_URL}`);
 }
+{
+  const g = readJson('gemini-extension.json');
+  const url = g?.mcpServers?.lavendly?.httpUrl;
+  if (url !== MCP_URL) fail(`gemini-extension.json: mcpServers.lavendly.httpUrl is "${url}", expected ${MCP_URL}`);
+  else ok(`gemini-extension.json points at ${MCP_URL}`);
+}
 
 const changelogPath = join(ROOT, 'CHANGELOG.md');
 if (existsSync(changelogPath)) {
@@ -202,18 +222,19 @@ if (existsSync(changelogPath)) {
 // Skill folders
 // ---------------------------------------------------------------------------
 
-const skillDirs = readdirSync(ROOT, { withFileTypes: true })
+const SKILLS_ROOT = join(ROOT, 'skills');
+const skillDirs = (existsSync(SKILLS_ROOT) ? readdirSync(SKILLS_ROOT, { withFileTypes: true }) : [])
   .filter((d) => d.isDirectory() && d.name.startsWith('lavendly-'))
   .map((d) => d.name)
   .sort();
 
-if (skillDirs.length === 0) fail('no lavendly-*/ skill folders found');
+if (skillDirs.length === 0) fail('no skills/lavendly-*/ skill folders found');
 
 const readme = existsSync(join(ROOT, 'README.md')) ? readText(join(ROOT, 'README.md')) : '';
 if (!readme) fail('README.md missing');
 
 for (const dirName of skillDirs) {
-  const dir = join(ROOT, dirName);
+  const dir = join(SKILLS_ROOT, dirName);
   const skillPath = join(dir, 'SKILL.md');
   if (!existsSync(skillPath)) {
     fail(`${dirName}/SKILL.md missing`);
@@ -289,22 +310,22 @@ for (const dirName of skillDirs) {
   // README mentions the skill
   if (readme && !readme.includes(dirName)) fail(`README.md does not mention ${dirName}`);
 
-  // package.json files list includes the folder
+}
+
+// package.json ships the whole skills/ folder
+{
   const pkg = manifests['package.json'];
-  if (pkg && Array.isArray(pkg.files)) {
-    const listed = pkg.files.some((f) => f.replace(/\/$/, '') === dirName);
-    if (!listed) fail(`package.json files does not include ${dirName}/`);
+  if (pkg && Array.isArray(pkg.files) && !pkg.files.some((f) => f.replace(/\/$/, '') === 'skills')) {
+    fail('package.json files does not include skills/');
   }
 }
 
-// The plugin manifests load the skill folders from the repository root, so
-// every lavendly-* folder ships in the plugin. (A marketplace entry `skills`
-// list is not used: Claude Code wants plain paths there, and the manifest
-// already covers it.)
+// Every host finds the skills in skills/ (the Agent Plugins default, Cursor,
+// Gemini CLI, Claude Code). A manifest may name it explicitly, nothing else.
 for (const name of ['.claude-plugin/plugin.json', '.cursor-plugin/plugin.json', '.codex-plugin/plugin.json']) {
   const m = manifests[name];
-  if (m && m.skills !== './') fail(`${name}: skills should be "./" (the skill folders live at the root)`);
-  else if (m) ok(`${name} loads skills from ./`);
+  if (m && m.skills !== undefined && m.skills !== './skills/') fail(`${name}: skills should be "./skills/" or left out`);
+  else if (m) ok(`${name} finds skills in skills/`);
 }
 if (marketplacePlugin && 'skills' in marketplacePlugin) {
   fail('.claude-plugin/marketplace.json: drop plugins[0].skills; the plugin manifest lists the skills');

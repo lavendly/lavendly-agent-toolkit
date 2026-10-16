@@ -15,6 +15,7 @@ const os = require('node:os');
 const path = require('node:path');
 
 const PKG_ROOT = path.resolve(__dirname, '..');
+const SKILLS_ROOT = path.join(PKG_ROOT, 'skills');
 const DEFAULT_TARGET = path.join(os.homedir(), '.claude', 'skills');
 const PREFIX = 'lavendly-';
 
@@ -28,9 +29,9 @@ function readVersion() {
 
 function listSkills() {
   return fs
-    .readdirSync(PKG_ROOT, { withFileTypes: true })
+    .readdirSync(SKILLS_ROOT, { withFileTypes: true })
     .filter((d) => d.isDirectory() && d.name.startsWith(PREFIX))
-    .filter((d) => fs.existsSync(path.join(PKG_ROOT, d.name, 'SKILL.md')))
+    .filter((d) => fs.existsSync(path.join(SKILLS_ROOT, d.name, 'SKILL.md')))
     .map((d) => d.name)
     .sort();
 }
@@ -38,7 +39,7 @@ function listSkills() {
 // First sentence of the frontmatter description, for --list.
 function summary(skillDir) {
   try {
-    const text = fs.readFileSync(path.join(PKG_ROOT, skillDir, 'SKILL.md'), 'utf8');
+    const text = fs.readFileSync(path.join(SKILLS_ROOT, skillDir, 'SKILL.md'), 'utf8');
     const end = text.indexOf('\n---\n', 4);
     const fm = end === -1 ? '' : text.slice(4, end);
     const lines = fm.split('\n');
@@ -146,7 +147,7 @@ function main(argv) {
   let installed = 0;
   let updated = 0;
   for (const skill of wanted) {
-    const src = path.join(PKG_ROOT, skill);
+    const src = path.join(SKILLS_ROOT, skill);
     const dest = path.join(target, skill);
     const existed = fs.existsSync(dest);
     if (existed) fs.rmSync(dest, { recursive: true, force: true });

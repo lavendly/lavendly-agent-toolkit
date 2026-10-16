@@ -20,69 +20,41 @@ gives the agent two things:
 The MCP tells the agent what tools exist. The skills tell it how to make a
 good video with them, cheaply, on the first try.
 
-## Install the plugin
+## Install
 
-### Claude Code
+One install gives the skills and the MCP on hosts with plugins:
 
-```
-/plugin marketplace add lavendly/lavendly-agent-toolkit
-/plugin install lavendly@lavendly
-```
+| Host | Install |
+|---|---|
+| Claude Code | `/plugin marketplace add lavendly/lavendly-agent-toolkit`, then `/plugin install lavendly@lavendly`, then `/mcp` to sign in |
+| Codex | `codex plugin marketplace add lavendly/lavendly-agent-toolkit`, then `codex plugin add lavendly@lavendly` |
+| Gemini CLI | `gemini extensions install https://github.com/lavendly/lavendly-agent-toolkit`, then `/mcp auth lavendly` |
+| Cursor | **Customize**, add this repository as a plugin, install |
+| Any Agent Plugins host | reads `plugin.json`, `skills/` and `mcp.json` from this repository |
 
-Then run `/mcp`, pick `lavendly`, and sign in. The skills answer to
-`/lavendly:lavendly-director`, `/lavendly:lavendly-storyteller` and the rest.
-
-### Codex
-
-```bash
-codex plugin marketplace add lavendly/lavendly-agent-toolkit
-```
-
-Install Lavendly from the plugin directory, then sign in when Codex asks.
-
-### Cursor
-
-Open **Customize**, add this repository as a plugin (from your team
-marketplace or a local clone), install it, and sign in to the `lavendly` MCP
-server when Cursor asks.
-
-### Unattended runs
-
-OAuth sign-in needs a person. For a cron job or CI, register the MCP with an
-API key instead (**Dashboard > Settings > API keys**) and install the skills
-only, with one of the methods below. Steps in [INSTALL.md](./INSTALL.md).
-
-## Install the skills only
-
-For hosts without plugins, or when the MCP is already configured.
+Amp, VS Code with Copilot, Windsurf, OpenCode and other agents take the
+skills and the MCP separately:
 
 ```bash
 npx skills add lavendly/lavendly-agent-toolkit
 ```
 
-```bash
-gh skill install lavendly/lavendly-agent-toolkit
-```
-
-```bash
-npx -y @lavendly/agent-toolkit install
-npx -y @lavendly/agent-toolkit install director review
-npx -y @lavendly/agent-toolkit --list
-```
-
-More options in [INSTALL.md](./INSTALL.md). Agent-driven install (paste into
-your agent): [INSTALL_FOR_AGENTS.md](./INSTALL_FOR_AGENTS.md).
+then add the remote MCP server `https://mcp.lavendly.ai/mcp` in that host
+(one line per host in [INSTALL.md](./INSTALL.md#other-hosts-skills-then-the-mcp)).
+Unattended runs use an API key instead of the sign-in, also in INSTALL.md.
+Agent-driven install (paste into your agent):
+[INSTALL_FOR_AGENTS.md](./INSTALL_FOR_AGENTS.md).
 
 ## Skills
 
 | Skill | Invoke | Description |
 |---|---|---|
-| [`lavendly-director`](./lavendly-director) | `/lavendly:lavendly-director` | Direct a 15 to 90 s video of any format: intent and continuity mode, hero lock (the same product or character in every scene), a sequence plan where each shot hands off to the next, a still-frame prompt and a motion prompt per shot in camera and light language, sound design, the cut, repair of only what failed |
-| [`lavendly-storyteller`](./lavendly-storyteller) | `/lavendly:lavendly-storyteller` | A finished narrated short (5 to 12 s, one shot) from a one-line idea: voice, one music bed, captions, free render. |
-| [`lavendly-multi-clip`](./lavendly-multi-clip) | `/lavendly:lavendly-multi-clip` | 2 to 6 shots that read as one film: character and palette anchors pasted verbatim into every shot, one score, narration that bridges the beats. |
-| [`lavendly-cost-aware`](./lavendly-cost-aware) | `/lavendly:lavendly-cost-aware` | Budget guardrails, priority high. Estimate before any spend, cheapest model that meets the brief, strict retry discipline, one-line reports. Load it for unattended runs. |
-| [`lavendly-review`](./lavendly-review) | `/lavendly:lavendly-review` | The quality loop, judged against the video's intent: check every scene, every cut and the whole video, rank findings by severity, repair smallest first, re-check, summarize before the render. |
-| [`lavendly-publish`](./lavendly-publish) | `/lavendly:lavendly-publish` | Channels, titles, captions, AI disclosure, scheduling in the user's timezone, and the confirmation that must come before anything posts. |
+| [`lavendly-director`](./skills/lavendly-director) | `/lavendly:lavendly-director` | Direct a 15 to 90 s video of any format: intent and continuity mode, hero lock (the same product or character in every scene), a sequence plan where each shot hands off to the next, a still-frame prompt and a motion prompt per shot in camera and light language, sound design, the cut, repair of only what failed |
+| [`lavendly-storyteller`](./skills/lavendly-storyteller) | `/lavendly:lavendly-storyteller` | A finished narrated short (5 to 12 s, one shot) from a one-line idea: voice, one music bed, captions, free render. |
+| [`lavendly-multi-clip`](./skills/lavendly-multi-clip) | `/lavendly:lavendly-multi-clip` | 2 to 6 shots that read as one film: character and palette anchors pasted verbatim into every shot, one score, narration that bridges the beats. |
+| [`lavendly-cost-aware`](./skills/lavendly-cost-aware) | `/lavendly:lavendly-cost-aware` | Budget guardrails, priority high. Estimate before any spend, cheapest model that meets the brief, strict retry discipline, one-line reports. Load it for unattended runs. |
+| [`lavendly-review`](./skills/lavendly-review) | `/lavendly:lavendly-review` | The quality loop, judged against the video's intent: check every scene, every cut and the whole video, rank findings by severity, repair smallest first, re-check, summarize before the render. |
+| [`lavendly-publish`](./skills/lavendly-publish) | `/lavendly:lavendly-publish` | Channels, titles, captions, AI disclosure, scheduling in the user's timezone, and the confirmation that must come before anything posts. |
 
 The skills compose. `cost-aware` sits above the others and wins every spend
 decision. `storyteller` and `multi-clip` hand their generated scenes to
@@ -112,48 +84,33 @@ and how, but it can never add a tool, remove one, or replace `get_status` as
 the source of truth for what works right now. Full tool list and install
 guides: https://docs.lavendly.ai/mcp/overview
 
-## Connect the MCP
+## Connect the MCP by hand
 
-Get an API key from **Dashboard > Settings > API keys** in the Lavendly app.
-
-Hosted (nothing to install, Streamable HTTP):
-
-```bash
-claude mcp add --transport http lavendly https://mcp.lavendly.ai/mcp \
-  --header "Authorization: Bearer <your key>"
-```
-
-Cursor (`~/.cursor/mcp.json`):
-
-```json
-{
-  "mcpServers": {
-    "lavendly": {
-      "url": "https://mcp.lavendly.ai/mcp",
-      "headers": { "Authorization": "Bearer <your key>" }
-    }
-  }
-}
-```
-
-Local (stdio):
+The plugin installs register the MCP for you. Without a plugin, add the
+remote server `https://mcp.lavendly.ai/mcp` and sign in when the host asks:
 
 ```bash
-claude mcp add lavendly --env LAVENDLY_API_KEY=<your key> -- npx -y @lavendly/mcp
+claude mcp add --transport http lavendly https://mcp.lavendly.ai/mcp
 ```
 
-Verify by asking the agent to call `get_status`. It should report provider
-readiness and the voice configuration without spending credits.
+Every other host, and the API key form for unattended runs, are in
+[INSTALL.md](./INSTALL.md). Verify by asking the agent to call `get_status`:
+it reports provider readiness and the voice configuration without spending
+credits.
 
 ## Repository
 
 | Path | Purpose |
 |---|---|
-| `lavendly-*/` | One folder per skill: `SKILL.md` plus `references/` |
+| `skills/lavendly-*/` | One folder per skill: `SKILL.md` plus `references/` |
+| `plugin.json`, `mcp.json` | Portable Agent Plugins manifest and MCP config (Cursor and other Agent Plugins hosts) |
+| `.claude-plugin/`, `.mcp.json` | Claude Code plugin, marketplace and MCP config |
+| `.codex-plugin/`, `.agents/plugins/` | Codex plugin and marketplace (MCP from `.mcp.json`) |
+| `.cursor-plugin/` | Cursor plugin |
+| `gemini-extension.json` | Gemini CLI extension (MCP; skills from `skills/`) |
 | `evals/` | Scenarios and rubric, dev-only |
 | `scripts/validate.mjs` | Structural checks, run by CI and before every PR |
-| `bin/install.js` | The `@lavendly/agent-toolkit` installer |
-| `.claude-plugin/`, `.cursor-plugin/`, `.codex-plugin/` | Plugin manifests |
+| `bin/install.js` | The `@lavendly/agent-toolkit` skills installer |
 
 See [CONTRIBUTING.md](./CONTRIBUTING.md) to add or change a skill and
 [COOKBOOK.md](./COOKBOOK.md) for end-to-end recipes.

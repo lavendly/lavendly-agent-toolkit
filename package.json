@@ -16,12 +16,7 @@
   },
   "files": [
     "bin/",
-    "lavendly-director/",
-    "lavendly-storyteller/",
-    "lavendly-multi-clip/",
-    "lavendly-cost-aware/",
-    "lavendly-review/",
-    "lavendly-publish/",
+    "skills/",
     "README.md",
     "INSTALL.md",
     "INSTALL_FOR_AGENTS.md",
@@ -34,7 +29,9 @@
     ".codex-plugin/",
     ".agents/",
     ".mcp.json",
-    "mcp.json"
+    "mcp.json",
+    "plugin.json",
+    "gemini-extension.json"
   ],
   "scripts": {
     "validate": "node scripts/validate.mjs",

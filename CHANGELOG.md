@@ -8,6 +8,12 @@ covers every skill and manifest (see `VERSION`).
 
 Added:
 
+- Skills moved to `skills/lavendly-<name>/`, the default location of the
+  Agent Plugins standard, Cursor, Gemini CLI, Codex and Claude Code.
+- A portable Agent Plugins manifest (`plugin.json`) and a Gemini CLI
+  extension (`gemini-extension.json`). INSTALL.md covers Claude Code, Codex,
+  Gemini CLI, Cursor, Agent Plugins hosts, and Amp, VS Code, Windsurf and
+  OpenCode (skills plus one MCP line each).
 - The repository is a plugin for Claude Code, Cursor and Codex: installing it
   connects the Lavendly MCP (`.mcp.json`, and `mcp.json` for Cursor; sign in
   on first use, no key to paste) and loads the six skills. A Codex repo
