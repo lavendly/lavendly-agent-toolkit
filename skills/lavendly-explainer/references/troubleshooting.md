@@ -12,7 +12,7 @@ a new idempotency key.
 | The last frame freezes at the end of a scene | Narration ran past its picture | Cut words to the budget (2.5 per second ceiling, aim 2.3) and attach again; the picture is not at fault |
 | Music under the narration that nobody attached | Veo's own bed in a clip set to `native` | Add "No music." to the motion prompt on re-rolls; set the clip to `mix` 0.2 to 0.3 or `off` |
 | The voice reads "1969" as "one nine six nine" or mangles an acronym | Digits or letters in the script | Spell the number as spoken; spell out the acronym or use the full name |
-| Captions missing | The voiceover was attached by `url` (no word timings), `subtitleStyle` is missing or `off`, or the film has one scene | Synthesize the voice from `text`; `update_track` with a caption style; two or more scenes |
+| Captions missing | The voiceover was attached by `url` (no word timings), or `subtitleStyle` is missing or `off` | Synthesize the voice from `text`; `update_track` with a caption style |
 | Captions sit under the platform's buttons | Captions burn bottom aligned on an MCP render; the brand-kit caption position does not reach it | Keep key picture content in the upper two thirds |
 | A diagram turned into a tangle of lines | Diagrams are not a model strength | Use a physical model, a cutaway object or a miniature; or import the user's real diagram |
 | An animal with wrong anatomy or extra legs | Fast motion or a vague species | Name the species and its markings, medium-wide framing, slow simple motion, "on all four legs" |
@@ -25,7 +25,7 @@ a new idempotency key.
 | `invalid_args` naming the duration | A length the model does not make (Veo 5 s, Hailuo 2.3 4 s) | Set the next allowed length with `update_workflow`; trim with `edit_clip` |
 | The film is letterboxed or pillarboxed | Clips of another shape than the first clip | Keep one aspect for the film; render a second version for the other platform |
 | A 1080p model looks no sharper than a cheap one | Free and Starter exports are 720p | Use a value model on those plans |
-| The imported clip is missing from the render | The clip node is not a videoGenerator node with `video_url` | Check the node in `get_workflow`; set its type and `data.video_url`; `move_clip` only reorders |
+| The imported clip is missing from the render | The clip node is not a videoGenerator node with `video_url` | Check the node in `get_workflow`; set its type and `data.video_url`; `move_clip` only places a clip that is already in the render |
 | The render refuses: film too long | Over 180 s | Split into parts |
 | The hook frame is an establishing wide | Habit from long-form | Open on the subject of the first sentence, close and legible |
 | Every shot pushes in | No move plan | Apply the arc's camera rhythm; static for the payoff |

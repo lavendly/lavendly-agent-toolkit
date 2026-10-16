@@ -1,10 +1,11 @@
 # Sequence checks
 
-`quality_check` judges one scene against its own prompt. Nothing on the
-server compares a scene with its neighbours or judges the video as a whole,
-so this skill does that part itself, with frames it opens and the audio
-summary it reads. Apply only the rows that matter for the video's intent;
-a row that does not apply is skipped, not failed.
+`quality_check` judges one scene against its own prompt, one cut on two
+frames (with `previous_node_id`), and the rendered film's loudness. Nothing
+on the server judges the video as a whole against its intent, so this skill
+does that part itself, with frames it opens and the audio summary it reads.
+Apply only the rows that matter for the video's intent; a row that does not
+apply is skipped, not failed.
 
 ## 1. Intent and continuity mode
 
@@ -38,9 +39,33 @@ an error. A tutorial showing a result before its step is always an error.
 
 ## 2. Each cut
 
-For each cut between scene N and scene N+1, open the last frame of N and
-the first frame of N+1 (`get_scene_frame`, frame last then first). On a
-server without the frame option, use mid frames and lower the confidence.
+Server first: for each cut between scene N and scene N+1, `quality_check`
+with `node_id` (N+1), `previous_node_id` (N), `same_scene` and `present`.
+`same_scene` is true under the same heading and false under a new one (the
+headings come from `get_scene_plan`, else the plan, else your inference,
+said in one line); `present` is who or what should be in N+1's frame (the
+plan's list). The answer's `cut` holds `cut_pass` (false when any finding is
+high) and findings, each with `severity` (high, medium, low), `kind`
+(identity, cast, state, light, geography, repeat), `detail`, `why`, `fix`
+and `mode` (regenerate, plan or edit), at confidence 0.6. With `same_scene`
+false only identity (for names in `present`) and repeat are checked. The
+cut is advisory: it never flips `pass`, and `skip_vlm` skips it.
+
+- Report each finding with its why and its fix, as a row of section 6.
+  Confidence is medium for a finding the tool alone reported, high once you
+  see it in both frames.
+- On a high finding, open both frames before paying for a re-roll. A
+  finding you cannot see in them is reported, not repaired.
+- A `mode` of edit (repeat) is a free trim first; plan (geography) is a
+  wider shot or a held screen side in the plan; regenerate is a paid re-roll.
+- A `previous_` error (`previous_node_not_found`, `previous_not_generated`)
+  means scene N is wrong or not generated: fix the order, do not re-roll.
+
+Then your own look: open the last frame of N and the first frame of N+1
+(`get_scene_frame`, frame last then first). On a server without the frame
+option, use mid frames and lower the confidence. On a self-hosted server
+whose `get_schema` shows no `previous_node_id`, this look is the whole cut
+check.
 Frame last reads the raw clip, not the trimmed window: when scene N is
 trimmed at its end, judge that cut on the rendered film instead.
 
@@ -97,17 +122,25 @@ true, the mid frame of each scene in order, and `get_workflow_audio`.
 | Check | Fix |
 |---|---|
 | Music ducked under narration and dialogue | `update_track` ducking true, `volume` 35 (a percent, never 0.35); film-wide music ducks only under a voiceover also wired to every clip |
-| Score and narration reach every clip | `update_workflow`: an edge from each to every clip; a track on one clip only freezes that clip's last frame for the rest of the track |
+| Score and narration reach every clip | Attach with `"scope": "film"` and check `get_workflow_audio`; for a clip it missed, `update_workflow` adds the edge; a track on one clip only freezes that clip's last frame for the rest of the track |
 | One score, not one per scene | `detach_track` the extras |
 | Narration and native dialogue do not overlap | `set_clip_native_audio` to mix or off, or a rewritten line (`startTime` moves the whole track on its mix clock) |
 | Narration fits its picture (about 2.3 words per second) | A shorter line attached again (synthesis is paid) |
 | A clip's own audio jumps in level against its neighbours | `edit_clip` volume |
 | A hard edge at the start or the end | `edit_clip` `fade_in_ms` or `fade_out_ms`; for the score, on the music node (a clip fade does not fade a film-wide score) |
 
-Perceived loudness, clipping and the balance between layers are not
-measured by any tool today. Say when a moment is in doubt and ask the user
-to listen to it; never report a level that was not measured. Keep intended
-silence; do not add music or effects the intent did not ask for.
+Loudness is measured. Every export is normalized to -14 LUFS integrated
+with a -1.5 dBTP true peak ceiling, and the film's `quality_check` returns
+`loudness` (`integrated_lufs`, `true_peak_dbtp`, `lra`, `target_lufs`,
+`target_true_peak_dbtp`). Report the integrated level and the true peak. A
+film below -20 or above -10 LUFS, or with a true peak above -1 dBTP, gets a
+warning in `failures` that never flips `pass`: report it and find the cause
+(a quiet mix, one loud clip).
+
+Not measured: the balance between layers and a single loud moment inside a
+film whose average is on target. Say when a moment is in doubt and ask the
+user to listen to it; never report a level that was not measured. Keep
+intended silence; do not add music or effects the intent did not ask for.
 
 ## 5. Severity
 
@@ -128,14 +161,16 @@ The message to the user opens with one line naming the video type and the
 continuity mode, then the findings with severity and confidence, in plain
 words.
 
-Confidence: high when a tool reported it or both frames show it plainly,
-medium when it rests on one mid frame, low when inferred without a frame.
+Confidence: high when a deterministic tool check reported it or both
+frames show it plainly, medium when it rests on one mid frame or on the cut
+check alone, low when inferred without a frame.
 
 ## 7. Repair, smallest first
 
 1. Edit: trim, split, reorder, speed (free).
 2. Audio: volume, ducking, native mode, track timing (free).
-3. Transition: a dip to black, or the cut moved onto a motion (free).
+3. Transition: a dip to black, a dissolve (an overlap plus matching fades),
+   or the cut moved onto a motion (free).
 4. One scene re-rolled, the fix named, `reroll_hint` appended (paid,
    announced, at most one per scene).
 5. A new direction for a section (paid; ask).

@@ -13,12 +13,11 @@ argument-hint: "[brief] [hero asset url or 'generate the hero'] [duration 15..90
 # Lavendly Director
 
 A video is not a stack of attractive clips. It is a hero that stays itself in
-every shot, light that stays in one world, a camera that moves for a reason,
-sound designed for the whole piece, and a cut that delivers what the video
-promised. What "delivers" means depends on the video: a payoff for a film, a
-readable product and a next step for an ad, a finished result for a
-tutorial, a resolved last section for a music video. This skill gives the
-agent that judgment and the exact calls that carry it into Lavendly.
+every shot, light in one world, a camera that moves for a reason, sound
+designed for the whole piece, and a cut that delivers what the video
+promised: a payoff for a film, a readable product and a next step for an ad,
+a finished result for a tutorial, a resolved last section for a music video.
+This skill gives the agent that judgment and the exact calls for Lavendly.
 
 ## Before anything else
 
@@ -45,17 +44,17 @@ agent that judgment and the exact calls that carry it into Lavendly.
 | 5 | show | The intent card, the shot list and the hero description to the user; wait for "go" |
 | 6 | `import_asset` | The hero image and any style plate the user supplied (public URL or Asset Library); returns the hosted url |
 | 7 | `create_workflow` | `shots: [{prompt, duration}]` in order, `aspect`, `videoModel`, `project_name` when named, `idempotency_key` |
-| 8 | `get_workflow` | Collect, per scene in order: the group, the image node (`img_` prefix) and the clip node (`vid_` prefix) |
+| 8 | `get_workflow`, `set_scene_plan` | Collect, per scene in order: the group, the image node (`img_` prefix) and the clip node (`vid_` prefix); then store the plan, per clip node: `heading` (the plan's heading word for word), `present` (exactly who is seen), `hands_off`. A later session starts with `get_scene_plan` |
 | 9 | `update_workflow` | Set each image node's `prompt` to the still-frame prompt; add one reference node for the hero and wire it into every clip and every image node (see [references/mcp-calls.md](references/mcp-calls.md)) |
 | 10 | `set_clip_native_audio` | Per clip: `native` for scenes with on-screen sound or dialogue, `mix` under narration, `off` for a music edit |
-| 11 | `attach_track`, `update_workflow` | Narration (one voice, captions via `subtitleStyle`) and one score (`ducking: true`) on the first clip, then `update_workflow` edges from both nodes to every other clip so they are film-wide, confirmed with `get_workflow_audio` (`scope` only once `get_schema` lists it); `fade_out_ms` on the music node |
+| 11 | `attach_track`, `get_workflow_audio` | Narration (one voice, captions via `subtitleStyle`) and one score (`ducking: true`), both with `"scope": "film"`, confirmed with `get_workflow_audio` to reach every clip (only if not, `update_workflow` edges to the missing clips); `fade_out_ms` on the music node |
 | 12 | `estimate_cost` | Announce in one line: shots, model by its display name, clip credits, opening image credits (a number), voice and music synthesis charged separately when attached, total, balance after; get approval |
 | 13 | `generate_scene` | Scene by scene in order (`node_id`), so each scene can be checked before the next is paid for; `max_credits` is that scene's line of `per_scene` plus its opening image |
 | 14 | `get_generation_status`, `get_scene_frame` | Silent polling; a frame per scene as it lands; update the ledger from its last frame |
-| 15 | `quality_check`, `get_scene_frame` | Each scene (level A), then its cut with the previous scene (level B, last and first frames); findings and repair below |
-| 16 | `edit_clip`, `split_clip`, `move_clip` | The cut: trims to the useful window, fades where a dip to black is wanted, order (clips play back to back) |
+| 15 | `quality_check`, `get_scene_frame` | Each scene (level A), then its cut (level B): `quality_check` with `previous_node_id`, `same_scene` (same heading) and `present`; report each finding with its why and fix, and open both boundary frames before paying for a re-roll on a high one |
+| 16 | `edit_clip`, `split_clip`, `move_clip` | The cut: trims, fades for a dip to black, order (clips play back to back), an overlap plus matching fades for a dissolve |
 | 17 | `create_render` | Free; `get_render` until done |
-| 18 | `quality_check`, `get_workflow_audio` | The whole video (level C) against the intent card; repair, render again, re-check; then deliver: link, length, what the viewer will see, any finding the user accepted; "captions requested" (ask the user to check), never "captions are on" |
+| 18 | `quality_check`, `get_workflow_audio` | The whole video (level C) against the intent card, with its measured `loudness`; repair, render again, re-check; then deliver: link, length, what the viewer will see, any finding the user accepted; "captions requested" (ask the user to check), never "captions are on" |
 
 ## Decision rules
 
@@ -191,10 +190,11 @@ agent that judgment and the exact calls that carry it into Lavendly.
 ### The cut
 
 - Hard cuts by default. A dip to black is `fade_out_ms` on the outgoing clip
-  and `fade_in_ms` on the incoming one. Dissolves and wipes do not exist in
-  the render yet; do not promise them.
+  and `fade_in_ms` on the incoming one. A dissolve: `move_clip` the later
+  clip to start before the earlier ends and set both fades to the overlap
+  ([references/mcp-calls.md](references/mcp-calls.md)). Wipes are not rendered.
 - Trim with `edit_clip` (`trim` in source ms); `split_clip` (`at_sec` from the clip's start) for two beats;
-  `move_clip` only reorders: clips play back to back, so a pause is a held shot or a trim, never a gap.
+  `move_clip` orders: clips play back to back, so a pause is a held shot or a trim, never a gap.
 - On-screen titles cannot be rendered from the MCP today. Carry the words in
   narration with captions, and leave room in the frame for a title the user
   can add in the app.
@@ -239,14 +239,14 @@ passed; before it, say "applied, not yet checked".
 ## Compatibility
 
 `attach_track` synthesizes the voiceover from `text` and the music from `mood`
-plus `duration` on servers that carry the synthesis update. Try that form
-first. If the server answers `url required`, ask the user to generate the
-voice or music in the Lavendly app (Asset Library), then attach the hosted
-file by `url` and continue. `get_scene_frame` takes a frame option (first,
-mid, last) on current servers; where `get_schema` does not show it, the
-call returns the mid frame, the cut checks rest on mid frames (say the
-confidence is lower), and a continuing shot is anchored by describing the
-earlier shot's end state in its prompt.
+plus `duration`; try that first. On `url required`, ask the user to generate
+the voice or music in the Lavendly app (Asset Library), then attach the
+hosted file by `url` and continue. Where `get_schema` shows no frame option
+on `get_scene_frame`, it returns the mid frame: cut checks rest on mid
+frames (say the confidence is lower) and a continuing shot is anchored by
+describing the earlier shot's end state. A self-hosted server without
+`set_scene_plan` or `previous_node_id`: keep the plan in the chat, judge cuts
+by the frames alone.
 
 ## When to stop
 

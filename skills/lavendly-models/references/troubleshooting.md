@@ -25,7 +25,7 @@ paid call with a new idempotency key; rejoin the running job instead.
 | You see | It means | Do |
 |---|---|---|
 | A vertical film exports letterboxed | A clip was made 16:9 (Hailuo 2.3 snaps to 16:9), or the first clip has another shape | Every clip on one aspect the model makes; the first clip sets the film |
-| A one-clip film is not at the plan's export size (720p or 1080p) | A one-clip film ships the raw clip with no stitch normalisation, unless it has captions or picture edits on a server that routes those through the stitch | Expect the model's own size and aspect; never quote a plan export size for one clip |
+| A one-clip film is not at the plan's export size (720p or 1080p) | A one-clip film with no captions and no picture edit (volume and mute aside) ships the raw clip with no stitch normalisation; captions or a picture edit send it through the full stitch | With neither, expect the model's own size and aspect; never quote a plan export size for a raw clip |
 | The export is pillarboxed in a 9:16 frame | The film's first clip is 21:9, 9:21, 3:2 or 2:3 | Use 9:16, 16:9, 1:1, 3:4 or 4:3 for films |
 | A Grok clip looks soft | Likely rendered at the provider default (unverified, xAI defaults to 480p) | Use it as a draft, or move the scene to another family |
 | A Hailuo shot does something the prompt did not say | The provider's prompt optimiser may have rewritten it | Simpler words, the bracket command right after its description, the end state stated |

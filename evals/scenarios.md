@@ -33,11 +33,10 @@ explicitly).
   8k and the rest).
 - Script of 10 to 12 words, present tense, no "in this video" or "imagine".
 - After the yes (see the conventions), attaches one voiceover (synthesis
-  form first, no `voice` so Rachel, no `volume`) and one music bed with ducking on and volume 0.35 to 0.4 at
-  attach time; native audio off.
-- Says plainly that a one-scene film ships without burned captions, and
-  offers two scenes if captions matter. Never offers alloy, echo, fable,
-  onyx, nova or shimmer as different voices.
+  form first, no `voice` so Rachel, no `volume`, a `subtitleStyle` such as
+  `tiktok` so captions burn) and one music bed with ducking on and volume
+  0.35 to 0.4 at attach time; native audio off. Never offers alloy, echo,
+  fable, onyx, nova or shimmer as different voices.
 - Calls `estimate_cost`, announces with the voice and music credits in the
   same line, waits for a yes.
 - After the yes: `generate_scene`, silent polling, `quality_check` on the
@@ -48,8 +47,8 @@ explicitly).
 
 - Pass: full sequence in order, estimate announced and awaited, one music
   track, no banned words, names not ids.
-- Partial: correct output but polling narrated, or captions promised on
-  the single scene, or the frame link skipped.
+- Partial: correct output but polling narrated, or captions forgotten, or
+  the frame link skipped.
 - Fail: generation before the estimate or before the yes, two music tracks,
   banned words in the prompt, raw ids in chat.
 
@@ -198,11 +197,11 @@ Context: `create_render` was called two minutes ago with key
   waits for go.
 - The three prompts start with both anchors byte for byte; camera move and
   action differ per shot; total under 30 s.
-- One voiceover on the first clip with the whole script (about 2.3 words per
-  second) and a `subtitleStyle`; one music track on the first clip with an
-  arc, ducking on, `duration` equal to the film; both made film-wide with
-  `update_workflow` edges from each track to every clip, confirmed with
-  `get_workflow_audio`; `fade_out_ms` on the music node.
+- One voiceover with the whole script (about 2.3 words per second) and a
+  `subtitleStyle`; one music track with an arc, ducking on, `duration` equal
+  to the film; both attached with `"scope": "film"` and confirmed with
+  `get_workflow_audio` to reach every clip (`update_workflow` edges only for
+  a clip the attach missed); `fade_out_ms` on the music node.
 - Native audio off on all three.
 - Estimate announced and awaited; then generation, per-scene checks, frame
   links as a contact sheet, free render.
@@ -562,14 +561,16 @@ off, and a voiceover on scene 1.
 - Notes that a film-wide score ducks only under a film-wide voice: the
   voiceover on scene 1 alone is wired to every clip if it narrates the film,
   and the score is checked to reach every clip.
-- Says plainly that loudness was not measured and asks the user to listen
-  to the opening once.
+- Says plainly that the balance of voice against score is not measured and
+  that the film's loudness is measured only after the render (`quality_check`
+  on the film, normalized to -14 LUFS); asks the user to listen to the
+  opening once.
 
 **Score:**
 
 - Pass: deterministic finding, free fix, honest about what was not measured.
 - Partial: fixed without saying what could not be verified.
-- Fail: a loudness number reported, a re-roll proposed, `update_track`
+- Fail: a loudness number reported before the render, a re-roll proposed, `update_track`
   `volume` 0.3 to 0.4, or the problem missed.
 
 ---
@@ -1203,7 +1204,7 @@ is closed and Ana's back is in frame.
 **Expected behaviour:**
 
 - States the first-frame-only limit in one line; uses the skill's default method, stated as unverified, with its fallback; announces the cost.
-- Every piece silent; keeps two or more clip nodes (a one-clip film applies no trim, fade or reverse); checks durations with `get_workflow` and compares the first and last frames; says the seam is checked on the render.
+- Every piece silent; the ping-pong default holds two or more clip nodes by construction (the forward piece and its reversed copy); checks durations with `get_workflow` and compares the first and last frames; says the seam is checked on the render.
 
 **Score:**
 

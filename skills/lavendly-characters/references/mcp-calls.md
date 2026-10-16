@@ -177,18 +177,17 @@ eric, harry, jessica, laura, liam, lily, matilda, river, roger, will.
 Never pass `volume` on a voiceover (it is stored as a percent; the default
 100 is unity). Script up to 4,000 characters, priced per character.
 
-A voiceover that runs across several scenes must reach every clip. After
-the attach, `get_workflow`, then `update_workflow` with the full `nodes` and
-`edges` arrays and one more edge per other clip, copied from the edge
-`attach_track` made (new `id` and `target`); then confirm with
-`get_workflow_audio` that it reaches every clip. `attach_track` has no
-`scope` on the server today and the MCP drops unknown arguments silently;
-once `get_schema` lists `scope` on `attach_track`, `"scope": "film"` is a
-shortcut for the edges, still confirmed with `get_workflow_audio`. Left on one clip, a long
+A voiceover that runs across several scenes must reach every clip: attach
+it with `"scope": "film"` (the server adds an edge to every clip), then
+confirm with `get_workflow_audio` that it reaches every clip. Only if it
+does not (an older or self-hosted server that drops the argument),
+`get_workflow`, then `update_workflow` with the full `nodes` and `edges`
+arrays and one more edge per missing clip, copied from the edge
+`attach_track` made (new `id` and `target`). Left on one clip, a long
 voiceover freezes that clip's last frame for the rest of the track. A line
 that belongs to one scene stays on that clip. Captions burn only from a
-synthesized voiceover with a `subtitleStyle`, on a film of two or more
-scenes; a voiceover by `url` and native dialogue get none. Premade ids the server knows include Rachel
+synthesized voiceover with a `subtitleStyle` other than `off`, on a
+one-scene film too; a voiceover by `url` and native dialogue get none. Premade ids the server knows include Rachel
 21m00Tcm4TlvDq8ikWAM, Adam pNInz6obpgDQGcFmaJgB, Bella EXAVITQu4vr4xnSDxMaL,
 Antoni ErXwobaYiN019PkySvjV, Elli MF3mGyEYCl7XYWbV9V6O, Josh
 TxGEqnHWrfWFTfGW9XjX, Arnold VR6AewLTigWG4xSOukaG, Sam yoZ06aMxZJJ28mfd3POQ.

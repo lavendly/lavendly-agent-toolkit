@@ -136,8 +136,8 @@ colour only unifies contrast and saturation across clips. Scales: brightness
 is an offset (0 neutral, keep within -0.2 to 0.2); contrast and saturation
 are multipliers (1 neutral, 0 saturation is black and white, 0 contrast is
 flat grey); hue is degrees (0 neutral). Apply the same values to every clip.
-Hue rotates every colour and is left at 0. A one-scene film applies no
-colour edit.
+Hue rotates every colour and is left at 0. A one-scene film applies the
+colour edit too.
 
 | Look | In the prompt | Edit on every clip |
 |---|---|---|

@@ -76,3 +76,9 @@ delivery line. Without those words, do not render.
 
 Rejoin with `get_generation_status`. If you must resend, use the identical
 `idempotency_key`.
+
+## `previous_node_not_found` or `previous_not_generated` on a cut check
+
+The scene passed as `previous_node_id` is wrong or has no clip yet. Pass the
+clip node of the scene before and generate it first; never re-roll the
+later scene for this.

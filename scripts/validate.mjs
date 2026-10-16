@@ -39,6 +39,8 @@ const TOOLS = new Set([
   'quality_check', 'get_scene_frame',
   'list_channels', 'publish_video', 'schedule_video',
   'get_ledger', 'get_monthly_usage', 'get_status', 'get_schema',
+  // Scene plan (lavendly/lavendlyai#736, live on main)
+  'get_scene_plan', 'set_scene_plan',
 ]);
 
 // Field names, response keys, phases and error codes the skills may backtick.
@@ -46,7 +48,7 @@ const TOOLS = new Set([
 // error envelope. Add here with the source when a skill needs a new one.
 const FIELDS = new Set([
   // tool arguments
-  'workflow_id', 'node_id', 'clip_id', 'track_id', 'channel_id', 'job_id',
+  'workflow_id', 'node_id', 'clip_id', 'clip_ids', 'track_id', 'channel_id', 'job_id',
   'project_id', 'project_name', 'idempotency_key', 'video_url', 'native_audio',
   'expect_audio', 'skip_vlm', 'remove_source_node',
   // estimate_cost, get_generation_status, quality_check, publish responses
@@ -77,6 +79,14 @@ const FIELDS = new Set([
   'tts_voices',
   // sequence lint rule ids in whole-film quality_check (shared/sequenceLint.mjs)
   'continue_without_link', 'ending_unnamed',
+  // quality_check cut check (lavendly/lavendlyai#735, server/qualityCheck.mjs):
+  // arguments, response key, and the previous_ error codes
+  'previous_node_id', 'same_scene', 'cut_pass',
+  'previous_node_not_found', 'previous_not_generated',
+  // scene plan entries (lavendly/lavendlyai#736, server/worldState.mjs)
+  'hands_off',
+  // loudness on get_render and the film's quality_check (lavendly/lavendlyai#734)
+  'integrated_lufs', 'true_peak_dbtp', 'target_lufs', 'target_true_peak_dbtp',
 ]);
 
 const failures = [];

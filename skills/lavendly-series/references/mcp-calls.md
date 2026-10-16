@@ -54,10 +54,32 @@ its `/api/v1/storage/m/<key>` path.
 }
 ```
 
-Then the director's steps: `get_workflow`, `update_workflow` (still prompts,
-reference nodes with the bible's hosted urls), `set_clip_native_audio`,
-`attach_track` (voice, score), `estimate_cost`, `generate_scene` scene by
-scene, `quality_check`, `create_render`.
+Then the director's steps: `get_workflow`, `set_scene_plan`,
+`update_workflow` (still prompts, reference nodes with the bible's hosted
+urls), `set_clip_native_audio`, `attach_track` (voice, score),
+`estimate_cost`, `generate_scene` scene by scene, `quality_check` per scene
+and per cut, `create_render`.
+
+The scene plan, keyed by clip node id, before the first `generate_scene`:
+
+```json
+{
+  "workflow_id": "<episode workflow id>",
+  "scenes": {
+    "vid_1": { "heading": "the hollow, dusk", "present": ["Pip"], "hands_off": "Pip looks up at the dark lantern" },
+    "vid_2": { "heading": "the hollow, dusk", "present": ["Pip", "Moss"], "hands_off": "Moss lands on the stone" }
+  }
+}
+```
+
+`heading` is the plan's heading word for word (up to 80 characters);
+`present` lists exactly who is seen, from the closed cast (up to 8 entries
+of up to 60). The server opens each planned scene's prompt with "Scene:
+<heading>" and "In frame: <present>, exactly one of each. Nobody else enters
+the frame, and no second copy, twin or reflection of them." `hands_off` is
+stored for the next session, not put in the prompt. The cut check reads the
+same plan: `quality_check` with `node_id`, `previous_node_id`, `same_scene`
+(true under one heading) and `present`.
 
 ## After delivery: the story so far
 
@@ -100,7 +122,10 @@ Then:
 ```
 
 `get_workflow`: read the description, the reference nodes (`data.reference`
-true) and their urls, the locked slot prompts. Then the final frame:
+true) and their urls, the locked slot prompts. Then `get_scene_plan` with
+the same `workflow_id`: the last scene's heading, who was present and its
+hand-off (an empty `scenes` means the episode was made without one). Then
+the final frame:
 
 ```json
 { "workflow_id": "<latest episode id>", "node_id": "<last clip id>", "frame": "last" }
@@ -118,6 +143,7 @@ references by url, the same voice id and the reused score:
   "workflow_id": "<new episode id>",
   "clip_id": "<first clip id>",
   "kind": "music",
+  "scope": "film",
   "url": "<hosted score url from episode 1>",
   "duration": 60,
   "volume": 0.3,
@@ -127,8 +153,9 @@ references by url, the same voice id and the reused score:
 ```
 
 A score by `url` gets a 30 s block unless `duration` is passed: set it to
-the episode's length. Then wire the score and the narration to every clip
-(the voice in the bible's voice id, no `volume`), exactly as below.
+the episode's length. Attach the narration the same way, with
+`"scope": "film"` (the voice in the bible's voice id, no `volume`), and
+confirm both reach every clip, exactly as below.
 
 Voices: no `voice` means Rachel, the default. Read `get_status`
 `models.tts_voices`. When it lists ElevenLabs voices (direct ElevenLabs),
@@ -149,22 +176,23 @@ a voiceover (the default 100 is unity), and when a level must change later
 pass `update_track` `volume` in percent (35 for a music bed, 100 for unity),
 never 0.35.
 
-## Make the score and the narration film-wide: `update_workflow`
+## Make the score and the narration film-wide: `scope` film
 
-`attach_track` has no `scope` argument on the server today, and the MCP
-drops an unknown argument without an error. So the default is always: attach,
-add the edges below with `update_workflow`, then call `get_workflow_audio`
-and confirm the track reaches every clip. Once `get_schema` lists `scope` on
-`attach_track`, `"scope": "film"` is a shortcut for the edges; confirm with
-`get_workflow_audio` all the same.
+A score or a narration plays across the film only when its node has an edge
+to every clip node (type videoGenerator). Attach it with `"scope": "film"`:
+the server adds an edge from the new node to every clip in the workflow and
+lists them in the response's `clip_ids`. Then call `get_workflow_audio` and
+confirm the track reaches every clip. Without `scope` (default `"clip"`) the
+node is wired to one clip only: mixed into that clip alone, and a track
+longer than the clip freezes that clip's last frame for the rest of the
+track. `scope` wires the clips that exist at attach time; a clip added or
+split later needs its own edge.
 
-`attach_track` wires its new node to one clip only. A score or a narration
-plays across the film only when its node has an edge to every clip node
-(type videoGenerator). Left on one clip it is mixed into that clip alone, and
-a track longer than the clip freezes that clip's last frame for the rest of
-the track. After the attach, `get_workflow`, then send the full `nodes` and
-`edges` arrays back with one more edge per other clip, copied from the edge
-`attach_track` made (same shape, new `id` and `target`):
+Only if `get_workflow_audio` shows the track on fewer clips (an older or
+self-hosted server that drops the argument), add the edges yourself:
+`get_workflow`, then `update_workflow` with the full `nodes` and `edges`
+arrays and one more edge per other clip, copied from the edge `attach_track`
+made (same shape, new `id` and `target`):
 
 ```json
 {

@@ -51,7 +51,7 @@ children's pacing) and the exact way each decision reaches Lavendly's models.
 | 10 | `get_workflow` | Image node and clip node per scene |
 | 11 | `update_workflow` | Still prompts on image nodes; hero and plate wired into every clip within the cap; user stills as image urls ([references/mcp-calls.md](references/mcp-calls.md)) |
 | 12 | `set_clip_native_audio` | Per clip: `native`, `mix` or `off` |
-| 13 | `attach_track`, `update_workflow` | One narration voice, one score with `ducking: true`, captions style; then `update_workflow` edges from both to every clip so they run film-wide, confirmed with `get_workflow_audio` (`scope` only once `get_schema` lists it) ([references/mcp-calls.md](references/mcp-calls.md)) |
+| 13 | `attach_track`, `get_workflow_audio` | One narration voice, one score with `ducking: true`, captions style; both with `"scope": "film"`, confirmed with `get_workflow_audio` to reach every clip (only if not, `update_workflow` edges to the missing clips) ([references/mcp-calls.md](references/mcp-calls.md)) |
 | 14 | `estimate_cost` | Announce clips, opening images, total, balance after; wait for a yes |
 | 15 | `generate_scene`, `get_generation_status` | Scene 1 alone first, silent polling |
 | 16 | `get_scene_frame`, `quality_check` | Scene 1 first and mid frames against the plate and the sheet; then each later scene, one at a time |
@@ -186,9 +186,10 @@ children's pacing) and the exact way each decision reaches Lavendly's models.
 - No lip sync to an uploaded voice or song; no frame-rate control; no
   last-frame pin (chain by hand from `get_scene_frame` last, at most 2 to 3
   hops); the Film Bible cannot be written from the MCP.
-- Hard cuts and dips to black (`fade_out_ms`, `fade_in_ms`) only; a page
-  turn or a dissolve is shown inside a shot (a wash spreading, a piece
-  sliding in), and export dissolves only where `get_schema` lists them.
+- Hard cuts, dips to black (`fade_out_ms`, `fade_in_ms`) and dissolves (the
+  later clip moved to overlap the earlier, both fades equal to the overlap,
+  [references/mcp-calls.md](references/mcp-calls.md)); a page turn or a wipe
+  is shown inside a shot (a wash spreading, a piece sliding in).
 
 ### Cost
 

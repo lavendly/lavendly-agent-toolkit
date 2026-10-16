@@ -49,7 +49,7 @@ plan, ledger, three-level checks); this skill makes the place decisions.
 | 8 | `create_workflow` | `shots` in order, top-level `aspect` and `videoModel`, `idempotency_key` |
 | 9 | `get_workflow`, `update_workflow` | Photo scenes: the image node's `data.url` is the photo; concept scenes: the still prompt on the image node ([references/mcp-calls.md](references/mcp-calls.md)) |
 | 10 | `set_clip_native_audio` | Every clip: `mix` under narration, `native` where the place's sound is the point, `off` for a music edit |
-| 11 | `attach_track`, `update_workflow` | One narration track, one score with `ducking: true`, captions when sound may be off; then `update_workflow` edges from both to every clip, so they run film-wide, confirmed with `get_workflow_audio` (`scope` only once `get_schema` lists it) ([references/mcp-calls.md](references/mcp-calls.md)) |
+| 11 | `attach_track`, `get_workflow_audio` | One narration track, one score with `ducking: true`, captions when sound may be off, both with `"scope": "film"`; confirm with `get_workflow_audio` that both reach every clip, and only if not, `update_workflow` edges to the missing clips ([references/mcp-calls.md](references/mcp-calls.md)) |
 | 12 | `estimate_cost` | Announce: shots, model, clips, opening images (none on photo scenes), total, balance after; wait for yes |
 | 13 | `generate_scene` | Scene by scene with `max_credits`; open each frame before paying for the next |
 | 14 | `quality_check`, `get_scene_frame` | Each scene against its photo: walls, windows, doors, furniture, view, signage; each cut; then the film |

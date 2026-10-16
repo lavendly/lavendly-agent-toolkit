@@ -63,7 +63,7 @@ One camera move per shot, constraints stated positively, no banned words.
 | 7 | `estimate_cost` | One approval line: scene count, model, clip credits plus the voice and music credits (paid when attached, not in the estimate), total, balance after; wait for the yes; refuse when `sufficient` is false |
 | 8 | `attach_track` voiceover | After the yes, on the first clip, `text` is the whole script, `voice` only when picked, `subtitleStyle`, no `volume`, `idempotency_key` |
 | 9 | `attach_track` music | On the first clip, one score: `mood` as an arc and `duration` equal to the film, `ducking: true`, volume 0.35 to 0.4, `idempotency_key` |
-| 10 | `update_workflow`, `edit_clip` | Make both tracks film-wide: full `nodes` and `edges` with an edge from the voiceover node and from the music node to every other clip, then `get_workflow_audio` to confirm both reach every clip (`scope` on `attach_track` is only a shortcut once `get_schema` lists it); then the music node's `fade_out_ms` |
+| 10 | `get_workflow_audio`, `edit_clip` | Confirm both tracks are film-wide: `get_workflow_audio` shows the voiceover and the music on every clip (both attached with `"scope": "film"`); only if not, `update_workflow` with full `nodes` and `edges` and an edge to each missing clip; then the music node's `fade_out_ms` |
 | 11 | `generate_scene` | No `node_id`: every ungenerated scene; `idempotency_key` |
 | 12 | `get_generation_status` | Poll silently; one line per phase change; name each scene as it lands |
 | 13 | `quality_check` per scene | `node_id`, `expect_audio` only where the clip should carry sound; failing scene: one re-roll with `reroll_hint` appended (lavendly-review) |
@@ -105,8 +105,8 @@ Exact JSON: [references/mcp-calls.md](references/mcp-calls.md).
 
 ### Music
 
-- One score for the whole film, attached once on the first clip, then
-  wired to every clip. Never a different track per scene. Describe the arc in
+- One score for the whole film, attached once with `"scope": "film"`, so
+  it is wired to every clip. Never a different track per scene. Describe the arc in
   one prompt: opening, build, release. `ducking: true`, volume 0.35 to 0.4
   at attach time, instrumental, `duration` equal to the film.
 - A track wired to clip 1 only is mixed into clip 1: a long score or

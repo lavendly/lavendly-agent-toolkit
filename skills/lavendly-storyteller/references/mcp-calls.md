@@ -65,6 +65,7 @@ always write it. The server sends it as written, never snapped.
   "clip_id": "<videoGenerator node id>",
   "kind": "voiceover",
   "text": "Steam lifts off the portafilter. The first drops fall, dark and slow.",
+  "subtitleStyle": "tiktok",
   "idempotency_key": "vo-<workflow id>"
 }
 ```
@@ -124,14 +125,23 @@ Fallback: replace `mood` with `url` pointing at a hosted file and keep
 `duration`. Keep `ducking: true` (drops the music to about a third under the
 voice) and the volume.
 
-## 8. No captions on one scene
+## 8. Captions and `update_track`
 
-A workflow with exactly one clip renders on the single-scene path: no
-burned captions and no `edit_clip` picture edits (only clip volume and mute
-apply). Do not call `update_track` for captions here. When captions matter,
-offer two scenes and hand off to lavendly-multi-clip.
+Captions burn from the synthesized voiceover's word timings when its
+`subtitleStyle` is not `off`. A workflow with exactly one clip then goes
+through the full stitch, so the captions burn and any `edit_clip` picture
+edit applies; with no captions and no picture edit (volume and mute aside)
+it ships the raw clip. To change the style after the attach:
 
-`update_track` still adjusts `muted`, `ducking`, `duration` (the block
+```json
+{
+  "workflow_id": "<id>",
+  "track_id": "<voiceover track id>",
+  "subtitleStyle": "youtube"
+}
+```
+
+`update_track` also adjusts `muted`, `ducking`, `duration` (the block
 length) and `startTime` (where the track starts on the clip, not a source
 in-point). Its `volume` is stored as a percent: pass 35 for a music bed, 100
 for unity, never 0.35.

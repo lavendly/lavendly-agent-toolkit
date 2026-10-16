@@ -14,9 +14,9 @@ decides a choice.
 | Export frame, Creator and up | 9:16 1080x1920, 16:9 1920x1080, 1:1 1080x1080, 3:4 1080x1440 |
 | Export shape | The first clip's aspect; other shapes are letterboxed |
 | Shapes models make | 9:16 and 16:9 on every family except Hailuo 2.3 (16:9 only); 1:1 on Seedance, Kling, Wan 2.7 and 3.0, Hailuo 3 Max, HeyGen, Grok; 3:4 on Seedance, Wan 2.7 and 3.0, Hailuo 3 Max, HeyGen, Grok; no model makes 4:5 |
-| Captions | Burned from the voiceover's word timings; styles `tiktok`, `reels`, `youtube`, `caption`; bottom aligned on an MCP render (the brand-kit position does not reach it); film of two or more scenes only |
+| Captions | Burned from the voiceover's word timings; styles `tiktok`, `reels`, `youtube`, `caption`; bottom aligned on an MCP render (the brand-kit position does not reach it); a one-scene film burns them too |
 | On-screen titles | Not rendered from the MCP; the user adds them in the app |
-| Loudness | Per-clip levelling and a limiter near -0.5 dBFS; no -14 LUFS target yet |
+| Loudness | Every export normalized to -14 LUFS integrated, true peak at most -1.5 dBTP; `quality_check` on the film returns the measured `loudness` |
 | AI label | Publishing through lavendly-publish adds the platform's AI label |
 
 ## 2. Platforms

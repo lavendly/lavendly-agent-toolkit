@@ -38,6 +38,6 @@ Never retry a paid call with a new idempotency key.
 | A named studio look was refused or ignored | a studio or artist name in the prompt | describe the traits instead ([prompt-anchors.md](prompt-anchors.md) section 5) |
 | The palette slides warm or green over a chain | chained frames drift after 2 to 3 hops | start the next scene from a fresh still from the bible |
 | The narrator speaks over the last frame frozen | narration over budget | cut words to 2.0 to 2.3 per second of the scene; re-attach |
-| The first scene freezes while the narration or score plays on | the track is wired to the first clip only | `update_workflow`: an edge from the track's node to every clip ([mcp-calls.md](mcp-calls.md) section 7) |
+| The first scene freezes while the narration or score plays on | the track is wired to the first clip only | Attach with `"scope": "film"`; for a clip it missed, `update_workflow`: an edge from the track's node to that clip ([mcp-calls.md](mcp-calls.md) section 7) |
 | The clip's own music fights the score | the model added music | write "No music." in Veo prompts; set the clip to `mix` low or `off` |
 | Native voice differs between scenes | each clip invents its voice | one voiceover track for the character; on-screen speech in one clip only |

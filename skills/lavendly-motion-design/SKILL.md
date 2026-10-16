@@ -48,7 +48,7 @@ about what Lavendly's models and edits can do and what they cannot.
 | 7 | `import_asset` | Packshots, plates, the user's sonic logo |
 | 8 | `create_workflow` | `shots` with motion prompts and exact durations, `aspect`, `videoModel`, `idempotency_key` |
 | 9 | `get_workflow`, `update_workflow` | Still prompts or packshot urls on image nodes; references within the cap ([references/mcp-calls.md](references/mcp-calls.md)) |
-| 10 | `set_clip_native_audio`, `attach_track`, `update_workflow` | Per-clip mode; one score or motif; narration where the recipe uses it; then `update_workflow` edges from each track to every clip so it runs film-wide, confirmed with `get_workflow_audio` (`scope` only once `get_schema` lists it) ([references/mcp-calls.md](references/mcp-calls.md)) |
+| 10 | `set_clip_native_audio`, `attach_track`, `get_workflow_audio` | Per-clip mode; one score or motif; narration where the recipe uses it; each track with `"scope": "film"`, confirmed with `get_workflow_audio` to reach every clip (only if not, `update_workflow` edges to the missing clips) ([references/mcp-calls.md](references/mcp-calls.md)) |
 | 11 | `estimate_cost` | Announce clips, opening images, total, balance after; wait for a yes |
 | 12 | `generate_scene`, `get_generation_status` | Scene 1 alone first, silent polling |
 | 13 | `get_scene_frame`, `quality_check` | First and last frames: product drift, empty areas still empty, loop seam; then each later scene |
@@ -131,9 +131,10 @@ about what Lavendly's models and edits can do and what they cannot.
   well), cyclic geometry (approximate, checked on first and last frames),
   occlusion seam, or a dip to black ([references/recipe-loops.md](references/recipe-loops.md)).
 - Frame 1 is the cover. Loops are silent by default.
-- A film of one clip node renders on the single-scene path: no trim, fade,
-  reverse, colour edit or captions. Every loop and any one-shot piece that
-  needs an edit keeps two clip nodes (a copy of the clip costs nothing).
+- A film of one clip node applies trim, fade, reverse, colour and captions
+  too (any of them sends it through the full stitch); with none it ships the
+  raw clip. Ping-pong needs a second node by construction (a copy of the
+  clip costs nothing).
 
 ### Model and length
 

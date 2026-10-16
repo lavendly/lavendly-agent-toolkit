@@ -148,8 +148,10 @@ E03 The Long Night: <after delivery>
 
 ## 11. Where the bible lives
 
-The MCP cannot read or write the app's Film Bible. Three places hold the
-bible and what you can rely on:
+The MCP cannot read or write the app's Film Bible, apart from each
+episode's scene plan (`set_scene_plan`, `get_scene_plan`: per clip the
+heading, who is present and the hand-off). Three places hold the bible and
+what you can rely on:
 
 | Place | How | Reliability |
 |---|---|---|

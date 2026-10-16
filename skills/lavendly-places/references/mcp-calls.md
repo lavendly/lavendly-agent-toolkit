@@ -113,6 +113,7 @@ crowd at a teaser's end), `off` for a music-only edit. Set every clip.
   "workflow_id": "<id>",
   "clip_id": "vid_1",
   "kind": "voiceover",
+  "scope": "film",
   "text": "Three bedrooms on a quiet lane.\nLight from both sides, all day.\nA kitchen made for long dinners.\nBook a viewing this week.",
   "subtitleStyle": "youtube",
   "idempotency_key": "vo-<workflow id>"
@@ -124,6 +125,7 @@ crowd at a teaser's end), `off` for a music-only edit. Set every clip.
   "workflow_id": "<id>",
   "clip_id": "vid_1",
   "kind": "music",
+  "scope": "film",
   "mood": "Light acoustic guitar and soft piano around 96 BPM, warm and unhurried. Opens on a single guitar figure at the front door, adds piano through the rooms, lifts gently in the garden, ends on a held chord at dusk. Instrumental.",
   "duration": 15,
   "ducking": true,
@@ -152,7 +154,7 @@ characters per voiceover (longer is cut), priced per character.
 
 Captions burn only from a synthesized voiceover (`text`, which keeps word
 timings) with an explicit `subtitleStyle` (`off`, `tiktok`, `reels`,
-`youtube`, `caption`), one style per film, on a film of two or more scenes.
+`youtube`, `caption`), one style per film; a one-scene film burns them too.
 A voiceover attached by `url`, native dialogue and imported speech get none.
 
 Levels: attach-time music `volume` 0 to 2 is read as a fraction (0.35
@@ -162,22 +164,23 @@ a voiceover (the default 100 is unity), and when a level must change later
 pass `update_track` `volume` in percent (35 for a music bed, 100 for unity),
 never 0.35.
 
-## Make the score and the narration film-wide: `update_workflow`
+## Make the score and the narration film-wide: `scope` film
 
-`attach_track` has no `scope` argument on the server today, and the MCP
-drops an unknown argument without an error. So the default is always: attach,
-add the edges below with `update_workflow`, then call `get_workflow_audio`
-and confirm the track reaches every clip. Once `get_schema` lists `scope` on
-`attach_track`, `"scope": "film"` is a shortcut for the edges; confirm with
-`get_workflow_audio` all the same.
+A score or a narration plays across the film only when its node has an edge
+to every clip node (type videoGenerator). Attach it with `"scope": "film"`:
+the server adds an edge from the new node to every clip in the workflow and
+lists them in the response's `clip_ids`. Then call `get_workflow_audio` and
+confirm the track reaches every clip. Without `scope` (default `"clip"`) the
+node is wired to one clip only: mixed into that clip alone, and a track
+longer than the clip freezes that clip's last frame for the rest of the
+track. `scope` wires the clips that exist at attach time; a clip added or
+split later needs its own edge.
 
-`attach_track` wires its new node to one clip only. A score or a narration
-plays across the film only when its node has an edge to every clip node
-(type videoGenerator). Left on one clip it is mixed into that clip alone, and
-a track longer than the clip freezes that clip's last frame for the rest of
-the track. After the attach, `get_workflow`, then send the full `nodes` and
-`edges` arrays back with one more edge per other clip, copied from the edge
-`attach_track` made (same shape, new `id` and `target`):
+Only if `get_workflow_audio` shows the track on fewer clips (an older or
+self-hosted server that drops the argument), add the edges yourself:
+`get_workflow`, then `update_workflow` with the full `nodes` and `edges`
+arrays and one more edge per other clip, copied from the edge `attach_track`
+made (same shape, new `id` and `target`):
 
 ```json
 {
@@ -254,9 +257,14 @@ place, whatever the score.
 Trim the first 300 to 600 ms when the move starts with a lurch, and the
 tail when walls start to bend. A slow hold: trim a steady stretch and set
 `speed` to 0.5. Hard cuts between rooms; a dip to black (`fade_out_ms` then
-`fade_in_ms`) for day to dusk. No dissolves on the render. Clips play back
-to back; `move_clip` only reorders, and `split_clip` `at_sec` counts from the
-clip's own start. A film of one clip node applies none of these edits.
+`fade_in_ms`) for day to dusk, or a dissolve between two rooms: give every
+video clip a position in film order with `move_clip` (an unpositioned clip
+renders after the positioned ones), move the later clip and every clip
+after it earlier by the overlap, then `fade_out_ms` on the earlier and
+`fade_in_ms` on the later equal to the overlap (within 50 ms). Otherwise
+clips play back to back; `move_clip` sets the order, and `split_clip`
+`at_sec` counts from the clip's own start. A film of one clip node applies
+these edits too: any picture edit sends it through the full stitch.
 
 ## `create_render`, `get_render`
 

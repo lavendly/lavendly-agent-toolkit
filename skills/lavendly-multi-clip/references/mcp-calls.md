@@ -46,6 +46,7 @@ are sent as written, never snapped: use the model's exact lengths. The
   "workflow_id": "<id>",
   "clip_id": "<first videoGenerator node id>",
   "kind": "voiceover",
+  "scope": "film",
   "text": "Mara steps into the market as the stalls open.\nOn the bridge she checks the letter again.\nThe station clock reads six. She does not look back.",
   "subtitleStyle": "tiktok",
   "idempotency_key": "vo-<workflow id>"
@@ -70,7 +71,7 @@ characters per voiceover (longer is cut), priced per character.
 
 Captions burn only from a synthesized voiceover (`text`, which keeps word
 timings) with an explicit `subtitleStyle` (`off`, `tiktok`, `reels`,
-`youtube`, `caption`), one style per film, on a film of two or more scenes.
+`youtube`, `caption`), one style per film; a one-scene film burns them too.
 A voiceover attached by `url`, native dialogue and imported speech get none.
 
 ## `attach_track` music on the first clip, one score
@@ -80,6 +81,7 @@ A voiceover attached by `url`, native dialogue and imported speech get none.
   "workflow_id": "<id>",
   "clip_id": "<first videoGenerator node id>",
   "kind": "music",
+  "scope": "film",
   "mood": "sparse felt piano and low strings, opening on a held note over the market, building through the bridge, release into a single sustained chord at the station",
   "duration": 16,
   "ducking": true,
@@ -100,22 +102,23 @@ a voiceover (the default 100 is unity), and when a level must change later
 pass `update_track` `volume` in percent (35 for a music bed, 100 for unity),
 never 0.35.
 
-## Make the score and the narration film-wide: `update_workflow`
+## Make the score and the narration film-wide: `scope` film
 
-`attach_track` has no `scope` argument on the server today, and the MCP
-drops an unknown argument without an error. So the default is always: attach,
-add the edges below with `update_workflow`, then call `get_workflow_audio`
-and confirm the track reaches every clip. Once `get_schema` lists `scope` on
-`attach_track`, `"scope": "film"` is a shortcut for the edges; confirm with
-`get_workflow_audio` all the same.
+A score or a narration plays across the film only when its node has an edge
+to every clip node (type videoGenerator). Attach it with `"scope": "film"`:
+the server adds an edge from the new node to every clip in the workflow and
+lists them in the response's `clip_ids`. Then call `get_workflow_audio` and
+confirm the track reaches every clip. Without `scope` (default `"clip"`) the
+node is wired to one clip only: mixed into that clip alone, and a track
+longer than the clip freezes that clip's last frame for the rest of the
+track. `scope` wires the clips that exist at attach time; a clip added or
+split later needs its own edge.
 
-`attach_track` wires its new node to one clip only. A score or a narration
-plays across the film only when its node has an edge to every clip node
-(type videoGenerator). Left on one clip it is mixed into that clip alone, and
-a track longer than the clip freezes that clip's last frame for the rest of
-the track. After the attach, `get_workflow`, then send the full `nodes` and
-`edges` arrays back with one more edge per other clip, copied from the edge
-`attach_track` made (same shape, new `id` and `target`):
+Only if `get_workflow_audio` shows the track on fewer clips (an older or
+self-hosted server that drops the argument), add the edges yourself:
+`get_workflow`, then `update_workflow` with the full `nodes` and `edges`
+arrays and one more edge per other clip, copied from the edge `attach_track`
+made (same shape, new `id` and `target`):
 
 ```json
 {

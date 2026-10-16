@@ -17,14 +17,14 @@ then offer the alternative that works.
 | Transparent background (alpha) | exports are MP4 with a picture in every pixel | a flat solid field in one colour the user can key in their editor; say keying generated edges is imperfect |
 | Exact brand colours by hex | models do not read hex reliably | named colours in prompts ("cobalt blue"), hex kept in the brief; check frames; `edit_clip` `color` can nudge brightness, contrast, saturation and hue per clip |
 | More than five identical objects counted exactly | models add and drop items | five or fewer, or a mass with no count ("a pile of sand", "a sea of spheres") |
-| Beat-exact sync of motion inside a clip | a generated clip's timing is approximate | cut points placed on the beat with `edit_clip` trims (clips play back to back, so the trims set every cut; `move_clip` only orders); the event inside the clip lands near its second |
+| Beat-exact sync of motion inside a clip | a generated clip's timing is approximate | cut points placed on the beat with `edit_clip` trims (clips play back to back, so the trims set every cut; `move_clip` orders, and overlaps only for a dissolve); the event inside the clip lands near its second |
 | A smooth speed ramp | `speed` is set per clip | `split_clip` and a different `speed` per half: a step change, or the model's own slow motion inside one clip |
 | 4K delivery, 60 fps | the render outputs at most 1080p frames at 30 fps | say so; 1080p on Creator and up |
 | Ultra-wide 2.39:1 frame | no export frame for 21:9; it falls back to the 9:16 size | compose 16:9 with the action in a central band; the user adds bars in their editor |
-| Dissolves between shots | the render makes hard cuts and fades to black today | cut on motion or on a shape match; a dip to black with `fade_out_ms` and `fade_in_ms`; dissolves only where `get_schema` shows them |
+| Wipes and other shaped transitions between shots | the render makes hard cuts, dips to black and dissolves only | cut on motion or on a shape match; a dip to black with `fade_out_ms` and `fade_in_ms`; a dissolve: `move_clip` the later clip to start before the earlier ends, both fades equal to the overlap ([mcp-calls.md](mcp-calls.md)) |
 | A sound effect layer under the score | `attach_track` takes voiceover or music only | the clip's own sound is the Foley (`native` or `mix`); a designed sound file can ride as the film's one music track by `url` |
 | Lip sync to an uploaded voice | no lip-sync route | narration over picture, no speaking face |
 
-Never promise a fix the platform does not have. When `get_schema` lists a
-new capability (dissolves, scene plans, loudness), use it where it appears;
-never before.
+Never promise a fix the platform does not have. Dissolves, the stored
+scene plan and measured loudness (every export normalized to -14 LUFS) are
+live; anything else new is used only once `get_schema` lists it.

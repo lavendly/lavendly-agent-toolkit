@@ -48,7 +48,7 @@ checks); this skill makes the ad decisions on top of it.
 | 8 | `create_workflow` | `shots` in order, top-level `aspect` and `videoModel`, `idempotency_key` |
 | 9 | `get_workflow`, `update_workflow` | Still-frame prompts on the image nodes; the packshot as the first frame of product-exact scenes; the packshot as a reference on the others, within the model's cap ([references/mcp-calls.md](references/mcp-calls.md)) |
 | 10 | `set_clip_native_audio` | Every clip: `native` for the product sound or a spoken line, `mix` under narration, `off` for a music edit |
-| 11 | `attach_track`, `update_workflow` | One narration track, one score with `ducking: true`, captions on for sound-off placements; then `update_workflow` edges from both to every clip so they run film-wide, confirmed with `get_workflow_audio` (`scope` only once `get_schema` lists it) ([references/mcp-calls.md](references/mcp-calls.md)) |
+| 11 | `attach_track`, `get_workflow_audio` | One narration track, one score with `ducking: true`, captions on for sound-off placements; both with `"scope": "film"`, confirmed with `get_workflow_audio` to reach every clip (only if not, `update_workflow` edges to the missing clips) ([references/mcp-calls.md](references/mcp-calls.md)) |
 | 12 | `estimate_cost` | Announce: shots, model, clips, opening images, total, balance after; wait for yes |
 | 13 | `generate_scene` | Scene by scene with `max_credits`; open each frame before paying for the next |
 | 14 | `quality_check`, `get_scene_frame` | Each scene, each cut, then the product check: shape, finish, label, count |

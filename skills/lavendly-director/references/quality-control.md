@@ -25,7 +25,7 @@ entities themselves, not because it looks attractive on its own.
 - [ ] Still-frame prompts are separate from motion prompts; one primary
       action per clip.
 - [ ] Every operation planned exists in the MCP catalog; known limits were
-      said plainly (no dissolves or wipes, no rendered titles).
+      said plainly (no wipes, no rendered titles).
 
 ## 2. Level A: each asset
 
@@ -54,10 +54,27 @@ Judgment, from the mid frame (`get_scene_frame`):
 
 ## 3. Level B: each cut
 
-For every cut between shot N and shot N+1, open the last frame of N and the
-first frame of N+1 (`get_scene_frame` with frame set to last, then first).
-Compare them with each other and with the ledger. The column on the right
-says when a row applies.
+Deterministic first: for every cut, `quality_check` with `node_id` (shot
+N+1), `previous_node_id` (shot N), `same_scene` (true under the same
+heading, false under a new one) and `present` (who or what should be in
+N+1's frame, the scene plan's list). It compares N's last frame with N+1's
+first and returns `cut`: `cut_pass` (false when any finding is high) and
+findings, each with `severity` (high, medium, low), `kind` (identity, cast,
+state, light, geography, repeat), `detail`, `why`, `fix` and `mode` (the fix
+type: regenerate, plan or edit), at confidence 0.6. With `same_scene` false
+only identity (for the names in `present`) and repeat are checked. The cut
+is advisory: it never flips `pass`, and `skip_vlm` skips it. Report each
+finding with its why and its fix. On a high finding, open both frames
+yourself before paying for a re-roll; a finding you cannot see in them is
+reported at low confidence, not repaired. An error starting `previous_`
+(`previous_node_not_found`, `previous_not_generated`) means the earlier scene
+is wrong or not generated yet. On a self-hosted server whose `get_schema`
+shows no `previous_node_id`, the frame comparison below is the whole check.
+
+Judgment: open the last frame of N and the first frame of N+1
+(`get_scene_frame` with frame set to last, then first). Compare them with
+each other and with the ledger. The column on the right says when a row
+applies.
 
 | Check | Applies |
 |---|---|
@@ -83,7 +100,8 @@ Distinguish a choice from an error with the three questions in
 
 After `create_render`, run `quality_check` without `node_id` and with
 `expect_audio` true, open the mid frame of each scene in order, and read
-the audio summary (`get_workflow_audio`). Then judge:
+the audio summary (`get_workflow_audio`). The film check also returns
+`loudness` (section 5). Then judge:
 
 - [ ] The video does what the card's objective says, for the stated
       audience.
@@ -111,7 +129,7 @@ What the agent can verify from `get_workflow_audio` and the plan:
 | Check | Fix with |
 |---|---|
 | Music is ducked under narration and dialogue | `update_track` ducking true, `volume` 35 (a percent, never 0.35); film-wide music ducks only under a voiceover that is also wired to every clip |
-| The score and the narration reach every clip | `update_workflow`: an edge from each to every clip; on one clip they freeze that clip's last frame |
+| The score and the narration reach every clip | Attach with `"scope": "film"` and check `get_workflow_audio`; for a clip it missed, `update_workflow` adds the edge; on one clip they freeze that clip's last frame |
 | One score for the video, not one per scene | `detach_track` the extras |
 | Narration and native dialogue do not overlap | `set_clip_native_audio` to mix or off on that clip, or rewrite the line so it falls on another scene |
 | Narration fits its picture (2.3 words per second) | Shorten the line and attach it again; never let it run over the next scene |
@@ -120,11 +138,21 @@ What the agent can verify from `get_workflow_audio` and the plan:
 | Sound starts or stops on a hard edge at the video's start or end | `edit_clip` `fade_in_ms` or `fade_out_ms` on the music node (a clip fade does not fade a film-wide score); `update_track` `duration` sets the block end |
 | Silence where the card wants sound, or sound where it wants silence | Attach or detach; keep intended silence |
 
-What it cannot verify: perceived loudness, clipping and the balance between
-layers are not measured by any tool today. When a join or a mix is in
-doubt, say so and ask the user to listen to that moment; never report a
-loudness level that was not measured. Do not add music or effects the card
-did not ask for.
+Measured: every export is normalized to -14 LUFS integrated with a -1.5
+dBTP true peak ceiling. The render result (`get_render`) and the film's
+`quality_check` carry `loudness`: integrated LUFS, true peak, loudness
+range and the targets (on the render, `normalized` false means the pass did
+not run: no audio, or the film shipped at its mixed level). Report the
+integrated level and the true peak. A film below -20 or above -10 LUFS, or
+with a true peak above -1 dBTP, gets a warning in `failures` that never
+flips `pass`; report it and look for its cause (a quiet mix, one loud
+clip).
+
+Not measured: the balance between layers (voice against music, one clip
+against its neighbour) and a single loud moment inside a film whose average
+is on target. When a join or a mix is in doubt, say so and ask the user to
+listen to that moment; never report a level that was not measured. Do not
+add music or effects the card did not ask for.
 
 ## 6. Timing and transitions
 
@@ -134,12 +162,14 @@ did not ask for.
   measured thresholds.
 - Trim to the strongest window with `edit_clip`; split a clip that holds
   two beats with `split_clip`; reorder with `move_clip`.
-- Transitions the render makes today: hard cut, cut on action, match cut
-  (planned in the prompts), dip to black (`fade_out_ms` then `fade_in_ms`),
-  J and L cuts (track timing), speed change (`edit_clip` speed). Dissolves
-  and wipes are not rendered; do not promise them.
+- Transitions the render makes: hard cut, cut on action, match cut (planned
+  in the prompts), dip to black (`fade_out_ms` then `fade_in_ms`), dissolve
+  (an overlap plus matching fades, [mcp-calls.md](mcp-calls.md)), J and L
+  cuts (track timing), speed change (`edit_clip` speed). Wipes are not
+  rendered; do not promise them.
 - A hard cut is the default. Use a dip to black for time passing or a new
-  chapter, a speed change for a deliberate beat, never as decoration.
+  chapter, a dissolve for a soft change of place or time inside one mood, a
+  speed change for a deliberate beat, never as decoration.
 
 ## 7. Severity
 
@@ -159,8 +189,9 @@ their beat:
 |---|---|---|---|---|---|---|
 | High | Cut from "lid open" to "cartridge in" | The lid is closed again in the second shot | The viewer cannot tell whether the step happened | Chain the second shot from the last frame of the first and re-roll it | Targeted regeneration, paid | High: both frames opened |
 
-Confidence is high when a tool reported it or both frames were opened and
-show it plainly, medium when it rests on one mid frame, low when it is
+Confidence is high when a deterministic tool check reported it or both
+frames were opened and show it plainly, medium when it rests on one mid
+frame or on the cut check alone (its findings come at 0.6), low when it is
 inferred from the plan without a frame. Say which.
 
 The message to the user opens with one line naming the video type and the
@@ -174,7 +205,8 @@ polish or nothing ranks above them.
 1. Edit: trim, split, reorder, speed (free).
 2. Audio: volume, ducking, native mode, track timing (free); a shorter
    synthesized line (paid).
-3. Transition: a dip to black, or the cut moved onto a motion (free).
+3. Transition: a dip to black, a dissolve, or the cut moved onto a motion
+   (free).
 4. Targeted regeneration of one scene, with the fix named and the server's
    `reroll_hint` appended (paid; announce; at most one per scene).
 5. A change of direction for a section (paid; ask first).
@@ -184,3 +216,4 @@ again: the repaired scene (level A), both of its cuts (level B), and the
 whole video after the next render (level C). A fix is reported as done only
 after that check ran and passed; until then it is "applied, not yet
 checked".
+

@@ -30,9 +30,11 @@ episode.
   episode, the face drifts.
 - Same narration voice and the same score brief (or the same hosted score)
   in every episode, so the show sounds like itself.
-- When the series tools of the platform appear in `get_schema`, use them;
-  until then the bible lives in the conversation and in the episodes'
-  prompts. Never say it is stored on the server.
+- Each episode's shot plan is stored with that episode (`set_scene_plan`);
+  read the last episode's with `get_scene_plan` for its final heading and
+  who was present. The series bible itself has no server tool: it lives in
+  the conversation and in the episodes' prompts. Never say the bible is
+  stored on the server.
 
 ## 3. Between episodes
 

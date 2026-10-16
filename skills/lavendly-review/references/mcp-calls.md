@@ -24,6 +24,18 @@ the model. The image reference for a scene is the imageSource node wired
 into it. Keep the full `nodes` and `edges` arrays: `update_workflow` needs
 them whole.
 
+## `get_scene_plan`, the stored plan
+
+```json
+{ "workflow_id": "<id>" }
+```
+
+Response: `{ workflow_id, version, scenes }`, `scenes` keyed by video node
+id, each with `heading` (place and time), `present` (who or what is in
+frame) and `hands_off` (what the shot hands to the next). The headings set
+`same_scene` on the cut check; `present` is the cut check's `present`. An
+empty `scenes` means no plan was stored: infer the headings and say so.
+
 ## `quality_check` per scene
 
 ```json
@@ -112,6 +124,19 @@ order, into the contact sheet.
 The two frames either side of the cut. `frame` takes first, mid or last
 where `get_schema` lists it; without it the call returns the mid frame.
 
+## `quality_check` per cut
+
+```json
+{ "workflow_id": "<id>", "node_id": "<scene N+1 video node id>", "previous_node_id": "<scene N video node id>", "same_scene": true, "present": ["Mia", "the brass lamp"] }
+```
+
+Both scenes must be generated. Adds `cut: { previous_node_id, same_scene,
+cut_pass, findings, boundary, notes }`; each finding has `severity`,
+`family`, `kind`, `detail`, `why`, `fix`, `mode`, `confidence`. `same_scene`
+defaults to true; `present` takes up to 8 entries. Advisory: never flips
+`pass`; `skip_vlm` skips it. Errors for the earlier scene start with
+`previous_` (`previous_node_not_found`, `previous_not_generated`).
+
 ## `get_workflow_audio`
 
 ```json
@@ -119,8 +144,8 @@ where `get_schema` lists it; without it the call returns the mid frame.
 ```
 
 Response: per clip, its native audio mode and the attached tracks with
-volume and ducking. The audio checks read this; they do not measure
-loudness.
+volume and ducking. The audio checks read this; the measured loudness
+comes from `quality_check` on the rendered film.
 
 ## `create_render`
 
@@ -144,13 +169,36 @@ retries at most, same key.
 ```
 
 No `node_id`. `expect_audio: true` when a voiceover or music track is
-attached. Report the score in one line with the video link. Its sequence
+attached. Report the score in one line with the video link. The answer
+adds `loudness`: `integrated_lufs`, `true_peak_dbtp`, `lra`, `target_lufs`
+(-14), `target_true_peak_dbtp` (-1.5). Below -20 or above -10 LUFS, or a
+true peak above -1 dBTP, adds a warning to `failures` that never flips
+`pass`. Its sequence
 findings are advisory: `continue_without_link` and `ending_unnamed` cannot
 be cleared on the MCP path, so never plan a fix for them.
 
 Check that every scene landed: a scene the provider refused (a Veo 3.1 Lite
 scene with a reference wired) is skipped uncharged and the render still
 ends `done` without it. Compare the film's length with the plan.
+
+## A dissolve, as a free transition fix
+
+Two neighbouring clips dissolve when the later one starts before the
+earlier ends and both carry fades equal to the overlap. Trim first (a left
+trim moves the clip). Give every video clip a position in film order with
+`move_clip` (a clip with no position renders after every clip that has
+one), then move the later clip and every clip after it earlier by the
+overlap, then the fades:
+
+```json
+{ "workflow_id": "<id>", "node_id": "<later clip>", "timeline_start_sec": 11 }
+{ "workflow_id": "<id>", "node_id": "<earlier clip>", "edits": { "fade_out_ms": 1000 } }
+{ "workflow_id": "<id>", "node_id": "<later clip>", "edits": { "fade_in_ms": 1000 } }
+```
+
+The fades must match the overlap within 50 ms; the export then blends
+picture and sound over it and the film gets shorter by the overlap. An
+overlap without matching fades plays back to back. Wipes are not rendered.
 
 ## `get_workflow_audio`, when the failure is about sound
 
