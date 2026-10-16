@@ -76,6 +76,9 @@ Twelve one-block clips and one 6 s clip: 14 blocks on Wan 2.7, 168 credits.
 - Camera: mostly locked-off tabletop frames; a slow slider move at most once
   per scene; tilt-shift shallow focus that says "miniature". No handheld, no
   orbit, no crane: a real stop-motion rig rarely moves that way.
+- A four-legged hero's block always includes "on all four paws" (or legs),
+  even where it sits; "mouth closed" goes in every prompt where the face is
+  in frame and nobody speaks.
 - Scale cues: name objects at miniature scale ("a thumb-sized spoon", "a
   biscuit as big as Dunk", "fabric weave visible on the tablecloth").
 - Materials: "matte plasticine with a soft sheen, thumbprints and tool
@@ -138,13 +141,13 @@ Pair 2: Tuft in the rain (felt)
 Still-frame prompt:
 
 ```text
-Needle-felted stop-motion animation, visible wool fibres and stitching, miniature fabric set. Tuft: a plump grey felted rabbit, long ears with pink felt insides, a stitched black nose, two black bead eyes, a small yellow felt bow on the right ear. Tuft sits on a felt hill under cotton-wool clouds, a big green felt leaf lying beside him. Medium shot, eye level, macro lens, shallow focus. Soft grey daylight from above. Palette: grey, moss green, buttercup yellow, cloud white. No text.
+Needle-felted stop-motion animation, visible wool fibres and stitching, miniature fabric set. Tuft: a plump grey felted rabbit who hops on all four paws, long ears with pink felt insides, a stitched black nose, two black bead eyes, a small yellow felt bow on the right ear. Tuft sits on a felt hill under cotton-wool clouds, a big green felt leaf lying beside him. Medium shot, eye level, macro lens, shallow focus. Soft grey daylight from above. Palette: grey, moss green, buttercup yellow, cloud white. No text.
 ```
 
 Motion prompt:
 
 ```text
-Needle-felted stop-motion animation at 12 frames per second, crisp frames with no motion blur. 0 to 2 s: clear glass-bead raindrops start to slide down thin threads from the cotton clouds. 2 to 5 s: Tuft lifts the felt leaf over his head with both front paws and his ears fold under it. 5 to 6 s: he holds still under the leaf, nose twitching once. Camera: locked-off. End state: Tuft sheltered under the leaf, beads sliding past. The wool fibres and the set stay as in the opening frame; only the rabbit, the leaf and the beads move. Exactly one rabbit, nobody else. Felt style. Sound: soft taps of beads, a wool rustle. Clean frame: no text, no on-screen graphics.
+Needle-felted stop-motion animation at 12 frames per second, crisp frames with no motion blur. 0 to 2 s: clear glass-bead raindrops start to slide down thin threads from the cotton clouds. 2 to 5 s: Tuft lifts the felt leaf over his head with both front paws and his ears fold under it. 5 to 6 s: he holds still under the leaf, mouth closed, nose twitching once. Camera: locked-off. End state: Tuft sheltered under the leaf, beads sliding past. The wool fibres and the set stay as in the opening frame; only the rabbit, the leaf and the beads move. Exactly one rabbit, nobody else. Felt style. Sound: soft taps of beads, a wool rustle. Clean frame: no text, no on-screen graphics.
 ```
 
 Second family (Seedance), pair 1 in 30 to 100 words: "Dunk the clay mug

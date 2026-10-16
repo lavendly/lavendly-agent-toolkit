@@ -265,3 +265,9 @@ Returns the hosted Lavendly url. Media pasted into the chat never reaches
 the agent; the user uploads it at https://lavendly.ai/AssetLibrary or gives
 a public URL. Limits by `url`: image 25 MB, video 64 MB and 3 minutes,
 music 50 MB and 10 minutes; inline `data` about 11 MB.
+
+It returns a path like `/api/v1/storage/m/<key>`. Use it exactly as
+returned on image nodes and tracks; never rewrite it to an absolute https
+url (the provider cannot open a signed-in link). A link the user copies
+from the app (`https://app.lavendly.ai/api/v1/storage/m/<key>`) goes in as
+its `/api/v1/storage/m/<key>` path.

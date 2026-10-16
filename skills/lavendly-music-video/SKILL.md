@@ -27,7 +27,8 @@ Lavendly.
 - `get_status` and `get_ledger` once per session. Never claim or deny a
   capability or model from memory; `get_schema` when in doubt.
 - Find the track first. It decides the length, the grid and the cost.
-  Without a track, offer to make one (below) before planning any shot.
+  Without a track, offer to make one (below); no clip is paid before the
+  user confirms the score.
 - Ask for what you cannot hear: the BPM, the time signature if not 4/4, the
   time of the first downbeat in the file, and the start times of the
   sections (intro, verse, chorus, bridge, drop). One question with all of
@@ -44,7 +45,7 @@ Lavendly.
 | A file on their computer | They upload it to the Asset Library in the Lavendly app and share the hosted link; attach that `url` |
 | A public link to the audio file | `import_asset` with `kind` music and the `url`; attach the hosted url it returns |
 | A file pasted in the chat | It never reaches you: ask for the Asset Library upload |
-| No track | Offer a score from `attach_track` synthesis (`mood` plus `duration`, 5 to 120 s, about 3 credits per 30 s), with the tempo and the section timings written into the brief; say you cannot hear it, so the grid is the brief's until the user confirms the times |
+| No track | Offer a score from `attach_track` synthesis (`mood` plus `duration`, 5 to 120 s, about 3 credits per 30 s), with the tempo and the section timings written into the brief; say you cannot hear it, so the grid is the brief's until the user confirms the times. Order: create the workflow (free), announce the score's credits, attach it to a clip and wire it film-wide (step 11), ask the user to listen and confirm the downbeats, adjust the cut list, and only then `estimate_cost` and pay for clips |
 
 For a chorus cut, set the song's source in-point with `edit_clip` `trim`
 `start_ms` on its node, or ask the user to upload an excerpt that starts on
@@ -66,7 +67,7 @@ brief: never promise exact tempo, and have the user confirm the downbeats.
 | 8 | `create_workflow` | `shots` in timeline order, one `aspect`, one `videoModel`, `idempotency_key` |
 | 9 | `get_workflow`, `update_workflow` | Still prompts on image nodes; references within the cap with a role sentence each |
 | 10 | `set_clip_native_audio` | `off` on every clip; an ambience-only clip in a breakdown or intro at `mix` 0.3 to 0.5 ([references/one-track-rule.md](references/one-track-rule.md)) |
-| 11 | `attach_track`, `update_workflow` | The song, once: `kind` music, `url`, `duration` equal to the film, volume 1, `ducking` false; then `scope` film where `get_schema` lists it, else an edge from it to every clip (and to every split piece either way) so it plays film-wide ([references/one-track-rule.md](references/one-track-rule.md)) |
+| 11 | `attach_track`, `update_workflow` | The song, once: `kind` music, `url`, `duration` equal to the film, volume 1, `ducking` false; then `update_workflow` edges from it to every clip and every split piece so it plays film-wide, confirmed with `get_workflow_audio` (`scope` on `attach_track` is only a shortcut once `get_schema` lists it) ([references/one-track-rule.md](references/one-track-rule.md)) |
 | 12 | `estimate_cost` | One line: clips, model, credits, balance after; wait for yes |
 | 13 | `generate_scene` | The first chorus shot first (it carries the look), check it, then in order |
 | 14 | `get_generation_status`, `get_scene_frame` | Silent polling; a frame per scene |
@@ -122,8 +123,9 @@ brief: never promise exact tempo, and have the user confirm the downbeats.
 - One long performance take (10 s on Seedance 2.0 Fast, 22 credits) split
   into three or four pieces and intercut with b-roll is cheaper than four
   separate performance clips and keeps the performance continuous.
-- One `videoModel` per workflow: one look per film is usually right; two
-  models mean two workflows.
+- One look per film is usually right. A film may still use a different
+  model per scene: set `data.videoModel` on that clip with `update_workflow`
+  and confirm it in `estimate_cost` `per_scene`.
 - Aspect: 9:16 for Shorts, Reels and TikTok; 16:9 for a premiere; 1:1 for a
   visualizer (not on Veo, Runway or Wan 2.6). Never 21:9: the export falls
   back to the 9:16 frame.

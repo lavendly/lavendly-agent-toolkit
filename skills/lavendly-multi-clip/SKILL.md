@@ -3,9 +3,9 @@ name: lavendly-multi-clip
 version: 0.2.0
 priority: normal
 description: |
-  Produce a 2 to 6 shot sequence that reads as one film with the Lavendly MCP: write a character anchor and a palette anchor, show them, wait for go, paste them verbatim at the top of every shot prompt, attach one voiceover and one score for the whole film, estimate and get approval, generate, check every scene, render for free.
+  Produce a 2 to 6 shot sequence that reads as one film with the Lavendly MCP: write a character anchor and a palette anchor, show them, wait for go, paste them verbatim at the top of every shot prompt, get approval for clips, voice and music, attach one voiceover and one score, generate, check every scene, render for free.
   Use when: "three shots of", "a sequence where", "the same character in", "scene one, scene two", "a 20 second video about", or any brief with two or more beats or longer than 12 seconds.
-  Chain: lavendly-director when the directing matters; lavendly-storyteller covers one beat under 12 s; lavendly-review runs the per-scene quality loop after generation; lavendly-publish posts; lavendly-cost-aware, when loaded, wins every spend decision.
+  Chain: lavendly-director when the directing matters; lavendly-storyteller covers one beat under 12 s; lavendly-review runs the per-scene quality loop after generation; lavendly-publish posts; lavendly-cost-aware, when loaded, wins every spend approval and cap.
   NOT for: one-shot clips (lavendly-storyteller), films over 30 s unless the user insists (propose two workflows), talking-head dialogue films, or briefs that depend on media pasted into the chat (the user uploads it to the Asset Library first).
 argument-hint: "[beats, 2 to 6] [seconds per shot] [voice] [language]"
 ---
@@ -59,17 +59,17 @@ One camera move per shot, constraints stated positively, no banned words.
 | 3 | write | One prompt per beat on the template; one narration line per beat |
 | 4 | `create_workflow` | `name`, `shots` in beat order (each `prompt`, `duration`), `project_name` when named, `idempotency_key` |
 | 5 | read the record | Clip ids are the videoGenerator node ids, in order; `get_workflow` if unsure |
-| 6 | `attach_track` voiceover | On the first clip, `text` is the whole script, `voice` only when picked, `subtitleStyle`, no `volume`, `idempotency_key` |
-| 7 | `attach_track` music | On the first clip, one score: `mood` as an arc and `duration` equal to the film, `ducking: true`, volume 0.35 to 0.4, `idempotency_key` |
-| 8 | `update_workflow`, `edit_clip` | Make both tracks film-wide (skip the edges when steps 6 and 7 passed `scope` film, offered where `get_schema` lists it): full `nodes` and `edges` with an edge from the voiceover node and from the music node to every other clip; then the music node's `fade_out_ms` |
-| 9 | `set_clip_native_audio` | `{mode: "off"}` on every clip; `mix` at about 0.6 only on a clip with on-screen dialogue the user wants heard |
-| 10 | `estimate_cost` | Announce in one line (scene count, model, credits, balance), get approval, refuse when `sufficient` is false |
+| 6 | `set_clip_native_audio` | `{mode: "off"}` on every clip; `mix` at about 0.6 only on a clip with on-screen dialogue the user wants heard |
+| 7 | `estimate_cost` | One approval line: scene count, model, clip credits plus the voice and music credits (paid when attached, not in the estimate), total, balance after; wait for the yes; refuse when `sufficient` is false |
+| 8 | `attach_track` voiceover | After the yes, on the first clip, `text` is the whole script, `voice` only when picked, `subtitleStyle`, no `volume`, `idempotency_key` |
+| 9 | `attach_track` music | On the first clip, one score: `mood` as an arc and `duration` equal to the film, `ducking: true`, volume 0.35 to 0.4, `idempotency_key` |
+| 10 | `update_workflow`, `edit_clip` | Make both tracks film-wide: full `nodes` and `edges` with an edge from the voiceover node and from the music node to every other clip, then `get_workflow_audio` to confirm both reach every clip (`scope` on `attach_track` is only a shortcut once `get_schema` lists it); then the music node's `fade_out_ms` |
 | 11 | `generate_scene` | No `node_id`: every ungenerated scene; `idempotency_key` |
 | 12 | `get_generation_status` | Poll silently; one line per phase change; name each scene as it lands |
 | 13 | `quality_check` per scene | `node_id`, `expect_audio` only where the clip should carry sound; failing scene: one re-roll with `reroll_hint` appended (lavendly-review) |
 | 14 | `get_scene_frame` per scene | Thumbnail links as a contact sheet, before rendering |
 | 15 | `create_render` | Free; `idempotency_key`; poll `get_render` |
-| 16 | deliver | Link, total duration, shot count, voice, one sentence per beat |
+| 16 | deliver | Link, total duration, shot count, voice, one sentence per beat; "captions requested" (ask the user to check), never "captions are on" |
 
 Exact JSON: [references/mcp-calls.md](references/mcp-calls.md).
 
@@ -127,6 +127,9 @@ Exact JSON: [references/mcp-calls.md](references/mcp-calls.md).
 
 - Announce before every paid call in one line. Generation is paid per clip.
   Render is free and reuses every generated clip.
+- Voice and music synthesis are paid when attached: their credits go in the
+  approval line with the clips, and they are attached only after the yes
+  (before it only when the user approved that spend explicitly).
 - Estimate over 30 percent of available credits: ask first. `sufficient`
   false: stop and report. Max 2 render retries with the same key. Never mint
   a new key to retry.

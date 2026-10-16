@@ -25,6 +25,12 @@ A designed sound or a sonic logo the user owns:
 Each returns a hosted url. Media pasted in the chat never reaches you: ask
 for an Asset Library upload or a public URL.
 
+It returns a path like `/api/v1/storage/m/<key>`. Use it exactly as
+returned on image nodes and tracks; never rewrite it to an absolute https
+url (the provider cannot open a signed-in link). A link the user copies
+from the app (`https://app.lavendly.ai/api/v1/storage/m/<key>`) goes in as
+its `/api/v1/storage/m/<key>` path.
+
 ## 3. `create_workflow`
 
 ```json
@@ -134,10 +140,12 @@ never 0.35.
 
 ## Make the score and the narration film-wide: `update_workflow`
 
-Where `get_schema` lists `scope` on `attach_track`, pass `"scope": "film"`
-when you attach the score and a film-wide narration: the server wires the
-new node to every clip and the edges below are not needed. Otherwise add
-them by hand.
+`attach_track` has no `scope` argument on the server today, and the MCP
+drops an unknown argument without an error. So the default is always: attach,
+add the edges below with `update_workflow`, then call `get_workflow_audio`
+and confirm the track reaches every clip. Once `get_schema` lists `scope` on
+`attach_track`, `"scope": "film"` is a shortcut for the edges; confirm with
+`get_workflow_audio` all the same.
 
 `attach_track` wires its new node to one clip only. A score or a narration
 plays across the film only when its node has an edge to every clip node

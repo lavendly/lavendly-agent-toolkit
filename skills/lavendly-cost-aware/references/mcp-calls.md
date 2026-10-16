@@ -58,8 +58,11 @@ The MCP input schema for `create_workflow` lists `name`, `description`,
 `nodes`, `edges`, `duration`, `project_id`, `project_name`,
 `idempotency_key`, the `shots` convenience array, `aspect` and `videoModel`
 (applied to every compiled shot; a `videoModel` inside a shot is ignored).
-The server validates no argument and checks no model id, so use exact names
-and only ids from this table (credits per 5 s block at default resolution):
+The server validates no argument and checks no model id, so use exact ids.
+This table is the cheap list (credits per 5 s block at default resolution),
+used when the user asks for cheap, a budget demands it, or the run is
+unattended. Other models from the genre skill or lavendly-models are
+allowed; keep their pick otherwise:
 
 | Model | Id | Seconds | Credits per block | Notes |
 |---|---|---|---|---|
@@ -76,7 +79,7 @@ lengths.
 {
   "name": "<name>",
   "shots": [ { "prompt": "<prompt>", "duration": 4 } ],
-  "videoModel": "<cheapest model id that meets the brief>",
+  "videoModel": "<the chosen model id>",
   "idempotency_key": "wf-<slug>-<date>"
 }
 ```

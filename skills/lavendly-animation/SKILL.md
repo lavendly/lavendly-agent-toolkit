@@ -51,7 +51,7 @@ children's pacing) and the exact way each decision reaches Lavendly's models.
 | 10 | `get_workflow` | Image node and clip node per scene |
 | 11 | `update_workflow` | Still prompts on image nodes; hero and plate wired into every clip within the cap; user stills as image urls ([references/mcp-calls.md](references/mcp-calls.md)) |
 | 12 | `set_clip_native_audio` | Per clip: `native`, `mix` or `off` |
-| 13 | `attach_track`, `update_workflow` | One narration voice, one score with `ducking: true`, captions style; then `scope` film where `get_schema` lists it, else edges from both to every clip so they run film-wide ([references/mcp-calls.md](references/mcp-calls.md)) |
+| 13 | `attach_track`, `update_workflow` | One narration voice, one score with `ducking: true`, captions style; then `update_workflow` edges from both to every clip so they run film-wide, confirmed with `get_workflow_audio` (`scope` only once `get_schema` lists it) ([references/mcp-calls.md](references/mcp-calls.md)) |
 | 14 | `estimate_cost` | Announce clips, opening images, total, balance after; wait for a yes |
 | 15 | `generate_scene`, `get_generation_status` | Scene 1 alone first, silent polling |
 | 16 | `get_scene_frame`, `quality_check` | Scene 1 first and mid frames against the plate and the sheet; then each later scene, one at a time |
@@ -108,8 +108,10 @@ children's pacing) and the exact way each decision reaches Lavendly's models.
 - Every motion prompt states the count: "Exactly one Pip in frame, nobody
   else, no copy of him." No two scenes start from the same frame.
 - A four-legged hero moves on all four legs with its gait named, unless the
-  brief makes it walk upright; then it is upright in every shot. Mouth closed
-  by default; both eyes look the same way ([references/creatures.md](references/creatures.md)).
+  brief makes it walk upright; then it is upright in every shot. Its hero
+  block always includes "on all four paws" (or legs), even where it sits or
+  lies. "Mouth closed" goes in every prompt where the face is in frame and
+  nobody speaks; both eyes look the same way ([references/creatures.md](references/creatures.md)).
 - Two characters: sides fixed for the scene, one acts while the other
   reacts, both named in every prompt with the count.
 

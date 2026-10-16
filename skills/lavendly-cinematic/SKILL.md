@@ -48,7 +48,7 @@ it never replaces the director's checks.
 | 8 | `create_workflow` | `shots` with the motion prompts and model lengths, one `aspect`, one `videoModel`, `project_name` when named, `idempotency_key` |
 | 9 | `get_workflow`, `update_workflow` | Still prompts onto the image nodes; references wired within the model's cap, each with its role sentence ([references/mcp-calls.md](references/mcp-calls.md)) |
 | 10 | `set_clip_native_audio` | `native` on dialogue and sound-led shots, `mix` under narration, `off` where only the score plays |
-| 11 | `attach_track`, `update_workflow` | One score for the film; narration only when the card says the story has a narrator; then `scope` film where `get_schema` lists it, else edges from both to every clip so they run film-wide ([references/mcp-calls.md](references/mcp-calls.md)) |
+| 11 | `attach_track`, `update_workflow` | One score for the film; narration only when the card says the story has a narrator; then `update_workflow` edges from both to every clip so they run film-wide, confirmed with `get_workflow_audio` (`scope` only once `get_schema` lists it) ([references/mcp-calls.md](references/mcp-calls.md)) |
 | 12 | `estimate_cost` | One line: shots, model, clip and opening image credits, total, balance after; wait for yes |
 | 13 | `generate_scene` | Scene 1, check it, then the hardest performance shot, then the rest in order |
 | 14 | `get_generation_status`, `get_scene_frame` | Silent polling; frame per scene; ledger from the landed frame; chain frames for continuous action |
@@ -118,7 +118,9 @@ it never replaces the director's checks.
 
 - Decide per shot: native (dialogue, footsteps, rain), narration, score,
   silence. Ambience under every shot of a place; the score enters late and
-  quietly; silence before the turn.
+  quietly; silence before the turn. A late entry is `update_track`
+  `startTime` on the film-wide score (seconds on the film clock), with the
+  score's `duration` equal to the film minus the entry; never the mood text.
 - One score for the film, one brief with an arc. Trailers cut picture to the
   score; dramas lay the score under the picture.
 - Narration about 2.3 words per second of the shots it covers; it is part of
@@ -136,8 +138,9 @@ it never replaces the director's checks.
 | One long take, 15 to 30 s | Wan 3.0 (24 per 5 s) | Seedance 2.5 (27, 720p) | Wan 3.0 at a shorter length |
 | Score-only shots, no references | Hailuo 3 Max (10, silent) | Veo 3.1 Lite (10, no refs) | Veo 3.1 Lite |
 
-- One `videoModel` per workflow; a film that needs two models is two
-  workflows or a compromise. Durations from the model's exact list (Veo 4,
+- The top-level `videoModel` sets every shot. A film may use a different
+  model per scene: set `data.videoModel` on that clip with `update_workflow`
+  and confirm it in `estimate_cost` `per_scene`. Durations from the model's exact list (Veo 4,
   6, 8). On Veo generate 4 s or 8 s (6 s costs the same as 8 s). On models
   priced per 5 s block, generate 5 s or 10 s and trim.
 - References: 4 on Seedance and Wan 2.6 and 2.7, 2 on the rest, none on Veo

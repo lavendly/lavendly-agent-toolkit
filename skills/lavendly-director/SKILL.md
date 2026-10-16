@@ -5,7 +5,7 @@ priority: normal
 description: |
   Direct a 15 to 90 s video of any format (ad, demo, tutorial, explainer, documentary, story, music video, social) on the Lavendly MCP: set the intent and continuity mode, lock the hero, plan each shot and what it hands to the next, write a still and a motion prompt per shot, plan the sound, cut, check each asset, each cut and the whole video against the intent, make the smallest repair.
   Use when: "a video ad for my lamp", "direct this", "same product in every scene", "a tutorial people can follow", "the clips do not fit together", "it looks like AI", or any brief where look, continuity and a finished edit matter more than speed.
-  Chain: lavendly-multi-clip is the fast path for pasted anchors and no hero asset; lavendly-storyteller covers one shot under 12 s; lavendly-review owns the quality loop; lavendly-publish posts; lavendly-cost-aware wins every spend decision.
+  Chain: lavendly-multi-clip is the fast path for pasted anchors and no hero asset; lavendly-storyteller covers one shot under 12 s; lavendly-review owns the quality loop; lavendly-publish posts; lavendly-cost-aware owns spend approval.
   NOT for: one-shot clips, posting, films over 90 s (propose two), talking-head interviews, or media pasted into the chat (Asset Library first).
 argument-hint: "[brief] [hero asset url or 'generate the hero'] [duration 15..90] [aspect] [voice or 'native sound']"
 ---
@@ -48,14 +48,14 @@ agent that judgment and the exact calls that carry it into Lavendly.
 | 8 | `get_workflow` | Collect, per scene in order: the group, the image node (`img_` prefix) and the clip node (`vid_` prefix) |
 | 9 | `update_workflow` | Set each image node's `prompt` to the still-frame prompt; add one reference node for the hero and wire it into every clip and every image node (see [references/mcp-calls.md](references/mcp-calls.md)) |
 | 10 | `set_clip_native_audio` | Per clip: `native` for scenes with on-screen sound or dialogue, `mix` under narration, `off` for a music edit |
-| 11 | `attach_track`, `update_workflow` | Narration (one voice, captions via `subtitleStyle`) and one score (`ducking: true`) on the first clip, then `scope` film where `get_schema` lists it, else edges from both nodes to every other clip so they are film-wide; `fade_out_ms` on the music node |
+| 11 | `attach_track`, `update_workflow` | Narration (one voice, captions via `subtitleStyle`) and one score (`ducking: true`) on the first clip, then `update_workflow` edges from both nodes to every other clip so they are film-wide, confirmed with `get_workflow_audio` (`scope` only once `get_schema` lists it); `fade_out_ms` on the music node |
 | 12 | `estimate_cost` | Announce in one line: shots, model by its display name, clip credits, opening image credits (a number), voice and music synthesis charged separately when attached, total, balance after; get approval |
 | 13 | `generate_scene` | Scene by scene in order (`node_id`), so each scene can be checked before the next is paid for; `max_credits` is that scene's line of `per_scene` plus its opening image |
 | 14 | `get_generation_status`, `get_scene_frame` | Silent polling; a frame per scene as it lands; update the ledger from its last frame |
 | 15 | `quality_check`, `get_scene_frame` | Each scene (level A), then its cut with the previous scene (level B, last and first frames); findings and repair below |
 | 16 | `edit_clip`, `split_clip`, `move_clip` | The cut: trims to the useful window, fades where a dip to black is wanted, order (clips play back to back) |
 | 17 | `create_render` | Free; `get_render` until done |
-| 18 | `quality_check`, `get_workflow_audio` | The whole video (level C) against the intent card; repair, render again, re-check; then deliver: link, length, what the viewer will see, any finding the user accepted |
+| 18 | `quality_check`, `get_workflow_audio` | The whole video (level C) against the intent card; repair, render again, re-check; then deliver: link, length, what the viewer will see, any finding the user accepted; "captions requested" (ask the user to check), never "captions are on" |
 
 ## Decision rules
 

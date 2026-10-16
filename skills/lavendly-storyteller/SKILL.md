@@ -3,9 +3,9 @@ name: lavendly-storyteller
 version: 0.2.0
 priority: normal
 description: |
-  Produce a finished narrated short (4 to 12 seconds, one shot) from a one-line idea with the Lavendly MCP: probe status and credits, create one workflow, attach one voiceover and one music bed, estimate and get approval, generate, check quality, render for free, deliver the link.
+  Produce a finished narrated short (4 to 12 seconds, one shot) from a one-line idea with the Lavendly MCP: probe status and credits, create one workflow, get approval for clip, voice and music, attach one voiceover and one bed, generate, check quality, render for free, deliver the link.
   Use when: "make me a short video of", "a 5 second clip of", "narrate this", "quick reel", "turn this sentence into a video", or any brief with one moment and no more than one shot.
-  Chain: hand off to lavendly-director when the look matters; to lavendly-multi-clip when the brief has two or more beats or asks for more than 12 seconds; lavendly-review owns the quality loop after generation; lavendly-publish owns posting; lavendly-cost-aware, when loaded, wins every spend decision.
+  Chain: hand off to lavendly-director when the look matters; to lavendly-multi-clip when the brief has two or more beats or asks for more than 12 seconds; lavendly-review owns the quality loop after generation; lavendly-publish owns posting; lavendly-cost-aware, when loaded, wins every spend approval and cap.
   NOT for: multi-shot sequences (lavendly-multi-clip), publishing or scheduling (lavendly-publish), editing an existing canvas node by node, or any brief that depends on media pasted into the chat (the user uploads it to the Asset Library first).
 argument-hint: "[one-line idea] [duration 4..12] [voice] [language]"
 ---
@@ -14,8 +14,9 @@ argument-hint: "[one-line idea] [duration 4..12] [voice] [language]"
 
 Turn one line into a finished narrated short: one shot, one voice, one music
 bed, a free render, a link. About twelve tool calls on a good day. A
-one-scene film renders on its own path: no burned captions and no picture
-edits (only clip volume and mute). Say so when captions come up.
+one-scene film renders on its own path: it ships the raw clip at the
+model's own size (no export normalisation), with no burned captions and no
+picture edits (only clip volume and mute). Say so when captions come up.
 
 ## Before anything else
 
@@ -35,11 +36,11 @@ edits (only clip volume and mute). Say so when captions come up.
 | 3 | write | The script (see Narration) and the shot prompt (see Prompt) |
 | 4 | `create_workflow` | `name`, `shots: [{prompt, duration}]` with a duration the model makes (see Duration), top-level `videoModel` only when Duration says so, `project_name` when the user named one, `idempotency_key` |
 | 5 | read the record | The clip id is the id of the scene's video node (type videoGenerator); call `get_workflow` if unsure |
-| 6 | `attach_track` voiceover | `kind: "voiceover"`, `text`, `voice` only when one was picked (see Narration), no `volume`, `idempotency_key` |
-| 7 | `attach_track` music | `kind: "music"`, `mood` and `duration` equal to the clip, `ducking: true`, volume 0.35 to 0.4, `idempotency_key` |
-| 8 | say | One line: a one-scene film ships without burned captions; when captions matter, offer two scenes (lavendly-multi-clip) |
-| 9 | `set_clip_native_audio` | `{mode: "off"}` unless the shot has on-screen dialogue |
-| 10 | `estimate_cost` | Announce in one line, get approval, refuse when `sufficient` is false |
+| 6 | say | One line: a one-scene film ships without burned captions; when captions matter, offer two scenes (lavendly-multi-clip) |
+| 7 | `set_clip_native_audio` | `{mode: "off"}` unless the shot has on-screen dialogue |
+| 8 | `estimate_cost` | One approval line: the clip credits plus the voice and music credits (paid when attached, not in the estimate), the total and the balance after; wait for the yes; refuse when `sufficient` is false |
+| 9 | `attach_track` voiceover | After the yes: `kind: "voiceover"`, `text`, `voice` only when one was picked (see Narration), no `volume`, `idempotency_key` |
+| 10 | `attach_track` music | `kind: "music"`, `mood` and `duration` equal to the clip, `ducking: true`, volume 0.35 to 0.4, `idempotency_key` |
 | 11 | `generate_scene` | `workflow_id` only (it is the one scene), `idempotency_key` |
 | 12 | `get_generation_status` | Poll silently, report phase changes only |
 | 13 | `quality_check` | `node_id` of the clip, `expect_audio: false` when native audio is off (the voice and music are mixed at render), `true` when it is on; on failure follow lavendly-review: one re-roll with `reroll_hint` appended |
@@ -99,6 +100,9 @@ Exact JSON for every call: [references/mcp-calls.md](references/mcp-calls.md).
 
 - Announce before every paid call in one line: what, model or scene count,
   credits. Generation is paid. Render is free and never re-charges.
+- Voice and music synthesis are paid when attached: their credits go in the
+  approval line with the clip, and they are attached only after the yes
+  (before it only when the user approved that spend explicitly).
 - When the estimate exceeds 30 percent of available credits, ask before
   generating. When `sufficient` is false, stop and say what is missing.
 - Retry a render at most twice, always with the same `idempotency_key`.

@@ -50,7 +50,7 @@ decisions on top.
 | 9 | `create_workflow` | `shots` in order, `aspect`, `videoModel`, `idempotency_key` ([references/mcp-calls.md](references/mcp-calls.md)) |
 | 10 | `get_workflow`, `update_workflow` | Still-frame prompts on the image nodes; reference node with its role; imported footage as ready clips |
 | 11 | `set_clip_native_audio` | Every clip: `mix` 0.2 to 0.4 under narration, `native` only where the sound is the point, `off` for silent illustration |
-| 12 | `attach_track`, `update_workflow` | One voiceover with the whole script and a caption style; one score with `ducking: true`; `scope` film where `get_schema` lists it, else edges from both to every clip ([references/mcp-calls.md](references/mcp-calls.md)) |
+| 12 | `attach_track`, `update_workflow` | One voiceover with the whole script and a caption style; one score with `ducking: true`; then `update_workflow` edges from both to every clip, confirmed with `get_workflow_audio` (`scope` only once `get_schema` lists it) ([references/mcp-calls.md](references/mcp-calls.md)) |
 | 13 | `estimate_cost` | Announce in one line; wait for a yes |
 | 14 | `generate_scene` | Scene 1, open its frame, check, then the rest in order |
 | 15 | `get_scene_frame`, `quality_check` | Per scene: the picture shows its line, no drawn text, the truth check; then each cut |
@@ -169,9 +169,9 @@ the formula: [references/models-and-credits.md](references/models-and-credits.md
 ### Sound
 
 - Narration leads: one voice for the film, named once, one track with the
-  whole script on the first clip, then `scope` film (where `get_schema`
-  lists it) or an edge from it to every other clip
-  (and the same for the score) so both run film-wide and the score ducks
+  whole script on the first clip, then an `update_workflow` edge from it
+  to every other clip (and the same for the score), confirmed with
+  `get_workflow_audio`, so both run film-wide and the score ducks
   under the voice. Under it every clip is `mix` at 0.2 to
   0.4 and the motion prompt says "No music." (Veo adds its own). A clip
   whose sound is the point (a click, a bird call, a pour) stays `native`

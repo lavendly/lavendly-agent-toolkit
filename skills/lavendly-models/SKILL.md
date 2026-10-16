@@ -5,7 +5,7 @@ priority: normal
 description: |
   Pick the video model and the image model for a Lavendly brief and write each shot in that model's dialect: routing by need (references, sound, dialogue, aspect, length, look, budget), exact specs and credits for the 26 generators, the 5 s block maths, and the MCP path quirks.
   Use when: "which model", "cheapest that works", "it has to talk", "keep my product reference", "one 20 s take", "write this for Veo", or before setting videoModel.
-  Chain: lavendly-director owns the process; lavendly-characters owns identity; lavendly-cost-aware wins every spend decision.
+  Chain: lavendly-director owns the process; lavendly-characters owns identity; lavendly-cost-aware wins every spend approval and cap.
   NOT for: the story, shot list or sound plan (director, genre skills), review (lavendly-review), posting (lavendly-publish).
 argument-hint: "[brief or shot list] [budget in credits] [aspect] [sound: native, narration, none] [references: count]"
 ---
@@ -93,7 +93,7 @@ Sora, Luma, LTX and Pixverse are not on Lavendly; never route to them.
 
 ### The MCP path, said plainly
 
-1. One model per workflow from `create_workflow`: only the top-level
+1. `create_workflow` sets one model for every shot: only the top-level
    `videoModel` and `aspect` apply; a per-shot `videoModel` is ignored. To
    put one scene on a second model, change that clip node's
    `data.videoModel` with `update_workflow`, then confirm it in
@@ -134,7 +134,7 @@ Sora, Luma, LTX and Pixverse are not on Lavendly; never route to them.
 | Three references (face, outfit, product) | Seedance 2.0 | Seedance 2.0 Mini | every 2-reference model |
 | Approved still, motion only | Kling v3 Pro | Runway Gen-4.5 | text-heavy prompts |
 | Exact camera choreography | Hailuo 3 | Hailuo 3 Max | stacked moves on any model |
-| One take of 16 to 30 s | Wan 3.0 Prime, Seedance 2.5 | Wan 3.0 | chaining 4 short clips |
+| One take of 16 to 30 s | Wan 3.0 Prime, Seedance 2.5 | Wan 3.0; cheaper with one cut: two 15 s Seedance 2.0 Mini clips, the second opened on the first's last frame (`/api` before the `get_scene_frame` path), 54 credits plus one opening image | chains past 2 to 3 hops (they drift; one hop is fine) |
 | Inserts of 2 to 3 s | Wan 2.7, Kling v3 Standard | Wan 2.7 | Veo (4 s minimum) |
 | Stylised, art-directed, animation | FLUX 3 Video | Wan 2.7, Seedance 2.0 Mini | |
 | Native ambience and effects, cheap | Seedance 2.0 Mini | Veo 3.1 Lite | silent models |

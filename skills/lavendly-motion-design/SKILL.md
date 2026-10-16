@@ -48,7 +48,7 @@ about what Lavendly's models and edits can do and what they cannot.
 | 7 | `import_asset` | Packshots, plates, the user's sonic logo |
 | 8 | `create_workflow` | `shots` with motion prompts and exact durations, `aspect`, `videoModel`, `idempotency_key` |
 | 9 | `get_workflow`, `update_workflow` | Still prompts or packshot urls on image nodes; references within the cap ([references/mcp-calls.md](references/mcp-calls.md)) |
-| 10 | `set_clip_native_audio`, `attach_track`, `update_workflow` | Per-clip mode; one score or motif; narration where the recipe uses it; `scope` film where `get_schema` lists it, else edges from each track to every clip so it runs film-wide ([references/mcp-calls.md](references/mcp-calls.md)) |
+| 10 | `set_clip_native_audio`, `attach_track`, `update_workflow` | Per-clip mode; one score or motif; narration where the recipe uses it; then `update_workflow` edges from each track to every clip so it runs film-wide, confirmed with `get_workflow_audio` (`scope` only once `get_schema` lists it) ([references/mcp-calls.md](references/mcp-calls.md)) |
 | 11 | `estimate_cost` | Announce clips, opening images, total, balance after; wait for a yes |
 | 12 | `generate_scene`, `get_generation_status` | Scene 1 alone first, silent polling |
 | 13 | `get_scene_frame`, `quality_check` | First and last frames: product drift, empty areas still empty, loop seam; then each later scene |

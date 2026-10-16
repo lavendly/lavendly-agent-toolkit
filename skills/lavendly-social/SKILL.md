@@ -47,7 +47,7 @@ post. This skill supplies the format decisions on top.
 | 8 | `create_workflow` | `shots`, `aspect` (9:16 unless the card says otherwise), `videoModel`, `idempotency_key` ([references/mcp-calls.md](references/mcp-calls.md)) |
 | 9 | `get_workflow`, `update_workflow` | Still-frame prompts; reference node with its role; imported clips as ready nodes |
 | 10 | `set_clip_native_audio` | Per clip: `mix` under voice, `native` for spoken lines and the sound that is the joke, `off` for silent b-roll |
-| 11 | `attach_track`, `update_workflow` | Voiceover from 0.0 s with a caption style; one music bed with `ducking: true`; `scope` film where `get_schema` lists it, else edges from both to every clip, so they run film-wide ([references/mcp-calls.md](references/mcp-calls.md)) |
+| 11 | `attach_track`, `update_workflow` | Voiceover from 0.0 s with a caption style; one music bed with `ducking: true`; then `update_workflow` edges from both to every clip, so they run film-wide, confirmed with `get_workflow_audio` (`scope` only once `get_schema` lists it) ([references/mcp-calls.md](references/mcp-calls.md)) |
 | 12 | `estimate_cost` | Announce in one line; wait for a yes |
 | 13 | `generate_scene` | The hook scene first; open its first frame; then the rest in order |
 | 14 | `get_generation_status`, `get_scene_frame`, `quality_check` | Silent polling; per scene: the hook frame, identity, no drawn text |

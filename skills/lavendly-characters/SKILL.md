@@ -47,7 +47,7 @@ carries each shot, and says plainly where the MCP path cannot hold a face.
 | 8 | `estimate_cost` | Announce in one line; wait for yes |
 | 9 | `generate_scene`, `get_scene_frame` | Scene 1 alone; compare it to the sheet before paying for scene 2 |
 | 10 | `get_scene_frame`, `update_workflow` | Chain a continuing shot: frame last of N on the image node of N+1; count hops |
-| 11 | `attach_track`, `update_workflow` | Voiceover in the character's one voice; voice is charged when attached, say so; a voiceover that spans the film gets `scope` film or an edge to every clip ([references/mcp-calls.md](references/mcp-calls.md)) |
+| 11 | `attach_track`, `update_workflow` | Voiceover in the character's one voice; voice is charged when attached, say so; a voiceover that spans the film gets an `update_workflow` edge to every clip, confirmed with `get_workflow_audio` (`scope` only once `get_schema` lists it) ([references/mcp-calls.md](references/mcp-calls.md)) |
 | 12 | `quality_check` | Every scene; identity drift gets one named fix ([references/troubleshooting.md](references/troubleshooting.md)) |
 | 13 | write | The identity record for the next video: description, sheet urls, voice id, end states |
 

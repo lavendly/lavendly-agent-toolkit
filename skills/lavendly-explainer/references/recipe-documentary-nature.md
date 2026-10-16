@@ -116,7 +116,10 @@ silence, not more words.
   Every motion prompt names the ambience ("Ambient noise: light wind in
   bare birches, the soft creak of snow") and ends with "No music."
 - Narration: calm, present tense, 2.1 words per second, long gaps; george,
-  bill or lily.
+  bill or lily. Per-scene voiceovers do not duck a film-wide score. Either
+  make the narration one film-wide track (it ducks the score; place the
+  lines with the gaps in the script), or keep per-scene lines and set the
+  score low (about 20 to 25 percent) and tell the user why.
 - Score: "Sparse and cold: a low cello drone and a few soft piano notes at
   about 60 BPM. Enters after the first behaviour, stays under the wind,
   swells slightly on the successful leap, fades out before the final wide

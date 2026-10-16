@@ -14,8 +14,14 @@ From a public link:
 ```
 
 `import_asset` returns the hosted url. From the Asset Library the user
-shares the hosted link directly; use it as is. Limits: 50 MB and 10 minutes
+shares the hosted link directly; use its path as below. Limits: 50 MB and 10 minutes
 per music file; the film is at most 180 s.
+
+It returns a path like `/api/v1/storage/m/<key>`. Use it exactly as
+returned on image nodes and tracks; never rewrite it to an absolute https
+url (the provider cannot open a signed-in link). A link the user copies
+from the app (`https://app.lavendly.ai/api/v1/storage/m/<key>`) goes in as
+its `/api/v1/storage/m/<key>` path.
 
 ## `create_workflow`: one shot per source clip, in timeline order
 
@@ -76,10 +82,13 @@ makes the track in the app's Asset Library and you attach it by `url`.
 
 ## The song across the whole film: `update_workflow`
 
-Where `get_schema` lists `scope` on `attach_track`, pass `"scope": "film"`
-when you attach the song: the server wires it to every clip and the edges
-below are not needed (split pieces made later still need their edge).
-Otherwise add them by hand.
+`attach_track` has no `scope` argument on the server today, and the MCP
+drops an unknown argument without an error. So the default is always: attach
+the song, add the edges below with `update_workflow` (to every clip and every
+split piece), then call `get_workflow_audio` and confirm the song reaches
+every clip. Once `get_schema` lists `scope` on `attach_track`,
+`"scope": "film"` is a shortcut for the edges (split pieces made later still
+need their edge); confirm with `get_workflow_audio` all the same.
 
 `attach_track` wires the song's node to the first clip only. It plays as the
 film's music only when its node has an edge to every clip (type

@@ -16,6 +16,12 @@ to 64 MB, inline `data` about 11 MB. Repeat for each sheet image and each packsh
 in the chat never reaches you: ask for an Asset Library upload or a public
 url.
 
+It returns a path like `/api/v1/storage/m/<key>`. Use it exactly as
+returned on image nodes and tracks; never rewrite it to an absolute https
+url (the provider cannot open a signed-in link). A link the user copies
+from the app (`https://app.lavendly.ai/api/v1/storage/m/<key>`) goes in as
+its `/api/v1/storage/m/<key>` path.
+
 ## Casting: two scenes, sheet stills plus screen tests
 
 ```json
@@ -171,11 +177,14 @@ eric, harry, jessica, laura, liam, lily, matilda, river, roger, will.
 Never pass `volume` on a voiceover (it is stored as a percent; the default
 100 is unity). Script up to 4,000 characters, priced per character.
 
-A voiceover that runs across several scenes must reach every clip: pass
-`"scope": "film"` on `attach_track` where `get_schema` lists `scope`;
-otherwise, after the attach, `get_workflow`, then `update_workflow` with the full `nodes` and
+A voiceover that runs across several scenes must reach every clip. After
+the attach, `get_workflow`, then `update_workflow` with the full `nodes` and
 `edges` arrays and one more edge per other clip, copied from the edge
-`attach_track` made (new `id` and `target`). Left on one clip, a long
+`attach_track` made (new `id` and `target`); then confirm with
+`get_workflow_audio` that it reaches every clip. `attach_track` has no
+`scope` on the server today and the MCP drops unknown arguments silently;
+once `get_schema` lists `scope` on `attach_track`, `"scope": "film"` is a
+shortcut for the edges, still confirmed with `get_workflow_audio`. Left on one clip, a long
 voiceover freezes that clip's last frame for the rest of the track. A line
 that belongs to one scene stays on that clip. Captions burn only from a
 synthesized voiceover with a `subtitleStyle`, on a film of two or more

@@ -49,7 +49,7 @@ plan, ledger, three-level checks); this skill makes the place decisions.
 | 8 | `create_workflow` | `shots` in order, top-level `aspect` and `videoModel`, `idempotency_key` |
 | 9 | `get_workflow`, `update_workflow` | Photo scenes: the image node's `data.url` is the photo; concept scenes: the still prompt on the image node ([references/mcp-calls.md](references/mcp-calls.md)) |
 | 10 | `set_clip_native_audio` | Every clip: `mix` under narration, `native` where the place's sound is the point, `off` for a music edit |
-| 11 | `attach_track`, `update_workflow` | One narration track, one score with `ducking: true`, captions when sound may be off; `scope` film where `get_schema` lists it, else edges from both to every clip, so they run film-wide ([references/mcp-calls.md](references/mcp-calls.md)) |
+| 11 | `attach_track`, `update_workflow` | One narration track, one score with `ducking: true`, captions when sound may be off; then `update_workflow` edges from both to every clip, so they run film-wide, confirmed with `get_workflow_audio` (`scope` only once `get_schema` lists it) ([references/mcp-calls.md](references/mcp-calls.md)) |
 | 12 | `estimate_cost` | Announce: shots, model, clips, opening images (none on photo scenes), total, balance after; wait for yes |
 | 13 | `generate_scene` | Scene by scene with `max_credits`; open each frame before paying for the next |
 | 14 | `quality_check`, `get_scene_frame` | Each scene against its photo: walls, windows, doors, furniture, view, signage; each cut; then the film |
@@ -131,7 +131,9 @@ format from lavendly-ads and the light and camera from here.
 | People moving (sport, dance, lookbook walks) | Kling v3 Pro (20 per 5 s) or Seedance 2.0 (44 per 5 s) | body motion; Seedance for 4 references |
 | Draft | Veo 3.1 Lite (10 per 4 s) | photo first frames work; no references |
 
-- One model per film through `shots`. Durations from the model's list:
+- The top-level `videoModel` sets every shot; a different model per scene
+  goes in that clip's `data.videoModel` with `update_workflow`, confirmed in
+  `estimate_cost` `per_scene`. Durations from the model's list:
   Veo 4, 6 or 8; Wan 2.7 2 to 10; Wan 3.0 2 to 30; Kling v3 3 to 15;
   Hailuo 2.3 6 or 10 (16:9 only, silent). Blocks of 5 s round up.
 - The export takes the first clip's aspect; 21:9 and 3:2 export at the 9:16

@@ -77,7 +77,8 @@ night-light went out; a firefly helps.
 - Camera: slow and gentle: locked-off frames, soft push-ins, slow pans. No
   shaky camera, no fast cuts, no extreme low angles that make anything loom.
 - Pace: average shot 4 to 6 s; the last shots longer than the first.
-- Framing: medium shots for acting; avoid open-mouth close-ups; every third
+- Framing: medium shots for acting; avoid open-mouth close-ups; "mouth
+  closed" in every prompt where the face is in frame and nobody speaks; every third
   shot an insert or a view from above (paws, the acorn, the moon).
 - Light: warm soft daylight, golden hour, lantern or night-light glow at
   night with a soft blue moonlight fill. Never frightening low key: shadows
@@ -132,13 +133,13 @@ one 6 s take, generated at 8 s)
 Still-frame prompt:
 
 ```text
-Needle-felted stop-motion animation, visible wool fibres and stitching, miniature fabric set. Pebble: a small round brown bear cub on four legs, cream muzzle, round black bead eyes, small round ears, a green knitted nightcap. Pebble lies in a moss bed in a cosy cave bedroom, blanket to his chin, a glowing acorn night-light on a stone beside him. Wide shot, eye level. Warm acorn glow from the right, soft blue moonlight from the cave mouth. Palette: honey, moss green, indigo, cream. No text.
+Needle-felted stop-motion animation, visible wool fibres and stitching, miniature fabric set. Pebble: a small round brown bear cub who walks on all four paws, cream muzzle, round black bead eyes, small round ears, a green knitted nightcap. Pebble lies in a moss bed in a cosy cave bedroom, blanket to his chin, a glowing acorn night-light on a stone beside him. Wide shot, eye level. Warm acorn glow from the right, soft blue moonlight from the cave mouth. Palette: honey, moss green, indigo, cream. No text.
 ```
 
 Motion prompt:
 
 ```text
-Needle-felted stop-motion animation, one continuous take, stepped at 12 frames per second. 0 to 2 s: the acorn night-light flickers twice. 2 to 3 s: it goes dark; the room falls into soft blue moonlight. 3 to 6 s: Pebble's eyes open wide; he pulls the blanket up to his nose and holds still. Camera: locked-off. End state: Pebble awake under his blanket, the acorn dark. The cave and the moonlight stay as in the opening frame; shadows stay soft. Exactly one bear cub, nobody else. SFX: a tiny fizzle, a soft blanket rustle. Ambient noise: quiet night crickets. No music. Clean frame: no text, no on-screen graphics.
+Needle-felted stop-motion animation, one continuous take, stepped at 12 frames per second. 0 to 2 s: the acorn night-light flickers twice. 2 to 3 s: it goes dark; the room falls into soft blue moonlight. 3 to 6 s: Pebble's eyes open wide, mouth closed; he pulls the blanket up to his nose and holds still. Camera: locked-off. End state: Pebble awake under his blanket, the acorn dark. The cave and the moonlight stay as in the opening frame; shadows stay soft. Exactly one bear cub, nobody else. SFX: a tiny fizzle, a soft blanket rustle. Ambient noise: quiet night crickets. No music. Clean frame: no text, no on-screen graphics.
 ```
 
 Pair 2: the firefly helps (the payoff)
@@ -146,7 +147,7 @@ Pair 2: the firefly helps (the payoff)
 Still-frame prompt:
 
 ```text
-Needle-felted stop-motion animation, visible wool fibres and stitching, miniature fabric set. Pebble: a small round brown bear cub on four legs, cream muzzle, round black bead eyes, small round ears, a green knitted nightcap. Pebble lies in his moss bed, the dark acorn on the stone beside him, one small firefly with a soft yellow glow hovering at the cave mouth. Medium shot, eye level. Soft blue moonlight, the firefly's glow. Palette: honey, moss green, indigo, cream. No text.
+Needle-felted stop-motion animation, visible wool fibres and stitching, miniature fabric set. Pebble: a small round brown bear cub who walks on all four paws, cream muzzle, round black bead eyes, small round ears, a green knitted nightcap. Pebble lies in his moss bed, the dark acorn on the stone beside him, one small firefly with a soft yellow glow hovering at the cave mouth. Medium shot, eye level. Soft blue moonlight, the firefly's glow. Palette: honey, moss green, indigo, cream. No text.
 ```
 
 Motion prompt:
@@ -157,7 +158,7 @@ Needle-felted stop-motion animation, one continuous take, stepped at 12 frames p
 
 Second family (Wan 2.7): subject, scene, motion, aesthetic, then "felt
 style": "Pebble the felt bear cub in his moss bed; the firefly settles in
-the acorn, it glows, he smiles and falls asleep. Slow push-in. Soft blue
+the acorn, it glows, he smiles, mouth closed, and falls asleep. Slow push-in. Soft blue
 moonlight and warm glow, low contrast. Felt style, stepped stop-motion.
 Sound: a soft chime, crickets. Clean frame: no text, no on-screen graphics."
 
@@ -167,7 +168,7 @@ Sound: a soft chime, crickets. Clean frame: no text, no on-screen graphics."
 |---|---|
 | Scary artefacts: extra eyes, teeth, a stretched jaw | medium shots, mouth closed by default, QC every frame before the next scene |
 | Two of the hero, or an extra creature | count line in every prompt; a newcomer (the firefly) gets its own introduction shot |
-| The cub stands up and walks like a person | "on four legs" in every still; "on all four paws" in every walking shot |
+| The cub stands up and walks like a person | "on all four paws" in the hero block of every still and motion prompt, sitting and lying shots included |
 | Colour drifts warm or green across chained scenes | start each scene from a fresh still written from the bible after 2 hops |
 | An ending gesture nobody asked for | the last beat is one named action and a hold |
 | Darkness turns frightening | name the soft fill ("soft blue moonlight"), "shadows stay soft" |

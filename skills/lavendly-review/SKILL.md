@@ -90,6 +90,11 @@ Full table with re-roll prompt wording:
 - Audio: only what the audio summary shows can be verified. Perceived
   loudness is not measured by any tool; when a join sounds doubtful, say so
   and ask the user to listen.
+- Captions: the render result cannot confirm they were burned (a failed
+  burn ships uncaptioned). Say "captions requested" and ask the user to
+  check; never "captions are on".
+- Name the frames you actually opened (first, mid, last) when you report a
+  check; never "checked frame by frame".
 
 ### Findings
 

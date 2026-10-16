@@ -48,7 +48,7 @@ checks); this skill makes the ad decisions on top of it.
 | 8 | `create_workflow` | `shots` in order, top-level `aspect` and `videoModel`, `idempotency_key` |
 | 9 | `get_workflow`, `update_workflow` | Still-frame prompts on the image nodes; the packshot as the first frame of product-exact scenes; the packshot as a reference on the others, within the model's cap ([references/mcp-calls.md](references/mcp-calls.md)) |
 | 10 | `set_clip_native_audio` | Every clip: `native` for the product sound or a spoken line, `mix` under narration, `off` for a music edit |
-| 11 | `attach_track`, `update_workflow` | One narration track, one score with `ducking: true`, captions on for sound-off placements; then `scope` film where `get_schema` lists it, else edges from both to every clip so they run film-wide ([references/mcp-calls.md](references/mcp-calls.md)) |
+| 11 | `attach_track`, `update_workflow` | One narration track, one score with `ducking: true`, captions on for sound-off placements; then `update_workflow` edges from both to every clip so they run film-wide, confirmed with `get_workflow_audio` (`scope` only once `get_schema` lists it) ([references/mcp-calls.md](references/mcp-calls.md)) |
 | 12 | `estimate_cost` | Announce: shots, model, clips, opening images, total, balance after; wait for yes |
 | 13 | `generate_scene` | Scene by scene with `max_credits`; open each frame before paying for the next |
 | 14 | `quality_check`, `get_scene_frame` | Each scene, each cut, then the product check: shape, finish, label, count |
@@ -113,7 +113,9 @@ UGC and the light and product rules from beauty.
 | People moving, sport, dance | Kling v3 Pro (20 per 5 s) | Body motion; 720p, 16:9, 9:16, 1:1 |
 | Cheap draft of layout and timing | Veo 3.1 Lite (10 per 4 s) or Seedance 2.0 Mini (9 per 5 s) | Lite takes no references; Mini takes 4 |
 
-- One model per film: only the top-level `videoModel` applies to `shots`.
+- The top-level `videoModel` sets every shot. A film may use a different
+  model per scene: set `data.videoModel` on that clip with `update_workflow`
+  and confirm it in `estimate_cost` `per_scene`.
 - Durations come from the model's exact list: Veo 4, 6 or 8 only; Seedance
   2.0 and 2.0 Fast and Mini 4 to 15; Kling v3 3 to 15; Wan 2.7 2 to 10.
   Blocks of 5 s round up, so a 6 s clip costs the same as 10 s on block

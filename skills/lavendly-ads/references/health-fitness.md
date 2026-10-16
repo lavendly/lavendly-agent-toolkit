@@ -121,8 +121,10 @@ generate 4. "Packshot" means the scene opens on the imported packshot.
 
 Totals: clips at 5 s (Kling, Seedance) or 4 s (Veo), one packshot scene
 without an opening image, the rest 2 credits each, score 2 or 3, voice 1.
-One model per film through `shots`; pick Kling when people move in most
-scenes, Veo 3.1 Fast when the product carries most scenes.
+The top-level `videoModel` sets every shot: pick Kling when people move in
+most scenes, Veo 3.1 Fast when the product carries most scenes. A scene that
+needs the other model gets it in `data.videoModel` with `update_workflow`,
+confirmed in `estimate_cost` `per_scene`.
 
 ## 7. Prompt pairs (Kling)
 
