@@ -45,11 +45,15 @@ Files each host reads:
 
 ## Other hosts: skills, then the MCP
 
+Antigravity reads skills from `.agents/skills/` in a workspace and from
+`~/.gemini/config/skills/` for every workspace. `npx skills ... --agent
+antigravity` writes the first, `install --host antigravity` the second.
+
 ### 1. The skills
 
-Cross-agent installer. It detects Amp, VS Code with Copilot, Windsurf,
-OpenCode, Cline and the hosts above, and writes each skill where that host
-looks:
+Cross-agent installer. It detects Antigravity, Amp, VS Code with Copilot,
+Windsurf, OpenCode, Cline and the hosts above, and writes each skill where
+that host looks:
 
 ```bash
 npx skills add lavendly/lavendly-agent-toolkit
@@ -59,7 +63,9 @@ Other ways:
 
 ```bash
 gh skill install lavendly/lavendly-agent-toolkit          # GitHub CLI 2.90+
+npx skills add lavendly/lavendly-agent-toolkit --agent antigravity   # Antigravity, this workspace
 amp skill add lavendly/lavendly-agent-toolkit --global    # Amp
+npx -y @lavendly/agent-toolkit install --host antigravity # also claude, codex, cursor, gemini, amp
 npx -y @lavendly/agent-toolkit install --dir <skills dir> # any folder
 npx -y @lavendly/agent-toolkit --list                     # what is available
 ```
@@ -68,6 +74,7 @@ npx -y @lavendly/agent-toolkit --list                     # what is available
 
 | Host | Add the server |
 |---|---|
+| Antigravity | **Manage MCP Servers > View raw config**: `{ "mcpServers": { "lavendly": { "serverUrl": "https://mcp.lavendly.ai/mcp" } } }`; if it does not offer a sign-in, add `"headers": { "Authorization": "Bearer <key>" }` |
 | Amp | `amp mcp add lavendly https://mcp.lavendly.ai/mcp` |
 | VS Code (Copilot agent mode) | `.vscode/mcp.json`: `{ "servers": { "lavendly": { "type": "http", "url": "https://mcp.lavendly.ai/mcp" } } }` |
 | Windsurf | `~/.codeium/windsurf/mcp_config.json`: `{ "mcpServers": { "lavendly": { "serverUrl": "https://mcp.lavendly.ai/mcp" } } }` |

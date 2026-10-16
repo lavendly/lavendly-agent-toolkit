@@ -32,8 +32,8 @@ One install gives the skills and the MCP on hosts with plugins:
 | Cursor | **Customize**, add this repository as a plugin, install |
 | Any Agent Plugins host | reads `plugin.json`, `skills/` and `mcp.json` from this repository |
 
-Amp, VS Code with Copilot, Windsurf, OpenCode and other agents take the
-skills and the MCP separately:
+Antigravity, Amp, VS Code with Copilot, Windsurf, OpenCode and other agents
+take the skills and the MCP separately:
 
 ```bash
 npx skills add lavendly/lavendly-agent-toolkit
