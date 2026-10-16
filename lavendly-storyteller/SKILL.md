@@ -40,8 +40,8 @@ bed, captions, a free render, a link. About twelve tool calls on a good day.
 | 10 | `estimate_cost` | Announce in one line, get approval, refuse when `sufficient` is false |
 | 11 | `generate_scene` | `workflow_id` only (it is the one scene), `idempotency_key` |
 | 12 | `get_generation_status` | Poll silently, report phase changes only |
-| 13 | `quality_check` | `node_id` of the clip, `expect_audio: true`; on failure follow lavendly-review: one re-roll with `reroll_hint` appended |
-| 14 | `get_scene_frame` | Give the user the thumbnail link before rendering |
+| 13 | `quality_check` | `node_id` of the clip, `expect_audio: false` when native audio is off (the voice and music are mixed at render), `true` when it is on; on failure follow lavendly-review: one re-roll with `reroll_hint` appended |
+| 14 | `get_scene_frame` | Send the thumbnail link and wait for the user's look before rendering |
 | 15 | `create_render` | Free; `idempotency_key`; poll `get_render` until done or failed |
 | 16 | deliver | The video link, duration, voice, one sentence on what it shows |
 

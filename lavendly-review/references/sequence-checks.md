@@ -60,7 +60,10 @@ server without the frame option, use mid frames and lower the confidence.
   reverse shots mirror in size and height; the person speaking is the one
   in frame with a moving mouth.
 - The two shots are not the same size and angle, unless the style wants a
-  jump cut.
+  jump cut. Inside a continuous scene the first fix is free: trim the cut
+  onto the end of a line or onto a motion (`edit_clip`), so it reads as a
+  deliberate beat; re-roll only when it still reads as a missing frame. A
+  same-size cut that already lands on a line break is Low.
 - N+1 adds something; it does not repeat N.
 - Sound across the cut: no abrupt drop, no two voices clashing, ambience
   carries within a place.
@@ -114,9 +117,13 @@ silence; do not add music or effects the intent did not ask for.
 
 ## 6. A finding
 
-| Where | Issue | Why it matters here | Fix | Fix type | Confidence |
-|---|---|---|---|---|---|
-| Cut from "pour" to "first sip" | The cup is full again in the second shot | The pour looks undone; the sip reads as a mistake | Re-roll the second shot chained from the last frame of the first | Targeted regeneration, paid | High: both frames opened |
+| Severity | Where | Issue | Why it matters here | Fix | Fix type | Confidence |
+|---|---|---|---|---|---|---|
+| High | Cut from "pour" to "first sip" | The cup is full again in the second shot | The pour looks undone; the sip reads as a mistake | Re-roll the second shot chained from the last frame of the first | Targeted regeneration, paid | High: both frames opened |
+
+The message to the user opens with one line naming the video type and the
+continuity mode, then the findings with severity and confidence, in plain
+words.
 
 Confidence: high when a tool reported it or both frames show it plainly,
 medium when it rests on one mid frame, low when inferred without a frame.

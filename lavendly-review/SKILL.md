@@ -93,13 +93,16 @@ Full table with re-roll prompt wording:
 
 ### Findings
 
-- One row per finding: where (scene beat or cut), the issue, why it matters
+- One row per finding: severity, where (scene beat or cut), the issue, why it matters
   for this video, the fix, the fix type (edit, audio, transition, re-roll),
   confidence (high when a tool reported it or both frames show it, medium
   on one mid frame, low without a frame).
 - Severity: Critical (fails its purpose, essential information missing,
   technical failure), High (damages comprehension or quality), Medium
   (noticeably weaker), Low (polish). Show Low only when nothing ranks above.
+- A same-size cut inside a continuous scene is first trimmed onto a line
+  end or a motion (free); a re-roll only if it still reads as a missing
+  frame.
 - Smallest fix first: trim, split, reorder or speed with `edit_clip`,
   `split_clip`, `move_clip`; audio with `update_track` and
   `set_clip_native_audio`; a dip to black with fades; a re-roll last.

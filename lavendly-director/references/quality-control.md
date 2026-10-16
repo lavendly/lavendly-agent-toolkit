@@ -68,7 +68,7 @@ says when a row applies.
 | No missing action: the viewer can tell how N's end became N+1's start | Strict, flexible |
 | Same scene, same people: nobody appears without an entrance or a reveal, nobody vanishes without an exit or an explanation; a new place or a clear time jump resets this | Strict, flexible |
 | Light, time, weather and colour hold within a scene | Strict, flexible |
-| The two shots are not the same size and angle (a jump cut) unless the card wants one | All, except styles that use jump cuts |
+| The two shots are not the same size and angle (a jump cut) unless the card wants one; inside a continuous scene trim the cut onto a line end or a motion first (free), re-roll only if it still reads as a missing frame | All, except styles that use jump cuts |
 | N+1 adds something; it does not repeat N | All |
 | The cut lands on a motion, a beat or a line end, not mid-word | All |
 | Sound across the cut: no abrupt drop, no clash of two voices, ambience carries within a place | All |
@@ -154,13 +154,16 @@ did not ask for.
 Report each finding on one row, in the user's language, scenes named by
 their beat:
 
-| Where | Issue | Why it matters here | Fix | Fix type | Confidence |
-|---|---|---|---|---|---|
-| Cut from "lid open" to "cartridge in" | The lid is closed again in the second shot | The viewer cannot tell whether the step happened | Chain the second shot from the last frame of the first and re-roll it | Targeted regeneration, paid | High: both frames opened |
+| Severity | Where | Issue | Why it matters here | Fix | Fix type | Confidence |
+|---|---|---|---|---|---|---|
+| High | Cut from "lid open" to "cartridge in" | The lid is closed again in the second shot | The viewer cannot tell whether the step happened | Chain the second shot from the last frame of the first and re-roll it | Targeted regeneration, paid | High: both frames opened |
 
 Confidence is high when a tool reported it or both frames were opened and
 show it plainly, medium when it rests on one mid frame, low when it is
 inferred from the plan without a frame. Say which.
+
+The message to the user opens with one line naming the video type and the
+continuity mode, then the findings with severity and confidence.
 
 Order findings by severity. List Low findings only when the user asks for
 polish or nothing ranks above them.

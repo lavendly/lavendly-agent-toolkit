@@ -21,7 +21,10 @@ episode.
 ## 2. How it reaches Lavendly
 
 - One project for the series (`create_project`, or `project_name` on
-  `create_workflow`); one workflow per episode inside it.
+  `create_workflow`); one workflow per episode inside it. For a later
+  episode, find the series project with `list_projects` and the earlier
+  episodes with `list_workflows`, and read the last one with `get_workflow`
+  for its references and final state.
 - Import each recurring reference once with `import_asset` and reuse the
   hosted url in every episode; do not regenerate a character sheet per
   episode, the face drifts.

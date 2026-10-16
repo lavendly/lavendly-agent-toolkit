@@ -33,6 +33,21 @@ Added:
 - `lavendly-director/references/series-continuity.md`: the series bible,
   recurring references reused across episodes, state carried between
   episodes, format beats, checks per episode.
+- Fixes from a paper eval round (23 scenarios, 18 pass, 5 partial, 0 fail):
+  director plans shots by length (4, 6, 8 s under headings) and offers a
+  30 s version with the cost above 30 s; one locked light line per scene;
+  a repeated camera move goes on the one shot it serves; the estimate line
+  names opening image credits and says synthesis is charged when attached;
+  `max_credits` defined per call; never claim a match with an unopened
+  reference; model display names in chat; "Cinematic" removed from the
+  style phrases. Review trims a same-size cut onto a line end or a motion
+  before any re-roll, findings carry severity, and a re-render after a fix
+  uses a new key. Storyteller checks a narrated clip with `expect_audio`
+  false and waits at the frame before rendering. Cost-aware lists the
+  current `create_workflow` schema and the synthesis charge. Series episodes
+  find their project with `list_projects`.
+- Rubric fixes: scenarios 3, 13 and 17 match the skills; the setup-only
+  scenarios carry a user request.
 - Nine eval scenarios (15 to 23): planted errors, deliberate choices that
   must not be flagged, an audio setup error, and an adversarial
   "regenerate everything".

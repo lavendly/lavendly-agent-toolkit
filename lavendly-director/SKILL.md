@@ -37,7 +37,7 @@ agent that judgment and the exact calls that carry it into Lavendly.
 |---|---|---|
 | 1 | `get_status`, `get_ledger` | Capabilities, credits |
 | 2 | write | Intent card: type, objective, structure, must show, ending, sound, continuity mode, the hero's locked description ([references/video-types.md](references/video-types.md)) |
-| 3 | write | Sequence plan: 3 to 6 scenes, each with a heading (place and time), purpose, action and outcome, what it takes from the previous shot and hands to the next, plus the continuity ledger ([references/sequence-plan.md](references/sequence-plan.md)) |
+| 3 | write | Sequence plan: shots of 4, 6 or 8 s grouped under 1 to 6 headings (place and time), as many shots as the length needs (a 60 s video is about 10), each with purpose, action and outcome, what it takes from the previous shot and hands to the next, plus the continuity ledger ([references/sequence-plan.md](references/sequence-plan.md)) |
 | 4 | write | Per shot: a still-frame prompt (the opening) and a motion prompt (the clip), in the structure from [references/prompt-anchors.md](references/prompt-anchors.md) |
 | 5 | show | The intent card, the shot list and the hero description to the user; wait for "go" |
 | 6 | `import_asset` | The hero image and any style plate the user supplied (public URL or Asset Library); returns the hosted url |
@@ -46,8 +46,8 @@ agent that judgment and the exact calls that carry it into Lavendly.
 | 9 | `update_workflow` | Set each image node's `prompt` to the still-frame prompt; add one reference node for the hero and wire it into every clip and every image node (see [references/mcp-calls.md](references/mcp-calls.md)) |
 | 10 | `set_clip_native_audio` | Per clip: `native` for scenes with on-screen sound or dialogue, `mix` under narration, `off` for a music edit |
 | 11 | `attach_track` | Narration on the first clip, one voice for the film; one music score on the first clip with `ducking: true`; captions via `subtitleStyle` |
-| 12 | `estimate_cost` | Announce total, `opening_image_credits` and balance in one line; get approval; pass the approved number as `max_credits` |
-| 13 | `generate_scene` | Scene by scene in order (`node_id`), so each scene can be checked before the next is paid for |
+| 12 | `estimate_cost` | Announce in one line: shots, model by its display name, clip credits, opening image credits (a number), voice and music synthesis charged separately when attached, total, balance after; get approval |
+| 13 | `generate_scene` | Scene by scene in order (`node_id`), so each scene can be checked before the next is paid for; `max_credits` is that scene's line of `per_scene` plus its opening image |
 | 14 | `get_generation_status`, `get_scene_frame` | Silent polling; a frame per scene as it lands; update the ledger from its last frame |
 | 15 | `quality_check`, `get_scene_frame` | Each scene (level A), then its cut with the previous scene (level B, last and first frames); findings and repair below |
 | 16 | `edit_clip`, `split_clip`, `move_clip` | The cut: trims to the useful window, fades where a dip to black is wanted, placement |
@@ -96,6 +96,12 @@ agent that judgment and the exact calls that carry it into Lavendly.
   reaction when the feeling carries the beat. Never a shot added for length.
 - Introduce before use: the product before its feature, the tool before the
   step, the person before their reaction.
+- A camera move asked for in every shot (an orbit, a drone pass, a whip
+  pan) goes on the one shot it serves, usually the hero or payoff shot. Say
+  in half a sentence why the others differ (identical moves read as a loop,
+  orbits drift the hero).
+- Over 30 s: show the plan for the asked length and, in the same message,
+  the cost and a 30 s version, and build the one the user picks.
 - One primary action per clip. A clip that needs two actions is two clips.
 - Change shot size between neighbours (detail, then wide, then medium); two
   equal sizes in a row read as a slideshow. Pick framing and angle from
@@ -122,9 +128,11 @@ agent that judgment and the exact calls that carry it into Lavendly.
 
 ### Light
 
-- One motivated source per scene, named in both prompts (window, lamp, sun,
-  neon, the product's own glow), with its direction and softness. Keep its
-  direction across the shots of one scene. Recipes by situation are in
+- One motivated source per scene, written once as a light line (source,
+  direction, softness, colour: "warm window light from camera left, soft,
+  late afternoon") and pasted word for word into both prompts of every shot
+  under that heading, like the hero block (window, lamp, sun, neon, the
+  product's own glow). Keep its direction across the shots of one scene. Recipes by situation are in
   [references/lighting-recipes.md](references/lighting-recipes.md).
 - No grain, bloom, flare, haze or teal-and-orange grade unless the brief
   asks for that look.
@@ -252,6 +260,10 @@ earlier shot's end state in its prompt.
 4. Silent polling; one line per phase change; a frame link per scene.
 5. The user's language in chat, English in prompts and tool arguments.
 6. Never present a failing or drifting scene as done.
+7. Never say a frame matches a reference or a photo you have not opened.
+   Before the first frame lands, say what will be checked, not that it
+   matches.
+8. Models by their display name in chat ("Veo 3.1 Fast"), never the id.
 
 ## Quality gate before delivery
 

@@ -71,7 +71,7 @@ Context: a workflow with three ungenerated scenes exists.
 
 ---
 
-## Scenario 3: a 60 second request (adversarial, multi-clip)
+## Scenario 3: a 60 second request (adversarial, multi-clip or director)
 
 **User request:**
 
@@ -80,15 +80,18 @@ Context: a workflow with three ungenerated scenes exists.
 **Expected behaviour:**
 
 - Does not create 12 shots silently.
-- Proposes a split: one 30 s film of six 5 s shots, or two films; says why
-  (attention, cost) in one or two lines.
+- Before creating anything, offers a shorter option next to the asked
+  length: one 30 s film, or two films; says why (attention, cost) in one or
+  two lines. Multi-clip proposes the split; director may plan the 60 s
+  video and show the 30 s version and both costs in the same message.
 - Asks one question (which option), then writes anchors and waits for go.
 - A factual topic: the narration sticks to what the user supplied or to
   well-known facts stated plainly; no invented dates.
 
 **Score:**
 
-- Pass: split proposed before any creation, one question, anchors shown.
+- Pass: the shorter option and the reason shown before any creation, one
+  question, the plan or anchors shown.
 - Partial: built six shots but never mentioned the 30 s cap or the option
   of two films.
 - Fail: created a 12-shot or 60 s single workflow without asking.
@@ -380,7 +383,8 @@ Notable regressions: <list>
 
 - Calls `get_status` then `get_ledger`.
 - Shows the direction first: a one-line premise, the hero block (1 to 2
-  observable sentences), three scenes with a purpose each (a detail hook, the
+  observable sentences, written from the image when the agent can see it,
+  otherwise drafted and marked for the user to confirm), three scenes with a purpose each (a detail hook, the
   lamp in its room, the hero shot), the sound plan. Waits for "go".
 - `import_asset` the lamp, `create_workflow` with three shots at lengths the
   model makes (6, 6, 4), `get_workflow`, then one `update_workflow` that sets
@@ -389,8 +393,9 @@ Notable regressions: <list>
 - Every prompt carries the hero block verbatim and the clean-frame line; no
   banned words; one light source named identically in both prompts of a
   scene.
-- `set_clip_native_audio` on every clip; one narration track inside the word
-  budget; one score with ducking.
+- `set_clip_native_audio` on every clip; the sound plan carried out (a
+  narration track inside the word budget with captions, or native sound if
+  the plan chose it); one score with ducking.
 - `estimate_cost`, announces total and opening image credits, waits for a
   yes, passes `max_credits`.
 - Generates scene 1 only, opens its frame, checks it, then scene 2, then 3.
@@ -500,6 +505,10 @@ the new cartridge already seated; scene 4 shows the hand pushing it in.
 **Setup:** a 3-scene lamp ad. The last scene, meant as the hero shot, frames
 the room so tightly that the lamp is cut out of frame.
 
+**User request:**
+
+> Check this before I render it.
+
 **Expected behaviour:**
 
 - Level A on the last scene may pass (the clip is clean); the whole-video
@@ -512,8 +521,8 @@ the room so tightly that the lamp is cut out of frame.
 
 **Score:**
 
-- Pass: the finding comes from the whole-video level even though the scene
-  passed; one scene re-rolled; three re-checks.
+- Pass: the finding is raised even though the scene passed its own check
+  (at the cut or whole-video level, before or after the render); one scene re-rolled; three re-checks.
 - Partial: found, but the whole film regenerated, or the re-check skipped
   on the cut.
 - Fail: delivered as done because every scene passed.
@@ -524,6 +533,10 @@ the room so tightly that the lamp is cut out of frame.
 
 **Setup:** a narrated explainer with one music track at volume 1, ducking
 off, and a voiceover on scene 1.
+
+**User request:**
+
+> Check this before I render it.
 
 **Expected behaviour:**
 
@@ -549,6 +562,10 @@ off, and a voiceover on scene 1.
 two seconds with the same framing.
 **Setup B:** a 30 s dramatic scene of two people at a table, with one cut
 between two identical framings in the middle of a line.
+
+**User request:**
+
+> Check this before I render it.
 
 **Expected behaviour:**
 
@@ -596,6 +613,10 @@ afternoon. Scene 1 shows Mia alone. Scene 2 shows Mia and a friend talking,
 with no entrance. Scene 3 shows Mia alone again, the friend's cup still on
 the table. Scene 4 is Mia walking home that evening, alone.
 
+**User request:**
+
+> Check this before I render it.
+
 **Expected behaviour:**
 
 - Two High findings, both inside the café scene: the friend appears in
@@ -626,6 +647,10 @@ the table. Scene 4 is Mia walking home that evening, alone.
 the left, Ben on the right. Shot 2: Ana's close-up, she is in the right
 third looking left. Shot 3: Ben's close-up, his line is heard but his mouth
 is closed and Ana's back is in frame.
+
+**User request:**
+
+> Check this before I render it.
 
 **Expected behaviour:**
 
