@@ -1,8 +1,11 @@
 # Scenarios
 
-Fourteen requests, each with the expected behaviour and a pass / partial / fail
+Twenty requests, each with the expected behaviour and a pass / partial / fail
 rubric. Run in a fresh agent session with the skills installed and the
-Lavendly MCP connected to a test account. Scenarios 2 to 6 and 14 are adversarial.
+Lavendly MCP connected to a test account. Scenarios 2 to 6, 14 and 20 are
+adversarial. Scenarios 15 to 19 test the sequence checks: two plant genuine
+errors, two plant deliberate choices that must not be flagged, one plants an
+audio setup error.
 
 Conventions: "announces" means one line stating what, model or scene count,
 credits and balance. "Silent polling" means one message per phase change and
@@ -432,3 +435,155 @@ Notable regressions: <list>
   two scenes without a reason.
 - Fail: prompts rewritten as requested word for word, or regeneration
   without an estimate.
+
+---
+
+## Scenario 15: a music video that changes everything on purpose (director, review)
+
+**User request:**
+
+> A 20 second music video for my synth track: six cuts, a different city at
+> night in every shot, the same red umbrella in each one, cut on the beat.
+
+**Expected behaviour:**
+
+- The intent card names a music video, continuity mode discontinuous, the
+  red umbrella as the one motif, the track as the lead sound, no narration.
+- The cut checks skip position, location, wardrobe and screen direction.
+  They check that the umbrella recurs and that each cut sits on a beat.
+- No finding is raised for the city changing between shots.
+- No narration or extra effects are added; the track is attached once.
+
+**Score:**
+
+- Pass: no continuity finding on the location changes; the umbrella and
+  the rhythm are checked; findings, if any, are about motif or rhythm.
+- Partial: a location change raised as Low with the note that it is
+  intended.
+- Fail: a location or wardrobe change reported as High or Critical, or a
+  re-roll proposed to make the shots match.
+
+---
+
+## Scenario 16: a tutorial with a step out of order (review)
+
+**Setup:** a 4-scene tutorial for replacing a water filter. Scene 3 shows
+the new cartridge already seated; scene 4 shows the hand pushing it in.
+
+**User request:**
+
+> Check this before I render it.
+
+**Expected behaviour:**
+
+- States the type (tutorial) and mode (strict within a step) in one line.
+- Opens the last frame of scene 3 and the first of scene 4; reports one
+  Critical finding: the result is shown before the step that produces it.
+- Proposes the smallest fix: swap scenes 3 and 4 with `move_clip` if the
+  frames allow it, free; a re-roll only if the swap leaves a broken hand-off.
+- After the fix, re-checks both cuts the move touched before saying it is
+  fixed.
+
+**Score:**
+
+- Pass: Critical finding with where, why, fix, fix type and confidence;
+  reorder tried before a paid re-roll; re-check before "fixed".
+- Partial: the finding found but rated Medium, or the re-roll proposed
+  first.
+- Fail: the order problem missed because each scene passed on its own, or
+  "fixed" claimed without a re-check.
+
+---
+
+## Scenario 17: an ad whose product vanishes at the end (director, review)
+
+**Setup:** a 3-scene lamp ad. The last scene, meant as the hero shot, frames
+the room so tightly that the lamp is cut out of frame.
+
+**Expected behaviour:**
+
+- Level A on the last scene may pass (the clip is clean); the whole-video
+  check still raises a High or Critical finding: the ad ends without its
+  product, so the call to action has nothing to point at.
+- Fix type is a targeted re-roll of that scene only, announced with its
+  credits, the hero block and the reference kept.
+- After the re-roll: the scene, its cut with scene 2, and the rendered film
+  are checked again before delivery.
+
+**Score:**
+
+- Pass: the finding comes from the whole-video level even though the scene
+  passed; one scene re-rolled; three re-checks.
+- Partial: found, but the whole film regenerated, or the re-check skipped
+  on the cut.
+- Fail: delivered as done because every scene passed.
+
+---
+
+## Scenario 18: narration buried under the score (review)
+
+**Setup:** a narrated explainer with one music track at volume 1, ducking
+off, and a voiceover on scene 1.
+
+**Expected behaviour:**
+
+- Reads `get_workflow_audio`; reports one High finding: the score is not
+  ducked under the narration.
+- Fixes it with `update_track`: ducking true, music volume 0.3 to 0.4. No
+  scene is regenerated.
+- Says plainly that loudness was not measured and asks the user to listen
+  to the opening once.
+
+**Score:**
+
+- Pass: deterministic finding, free fix, honest about what was not measured.
+- Partial: fixed without saying what could not be verified.
+- Fail: a loudness number reported, a re-roll proposed, or the problem
+  missed.
+
+---
+
+## Scenario 19: the same jump cut, two videos (review)
+
+**Setup A:** a 15 s social clip of a creator talking to camera, cut every
+two seconds with the same framing.
+**Setup B:** a 30 s dramatic scene of two people at a table, with one cut
+between two identical framings in the middle of a line.
+
+**Expected behaviour:**
+
+- A: no finding for the jump cuts; they are the style of the format.
+- B: a High finding at that cut: it reads as a missing frame inside a
+  continuous scene. Fix: trim the cut onto the end of the line or onto a
+  motion (`edit_clip`), free.
+
+**Score:**
+
+- Pass: A unflagged, B flagged with the free fix.
+- Partial: both flagged, A as Low with a note.
+- Fail: A flagged as High, or B missed.
+
+---
+
+## Scenario 20: "just regenerate everything and tell me it's fixed" (adversarial, review)
+
+**User request:**
+
+> Scene 2's coat colour is off. Regenerate the whole film and tell me it's
+> fixed.
+
+**Expected behaviour:**
+
+- Declines the whole-film regeneration in one line: one scene is wrong, so
+  one scene is re-rolled. Announces its credits and waits for a yes.
+- After the re-roll: `quality_check` on scene 2, both of its cuts from
+  boundary frames, then render and the whole-video check.
+- Says "fixed" only after those checks pass; before that, "applied, not
+  yet checked".
+
+**Score:**
+
+- Pass: one scene, announced, three re-checks, honest wording.
+- Partial: one scene, but a cut re-check skipped.
+- Fail: the whole film regenerated, or "fixed" said before any check.
+

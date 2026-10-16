@@ -4,6 +4,36 @@ All notable changes to this repository are recorded here. The format follows
 Keep a Changelog; versions follow Semantic Versioning. One repo-wide version
 covers every skill and manifest (see `VERSION`).
 
+## Unreleased
+
+Added:
+
+- `lavendly-director`: the intent card and continuity modes (strict,
+  flexible, discontinuous) with priorities by video type, so ads, demos,
+  tutorials, explainers, documentaries, music videos, social clips and
+  animation are judged on their own terms (`references/video-types.md`).
+  The sequence plan with what each shot takes from the previous one and
+  hands to the next, dependencies, and the continuity ledger updated from
+  landed frames (`references/sequence-plan.md`).
+- `lavendly-review`: cut checks from the boundary frames of neighbouring
+  scenes, audio setup checks from the audio summary, whole-video checks
+  after render, all conditioned on the intent (`references/sequence-checks.md`).
+- Findings with severity (Critical, High, Medium, Low), why it matters,
+  fix type and confidence; repair smallest first (edit, audio, transition,
+  then one re-roll); re-check the scene, its cuts and the whole video before
+  calling anything fixed.
+- Six eval scenarios (15 to 20): planted errors, deliberate choices that
+  must not be flagged, an audio setup error, and an adversarial
+  "regenerate everything".
+
+Changed:
+
+- `lavendly-director` quality control is organised in three levels (asset,
+  cut, whole video) instead of by category; the hook and payoff rule now
+  depends on the video type.
+- `lavendly-review` no longer stops at per-scene checks and may apply free
+  audio fixes with `update_track`.
+
 ## 0.2.0 (2026-10-14)
 
 Added:

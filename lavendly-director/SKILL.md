@@ -3,8 +3,8 @@ name: lavendly-director
 version: 0.2.0
 priority: normal
 description: |
-  Direct a 15 to 90 s film on the Lavendly MCP as a director, cinematographer, lighting designer, sound designer and editor: lock the hero (product or character), design arc and coverage, write a still-frame prompt and a motion prompt per shot in concrete camera and light language, keep identity and light continuous, plan the sound, cut, review, repair only what failed.
-  Use when: "a video ad for my lamp", "direct this", "same product in every scene", "a real commercial", "scenes that feel like one film", "it looks like AI", "which angle for scene two", or any brief where look and continuity matter more than speed.
+  Direct a 15 to 90 s video of any format (ad, demo, tutorial, explainer, documentary, story, music video, social) on the Lavendly MCP: set the intent and continuity mode, lock the hero, plan each shot and what it hands to the next, write a still and a motion prompt per shot, plan the sound, cut, check each asset, each cut and the whole video against the intent, make the smallest repair.
+  Use when: "a video ad for my lamp", "direct this", "same product in every scene", "a tutorial people can follow", "the clips do not fit together", "it looks like AI", or any brief where look, continuity and a finished edit matter more than speed.
   Chain: lavendly-multi-clip is the fast path for pasted anchors and no hero asset; lavendly-storyteller covers one shot under 12 s; lavendly-review owns the quality loop; lavendly-publish posts; lavendly-cost-aware wins every spend decision.
   NOT for: one-shot clips, posting, films over 90 s (propose two), talking-head interviews, or media pasted into the chat (Asset Library first).
 argument-hint: "[brief] [hero asset url or 'generate the hero'] [duration 15..90] [aspect] [voice or 'native sound']"
@@ -12,30 +12,34 @@ argument-hint: "[brief] [hero asset url or 'generate the hero'] [duration 15..90
 
 # Lavendly Director
 
-A film is not a stack of attractive clips. It is a hero that stays itself in
+A video is not a stack of attractive clips. It is a hero that stays itself in
 every shot, light that stays in one world, a camera that moves for a reason,
-sound designed for the whole piece, and a cut that lands a payoff. This skill
-gives the agent that judgment and the exact calls that carry it into Lavendly.
+sound designed for the whole piece, and a cut that delivers what the video
+promised. What "delivers" means depends on the video: a payoff for a film, a
+readable product and a next step for an ad, a finished result for a
+tutorial, a resolved last section for a music video. This skill gives the
+agent that judgment and the exact calls that carry it into Lavendly.
 
 ## Before anything else
 
 - `get_status` once per session; never claim or deny a capability from memory.
 - `get_ledger`; every spend is measured against the available credits.
 - Never invent a tool, an argument or a model id. `get_schema` when in doubt.
-- Read the brief for: goal, audience, platform, aspect, duration, the hero
-  (product or character), the feeling, assets the user already has. Ask one
-  question only when a missing answer changes the film. Otherwise decide and
-  say what you assumed in one line.
+- Read the brief for: video type, goal, audience, platform, aspect,
+  duration, the hero (product or character), the feeling, what must be
+  shown, how it should end, the sound, assets the user already has. Ask one
+  question only when a missing answer changes the video. Otherwise decide
+  and say what you assumed in one line.
 
 ## Sequence
 
 | Step | Call | Purpose |
 |---|---|---|
 | 1 | `get_status`, `get_ledger` | Capabilities, credits |
-| 2 | write | Creative direction: premise, feeling, visual rules, the hero's locked description (see Hero lock) |
-| 3 | write | Arc and coverage: 3 to 6 scenes with a purpose each, a hook in scene 1, a payoff at the end, shot sizes that change between neighbours |
+| 2 | write | Intent card: type, objective, structure, must show, ending, sound, continuity mode, the hero's locked description ([references/video-types.md](references/video-types.md)) |
+| 3 | write | Sequence plan: 3 to 6 scenes, each with purpose, action and outcome, what it takes from the previous shot and hands to the next, plus the continuity ledger ([references/sequence-plan.md](references/sequence-plan.md)) |
 | 4 | write | Per shot: a still-frame prompt (the opening) and a motion prompt (the clip), in the structure from [references/prompt-anchors.md](references/prompt-anchors.md) |
-| 5 | show | The direction, the shot list and the hero description to the user; wait for "go" |
+| 5 | show | The intent card, the shot list and the hero description to the user; wait for "go" |
 | 6 | `import_asset` | The hero image and any style plate the user supplied (public URL or Asset Library); returns the hosted url |
 | 7 | `create_workflow` | `shots: [{prompt, duration}]` in order, `aspect`, `videoModel`, `project_name` when named, `idempotency_key` |
 | 8 | `get_workflow` | Collect, per scene in order: the group, the image node (`img_` prefix) and the clip node (`vid_` prefix) |
@@ -44,13 +48,24 @@ gives the agent that judgment and the exact calls that carry it into Lavendly.
 | 11 | `attach_track` | Narration on the first clip, one voice for the film; one music score on the first clip with `ducking: true`; captions via `subtitleStyle` |
 | 12 | `estimate_cost` | Announce total, `opening_image_credits` and balance in one line; get approval; pass the approved number as `max_credits` |
 | 13 | `generate_scene` | Scene by scene in order (`node_id`), so each scene can be checked before the next is paid for |
-| 14 | `get_generation_status`, `get_scene_frame` | Silent polling; a frame per scene as it lands |
-| 15 | `quality_check` | Every scene; on drift or a failed check follow Repair below, at most one re-roll per scene |
+| 14 | `get_generation_status`, `get_scene_frame` | Silent polling; a frame per scene as it lands; update the ledger from its last frame |
+| 15 | `quality_check`, `get_scene_frame` | Each scene (level A), then its cut with the previous scene (level B, last and first frames); findings and repair below |
 | 16 | `edit_clip`, `split_clip`, `move_clip` | The cut: trims to the useful window, fades where a dip to black is wanted, placement |
 | 17 | `create_render` | Free; `get_render` until done |
-| 18 | `quality_check` | The rendered film once, without `node_id`; then deliver: link, length, what the viewer will see |
+| 18 | `quality_check`, `get_workflow_audio` | The whole video (level C) against the intent card; repair, render again, re-check; then deliver: link, length, what the viewer will see, any finding the user accepted |
 
 ## Decision rules
+
+### Intent before rules
+
+- Every rule below is applied through the intent card and its continuity
+  mode (strict, flexible, discontinuous). A deviation is an error only when
+  it breaks the card; a music video's wardrobe change or a social clip's
+  jump cut can be the point. Priorities by type and the test for "choice or
+  error" are in [references/video-types.md](references/video-types.md).
+- Do not force film conventions on a video that does not need them: a
+  tutorial opens on the goal and ends on the result, a social clip has no
+  establishing shot, a montage has no physical continuity.
 
 ### Hero lock
 
@@ -70,9 +85,17 @@ gives the agent that judgment and the exact calls that carry it into Lavendly.
 
 ### Arc and coverage
 
-- Scene 1 carries the hook: a striking frame, a question or a detail that
-  promises the reveal. The payoff scene delivers it. Between them each scene
-  adds information, action or feeling; a scene that adds none is cut.
+- The opening earns attention the way the type needs: a hook for an ad or a
+  social clip, the goal for a tutorial, the question for a documentary or an
+  explainer. The ending delivers what the card promised: payoff, call to
+  action, result, summary, final reveal or a chosen open ending. Between
+  them each scene adds information, action or feeling; a scene that adds
+  none is cut.
+- Coverage serves comprehension: an establishing shot when the place
+  matters, an insert when a detail carries the step or the feature, a
+  reaction when the feeling carries the beat. Never a shot added for length.
+- Introduce before use: the product before its feature, the tool before the
+  step, the person before their reaction.
 - One primary action per clip. A clip that needs two actions is two clips.
 - Change shot size between neighbours (detail, then wide, then medium); two
   equal sizes in a row read as a slideshow. Pick framing and angle from
@@ -109,9 +132,12 @@ gives the agent that judgment and the exact calls that carry it into Lavendly.
 ### Continuity across scenes
 
 - Same hero description, same light world, same place geometry unless the
-  story moves. When a shot continues the previous one, describe the exit
-  motion of the earlier shot at the start of the new motion prompt so
-  velocity carries over the cut.
+  story moves, as strict as the continuity mode says. When a shot continues
+  the previous one, chain it from the earlier shot's last frame and describe
+  the exit motion at the start of the new motion prompt so velocity carries
+  over the cut ([references/sequence-plan.md](references/sequence-plan.md)).
+- The ledger records what each landed frame shows (state, position,
+  facing), not what the prompt asked for. The next prompt starts from it.
 - After scene 1 lands, open its frame before paying for scene 2. If the hero
   drifted there, fix scene 1 first; every later scene inherits it.
 - The physical checks (hands, contact, shadows, reflections, object state)
@@ -150,20 +176,34 @@ gives the agent that judgment and the exact calls that carry it into Lavendly.
 - A re-roll is paid; at most one per scene, with the fix named. Over 30
   percent of the balance, ask first. When `sufficient` is false, stop.
 
-## Repair
+## Findings and repair
 
-When a scene fails `quality_check`, drifts from the hero, or breaks a rule:
+Report each problem as a finding: where, the issue, why it matters for this
+video, the fix, the fix type, and how sure you are. Rank by severity
+(Critical, High, Medium, Low) and show Low only when nothing ranks above it.
+Format and scale in
+[references/quality-control.md](references/quality-control.md).
+
+Repair with the smallest fix that works, in this order: an edit (trim,
+split, reorder, speed), an audio change (volume, ducking, native mode,
+timing), a transition (dip to black, a cut moved onto a motion), then a
+targeted re-roll of one scene. When a re-roll is the fix:
 
 1. Name the most damaging visible failure (identity, light, an action that
-   never happened, an artefact).
+   never happened, an artefact, a broken hand-off from the previous shot).
 2. Simplify: one action, one camera move, fewer objects, stillness where
    motion added nothing.
-3. Strengthen the anchor: the hero description verbatim, the reference wired,
-   the opening prompt showing the start state, the end state explicit.
+3. Strengthen the anchor: the hero description verbatim, the reference
+   wired, the opening image chained from the previous shot when the action
+   continues, the end state explicit.
 4. Append the server's `reroll_hint` and regenerate that scene only.
 5. Still failing: keep the better take, tell the user what is wrong and what
    it would cost to try a different direction. Never add a longer negative
    list; write a clearer positive instruction.
+
+After any repair, check the scene again, both of its cuts, and the whole
+video after the next render. Say a fix is done only after that check
+passed; before it, say "applied, not yet checked".
 
 ## Compatibility
 
@@ -171,9 +211,11 @@ When a scene fails `quality_check`, drifts from the hero, or breaks a rule:
 plus `duration` on servers that carry the synthesis update. Try that form
 first. If the server answers `url required`, ask the user to generate the
 voice or music in the Lavendly app (Asset Library), then attach the hosted
-file by `url` and continue. `get_scene_frame` returns a frame from the middle
-of the clip on current servers; a last-frame option is arriving and, where
-`get_schema` shows it, is the frame to show for a shot that continues.
+file by `url` and continue. `get_scene_frame` takes a frame option (first,
+mid, last) on current servers; where `get_schema` does not show it, the
+call returns the mid frame, the cut checks rest on mid frames (say the
+confidence is lower), and a continuing shot is anchored by describing the
+earlier shot's end state in its prompt.
 
 ## When to stop
 
@@ -201,15 +243,21 @@ of the clip on current servers; a last-frame option is arriving and, where
 
 ## Quality gate before delivery
 
-Every shot has a purpose; the hero is the same object in every frame; light
-direction holds within each scene; the action is readable; shot sizes vary
-on purpose; sound matches what is seen; the total length matches the target;
-nothing in the frame looks like a phone UI, a timestamp, a watermark or stray
-text. The full checklist is
+Three levels, judged against the intent card. Each asset: passes
+`quality_check`, the hero is itself, the action happened, text and products
+are correct, no stray UI or watermark. Each cut: the hand-off from the
+previous shot holds as strictly as the continuity mode asks, nothing is
+missing between them, sound carries across. The whole video: it does what
+the card says, information arrives in order, the pace suits the type, sound
+and picture agree, the ending is the promised one, the length matches. No
+Critical or High finding is open unless the user accepted it knowingly. The
+full checklist is
 [references/quality-control.md](references/quality-control.md).
 
 ## Reference docs
 
+- [references/video-types.md](references/video-types.md): the intent card, continuity modes, priorities by type, choice or error.
+- [references/sequence-plan.md](references/sequence-plan.md): the shot rows, dependencies, the continuity ledger, how the plan reaches the platform.
 - [references/mcp-calls.md](references/mcp-calls.md): exact call shapes, the hero wiring, trims.
 - [references/prompt-anchors.md](references/prompt-anchors.md): the two prompt structures, banned words, slop list, narration budget.
 - [references/camera-language.md](references/camera-language.md): shot sizes, angles, composition, movement.
@@ -217,5 +265,5 @@ text. The full checklist is
 - [references/scene-recipes.md](references/scene-recipes.md): product, food, car, interior, explainer, dialogue, suspense, travel, craft, before and after.
 - [references/visual-realism.md](references/visual-realism.md): physical logic, motion, artefacts, repair.
 - [references/editing-and-sound.md](references/editing-and-sound.md): arc, coverage, cuts, rhythm, sound layers, music direction.
-- [references/quality-control.md](references/quality-control.md): the review checklist.
+- [references/quality-control.md](references/quality-control.md): asset, cut and whole-video checks, audio checks, severity, findings, repair order.
 - [references/troubleshooting.md](references/troubleshooting.md): error strings and what to do.
