@@ -50,7 +50,7 @@ const TOOLS = new Set([
 // error envelope. Add here with the source when a skill needs a new one.
 const FIELDS = new Set([
   // tool arguments
-  'workflow_id', 'node_id', 'clip_id', 'clip_ids', 'track_id', 'channel_id', 'job_id',
+  'workflow_id', 'subreddit', 'node_id', 'clip_id', 'clip_ids', 'track_id', 'channel_id', 'job_id',
   'project_id', 'project_name', 'idempotency_key', 'video_url', 'native_audio',
   'expect_audio', 'skip_vlm', 'remove_source_node',
   // estimate_cost, get_generation_status, quality_check, publish responses

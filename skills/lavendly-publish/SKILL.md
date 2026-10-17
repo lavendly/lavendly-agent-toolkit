@@ -32,10 +32,10 @@ itself boring.
 | 1 | `list_channels` | `channels[{id, name, platform}]` and `connected` |
 | 2 | check | `connected` false: the user must connect a channel in Settings (Connect Postiz). You cannot do it. Stop |
 | 3 | `list_renders` | Confirm a `done` render and which one will post (the latest by default) |
-| 4 | write | Title (required for YouTube), caption, and for a schedule the ISO 8601 time in the user's timezone |
+| 4 | write | Title (required for YouTube and Reddit), the community for Reddit, caption, and for a schedule the ISO 8601 time in the user's timezone |
 | 5 | confirm | One message: channel and platform, title, first line of the caption, now or the exact local time with offset, the AI-disclosure note, the "cannot be undone" note. Wait for a yes |
-| 6a | `publish_video` | `workflow_id`, `channel_id`, `title`, `caption`, `idempotency_key` |
-| 6b | `schedule_video` | `workflow_id`, `channel_id`, `when`, `title`, `caption` |
+| 6a | `publish_video` | `workflow_id`, `channel_id`, `title`, `caption`, `idempotency_key`; `subreddit` for Reddit |
+| 6b | `schedule_video` | `workflow_id`, `channel_id`, `when`, `title`, `caption`; `subreddit` for Reddit |
 | 7 | report | Status (`publishing`, `published`, `scheduled`), the post link when returned (`release_url`), the local time for a schedule |
 
 Exact JSON: [references/mcp-calls.md](references/mcp-calls.md).
@@ -58,6 +58,7 @@ Exact JSON: [references/mcp-calls.md](references/mcp-calls.md).
 | YouTube | required, 100 characters or fewer, plain, no clickbait, no all caps | description: what the film shows, one line; hashtags at most three |
 | TikTok | used when given, keep it short | the caption carries the post; hashtags at most three; no "link in bio" unless the user has one |
 | Instagram | not used | first line is the hook; plain sentences; hashtags at the end |
+| Reddit | required, 300 characters or fewer, written like a person posting, not an ad | the post text under the video; no hashtags. `subreddit` is the community the user names (r/name); never pick one for them. Communities that ban video or require a flair reject the post |
 | X | not used | one sentence and the point; under 200 characters |
 
 - Present tense, concrete, in the user's language. No exclamation marks, no
