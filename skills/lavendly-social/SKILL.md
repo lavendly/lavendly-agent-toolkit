@@ -43,7 +43,7 @@ post. This skill supplies the format decisions on top.
 | 4 | write | Script inside 2.5 words per second, spoken from 0.0 s; beat sheet with a change every 2 to 3 s ([references/retention.md](references/retention.md)) |
 | 5 | write | Shot list from the recipe; still-frame and motion prompts ([references/prompt-anchors.md](references/prompt-anchors.md), [references/phone-footage.md](references/phone-footage.md) for the native look) |
 | 6 | show | Hook, script, shot list (one line each), look, sound, model, credits; wait for "go" |
-| 7 | `import_asset` | The user's footage, a face or product reference, a long video to clip |
+| 7 | `list_assets`, `import_asset` | The user's footage, a face or product reference, a long video to clip: already in Lavendly, `list_assets` (show the name when more than one fits); a public URL, `import_asset`; a clip takes `data.duration` from `metadata.duration_sec` |
 | 8 | `create_workflow` | `shots`, `aspect` (9:16 unless the card says otherwise), `videoModel`, `idempotency_key` ([references/mcp-calls.md](references/mcp-calls.md)) |
 | 9 | `get_workflow`, `update_workflow` | Still-frame prompts; reference node with its role; imported clips as ready nodes |
 | 10 | `set_clip_native_audio` | Per clip: `mix` under voice, `native` for spoken lines and the sound that is the joke, `off` for silent b-roll |
@@ -175,8 +175,8 @@ Details and per-recipe builds: [references/models-and-credits.md](references/mod
 `attach_track` synthesizes the voiceover from `text` and the music from `mood`
 plus `duration` on servers that carry the synthesis update. Try that form
 first. If the server answers `url required`, ask the user to make the voice
-or the music in the Lavendly app (Asset Library), then attach the hosted file
-by `url`. A voiceover attached by `url` has no word timings and gets no
+or the music in the Lavendly app (Asset Library), then find it with
+`list_assets` and attach its `url`. A voiceover attached by `url` has no word timings and gets no
 burned captions; say so.
 
 ## When to stop
@@ -192,7 +192,8 @@ burned captions; say so.
 - `sufficient` is false, or the user declines the estimate.
 - `needs_browser`, `stalled` twice, the same failure twice: as
   lavendly-director says.
-- Media pasted in the chat: ask for an Asset Library upload or a public URL.
+- Media pasted in the chat: ask for an Asset Library upload, then
+  `list_assets`; or a public URL, then `import_asset`.
 
 ## UX rules
 

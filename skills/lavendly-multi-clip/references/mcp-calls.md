@@ -273,6 +273,27 @@ Free, reuse-aware. Then poll:
 Until `status` is `done` (read `result.video_url`) or `failed`. Two retries
 at most, same key.
 
+## `list_assets`: media already in Lavendly
+
+When the user says the file is already in Lavendly (their library, an
+earlier upload, "my photo"), find it there first:
+
+```json
+{ "type": "image", "query": "<the name or words the user used>", "limit": 20 }
+```
+
+`type` is image, video, audio, voice or music; `query` matches the asset
+name; `limit` 1 to 200 (default 50), newest first. Returns
+`{ assets, count, total }`; each asset has `id`, `name`, `type`, `url`,
+`thumbnail_url` and `metadata` (`metadata.duration_sec` for video and
+audio), scoped to the workspace and project privacy. When more than one
+could fit, show the names and let the user pick. Use the `url` exactly as
+returned: `data.url` on an image node (a first frame or a reference),
+`data.video_url` on a clip node, or the `attach_track` `url`. Not
+there: a public URL goes through `import_asset`; media pasted in the chat
+never reaches you, so ask the user to upload it to the Asset Library and
+list again.
+
 ## `import_asset` for the user's own reference
 
 ```json
@@ -280,7 +301,8 @@ at most, same key.
 ```
 
 Returns the hosted url. Chat attachments never reach the agent; the user
-uploads at https://lavendly.ai/AssetLibrary or gives a public URL.
+uploads at https://lavendly.ai/AssetLibrary (then `list_assets`) or gives a
+public URL.
 
 It returns a path like `/api/v1/storage/m/<key>`. Use it exactly as
 returned on image nodes and tracks; never rewrite it to an absolute https

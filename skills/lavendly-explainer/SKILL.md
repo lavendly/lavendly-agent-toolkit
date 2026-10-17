@@ -46,7 +46,7 @@ decisions on top.
 | 5 | write | Beat sheet: one idea per beat, a picture per sentence from the recipe and [references/visual-metaphors.md](references/visual-metaphors.md); mark each beat Picture or Page |
 | 6 | write | Shot list from the recipe tables; a still-frame prompt and a motion prompt per shot ([references/prompt-anchors.md](references/prompt-anchors.md)) |
 | 7 | show | Script with word counts, shot list (one line each), look line, sound plan, model and credits; wait for "go" |
-| 8 | `import_asset` | Real footage, screen recordings, photos, a hero or style reference the user supplied |
+| 8 | `list_assets`, `import_asset` | Real footage, screen recordings, photos, a hero or style reference the user supplied: already in Lavendly, `list_assets` (show the name when more than one fits); a public URL, `import_asset`; a video clip takes `data.duration` from `metadata.duration_sec` |
 | 9 | `create_workflow` | `shots` in order, `aspect`, `videoModel`, `idempotency_key` ([references/mcp-calls.md](references/mcp-calls.md)) |
 | 10 | `get_workflow`, `update_workflow` | Still-frame prompts on the image nodes; reference node with its role; imported footage as ready clips |
 | 11 | `set_clip_native_audio` | Every clip: `mix` 0.2 to 0.4 under narration, `native` only where the sound is the point, `off` for silent illustration |
@@ -119,7 +119,7 @@ of the first and the guards of both.
 - Data is spoken and shown in captions from the narration; a physical
   comparison may show direction (more, less, rising) but never a value.
 - Real screens, real charts, real documents and real footage are imported
-  by the user (`import_asset`) and placed as ready clips. Leave negative
+  by the user (`list_assets` or `import_asset`) and placed as ready clips. Leave negative
   space for titles the user adds in the app; say where.
 
 ### Truth and labels
@@ -192,8 +192,8 @@ the formula: [references/models-and-credits.md](references/models-and-credits.md
 `attach_track` synthesizes the voiceover from `text` and the music from `mood`
 plus `duration` on servers that carry the synthesis update. Try that form
 first. If the server answers `url required`, ask the user to make the voice
-or the music in the Lavendly app (Asset Library), then attach the hosted file
-by `url`. A voiceover attached by `url` carries no word timings, so it gets
+or the music in the Lavendly app (Asset Library), then find it with
+`list_assets` and attach its `url`. A voiceover attached by `url` carries no word timings, so it gets
 no burned captions; say so and offer the synthesized voice instead.
 
 ## When to stop
@@ -208,8 +208,8 @@ no burned captions; say so and offer the synthesized voice instead.
 - More than 90 s in one film: propose parts.
 - `needs_browser`, `stalled` twice, the same failure twice on one scene: as
   lavendly-director says.
-- Media pasted in the chat: ask for an Asset Library upload or a public URL,
-  then `import_asset`.
+- Media pasted in the chat: ask for an Asset Library upload, then
+  `list_assets`; or a public URL, then `import_asset`.
 
 ## UX rules
 

@@ -35,7 +35,7 @@ or you say this one is critical." Unattended: skipped line, stop.
 ## `url required` (code `invalid_args`) on `attach_track`
 
 No audio synthesis on this server. The track needs a hosted file from the
-Lavendly app (Asset Library). Attended: ask once. Unattended: skip the track,
+Lavendly app (Asset Library), found with `list_assets`. Attended: ask once. Unattended: skip the track,
 say so in the report, do not fail the whole run because of it unless the
 brief requires narration.
 

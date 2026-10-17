@@ -22,6 +22,9 @@ Added:
     light and sound, model picks with credits, prompt pairs, failure modes,
     policy guards).
 - Eval scenarios 24 to 56 for the new skills.
+- `list_assets` (lavendly/lavendlyai#743): every skill that takes the user's
+  own media finds it in the Asset Library first and uses the returned url;
+  `import_asset` is for public URLs only.
 
 Changed:
 

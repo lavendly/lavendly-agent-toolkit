@@ -57,7 +57,8 @@ chat call with image output; the price per image is flat.
   credits per run.
 
 When a shot needs one of these, ask the user to make the image in the app
-(or upload it to the Asset Library) and bring it back with `import_asset`.
+(or upload it to the Asset Library) and find it with `list_assets`; only a
+public URL goes through `import_asset`.
 
 ## Writing the still-frame prompt
 

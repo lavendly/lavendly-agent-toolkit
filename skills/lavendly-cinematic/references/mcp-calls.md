@@ -14,6 +14,27 @@ voice and music config, not video models: the model facts come from this
 skill's tables, and `estimate_cost` `per_scene` shows the model each scene
 will use.
 
+## `list_assets`: media already in Lavendly
+
+When the user says the file is already in Lavendly (their library, an
+earlier upload, "my photo"), find it there first:
+
+```json
+{ "type": "image", "query": "<the name or words the user used>", "limit": 20 }
+```
+
+`type` is image, video, audio, voice or music; `query` matches the asset
+name; `limit` 1 to 200 (default 50), newest first. Returns
+`{ assets, count, total }`; each asset has `id`, `name`, `type`, `url`,
+`thumbnail_url` and `metadata` (`metadata.duration_sec` for video and
+audio), scoped to the workspace and project privacy. When more than one
+could fit, show the names and let the user pick. Use the `url` exactly as
+returned: `data.url` on an image node (a first frame or a reference),
+`data.video_url` on a clip node, or the `attach_track` `url`. Not
+there: a public URL goes through `import_asset`; media pasted in the chat
+never reaches you, so ask the user to upload it to the Asset Library and
+list again.
+
 ## `import_asset`: the references
 
 ```json
@@ -24,7 +45,7 @@ Repeat for Tom and for the kitchen plate. Each returns a hosted Lavendly url.
 A character reference is a clean, evenly lit, front or three-quarter head
 and shoulders on a plain background; a full-body sheet with several faces
 averages them into a stranger. Media pasted into the chat never reaches
-you: ask for an Asset Library upload or a public URL.
+you: ask for an Asset Library upload (then `list_assets`) or a public URL.
 
 It returns a path like `/api/v1/storage/m/<key>`. Use it exactly as
 returned on image nodes and tracks; never rewrite it to an absolute https
@@ -193,7 +214,8 @@ New clips have no mode: set every clip.
 
 One track carries the whole script, 2.3 words per second of the shots it
 covers. If the server answers `url required`, the user makes the voice or
-the score in the app's Asset Library and you attach the hosted file by `url`
+the score in the app's Asset Library, you find it with `list_assets` and
+attach its `url`
 (a voiceover by `url` gets no captions). A tempo in a score brief is a
 request the provider may not follow: never promise exact BPM; ask the user
 to confirm the downbeats by ear.

@@ -44,7 +44,7 @@ it never replaces the director's checks.
 | 4 | write | Shot list from the recipe: size, angle, lens feel, move, action, the one emotion of the beat, cut length, model length. Dialogue gets coverage ([references/dialogue-scenes.md](references/dialogue-scenes.md)) |
 | 5 | write | Per shot a still-frame prompt (under 500 characters) and a motion prompt in the model's dialect ([references/prompt-anchors.md](references/prompt-anchors.md)); performance words from [references/acting.md](references/acting.md) |
 | 6 | show | Logline, shot list, cast descriptions, sound plan, model and rough cost; wait for "go" |
-| 7 | `import_asset` | Character references, a location or style plate the user supplied |
+| 7 | `list_assets`, `import_asset` | Character references, a location or style plate the user supplied: already in Lavendly, `list_assets` (show the name when more than one fits); a public URL, `import_asset` |
 | 8 | `create_workflow` | `shots` with the motion prompts and model lengths, one `aspect`, one `videoModel`, `project_name` when named, `idempotency_key` |
 | 9 | `get_workflow`, `update_workflow` | Still prompts onto the image nodes; references wired within the model's cap, each with its role sentence ([references/mcp-calls.md](references/mcp-calls.md)) |
 | 10 | `set_clip_native_audio` | `native` on dialogue and sound-led shots, `mix` under narration, `off` where only the score plays |
@@ -164,8 +164,8 @@ it never replaces the director's checks.
 `attach_track` synthesizes the voiceover from `text` and the music from
 `mood` plus `duration` on servers that carry the synthesis update. Try that
 form first. If the server answers `url required`, ask the user to make the
-voice or the score in the Lavendly app (Asset Library), then attach the
-hosted file by `url`. `get_scene_frame` takes a frame option (first, mid,
+voice or the score in the Lavendly app (Asset Library), then find it with
+`list_assets` and attach its `url`. `get_scene_frame` takes a frame option (first, mid,
 last) where `get_schema` lists it; without it, a continuing shot is anchored
 by describing the earlier shot's end state in the next motion prompt.
 
@@ -181,8 +181,8 @@ by describing the earlier shot's end state in the next motion prompt.
   model) and ask before more spend.
 - `needs_browser`, or `stalled` on two polls: report; never start a second
   job for the same scene.
-- Media pasted into the chat: ask for an Asset Library upload or a public
-  URL, then `import_asset`.
+- Media pasted into the chat: ask for an Asset Library upload, then
+  `list_assets`; or a public URL, then `import_asset`.
 
 ## UX rules
 

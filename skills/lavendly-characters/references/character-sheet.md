@@ -7,8 +7,8 @@ once, approved once, and reused by url in every scene and every episode.
 
 | Source | How | Cost |
 |---|---|---|
-| A real image the user owns (photo of a consenting person, a packshot, a drawing, an earlier episode's sheet) | `import_asset` with a public url or an Asset Library upload | free |
-| Made in the Lavendly app | An image node with the user's photos connected (image-to-image, up to 3 references), or the in-app Director's lock subject (one picture: front, three-quarter, side on white), or a trained persona for a consenting person; then imported | 1 to 5 credits per image; persona training 100 |
+| A real image the user owns (photo of a consenting person, a packshot, a drawing, an earlier episode's sheet) | Already in the Asset Library: `list_assets`; a public url: `import_asset` | free |
+| Made in the Lavendly app | An image node with the user's photos connected (image-to-image, up to 3 references), or the in-app Director's lock subject (one picture: front, three-quarter, side on white), or a trained persona for a consenting person; then found with `list_assets` | 1 to 5 credits per image; persona training 100 |
 | The MCP casting scenes | Section 3: two scenes whose opening images are the sheet and whose clips are screen tests | 2 opening images plus 2 short clips |
 
 Media pasted into the chat never reaches the agent: ask for an Asset

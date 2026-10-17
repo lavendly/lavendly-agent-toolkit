@@ -141,8 +141,8 @@ Exact JSON: [references/mcp-calls.md](references/mcp-calls.md).
 `attach_track` synthesizes the voiceover from `text` and the score from `mood`
 plus `duration` on servers that carry the synthesis update. Try that form
 first. If the server answers `url required`, ask the user to generate the
-voice and the music in the Lavendly app (Asset Library) and attach the hosted
-files by `url`, still one voiceover and one score wired to every clip. A
+voice and the music in the Lavendly app (Asset Library), find them with
+`list_assets` and attach each by `url`, still one voiceover and one score wired to every clip. A
 voiceover by `url` gets no captions. Say it once.
 
 ## When to stop
@@ -153,7 +153,8 @@ voiceover by `url` gets no captions. Say it once.
 - `stalled` twice: report, re-check once, never duplicate a running job.
 - The same scene fails twice: the prompt must change. Show the frame, ask.
 - Media pasted into the chat: it never reaches you. Ask for an upload at
-  https://lavendly.ai/AssetLibrary or a public URL, then `import_asset`.
+  https://lavendly.ai/AssetLibrary, then `list_assets`; or a public URL,
+  then `import_asset`.
 
 ## UX rules
 

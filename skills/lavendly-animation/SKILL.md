@@ -46,7 +46,7 @@ children's pacing) and the exact way each decision reaches Lavendly's models.
 | 5 | write | Shot list from the recipe's structure for the asked length: size, angle, lens feel, move, action, cut length, generated length |
 | 6 | write | Per shot a still-frame prompt (under 500 characters) and a motion prompt in the model's dialect ([references/prompt-anchors.md](references/prompt-anchors.md)) |
 | 7 | show | Style bible, hero block, shot list, sound plan, model and rough credits; wait for "go" |
-| 8 | `import_asset` | Hero sheet, style plate, any stills the user supplies |
+| 8 | `list_assets`, `import_asset` | Hero sheet, style plate, any stills the user supplies: already in Lavendly, `list_assets` (show the name when more than one fits); a public URL, `import_asset` |
 | 9 | `create_workflow` | `shots` with motion prompts and exact durations, `aspect`, `videoModel`, `idempotency_key` |
 | 10 | `get_workflow` | Image node and clip node per scene |
 | 11 | `update_workflow` | Still prompts on image nodes; hero and plate wired into every clip within the cap; user stills as image urls ([references/mcp-calls.md](references/mcp-calls.md)) |
@@ -203,8 +203,8 @@ children's pacing) and the exact way each decision reaches Lavendly's models.
 `attach_track` synthesizes the voiceover from `text` and the music from
 `mood` plus `duration` on servers that carry the synthesis update. Try that
 form first. If the server answers `url required`, ask the user to make the
-voice or music in the Lavendly app (Asset Library), then attach the hosted
-file by `url` and continue. `get_scene_frame` takes a frame option (first,
+voice or music in the Lavendly app (Asset Library), then find it with
+`list_assets` and attach its `url` and continue. `get_scene_frame` takes a frame option (first,
 mid, last) on current servers; where `get_schema` does not show it, the
 mid frame is returned, the style check rests on it (say the confidence is
 lower), and a continuing shot describes the earlier shot's end state in its

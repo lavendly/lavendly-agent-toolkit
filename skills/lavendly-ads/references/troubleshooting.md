@@ -41,7 +41,7 @@ idempotency key.
 
 | You see | It means | Do |
 |---|---|---|
-| `url required` from `attach_track` | no synthesis on this server | ask the user to make the voice or music in the Asset Library; attach by `url` |
+| `url required` from `attach_track` | no synthesis on this server | ask the user to make the voice or music in the Asset Library; find it with `list_assets`, attach by `url` |
 | A refusal naming the duration | the length is not on the model's list | set a listed length with `update_workflow` (Veo 4, 6, 8), trim later |
 | A 400 naming references, or a scene missing from a render that says done (a referenced Veo 3.1 Lite scene is retried, then skipped uncharged) | more references than the model takes, or any on Veo 3.1 Lite | keep the packshot only (cap 2, MCP path 3 besides the first frame on Seedance and Wan 2.6, 2.7); none on Lite |
 | `insufficient_credits` or `sufficient` false | the balance cannot cover it | stop; offer a cheaper model from the recipe or fewer shots |

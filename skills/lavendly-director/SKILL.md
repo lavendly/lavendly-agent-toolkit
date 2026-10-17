@@ -6,7 +6,7 @@ description: |
   Direct a 15 to 90 s video of any format (ad, demo, tutorial, explainer, documentary, story, music video, social) on the Lavendly MCP: set the intent and continuity mode, lock the hero, plan each shot and what it hands to the next, write a still and a motion prompt per shot, plan the sound, cut, check each asset, each cut and the whole video against the intent, make the smallest repair.
   Use when: "a video ad for my lamp", "direct this", "same product in every scene", "a tutorial people can follow", "the clips do not fit together", "it looks like AI", or any brief where look, continuity and a finished edit matter more than speed.
   Chain: lavendly-multi-clip is the fast path for pasted anchors and no hero asset; lavendly-storyteller covers one shot under 12 s; lavendly-review owns the quality loop; lavendly-publish posts; lavendly-cost-aware owns spend approval.
-  NOT for: one-shot clips, posting, films over 90 s (propose two), talking-head interviews, or media pasted into the chat (Asset Library first).
+  NOT for: one-shot clips, posting, films over 90 s (propose two), talking-head interviews, or media pasted into the chat (upload, then `list_assets`).
 argument-hint: "[brief] [hero asset url or 'generate the hero'] [duration 15..90] [aspect] [voice or 'native sound']"
 ---
 
@@ -42,7 +42,7 @@ This skill gives the agent that judgment and the exact calls for Lavendly.
 | 3 | write | Sequence plan: shots of 4, 6 or 8 s grouped under 1 to 6 headings (place and time), as many shots as the length needs (a 60 s video is about 10), each with purpose, action and outcome, what it takes from the previous shot and hands to the next, plus the continuity ledger ([references/sequence-plan.md](references/sequence-plan.md)) |
 | 4 | write | Per shot: a still-frame prompt (the opening) and a motion prompt (the clip), in the structure from [references/prompt-anchors.md](references/prompt-anchors.md) |
 | 5 | show | The intent card, the shot list and the hero description to the user; wait for "go" |
-| 6 | `import_asset` | The hero image and any style plate the user supplied (public URL or Asset Library); returns the hosted url |
+| 6 | `list_assets`, `import_asset` | The hero image and any style plate the user supplied: already in Lavendly, `list_assets` (show the name when more than one fits); a public URL, `import_asset`; use the returned url as is |
 | 7 | `create_workflow` | `shots: [{prompt, duration}]` in order, `aspect`, `videoModel`, `project_name` when named, `idempotency_key` |
 | 8 | `get_workflow`, `set_scene_plan` | Collect, per scene in order: the group, the image node (`img_` prefix) and the clip node (`vid_` prefix); then store the plan, per clip node: `heading` (the plan's heading word for word), `present` (exactly who is seen), `hands_off`. A later session starts with `get_scene_plan` |
 | 9 | `update_workflow` | Set each image node's `prompt` to the still-frame prompt; add one reference node for the hero and wire it into every clip and every image node (see [references/mcp-calls.md](references/mcp-calls.md)) |
@@ -240,8 +240,8 @@ passed; before it, say "applied, not yet checked".
 
 `attach_track` synthesizes the voiceover from `text` and the music from `mood`
 plus `duration`; try that first. On `url required`, ask the user to generate
-the voice or music in the Lavendly app (Asset Library), then attach the
-hosted file by `url` and continue. Where `get_schema` shows no frame option
+the voice or music in the Lavendly app (Asset Library), then find it with
+`list_assets` and attach its `url` and continue. Where `get_schema` shows no frame option
 on `get_scene_frame`, it returns the mid frame: cut checks rest on mid
 frames (say the confidence is lower) and a continuing shot is anchored by
 describing the earlier shot's end state. A self-hosted server without
@@ -258,7 +258,7 @@ by the frames alone.
 - The same failure twice on one scene: the direction must change before any
   further spend. Ask.
 - Media pasted into the chat never reaches you: ask for an upload to the
-  Asset Library or a public URL, then `import_asset`.
+  Asset Library, then `list_assets`; or a public URL, then `import_asset`.
 
 ## UX rules
 

@@ -177,8 +177,9 @@ Wire the plant reference and the pot reference; say each one's job: "Reference 1
 - Never generate an interface. The model invents buttons, misspells
   labels and changes layouts between shots.
 - The user records the real screen; `import_asset` (kind video, 3 minutes
-  and 64 MB at most by url; bigger files through the Asset Library upload) and place it as a ready clip
-  (mcp-calls.md). Trim each step with `edit_clip`; a digital punch-in with
+  and 64 MB at most by url; bigger files through the Asset Library upload,
+  then `list_assets`) and place it as a ready clip with `data.duration` from
+  `metadata.duration_sec` (mcp-calls.md). Trim each step with `edit_clip`; a digital punch-in with
   `crop` no tighter than about 1.2 times, or the text softens.
 - Generated shots carry the human context only: hands on a keyboard with
   the screen turned away, a person at a desk seen from behind, a coffee cup

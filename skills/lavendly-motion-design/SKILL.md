@@ -45,7 +45,7 @@ about what Lavendly's models and edits can do and what they cannot.
 | 4 | write | Shot list from the recipe for the length: size, angle, lens feel, one move with its amount, action, easing, cut length, generated length, beat grid |
 | 5 | write | Per shot a still prompt (under 500 characters, empty areas described as surfaces) and a motion prompt in the model's dialect ([references/prompt-anchors.md](references/prompt-anchors.md)) |
 | 6 | show | Shot list, look, sound plan, model, rough credits; wait for "go" |
-| 7 | `import_asset` | Packshots, plates, the user's sonic logo |
+| 7 | `list_assets`, `import_asset` | Packshots, plates, the user's sonic logo: already in Lavendly, `list_assets` (show the name when more than one fits); a public URL, `import_asset` |
 | 8 | `create_workflow` | `shots` with motion prompts and exact durations, `aspect`, `videoModel`, `idempotency_key` |
 | 9 | `get_workflow`, `update_workflow` | Still prompts or packshot urls on image nodes; references within the cap ([references/mcp-calls.md](references/mcp-calls.md)) |
 | 10 | `set_clip_native_audio`, `attach_track`, `get_workflow_audio` | Per-clip mode; one score or motif; narration where the recipe uses it; each track with `"scope": "film"`, confirmed with `get_workflow_audio` to reach every clip (only if not, `update_workflow` edges to the missing clips) ([references/mcp-calls.md](references/mcp-calls.md)) |
@@ -171,8 +171,9 @@ about what Lavendly's models and edits can do and what they cannot.
 `attach_track` synthesizes the voiceover from `text` and the music from
 `mood` plus `duration` on servers that carry the synthesis update. Try that
 form first. If the server answers `url required`, ask the user to make the
-voice or music in the Lavendly app (Asset Library), or import their own file
-with `import_asset`, then attach the hosted file by `url` and continue.
+voice or music in the Lavendly app (Asset Library) and find it with
+`list_assets`, or import their own file with `import_asset`, then attach
+the hosted file by `url` and continue.
 `get_scene_frame` takes a frame option (first, mid, last) on current
 servers; where `get_schema` does not show it, the loop seam and product
 drift checks rest on the mid frame (say the confidence is lower) and

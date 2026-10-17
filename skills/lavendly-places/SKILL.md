@@ -45,7 +45,7 @@ plan, ledger, three-level checks); this skill makes the place decisions.
 | 4 | write | Concept gate: the film retold in three sentences; a muted viewer knows where it is, what it offers, what to do |
 | 5 | write | Sequence plan from the recipe; a ledger row per place (geometry, light direction, time of day); a still and a motion prompt per shot ([references/prompt-anchors.md](references/prompt-anchors.md)) |
 | 6 | show | Place card, shot list with which photo opens which scene, sound plan, model, cost range; wait for "go" |
-| 7 | `import_asset` | Every photo that opens a scene (images up to 25 MB) |
+| 7 | `list_assets`, `import_asset` | Every photo that opens a scene (images up to 25 MB): already in Lavendly, `list_assets` (show the name when more than one fits); a public URL, `import_asset`; footage as a clip takes `data.duration` from `metadata.duration_sec` |
 | 8 | `create_workflow` | `shots` in order, top-level `aspect` and `videoModel`, `idempotency_key` |
 | 9 | `get_workflow`, `update_workflow` | Photo scenes: the image node's `data.url` is the photo; concept scenes: the still prompt on the image node ([references/mcp-calls.md](references/mcp-calls.md)) |
 | 10 | `set_clip_native_audio` | Every clip: `mix` under narration, `native` where the place's sound is the point, `off` for a music edit |
@@ -174,8 +174,8 @@ format from lavendly-ads and the light and camera from here.
 `attach_track` synthesizes the voiceover from `text` and the music from
 `mood` plus `duration` on servers that carry the synthesis update. Try that
 form first. If the server answers `url required`, ask the user to make the
-voice or music in the Lavendly app (Asset Library), then attach the hosted
-file by `url` and continue.
+voice or music in the Lavendly app (Asset Library), then find it with
+`list_assets` and attach its `url` and continue.
 
 ## When to stop
 
@@ -189,7 +189,8 @@ file by `url` and continue.
   melts): change the direction (shorter move, a cut, another photo) before
   more spend.
 - `needs_browser`, or `stalled` on two polls: report and stop polling.
-- Media pasted in the chat: ask for an Asset Library upload or a public URL.
+- Media pasted in the chat: ask for an Asset Library upload, then
+  `list_assets`; or a public URL, then `import_asset`.
 
 ## UX rules
 

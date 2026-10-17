@@ -8,9 +8,9 @@ and renders are free: fix sync in the edit before any re-roll.
 
 | You see | It means | Do |
 |---|---|---|
-| `url required` from `attach_track` | No synthesis on this server | The user makes the track in the app's Asset Library; attach by `url` |
-| The track file pasted in the chat | It never reaches you | Ask for the Asset Library upload or a public link; `import_asset` with `kind` music |
-| `import_asset` refuses the music file | Over 50 MB or 10 minutes, or not a public file link | Ask for a smaller export (a 320 kbps MP3 or a shorter edit) or an Asset Library upload |
+| `url required` from `attach_track` | No synthesis on this server | The user makes the track in the app's Asset Library; find it with `list_assets`, attach by `url` |
+| The track file pasted in the chat | It never reaches you | Ask for the Asset Library upload, then `list_assets`; or a public link, `import_asset` with `kind` music |
+| `import_asset` refuses the music file | Over 50 MB or 10 minutes, or not a public file link | Ask for a smaller export (a 320 kbps MP3 or a shorter edit) or an Asset Library upload, then `list_assets` |
 | video_too_long on render | The film is over 180 s | Ask for a song edit under 3 minutes, or two parts |
 | `invalid_args` naming the duration | Not a length the model makes | Use the model's list (Veo 4, 6, 8; Kling o1 5 or 10); trim later |
 | A 400 naming references, or a scene missing from a render that says done (a referenced Veo 3.1 Lite scene is retried, then skipped uncharged) | More references than the cap | 4 on Seedance and Wan 2.6, 2.7; 2 others; 0 on Veo 3.1 Lite |
