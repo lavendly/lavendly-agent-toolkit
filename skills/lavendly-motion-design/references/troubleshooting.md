@@ -7,7 +7,7 @@ to do. Never retry a paid call with a new idempotency key.
 
 | You see | It means | Do |
 |---|---|---|
-| `url required` from `attach_track` | this server does not synthesize voice or music | ask the user to make it in the app's Asset Library, attach the hosted file by `url` |
+| `url required` from `attach_track` | this server does not synthesize voice or music | ask the user to make it in the app's Asset Library, find it with `list_assets`, attach its `url` |
 | `invalid_args` naming the duration | the model does not make that length | a listed length with `update_workflow` (Veo: 4, 6, 8; Hailuo 2.3: 6, 10; FLUX 3: 5 to 20), then trim |
 | an invalid edits error from `edit_clip` | an unknown key or a value out of range | only trim, speed, volume, mute, loop, fades, crop, resize, rotate, flip, color, reverse; check the bounds. The export ignores loop and resize (and stabilize, `lut_id`) |
 | a 400 naming references, or a scene missing from a render that says done (a referenced Veo 3.1 Lite scene is retried, then skipped uncharged) | more references than the model takes, or references on Veo 3.1 Lite | the product first, the plate second, within the cap; none on Veo 3.1 Lite |

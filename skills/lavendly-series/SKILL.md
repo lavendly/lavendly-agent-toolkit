@@ -47,7 +47,7 @@ what carries between episodes and the production around them.
 | 4 | write | The pilot plan (episode 1) with the genre skill; the cost per episode and per month at the chosen cadence |
 | 5 | show | Bible, format, pilot plan, budget; wait for "go" |
 | 6 | `create_project` | One project for the show; its description holds the short bible |
-| 7 | `import_asset` | Every recurring reference, once (character sheets, head close-ups, places, style plate); keep the hosted urls in the bible |
+| 7 | `list_assets`, `import_asset` | Every recurring reference, once (character sheets, head close-ups, places, style plate): already in Lavendly, `list_assets`; a public URL, `import_asset`; keep the hosted urls in the bible |
 | 8 | director steps | Episode 1 with `create_workflow` (`project_id`, the episode name); `set_scene_plan` per clip node (`heading` equal to the plan's heading, `present` from the closed cast, `hands_off`) before any generation; references wired, sound, estimate, scene-by-scene generation, checks (each cut with `previous_node_id`), render |
 | 9 | `update_workflow` | After delivery: the episode's `description` gets its story-so-far line and its end state; `get_workflow` to read it back |
 
@@ -154,8 +154,8 @@ what carries between episodes and the production around them.
 `attach_track` synthesizes the voiceover from `text` and the music from
 `mood` plus `duration` on servers that carry the synthesis update. Try that
 form first. If the server answers `url required`, ask the user to make the
-voice or the score in the Lavendly app (Asset Library), then attach the
-hosted file by `url`; reuse that hosted score in every episode. `get_scene_frame`
+voice or the score in the Lavendly app (Asset Library), then find it with
+`list_assets` and attach its `url`; reuse that hosted score in every episode. `get_scene_frame`
 takes a frame option (first, mid, last) where `get_schema` lists it; without
 it, read the end state from the episode's description and say the
 confidence is lower.

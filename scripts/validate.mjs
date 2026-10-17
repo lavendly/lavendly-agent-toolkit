@@ -41,6 +41,8 @@ const TOOLS = new Set([
   'get_ledger', 'get_monthly_usage', 'get_status', 'get_schema',
   // Scene plan (lavendly/lavendlyai#736, live on main)
   'get_scene_plan', 'set_scene_plan',
+  // Asset Library listing (lavendly/lavendlyai#743)
+  'list_assets',
 ]);
 
 // Field names, response keys, phases and error codes the skills may backtick.
@@ -87,6 +89,9 @@ const FIELDS = new Set([
   'hands_off',
   // loudness on get_render and the film's quality_check (lavendly/lavendlyai#734)
   'integrated_lufs', 'true_peak_dbtp', 'target_lufs', 'target_true_peak_dbtp',
+  // list_assets response keys (lavendly/lavendlyai#743): asset thumbnail_url,
+  // metadata.duration_sec; duration_seconds on a clip node set from it
+  'thumbnail_url', 'duration_sec', 'duration_seconds',
 ]);
 
 const failures = [];

@@ -8,7 +8,7 @@ shot, with the fix named; after two failures, change the direction and ask.
 
 | You see | It means | Do |
 |---|---|---|
-| `url required` from `attach_track` | This server does not synthesize voice or music | The user makes it in the app's Asset Library; attach the hosted file by `url` |
+| `url required` from `attach_track` | This server does not synthesize voice or music | The user makes it in the app's Asset Library; find it with `list_assets`, attach its `url` |
 | `invalid_args` naming the duration | The model does not make that length | Set the clip to a length from the model's list (Veo 4, 6, 8; Kling o1 5 or 10; Hailuo 2.3 6 or 10) with `update_workflow`; trim later |
 | A 400 naming references, or a scene missing from a render that says done (a referenced Veo 3.1 Lite scene is retried, then skipped uncharged) | More references wired than the model takes, or references on Veo 3.1 Lite | Remove reference edges down to the cap (4 Seedance and Wan 2.6, 2.7; 2 others; 0 Lite) |
 | A Veo clip with references refused at 4 or 6 s | The provider asks for 8 s with reference images | Set that clip to 8 s; trim in the edit |

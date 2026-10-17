@@ -10,6 +10,29 @@ group, an image node (`img_` prefix) and a clip node (`vid_` prefix).
 `get_status` (voices, providers) and `get_ledger` (credits), once per
 session, both free.
 
+## `list_assets`: media already in Lavendly
+
+When the user says the file is already in Lavendly (their library, an
+earlier upload, "the clip I uploaded"), find it there first:
+
+```json
+{ "type": "video", "query": "<the name or words the user used>", "limit": 20 }
+```
+
+`type` is image, video, audio, voice or music; `query` matches the asset
+name; `limit` 1 to 200 (default 50), newest first. Returns
+`{ assets, count, total }`; each asset has `id`, `name`, `type`, `url`,
+`thumbnail_url` and `metadata` (`metadata.duration_sec` for video and
+audio), scoped to the workspace and project privacy. When more than one
+could fit, show the names and let the user pick. Use the `url` exactly as
+returned: `data.url` on an image node (a first frame or a reference),
+`data.video_url` on a clip node, or the `attach_track` `url`. An uploaded
+video as a clip costs zero generation credits; set `data.duration` (and
+`duration_seconds`) from `metadata.duration_sec`, or it is treated as 5 s. Not
+there: a public URL goes through `import_asset`; media pasted in the chat
+never reaches you, so ask the user to upload it to the Asset Library and
+list again.
+
 ## `import_asset`: the user's footage and references
 
 ```json
@@ -18,8 +41,9 @@ session, both free.
 
 Limits on `import_asset`: video 64 MB and 3 minutes, image 25 MB, music
 50 MB and 10 minutes, by `url`; inline `data` about 11 MB. Bigger video (up
-to 300 MB) goes through the Asset Library upload in the app. Long sources are cut into parts of 3
-minutes or less before import. Media pasted in the chat never reaches you.
+to 300 MB) goes through the Asset Library upload in the app, then
+`list_assets`. Long sources are cut into parts of 3 minutes or less before
+import. Media pasted in the chat never reaches you.
 
 It returns a path like `/api/v1/storage/m/<key>`. Use it exactly as
 returned on image nodes and tracks; never rewrite it to an absolute https
@@ -64,7 +88,7 @@ render (read from the render code; confirm the first render plays them).
       "id": "vid_src_1",
       "type": "videoGenerator",
       "position": { "x": 400, "y": 200 },
-      "data": { "title": "Source part 2", "video_url": "<hosted url from import_asset>", "duration": 180, "aspect": "9:16" }
+      "data": { "title": "Source part 2", "video_url": "<url from list_assets or import_asset>", "duration": 180, "aspect": "9:16" }
     }
   ],
   "edges": [],
@@ -72,7 +96,8 @@ render (read from the render code; confirm the first render plays them).
 }
 ```
 
-Set `duration` to the source part's real length. `estimate_cost` should
+Set `duration` to the source part's real length (`metadata.duration_sec`
+from `list_assets`, also as `duration_seconds`), or it is treated as 5 s. `estimate_cost` should
 show it as already generated: zero clip credits. Read the node id back from
 `get_workflow`. Never call `generate_scene` on this node: it would generate
 over the import.

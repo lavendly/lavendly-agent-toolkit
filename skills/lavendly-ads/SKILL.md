@@ -44,7 +44,7 @@ checks); this skill makes the ad decisions on top of it.
 | 4 | write | Concept gate: the ad retold in three sentences; a muted viewer gets what it is, what it does, what to do next |
 | 5 | write | Sequence plan from the recipe's structure for the length; the product row in the ledger; a still and a motion prompt per shot in the model's dialect ([references/prompt-anchors.md](references/prompt-anchors.md)) |
 | 6 | show | Ad card, shot list, product description, sound plan, model, the estimate range from the recipe; wait for "go" |
-| 7 | `import_asset` | The packshot and any lifestyle photo the user owns |
+| 7 | `list_assets`, `import_asset` | The packshot and any lifestyle photo the user owns: already in Lavendly, `list_assets` (show the name when more than one fits); a public URL, `import_asset` |
 | 8 | `create_workflow` | `shots` in order, top-level `aspect` and `videoModel`, `idempotency_key` |
 | 9 | `get_workflow`, `update_workflow` | Still-frame prompts on the image nodes; the packshot as the first frame of product-exact scenes; the packshot as a reference on the others, within the model's cap ([references/mcp-calls.md](references/mcp-calls.md)) |
 | 10 | `set_clip_native_audio` | Every clip: `native` for the product sound or a spoken line, `mix` under narration, `off` for a music edit |
@@ -82,8 +82,8 @@ UGC and the light and product rules from beauty.
 ### Product fidelity
 
 - The product is the hero and the only thing that must never change. Never
-  let a model invent it from words. `import_asset` a real packshot or
-  accurate render before any spend; without one, say the product will be
+  let a model invent it from words. Bring in a real packshot or accurate
+  render (`list_assets` if it is in Lavendly, else `import_asset`) before any spend; without one, say the product will be
   an approximation and offer to wait for a photo.
 - Opening images are made from text alone on the MCP path. So any scene
   where the product is large, centred or labelled opens on a real image:
@@ -197,8 +197,8 @@ UGC and the light and product rules from beauty.
 `attach_track` synthesizes the voiceover from `text` and the music from
 `mood` plus `duration` on servers that carry the synthesis update. Try that
 form first. If the server answers `url required`, ask the user to make the
-voice or music in the Lavendly app (Asset Library), then attach the hosted
-file by `url` and continue.
+voice or music in the Lavendly app (Asset Library), then find it with
+`list_assets` and attach its `url` and continue.
 
 ## When to stop
 
@@ -210,7 +210,8 @@ file by `url` and continue.
 - The same failure twice on one scene (label melts, product changes shape):
   change the direction (packshot frame, smaller move) before more spend.
 - `needs_browser`, or `stalled` on two polls: report and stop polling.
-- Media pasted in the chat: ask for an Asset Library upload or a public URL.
+- Media pasted in the chat: ask for an Asset Library upload, then
+  `list_assets`; or a public URL, then `import_asset`.
 
 ## UX rules
 

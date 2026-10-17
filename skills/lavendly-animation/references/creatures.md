@@ -25,8 +25,8 @@ creature per sheet:
 - Fix a flawed sheet with an edit of that sheet, never by rebuilding it from
   scratch: a rebuilt sheet is a new character.
 
-On Lavendly the sheet comes from the user (Asset Library, then
-`import_asset`), from the app, or from an approved scene 1 opening image. The
+On Lavendly the sheet comes from the user (Asset Library, found with
+`list_assets`; or a public URL, then `import_asset`), from the app, or from an approved scene 1 opening image. The
 head close-up is reference 1 in every clip that has slots; the full body is
 reference 2 on 4-reference models.
 

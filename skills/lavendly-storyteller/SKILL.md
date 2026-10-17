@@ -131,8 +131,8 @@ second apology.
 - The same failure twice in a row: the prompt or the parameters must change
   before any further spend. Ask.
 - The user pasted media into the chat: it never reaches you. Ask them to
-  upload it at https://lavendly.ai/AssetLibrary or give a public URL, then
-  bring it in with `import_asset`.
+  upload it at https://lavendly.ai/AssetLibrary, then find it with
+  `list_assets`; or to give a public URL, then bring it in with `import_asset`.
 
 ## UX rules
 

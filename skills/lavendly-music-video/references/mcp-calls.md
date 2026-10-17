@@ -7,14 +7,39 @@ placeholders in angle brackets. Read real node ids from `get_workflow`.
 
 ## The track
 
+### Already in Lavendly: `list_assets`
+
+When the user says the file is already in Lavendly (their library, an
+earlier upload, "my song"), find it there first:
+
+```json
+{ "type": "audio", "query": "<the name or words the user used>", "limit": 20 }
+```
+
+An uploaded song is filed as `audio`; a score generated in the app is `music`.
+No match under audio: list music.
+
+`type` is image, video, audio, voice or music; `query` matches the asset
+name; `limit` 1 to 200 (default 50), newest first. Returns
+`{ assets, count, total }`; each asset has `id`, `name`, `type`, `url`,
+`thumbnail_url` and `metadata` (`metadata.duration_sec` for video and
+audio), scoped to the workspace and project privacy. When more than one
+could fit, show the names and let the user pick. Use the `url` exactly as
+returned: `data.url` on an image node (a first frame or a reference),
+`data.video_url` on a clip node, or the `attach_track` `url`. Not
+there: a public URL goes through `import_asset`; media pasted in the chat
+never reaches you, so ask the user to upload it to the Asset Library and
+list again.
+
 From a public link:
 
 ```json
 { "kind": "music", "url": "https://example.com/my-song-chorus-edit.wav", "filename": "my-song-chorus-edit.wav" }
 ```
 
-`import_asset` returns the hosted url. From the Asset Library the user
-shares the hosted link directly; use its path as below. Limits: 50 MB and 10 minutes
+`import_asset` returns the hosted url. From the Asset Library, find it with
+`list_assets` above; a hosted link the user shares works too, use its path
+as below. Limits: 50 MB and 10 minutes
 per music file; the film is at most 180 s.
 
 It returns a path like `/api/v1/storage/m/<key>`. Use it exactly as
@@ -79,7 +104,8 @@ No track yet: the same call with `mood` and `duration` instead of `url`
 (ElevenLabs Music or Lyria 3, `get_status` `music.provider`) may not follow
 the BPM in the brief: never promise exact tempo; the user confirms the
 downbeats after listening. If the server answers `url required`, the user
-makes the track in the app's Asset Library and you attach it by `url`.
+makes the track in the app's Asset Library; find it with `list_assets` and
+attach it by `url`.
 
 ## The song across the whole film: `scope` film
 

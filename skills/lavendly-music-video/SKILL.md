@@ -7,7 +7,7 @@ description: |
   Use when: "a music video for my song", "a visualizer", "cut it on the beat", "a dance video", "a chorus clip for Reels".
   Chain: runs the lavendly-director process; lavendly-cost-aware wins spend; lavendly-publish posts; lavendly-cinematic for story scenes.
   NOT for: lip sync to the user's vocal, rendered lyrics, songs over 180 s in one film, another artist's song or likeness.
-argument-hint: "[track: Asset Library link, public URL, or 'make one'] [BPM and first downbeat if known] [type] [length] [aspect] [artist look]"
+argument-hint: "[track: its name in the Asset Library, public URL, or 'make one'] [BPM and first downbeat if known] [type] [length] [aspect] [artist look]"
 ---
 
 # Lavendly Music Video
@@ -42,9 +42,10 @@ Lavendly.
 
 | The user has | Do |
 |---|---|
-| A file on their computer | They upload it to the Asset Library in the Lavendly app and share the hosted link; attach that `url` |
+| Already in Lavendly ("my song", an earlier upload) | `list_assets` with `type` audio (uploads are filed as audio; generated scores as music, search that next) and the song's name; show the match by name when more than one fits; attach its `url` |
+| A file on their computer | They upload it to the Asset Library in the Lavendly app; find it with `list_assets` and attach its `url` |
 | A public link to the audio file | `import_asset` with `kind` music and the `url`; attach the hosted url it returns |
-| A file pasted in the chat | It never reaches you: ask for the Asset Library upload |
+| A file pasted in the chat | It never reaches you: ask for the Asset Library upload, then `list_assets` |
 | No track | Offer a score from `attach_track` synthesis (`mood` plus `duration`, 5 to 120 s, about 3 credits per 30 s), with the tempo and the section timings written into the brief; say you cannot hear it, so the grid is the brief's until the user confirms the times. Order: create the workflow (free), announce the score's credits, attach it to a clip and wire it film-wide (step 11), ask the user to listen and confirm the downbeats, adjust the cut list, and only then `estimate_cost` and pay for clips |
 
 For a chorus cut, set the song's source in-point with `edit_clip` `trim`
@@ -63,7 +64,7 @@ brief: never promise exact tempo, and have the user confirm the downbeats.
 | 4 | write | Cut list: every cut time in ms from the grid, shot per slot, cut length, model length; trims computed ([references/beat-maths.md](references/beat-maths.md)) |
 | 5 | write | Per shot a still prompt (under 500 characters) and a silent motion prompt ([references/prompt-anchors.md](references/prompt-anchors.md)) |
 | 6 | show | Song map, section looks, cut list summary, model, rough cost; wait for "go" |
-| 7 | `import_asset` | The track (if from a public link), the artist reference, a style plate |
+| 7 | `list_assets`, `import_asset` | The track, the artist reference, a style plate: already in Lavendly, `list_assets`; a public link, `import_asset` |
 | 8 | `create_workflow` | `shots` in timeline order, one `aspect`, one `videoModel`, `idempotency_key` |
 | 9 | `get_workflow`, `update_workflow` | Still prompts on image nodes; references within the cap with a role sentence each |
 | 10 | `set_clip_native_audio` | `off` on every clip; an ambience-only clip in a breakdown or intro at `mix` 0.3 to 0.5 ([references/one-track-rule.md](references/one-track-rule.md)) |

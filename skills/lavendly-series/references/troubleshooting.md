@@ -12,7 +12,7 @@ second job for the same episode.
 | An episode is missing from `list_workflows` | The list holds every non-trashed workflow of the caller's workspace; a trashed or other-workspace episode is not in it | Ask for the episode's name; read it with `get_workflow` if the user has its link |
 | The description came back cut short | Descriptions are stored up to 400 characters, names up to 80 | Shorten to the end state and the next question; store the rest in the conversation and say so |
 | A 400 naming references, or a scene missing from a render that says done | References above the model's cap, or a reference reached Veo 3.1 Lite (also through an app Film Bible): that scene is retried, then skipped uncharged | Pick the series model with the right cap; never Veo 3.1 Lite for a show with references |
-| `url required` from `attach_track` | No synthesis on this server | The user makes the voice or score in the Asset Library; attach by `url`; reuse that url every episode |
+| `url required` from `attach_track` | No synthesis on this server | The user makes the voice or score in the Asset Library; find it with `list_assets`, attach by `url`; reuse that url every episode |
 | `insufficient_credits` mid-season | The cadence outgrew the plan | Stop; show the budget table row; offer a shorter format, a cheaper model or a lower cadence |
 | `get_monthly_usage` above 0.85 before an unattended run | The month's provider share is nearly spent | Skip the run, report, wait for the operator |
 | `version_conflict` on the description update | The episode changed since it was read | `get_workflow`, reapply, send again |

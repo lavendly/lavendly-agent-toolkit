@@ -39,7 +39,7 @@ carries each shot, and says plainly where the MCP path cannot hold a face.
 |---|---|---|
 | 1 | `get_status`, `get_ledger` | Capabilities, balance |
 | 2 | write | The identity card per subject: kind, name, count per scene, locked description, what may change, voice |
-| 3 | `import_asset` | Supplied photos, packshots or sheets to hosted urls |
+| 3 | `list_assets`, `import_asset` | Supplied photos, packshots or sheets to hosted urls: already in Lavendly, `list_assets` (show the name when more than one fits); a public URL, `import_asset` |
 | 4 | `create_workflow`, `update_workflow`, `estimate_cost`, `generate_scene` | Only when nothing is supplied: the casting scenes, announced and approved like any spend ([references/character-sheet.md](references/character-sheet.md)) |
 | 5 | show | Sheet frames and locked description; wait for approval |
 | 6 | `create_workflow` | The film: a reference-capable `videoModel`, `aspect`, exact durations |
@@ -82,7 +82,7 @@ Call shapes: [references/mcp-calls.md](references/mcp-calls.md).
 
 ### The hero sheet
 
-- Supplied first: `import_asset`. Second, made in the app (image-to-image
+- Supplied first: `list_assets` (in Lavendly) or `import_asset`. Second, made in the app (image-to-image
   from the user's photos, the in-app Director's lock subject sheet, a
   trained persona for a consenting person), then imported. Third, the MCP
   casting scenes: a head close-up and a full figure, each with a short
@@ -180,7 +180,7 @@ angle, its own still or its own chained frame.
 
 ### Products and vehicles
 
-- Start from a real packshot via `import_asset`; never let a model invent
+- Start from a real packshot (`list_assets` or `import_asset`); never let a model invent
   the product from text.
 - Rigid material words and shape invariance in every motion prompt ("rigid
   frosted glass, fixed white cap; the bottle's shape stays exactly the
@@ -222,7 +222,8 @@ angle, its own still or its own chained frame.
 `attach_track` synthesizes a voiceover from `text` on servers that carry the
 synthesis update; try that first with the character's `voice`. If the server
 answers `url required`, ask the user to make the voice in the Lavendly app
-(Asset Library) with the same voice, then attach the hosted file by `url`.
+(Asset Library) with the same voice, then find it with `list_assets` and
+attach its `url`.
 
 ## When to stop
 

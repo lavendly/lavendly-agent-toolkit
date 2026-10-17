@@ -7,7 +7,7 @@ Never retry a paid call with a new idempotency key.
 
 | You see | It means | Do |
 |---|---|---|
-| `url required` from `attach_track` | this server does not synthesize voice or music | ask the user to make it in the app's Asset Library, attach the hosted file by `url`, keep `text` for captions |
+| `url required` from `attach_track` | this server does not synthesize voice or music | ask the user to make it in the app's Asset Library, find it with `list_assets`, attach its `url`, keep `text` for captions |
 | `invalid_args` naming the duration | the model does not make that length | set the clip's duration to a listed length with `update_workflow` (Veo: 4, 6, 8; Wan 2.6: 5, 10; Hailuo 2.3: 6, 10) and trim later |
 | a 400 naming references, or a receipt saying the model takes none, or a scene missing from a render that says done (a referenced Veo 3.1 Lite scene is retried, then skipped uncharged) | too many references for the model, or references on Veo 3.1 Lite | keep the hero first and the plate second within the cap; on Veo 3.1 Lite remove every reference edge or change the model |
 | `insufficient_credits` or `sufficient` false | the balance cannot cover the quote | stop; propose fewer scenes, shorter clips or a cheaper model from the picks table |

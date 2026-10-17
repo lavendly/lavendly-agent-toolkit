@@ -40,7 +40,7 @@ idempotency key.
 
 | You see | It means | Do |
 |---|---|---|
-| `url required` from `attach_track` | no synthesis on this server | ask the user to make the voice or music in the Asset Library; attach by `url` |
+| `url required` from `attach_track` | no synthesis on this server | ask the user to make the voice or music in the Asset Library; find it with `list_assets`, attach by `url` |
 | A refusal naming the duration | the length is not on the model's list | a listed length with `update_workflow` (Veo 4, 6, 8; Hailuo 2.3 6 or 10), trim later |
 | A refusal naming the aspect | Hailuo 2.3 makes 16:9 only; Veo 16:9 and 9:16 only | pick a model with the shape |
 | A 400 naming references, or a scene missing from a render that says done (a referenced Veo 3.1 Lite scene is retried, then skipped uncharged) | too many references, or any on Veo 3.1 Lite | photo scenes need none; remove the reference edges |

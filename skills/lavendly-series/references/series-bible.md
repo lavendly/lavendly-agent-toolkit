@@ -72,8 +72,8 @@ Where sheets come from on Lavendly:
 
 | Route | How | Cost |
 |---|---|---|
-| The user uploads | Their own art or photos (their consent for a real person), via the Asset Library; `import_asset` | none |
-| Made in the app | The user makes the sheet with an image model in the Lavendly app (references accepted there) and shares the hosted link | 1 to 5 credits per image |
+| The user uploads | Their own art or photos (their consent for a real person): in the Asset Library, `list_assets`; a public URL, `import_asset` | none |
+| Made in the app | The user makes the sheet with an image model in the Lavendly app (references accepted there); find it with `list_assets` | 1 to 5 credits per image |
 | A casting scene | One-scene workflow whose image node prompt is the sheet prompt, on the cheapest model without references; generate it, keep the opening image's url from `get_workflow`, ignore the clip | about 2 for the image plus the clip (10 on Veo 3.1 Lite at 4 s) |
 
 Opening images made on the server never see a reference image: a sheet made

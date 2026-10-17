@@ -21,7 +21,8 @@ van for a year.
   timecodes of the moments the user wants. Ask for it first.
 - Import limits: `import_asset` takes video up to 3 minutes and 64 MB by
   url; bigger files (up to 300 MB) go through the Asset Library upload
-  in the app and the user shares the asset's link. Long episodes are cut
+  in the app; find it with `list_assets` (`type` video) and set the clip's
+  `data.duration` from `metadata.duration_sec`. Long episodes are cut
   into parts of 3 minutes or less around the chosen moments before import.
 - Imported footage placed as a ready clip costs no generation credits; the
   render is free.
@@ -180,7 +181,7 @@ Phone video, one continuous take, handheld. Close-up. 0 to 2 s: the hand opens a
 | B-roll silences the speaker mid-sentence | Move the b-roll into a pause or remove it |
 | Loudness jumps between pieces | `edit_clip` volume on the quiet piece |
 | No captions | Platform auto-captions at posting, or the app |
-| Import refused | Asset Library upload; parts of 3 minutes or less |
+| Import refused | Asset Library upload, then `list_assets`; parts of 3 minutes or less |
 
 ## 11. Policy guards
 

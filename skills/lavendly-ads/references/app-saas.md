@@ -22,13 +22,14 @@ user's own screen recording.
 | Option | How on Lavendly | When |
 |---|---|---|
 | No interface | people, hands, reactions, physical outcomes; screens dark, away or a glow | default for every generated shot |
-| The real interface | the user's screen recording (`import_asset` with kind video, up to 64 MB by url and 3 minutes), placed in the film as its own clip between generated scenes | when the feature must be seen |
+| The real interface | the user's screen recording (`list_assets` with `type` video when it is in Lavendly, else `import_asset` with kind video, up to 64 MB by url and 3 minutes), placed in the film as its own clip between generated scenes | when the feature must be seen |
 | Phone in hand, screen as glow | "the phone screen faces away from the camera; a soft cool glow lights her face" | reaction shots |
 | A laptop from behind | "the laptop seen from behind, its lid toward camera, plain and unmarked" | work scenes |
 
 An imported video becomes a clip through `update_workflow`: add a
 videoGenerator node with `data.video_url` set to the hosted url and
-`data.duration` set to its length, in scene order. It costs no generation
+`data.duration` (and `duration_seconds`) set to its length
+(`metadata.duration_sec` from `list_assets`), in scene order. It costs no generation
 credits; never call `generate_scene` on that node (it would regenerate over
 the recording). Trim it with `edit_clip`.
 

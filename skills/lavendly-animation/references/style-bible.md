@@ -35,8 +35,9 @@ model takes the look and not the content.
 
 Where it comes from, best first:
 
-1. The user's own art or a frame they own, uploaded to the Asset Library or
-   given as a public URL, then `import_asset` with `kind: "image"`.
+1. The user's own art or a frame they own: in the Asset Library, found with
+   `list_assets` (`type` image); or given as a public URL, then
+   `import_asset` with `kind: "image"`.
 2. A plate the user makes in the Lavendly app, where image nodes can take
    reference images (image-to-image is a canvas feature).
 3. Scene 1's opening image, approved by the user before any other scene is

@@ -23,7 +23,7 @@ a new idempotency key.
 | `invalid_args` naming the duration | Length not in the model's list (Veo 5 s, HeyGen 4 s) | Next allowed length; trim |
 | The video is letterboxed | The first clip is another shape | Every clip 9:16; one workflow per shape |
 | An imported clip does not appear | The node is not a videoGenerator node with `video_url` | Check it in `get_workflow`; fix the node with `update_workflow`; `move_clip` only places a clip that is already in the render |
-| Import refused | Over 64 MB by URL, about 11 MB inline, or over 3 minutes | Asset Library upload in the app; cut the source into parts of 3 minutes or less |
+| Import refused | Over 64 MB by URL, about 11 MB inline, or over 3 minutes | Asset Library upload in the app, then `list_assets`; cut the source into parts of 3 minutes or less |
 | An invalid edits error on a trim | The window is outside the media's length | Read the clip's length; trim inside it |
 | A crop looks soft | A 16:9 1080p source cropped to vertical keeps 608 px of width | Say so; prefer vertical sources; crop less (a 3:4 or 1:1 version) |
 | The loop has a visible jump | The last frame does not match frame 0 | recipe-loops.md: a cyclic action, a ping-pong copy, or a matched end state checked with first and last frames |

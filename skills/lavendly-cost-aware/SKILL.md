@@ -125,7 +125,8 @@ there. Nothing else goes out unattended.
 `attach_track` synthesizes from `text` or from `mood` plus `duration` on
 servers with the synthesis update. If the server answers `url required`,
 synthesis is unavailable there: report that the run needs a hosted voice or
-music file from the Lavendly app (Asset Library) and stop that step. In
+music file from the Lavendly app (Asset Library), found with
+`list_assets`, and stop that step. In
 attended mode ask the user; in unattended mode report and skip the track.
 
 ## When to stop

@@ -6,8 +6,8 @@ errors arrive as `{ "error": { "code", "message", "http_status" } }`.
 ## `url required` (code `invalid_args`, 400) on `attach_track`
 
 This server does not synthesize audio from `text` or `mood` yet. Ask the user
-to generate the voice or music in the Lavendly app (Asset Library), then call
-`attach_track` again with the hosted `url` and the same `idempotency_key`
+to generate the voice or music in the Lavendly app (Asset Library), find it
+with `list_assets`, then call `attach_track` again with its `url` and the same `idempotency_key`
 prefix. Say it once, plainly.
 
 ## `insufficient_credits` (402)
