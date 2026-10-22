@@ -166,6 +166,23 @@ most one style plate; nothing else.
 The hero description in words goes into every prompt as well. The image
 locks the look; the words lock the identity when the model leans on text.
 
+## `create_sequence`: chapters on the canvas
+
+```json
+{
+  "workflow_id": "<workflow_id>",
+  "scene_ids": ["g_<a>", "g_<b>", "g_<c>"],
+  "name": "Cold open"
+}
+```
+
+Only for a film with more than about six scenes or distinct chapters: one
+sequence per heading of the sequence plan, with the scene (group) ids from
+`get_workflow` in order. Organisation only; nothing about the cut changes.
+Returns `{ id, name, scene_ids }`. `list_sequences` reads them back,
+`update_sequence` takes `sequence_id` with a new `name` or the full new
+`scene_ids`, and `delete_sequence` removes the rectangle and keeps the scenes.
+
 ## `set_clip_native_audio`: per clip
 
 ```json

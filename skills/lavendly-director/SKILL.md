@@ -108,6 +108,8 @@ This skill gives the agent that judgment and the exact calls for Lavendly.
   orbits drift the hero).
 - Over 30 s: show the plan for the asked length and, in the same message,
   the cost and a 30 s version, and build the one the user picks.
+- Over about six scenes, or distinct chapters: group each plan heading's scenes into a sequence on the canvas with
+  `create_sequence` (scene ids from `get_workflow`, the heading as its name); it is a named rectangle, organisation only.
 - One primary action per clip. A clip that needs two actions is two clips.
 - Change shot size between neighbours (detail, then wide, then medium); two
   equal sizes in a row read as a slideshow. Pick framing and angle from
@@ -238,14 +240,12 @@ passed; before it, say "applied, not yet checked".
 
 ## Compatibility
 
-`attach_track` synthesizes the voiceover from `text` and the music from `mood`
-plus `duration`; try that first. On `url required`, ask the user to generate
-the voice or music in the Lavendly app (Asset Library), then find it with
-`list_assets` and attach its `url` and continue. Where `get_schema` shows no frame option
-on `get_scene_frame`, it returns the mid frame: cut checks rest on mid
-frames (say the confidence is lower) and a continuing shot is anchored by
-describing the earlier shot's end state. A self-hosted server without
-`set_scene_plan` or `previous_node_id`: keep the plan in the chat, judge cuts
+`attach_track` synthesizes the voiceover from `text` and the music from `mood` plus `duration`; try
+that first. On `url required`, ask the user to generate the voice or music in the Lavendly app (Asset
+Library), then find it with `list_assets` and attach its `url` and continue. Where `get_schema` shows no
+frame option on `get_scene_frame`, it returns the mid frame: cut checks rest on mid frames (say the
+confidence is lower) and a continuing shot is anchored by describing the earlier shot's end state. A
+self-hosted server without `set_scene_plan` or `previous_node_id`: keep the plan in the chat, judge cuts
 by the frames alone.
 
 ## When to stop
