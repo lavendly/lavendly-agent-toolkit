@@ -43,6 +43,8 @@ const TOOLS = new Set([
   'get_scene_plan', 'set_scene_plan',
   // Asset Library listing (lavendly/lavendlyai#743)
   'list_assets',
+  // sequences: a named group of scenes on the canvas (shared/mcpCatalog.mjs)
+  'list_sequences', 'create_sequence', 'update_sequence', 'delete_sequence',
 ]);
 
 // Field names, response keys, phases and error codes the skills may backtick.
@@ -77,6 +79,8 @@ const FIELDS = new Set([
   'lut_id',
   // get_scene_frame response key (server/index.mjs frame_url)
   'frame_url',
+  // create_sequence and update_sequence arguments
+  'scene_ids', 'sequence_id',
   // get_status models.tts_voices (server/index.mjs _status handler)
   'tts_voices',
   // sequence lint rule ids in whole-film quality_check (shared/sequenceLint.mjs)
