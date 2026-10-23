@@ -28,6 +28,11 @@ Added:
 
 Changed:
 
+- Routines: a schedule the user set up with a channel and a credit cap is
+  the user's yes to posting. `lavendly-series` (Routines rules, production
+  section 6), `lavendly-publish` and `lavendly-cost-aware` now post the
+  reviewed film to that channel without asking; ad hoc runs still render,
+  report and wait. README gains a Routines section with a schedule prompt.
 - Every skill corrected against the platform as it runs: a score or
   narration covers the film only when wired to every clip; levels set at
   attach time, `update_track` volume as a percent; chained frame urls

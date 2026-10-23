@@ -62,7 +62,7 @@ what carries between episodes and the production around them.
 | 5 | show | The plan and the cost; wait for "go" (or the operator's cap in an unattended run) |
 | 6 | director steps | `create_workflow` with the show's `project_id`; `set_scene_plan` for this episode before generating; the same references by url, the same voice and score brief, generate, check, render |
 | 7 | `update_workflow` | Write this episode's story-so-far line and end state into its description |
-| 8 | lavendly-publish | Schedule or post only after an explicit yes |
+| 8 | lavendly-publish | Schedule or post only after an explicit yes, or in a routine the user set up (see Routines) |
 
 ## Decision rules
 
@@ -119,6 +119,19 @@ what carries between episodes and the production around them.
 - Unattended or scheduled runs follow lavendly-cost-aware: a hard cap per
   run and per month, `get_monthly_usage` before each run, a report after.
   The agent's host schedules the runs; the MCP schedules only the posts.
+
+### Routines
+
+- A routine is a schedule the user set up on their side (a Claude Code
+  routine, a cron job) that makes a new episode from the template on a
+  cadence. The MCP makes and posts; it never starts a run.
+- The routine is the user's yes: when the user wrote it and it names a
+  channel and a credit cap, post the reviewed film to that channel without
+  asking. Without a channel or a cap, and for any ad hoc run, render, report
+  and wait for the yes. Rules in
+  [references/production.md](references/production.md) section 6.
+- Every run reads the template fresh and never edits it, so the user
+  iterates on the template film and the next run picks the change up.
 
 ### Models
 
