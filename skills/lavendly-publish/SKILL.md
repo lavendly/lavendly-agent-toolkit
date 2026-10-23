@@ -131,7 +131,9 @@ A question, a correction, or silence is not a yes.
    brief already answered.
 4. Report the result in one line with the post link when the platform
    returns one; otherwise the status and where to find it.
-5. Never post, schedule, or "test post" without the explicit yes.
+5. Never post, schedule, or "test post" without the explicit yes. A routine
+   the user set up with a channel and a credit cap is that yes, for that
+   channel only.
 6. The render result cannot confirm burned captions: say "captions
    requested" and ask the user to check before posting. When describing
    checks, name the frames that were opened (first, mid, last), never

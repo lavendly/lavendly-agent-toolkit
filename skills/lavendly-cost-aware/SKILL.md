@@ -5,7 +5,7 @@ priority: high
 description: |
   Budget guardrails for every Lavendly MCP run, attended or unattended: pre-flight on status, ledger and monthly usage; estimate before any spend; the cheapest model when the user asks for cheap or a budget demands it; strict retry and idempotency discipline; one-line announcements and reports. Loads on top of a domain skill and wins every spend approval, cap and retry decision.
   Use when: "budget", "cheap", "do not overspend", "run this every Monday", "unattended", "cron", "keep it under N credits", or whenever the agent will call generate_scene without a human reading each estimate.
-  Chain: load first, then the domain skill (storyteller, multi-clip, director or a genre skill) for the film itself; lavendly-review still runs; lavendly-publish still needs an explicit yes.
+  Chain: load first, then the domain skill (storyteller, multi-clip, director or a genre skill) for the film itself; lavendly-review still runs; lavendly-publish still needs an explicit yes, which a routine the user set up with a channel and a cap provides.
   NOT for: writing prompts or scripts (domain skills), quality judgement (lavendly-review), or publishing decisions (lavendly-publish).
 argument-hint: "[budget in credits] [mode: attended|unattended] [report target]"
 ---
@@ -101,7 +101,9 @@ the estimate before it fires.
 - Use `list_workflows` before creating (it returns every workflow, newest
   first, no filter): an identical name from the same day means a prior run
   may have partly succeeded. Continue it instead of duplicating.
-- Report after each render, one line, then stop.
+- Report after each render, one line, then stop. A routine the user set up
+  with a channel and a cap also posts the reviewed film to that channel
+  (lavendly-series, Routines).
 
 ## Reporting format
 
@@ -118,7 +120,7 @@ After a refusal, one line:
 ```
 
 If the brief names a webhook or a channel for reports, post the same line
-there. Nothing else goes out unattended.
+there. Apart from a routine's post, nothing else goes out unattended.
 
 ## Compatibility
 

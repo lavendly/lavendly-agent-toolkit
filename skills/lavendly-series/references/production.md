@@ -102,6 +102,9 @@ A daily show is a template plus an episode card.
 - Build each episode fresh with `shots` and `update_workflow`; do not copy an
   earlier episode's nodes wholesale (they carry its generated clips and
   frames). Copy only the reference nodes' urls and the locked prompt text.
+  The exception is a slot that is the same clip every episode (an intro, a
+  sign-off): copy that node with its clip url from the template. A node that
+  already has a clip is reused and never charged.
 - When `get_schema` lists a series episode operation (an episode from a
   skeleton and a story), use it instead; until then the template lives in
   text.
@@ -113,11 +116,29 @@ Unattended runs follow lavendly-cost-aware:
 | Cap per run | The operator's number, or the episode's estimate plus one re-roll, whichever is lower |
 | Before each run | `get_ledger`, `get_monthly_usage` (stop above 0.85 of the month's share), `estimate_cost` |
 | Re-rolls | One per shot, with the fix named; then keep the better take and report |
-| Posting | Never unattended: render, report, and wait for the user's yes in lavendly-publish; `schedule_video` can then queue several approved episodes at once |
+| Posting | Depends on who set up the run: see the two cases below |
 | Report | One line: episode name, credits spent, balance, link, any finding left open |
 
 The agent's host (a scheduler, a cron job, the user) starts each run; the
 MCP has no run scheduler, only post scheduling.
+
+Posting from a run:
+
+- **A routine the user set up.** The user wrote the schedule themselves (a
+  Claude Code routine, a cron job, a scheduled CI job) and it names a channel
+  and a credit cap. The routine is the user's yes: render, run
+  lavendly-review, then `publish_video` or `schedule_video` to that channel
+  without asking. Post only to the channel the routine names, only a film
+  that passed review, and once per run (an `idempotency_key` with the date).
+  A failed review, a cap hit or a missing channel is a stop with a report,
+  never a post.
+- **An ad hoc run.** Anything else (the user asked once in chat, a brief with
+  no channel or no cap, a run another agent started): render, report, and
+  wait for the user's yes in lavendly-publish; `schedule_video` can then
+  queue several approved episodes at once.
+
+Each routine run reads the template fresh with `get_workflow` and never edits
+it, so a change the user makes to the template film applies from the next run.
 
 ## 7. Budgets by cadence
 
