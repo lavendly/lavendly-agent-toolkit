@@ -107,3 +107,12 @@ on 15 to 30 s videos.
 - Stories and commentary: 30 to 60 s; clipped long-form moments 25 to 40 s
   (claimed sweet spot for clips: 15 to 55 s, peak 25 to 40 s).
 - Over 60 s only when every 10 s adds a new beat.
+
+## 9. Why retention decides reach
+
+Every feed shows a new video to a small audience first and widens it only
+when that audience stops, stays and acts: finishes and rewatches on TikTok
+and Shorts, sends on Reels, shares on Facebook, replies on X, early upvotes
+on Reddit. The hook and the retention rules above win the first test; the
+signal each feed rewards wins the next ones
+([distribution.md](distribution.md)).
