@@ -15,6 +15,8 @@
 //   6. VERSION matches every manifest, package.json and CHANGELOG
 //   7. every plugin manifest finds the skills in skills/
 //   8. no example name (Mia, Pip and the like) appears in more than one skill folder
+//   9. every SKILL.md keeps the shared sections of templates/SKILL.md and its
+//      "every name ... is an example" line
 //
 // Exit code 1 with a list of failures, 0 when clean.
 
@@ -287,6 +289,14 @@ for (const dirName of skillDirs) {
     if (desc.length > 1024) fail(`${dirName}/SKILL.md: description is ${desc.length} characters (limit 1024)`);
     if (!fm['argument-hint']) fail(`${dirName}/SKILL.md: argument-hint missing`);
     if (!fm.priority) fail(`${dirName}/SKILL.md: priority missing`);
+  }
+
+  // the shared skeleton (templates/SKILL.md) and the examples line
+  for (const heading of ['## Before anything else', '## When to stop', '## UX rules', '## Reference docs']) {
+    if (!skill.includes(`\n${heading}\n`)) fail(`${dirName}/SKILL.md: missing section "${heading}" (see templates/SKILL.md)`);
+  }
+  if (!skill.replace(/\s+/g, ' ').includes('in this skill and its references is an example')) {
+    fail(`${dirName}/SKILL.md: lacks the examples line from templates/SKILL.md ("Every name, product, place and story ... is an example")`);
   }
 
   // line budget

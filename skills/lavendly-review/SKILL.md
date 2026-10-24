@@ -29,6 +29,8 @@ neighbour; this skill catches that too.
   the type and continuity mode inferred from the brief and stated in one
   line. Every check is judged against it
   ([references/sequence-checks.md](references/sequence-checks.md)).
+- Every name, product, place and story in this skill and its references is an
+  example. The user's brief replaces it; never carry one into their film.
 
 ## Sequence
 

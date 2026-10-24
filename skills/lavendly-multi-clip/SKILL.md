@@ -22,6 +22,8 @@ without a changed word into every shot prompt.
 - `get_status` at session start; never claim or deny a capability from memory.
 - `get_ledger`; keep the available credits in mind.
 - Never invent a tool name or a model id. Check `get_schema` when in doubt.
+- Every name, product, place and story in this skill and its references is an
+  example. The user's brief replaces it; never carry one into their film.
 
 ## Anchors first
 

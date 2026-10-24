@@ -32,6 +32,8 @@ This skill gives the agent that judgment and the exact calls for Lavendly.
 - Load the genre skill when installed (lavendly-ads, -cinematic, -music-video,
   -animation, -motion-design, -explainer, -social, -places, -series; with
   -models and -characters). This skill stays the process.
+- Every name, product, place and story in this skill and its references is an
+  example. The user's brief replaces it; never carry one into their film.
 
 ## Sequence
 
@@ -95,8 +97,7 @@ This skill gives the agent that judgment and the exact calls for Lavendly.
   social clip, the goal for a tutorial, the question for a documentary or an
   explainer. The ending delivers what the card promised: payoff, call to
   action, result, summary, final reveal or a chosen open ending. Between
-  them each scene adds information, action or feeling; a scene that adds
-  none is cut.
+  them each scene adds information, action or feeling; if none, it is cut.
 - Coverage serves comprehension: an establishing shot when the place
   matters, an insert when a detail carries the step or the feature, a
   reaction when the feeling carries the beat. Never a shot added for length.
@@ -272,8 +273,7 @@ by the frames alone.
 5. The user's language in chat, English in prompts and tool arguments.
 6. Never present a failing or drifting scene as done.
 7. Never say a frame matches a reference or a photo you have not opened.
-   Before the first frame lands, say what will be checked, not that it
-   matches.
+   Before the first frame lands, say what will be checked, not a match.
 8. Models by their display name in chat ("Veo 3.1 Fast"), never the id.
 
 ## Quality gate before delivery

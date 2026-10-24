@@ -33,6 +33,8 @@ it never replaces the director's checks.
 - Pick the recipe from the table in Reference docs. A mixed brief (a horror
   comedy) takes the structure of the genre that owns the ending and the
   look of the other.
+- Every name, product, place and story in this skill and its references is an
+  example. The user's brief replaces it; never carry one into their film.
 
 ## Sequence
 

@@ -57,6 +57,7 @@ skills/
   .mcp.json                      the Lavendly MCP server (Claude Code, Codex)
   mcp.json                       the same server, portable format (Cursor)
   evals/README.md, scenarios.md  dev-only
+  templates/SKILL.md              the skeleton every new skill starts from
   skills/lavendly-<name>/SKILL.md      one folder per skill
   skills/lavendly-<name>/references/   mcp-calls.md, prompt-anchors.md, troubleshooting.md
   plugin.json                    portable Agent Plugins manifest ($schema, name)
@@ -144,13 +145,15 @@ fails on any drift.
 
 ## Adding a skill
 
-1. Create `skills/lavendly-<name>/SKILL.md` with frontmatter `name` (equal to the
+1. Copy `templates/SKILL.md` to `skills/lavendly-<name>/SKILL.md` and fill the
+   slots. Frontmatter: `name` (equal to the
    folder), `version` (equal to `VERSION`), `priority`, a `description` that
    contains the lines `Use when:`, `Chain:` and `NOT for:`, and
    `argument-hint`.
-2. Write the body: one-sentence purpose, Sequence, Decision rules,
-   Compatibility (if it attaches audio), When to stop, UX rules, Reference
-   docs.
+2. Write the body: one-sentence purpose, Before anything else (it keeps the
+   examples line), Sequence, Decision rules, Compatibility (if it attaches
+   audio), When to stop, UX rules, Reference docs. The validator checks the
+   shared sections and the examples line.
 3. Add `references/mcp-calls.md` with the exact call shapes the skill uses.
    Add `references/troubleshooting.md` and `references/prompt-anchors.md`
    where they help.

@@ -32,6 +32,8 @@ post. This skill supplies the format decisions on top.
 - Pick the format recipe (first table below).
 - Trends: you cannot see what is trending today. Ask the user to name or
   describe the format; build the format, never a copy of a specific video.
+- Every name, product, place and story in this skill and its references is an
+  example. The user's brief replaces it; never carry one into their film.
 
 ## Sequence
 

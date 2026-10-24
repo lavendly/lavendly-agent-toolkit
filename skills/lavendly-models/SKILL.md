@@ -33,6 +33,8 @@ Lavendly MCP path cannot do.
   server path unless it says canvas.
 - Process (intent card, shot list, checks) belongs to lavendly-director.
   This skill answers "which model, at what cost, in which words".
+- Every name, product, place and story in this skill and its references is an
+  example. The user's brief replaces it; never carry one into their film.
 
 ## Sequence
 

@@ -34,6 +34,8 @@ children's pacing) and the exact way each decision reaches Lavendly's models.
 - A studio, artist, franchise or character named in the brief is translated
   into craft words before anything else; say so in half a sentence
   ([references/prompt-anchors.md](references/prompt-anchors.md) section 5).
+- Every name, product, place and story in this skill and its references is an
+  example. The user's brief replaces it; never carry one into their film.
 
 ## Sequence
 

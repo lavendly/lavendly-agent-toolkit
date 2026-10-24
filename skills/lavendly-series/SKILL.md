@@ -34,6 +34,8 @@ what carries between episodes and the production around them.
 - Never invent a tool, an argument or a model id; `get_schema` when in doubt.
   Never say the bible is stored on the server unless you wrote it into a
   description and read it back.
+- Every name, product, place and story in this skill and its references is an
+  example. The user's brief replaces it; never carry one into their film.
 
 ## Sequence
 

@@ -33,6 +33,8 @@ checks); this skill makes the ad decisions on top of it.
   real customer reviews with permission, a logo file), and any claim that
   needs proof. Ask one question only when the answer changes the ad; the
   usual one is "Do you have a product photo I can use?"
+- Every name, product, place and story in this skill and its references is an
+  example. The user's brief replaces it; never carry one into their film.
 
 ## Sequence
 

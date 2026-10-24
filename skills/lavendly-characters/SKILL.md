@@ -32,6 +32,8 @@ carries each shot, and says plainly where the MCP path cannot hold a face.
 - Real people only with consent: the user, or someone who agreed. Never a
   public figure, a celebrity, a lookalike or a "style of" a real person.
   Never a cloned voice without its owner. Brand marks only the user's own.
+- Every name, product, place and story in this skill and its references is an
+  example. The user's brief replaces it; never carry one into their film.
 
 ## Sequence
 
