@@ -28,6 +28,14 @@ Added:
 
 Changed:
 
+- `lavendly-social`: a new reference, `references/distribution.md`, on how
+  each feed spreads a video (TikTok, Reels, Shorts, Facebook Reels, X,
+  Reddit, LinkedIn): the signal to design for, what the platform says it
+  measures, what cuts reach, lengths, keywords and hashtags, trends,
+  originality, cadence, and reading the result. Platform statements are
+  cited; creator-tooling numbers are marked claimed. Adapted in part from
+  viral-video-master by Josiah Siegel (MIT). SKILL.md gains a Reach rule
+  block; `retention.md` and `platform-specs.md` point to it. Eval scenario 57.
 - Routines: a schedule the user set up with a channel and a credit cap is
   the user's yes to posting. `lavendly-series` (Routines rules, production
   section 6), `lavendly-publish` and `lavendly-cost-aware` now post the

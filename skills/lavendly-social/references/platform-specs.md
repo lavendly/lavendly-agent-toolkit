@@ -30,6 +30,9 @@ decides a choice.
 | Caption style | `tiktok` | `reels` | `tiktok` or `reels` | `caption` (boxed) | `caption` or `youtube` on 16:9 |
 | Tone | Native, direct, fast | Polished-native, visual first | Hook-led, loop-friendly | Professional, specific, useful | Opinion, news, humour |
 
+Facebook Reels and Reddit, and what each feed ranks on, are in
+[distribution.md](distribution.md).
+
 TikTok's ad guidance (2026): over 63 percent of the highest click-through
 videos show the key message or product in the first 3 s; vertical video
 has a 25 percent higher 6-second watch-through; tracks above 120 BPM drive

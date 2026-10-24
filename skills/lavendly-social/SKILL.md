@@ -3,8 +3,8 @@ name: lavendly-social
 version: 0.2.0
 priority: normal
 description: |
-  Make short-form social video on the Lavendly MCP: TikTok, Reels, Shorts, LinkedIn and X formats with a first-second hook, a cut every 2 to 3 s, a payoff before the end, captions clear of the platform buttons, phone-footage realism, honest AI presenters, clips from imported long videos.
-  Use when: "a TikTok about", "POV video", "day in the life", "top 5 video", "storytime", "clip my podcast", "a looping Short", "faceless channel", "talking-head avatar".
+  Make short-form social video on the Lavendly MCP: TikTok, Reels, Shorts, Facebook, LinkedIn, X and Reddit formats designed for the signal each feed rewards (finishes, rewatches, sends, replies, upvotes), with a first-second hook, a cut every 2 to 3 s, a payoff before the end, captions clear of the platform buttons, phone-footage realism, honest AI presenters, clips from imported long videos.
+  Use when: "a TikTok about", "POV video", "day in the life", "top 5 video", "storytime", "clip my podcast", "a looping Short", "faceless channel", "talking-head avatar", "make it go viral", "for the algorithm".
   Chain: lavendly-director runs the process; lavendly-storyteller for one-shot posts; lavendly-explainer for lessons; lavendly-publish posts.
   NOT for: copying a creator's video or voice, trending audio, AI people as real testimony, lip sync to an attached voice, media pasted in chat.
 argument-hint: "[idea or source video url] [format] [platform] [duration 6..90] [voice or 'native sound']"
@@ -28,7 +28,8 @@ post. This skill supplies the format decisions on top.
   Sequence below is complete without it. A post that is one shot under
   12 s goes to lavendly-storyteller.
 - Write the platform card first: platform, aspect, length, sound default,
-  safe zone, caption style ([references/platform-specs.md](references/platform-specs.md)).
+  safe zone, caption style ([references/platform-specs.md](references/platform-specs.md)),
+  and the one signal that feed rewards ([references/distribution.md](references/distribution.md)).
 - Pick the format recipe (first table below).
 - Trends: you cannot see what is trending today. Ask the user to name or
   describe the format; build the format, never a copy of a specific video.
@@ -163,6 +164,26 @@ post. This skill supplies the format decisions on top.
 Totals include opening images (2 each), voice (1) and the bed (2 or 3).
 Details and per-recipe builds: [references/models-and-credits.md](references/models-and-credits.md).
 
+### Reach
+
+- Design for the destination's signal ([references/distribution.md](references/distribution.md)):
+  TikTok and Shorts reward finishes and rewatches, Reels and Facebook
+  sends and shares, X replies the author answers, Reddit early upvotes in
+  one community. Name the signal on the platform card and build the ending
+  for it (a loop, a reason to send, one specific question).
+- A feed tests a new video on a small audience, then a wider one. It
+  learns the topic from the caption, the spoken words and the sound: say
+  the topic in the first spoken line and in the post caption, in the words
+  a person would search.
+- Original upload per platform: the rendered file, never a repost from
+  another app, never another app's watermark or interface in the picture.
+- Trends: the user names a rising format; build the format, never the
+  video. When they will add a platform sound at posting, offer a version
+  without the bed.
+- Cadence the user can keep inside their credits; post when their own
+  audience is active. Never promise views or virality; after posting, read
+  the numbers with the table in distribution.md.
+
 ### Versions and aspects
 
 - 9:16 for TikTok, Reels, Shorts; 1:1 or 9:16 for LinkedIn; 16:9 or 1:1
@@ -203,8 +224,8 @@ burned captions; say so.
    trending audio) and what the user adds in the app or at posting.
 4. Names and links, never ids or JSON; models by display name; silent
    polling; a frame link for the hook scene before the rest is paid for.
-5. Deliver the video with a post caption draft: hook under 15 words, one
-   line of value, the AI disclosure where needed, three relevant hashtags at
+5. Deliver the video with a post caption draft: hook under 15 words, the
+   topic in words a person would search, one line of value, the AI disclosure where needed, three relevant hashtags at
    most. Posting needs an explicit yes and belongs to lavendly-publish.
 6. The user's language in chat; English in prompts and tool arguments; the
    narration in the audience's language.
@@ -214,6 +235,7 @@ burned captions; say so.
 - [references/hooks-library.md](references/hooks-library.md): visual and spoken hooks for the first 1 to 3 s, by goal.
 - [references/retention.md](references/retention.md): open loops, interrupts with numbers, payoff timing, loops, comment prompts, curve fixes.
 - [references/platform-specs.md](references/platform-specs.md): TikTok, Reels, Shorts, LinkedIn, X: shapes, lengths, safe zones, captions, covers.
+- [references/distribution.md](references/distribution.md): how each feed spreads a video (TikTok, Reels, Shorts, Facebook, X, Reddit): signals, lengths, keywords, trends, originality, cadence, reading the result; sources.
 - [references/phone-footage.md](references/phone-footage.md): who filmed it, device, year, defects, one imperfection per shot.
 - [references/models-and-credits.md](references/models-and-credits.md): models, lengths, references, sound, credits, builds.
 - [references/prompt-anchors.md](references/prompt-anchors.md): the two prompts, social style lines, dialects, banned words.
