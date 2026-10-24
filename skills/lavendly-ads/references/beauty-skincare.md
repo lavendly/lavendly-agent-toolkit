@@ -125,6 +125,8 @@ only 16:9 and 9:16.
 
 ## 7. Prompt pairs (Veo)
 
+Examples: the user's own product, brand and photos replace the ones shown.
+
 **Pair 1: the hook drop**
 
 Still:

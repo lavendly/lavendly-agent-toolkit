@@ -35,7 +35,7 @@ for the user's own policy).
 
 ## 3. Structures (16:9, 60 to 90 s per objective; short versions for reminders)
 
-Character block, verbatim in every still prompt: "Sam, a warehouse worker
+Character block, verbatim in every still prompt: "Tariq, a warehouse worker
 in his thirties with short dark hair, a navy work polo, grey work trousers,
 black safety boots and an orange high-visibility vest".
 
@@ -43,13 +43,13 @@ black safety boots and an orange high-visibility vest".
 
 | # | Time | Shot | Lens | Move | Picture | Gen | Words |
 |---|---|---|---|---|---|---|---|
-| 1 | 0 to 6 | Medium wide, side | 35mm | Locked-off | Sam bends his knees, grips the box, stands with it close | 8, trim 6 | 13 ("Bend your knees, hold it close, lift with your legs.") |
+| 1 | 0 to 6 | Medium wide, side | 35mm | Locked-off | Tariq bends his knees, grips the box, stands with it close | 8, trim 6 | 13 ("Bend your knees, hold it close, lift with your legs.") |
 
 ### 15 s (reminder)
 
 | # | Time | Shot | Lens | Move | Picture | Gen | Words |
 |---|---|---|---|---|---|---|---|
-| 1 | 0 to 4 | Medium wide, side | 35mm | Locked-off | Sam faces a box on the floor, feet apart | 4 | 7 "Before you lift, stand close, feet apart." |
+| 1 | 0 to 4 | Medium wide, side | 35mm | Locked-off | Tariq faces a box on the floor, feet apart | 4 | 7 "Before you lift, stand close, feet apart." |
 | 2 | 4 to 8 | Medium, side | 50mm | Locked-off | He bends his knees, back straight | 4 | 7 "Bend your knees, keep your back straight." |
 | 3 | 8 to 12 | Insert | 85mm | Locked-off | Hands grip the base of the box | 4 | 6 "Grip the base, hold it close." |
 | 4 | 12 to 15 | Medium wide | 35mm | Locked-off | He stands, box against his body | 4, trim 3 | 6 "Lift with your legs, not your back." |
@@ -58,7 +58,7 @@ black safety boots and an orange high-visibility vest".
 
 | # | Time | Shot | Lens | Move | Picture | Gen | Words |
 |---|---|---|---|---|---|---|---|
-| 1 | 0 to 4 | Wide, warehouse aisle | 24mm | Slow push-in | Sam walks up to a box on the floor | 4 | 9 objective |
+| 1 | 0 to 4 | Wide, warehouse aisle | 24mm | Slow push-in | Tariq walks up to a box on the floor | 4 | 9 objective |
 | 2 | 4 to 8 | Medium, side | 50mm | Locked-off | He tests the box by tilting one corner | 4 | 8 step one: check the weight |
 | 3 | 8 to 12 | Low, front | 35mm | Locked-off | Feet set shoulder-width apart beside the box | 4 | 8 step two |
 | 4 | 12 to 16 | Medium, side | 50mm | Locked-off | Knees bend, back straight | 4 | 8 step three |
@@ -69,7 +69,7 @@ black safety boots and an orange high-visibility vest".
 
 ### 60 s
 
-The 30 s plan plus: a short reason (shot after 1: a close-up of Sam
+The 30 s plan plus: a short reason (shot after 1: a close-up of Tariq
 pressing a hand to his lower back after a careless lift, 4 s, "Back
 injuries are the most common injury in warehouse work, according to
 <source>"), the wrong way once (medium side, bending at the waist, 4 s,
@@ -78,7 +78,7 @@ and the recap over three result shots. About 130 words.
 
 | # | Time | Shot | Move | Picture | Gen |
 |---|---|---|---|---|---|
-| 1 | 0 to 4 | Wide aisle | Slow push-in | Sam walks to the box | 4 |
+| 1 | 0 to 4 | Wide aisle | Slow push-in | Tariq walks to the box | 4 |
 | 2 | 4 to 8 | Close-up | Locked-off | Hand to lower back (why it matters) | 4 |
 | 3 | 8 to 12 | Medium, side | Locked-off | Tilts a corner to test the weight | 4 |
 | 4 | 12 to 16 | Low, front | Locked-off | Feet apart | 4 |
@@ -89,12 +89,12 @@ and the recap over three result shots. About 130 words.
 | 9 | 32 to 36 | Medium, front | Locked-off | Turns with his feet | 4 |
 | 10 | 36 to 44 | Wide | Slow pan right | Two colleagues lift a long crate together (hold) | 8 |
 | 11 | 44 to 48 | Medium | Locked-off | Box set on a shelf | 4 |
-| 12 | 48 to 56 | Medium wide | Slow pull-back | Sam steps back from the shelf (recap over it) | 8 |
+| 12 | 48 to 56 | Medium wide | Slow pull-back | Tariq steps back from the shelf (recap over it) | 8 |
 | 13 | 56 to 60 | Close-up | Locked-off | The box on the shelf (the question) | 4 |
 
 ### 90 s
 
-Add a scenario chapter (25 s: a heavier box, Sam decides to use a trolley;
+Add a scenario chapter (25 s: a heavier box, Tariq decides to use a trolley;
 three shots) and a second wrong-way example only if the policy names it.
 About 190 words. Longer modules become a series of 60 to 90 s films, one
 objective each.
@@ -136,7 +136,7 @@ objective each.
 |---|---|---|---|---|
 | Body motion | Kling v3 Pro, 5 s clips | Human posture and movement hold best | 69 | 136 |
 | Default | Veo 3.1 Fast | Light and materials, 16:9 | 67 | 132 |
-| Value with references | Wan 2.7 | 4 references hold Sam's face, outfit and the set | 45 | 88 |
+| Value with references | Wan 2.7 | 4 references hold Tariq's face, outfit and the set | 45 | 88 |
 
 Credits assume 5 s clips (three for 15 s, six for 30 s). Keeping the four and eight 4 s shots of the tables costs one block per shot: 91 and 180 on Kling v3 Pro. A 60 s module on Kling v3 Pro is about 12 clips of 5 s: 240 + 24 + 7 =
 about 271 credits. On Wan 2.7: about 175.
@@ -150,13 +150,13 @@ Kling reads scene, subject, action, camera, audio in plain sentences.
 Still-frame prompt:
 
 ```text
-Workplace documentary, natural light. Sam, a warehouse worker in his thirties with short dark hair, a navy work polo, grey work trousers, black safety boots and an orange high-visibility vest, stands upright facing a plain cardboard box on a concrete floor, feet shoulder-width apart. Medium shot from the side at hip height, 50mm look. Soft daylight from high skylights. Plain unlabelled shelving behind. Clean frame, no text.
+Workplace documentary, natural light. Tariq, a warehouse worker in his thirties with short dark hair, a navy work polo, grey work trousers, black safety boots and an orange high-visibility vest, stands upright facing a plain cardboard box on a concrete floor, feet shoulder-width apart. Medium shot from the side at hip height, 50mm look. Soft daylight from high skylights. Plain unlabelled shelving behind. Clean frame, no text.
 ```
 
 Motion prompt:
 
 ```text
-Workplace documentary, natural light, one continuous take. A warehouse aisle in soft skylight. Sam bends his knees slowly into a squat beside the box, keeping his back straight and his head up, and places both hands on the sides of the box. Camera: locked-off side view, no movement. End state: Sam in a squat, back straight, hands on the box. Sam, the box and the aisle stay exactly as in the opening frame. Exactly one person in frame. Sound: quiet warehouse ambience, the scuff of a boot. No music. Clean frame: no text, no subtitles, no on-screen graphics.
+Workplace documentary, natural light, one continuous take. A warehouse aisle in soft skylight. Tariq bends his knees slowly into a squat beside the box, keeping his back straight and his head up, and places both hands on the sides of the box. Camera: locked-off side view, no movement. End state: Tariq in a squat, back straight, hands on the box. Tariq, the box and the aisle stay exactly as in the opening frame. Exactly one person in frame. Sound: quiet warehouse ambience, the scuff of a boot. No music. Clean frame: no text, no subtitles, no on-screen graphics.
 ```
 
 **Pair 2, the grip.**
@@ -181,7 +181,7 @@ cardboard creak." Use 4 s clips; durations 4 or 8 only.
 
 | Failure | Fix |
 |---|---|
-| Sam's face or vest changes between steps | Character block verbatim; a reference image wired (Wan 2.7 takes 4) |
+| Tariq's face or vest changes between steps | Character block verbatim; a reference image wired (Wan 2.7 takes 4) |
 | The posture is wrong in the "right way" shot | One movement, slow, the end posture stated; re-roll once; or import real footage |
 | Readable labels on boxes, shelves, signs | "plain unlabelled" in every still prompt |
 | A second worker appears | "Exactly one person in frame" |

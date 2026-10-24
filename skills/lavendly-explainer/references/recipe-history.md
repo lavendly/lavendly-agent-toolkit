@@ -2,7 +2,7 @@
 
 A past event, era, invention or idea, told so the viewer understands what
 changed and why it matters now. Worked example: how the printing press
-changed the spread of news after the fourteen-fifties.
+changed the spread of news after the fourteen-fifties. The user's own subject replaces it.
 
 ## 1. Purpose, audience, ending
 

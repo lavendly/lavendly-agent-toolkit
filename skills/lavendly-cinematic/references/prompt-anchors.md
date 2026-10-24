@@ -28,17 +28,18 @@ how it ends; do not describe the picture again.
 <style line>, one continuous take. <camera: the one move, its speed, where it stops, or "locked-off camera">. <0 to N s: action as physical behaviour>. <N to M s: the rest, from the result of the first>. <dialogue line in the model's syntax, if any>. <end state, held>. <lock sentence>. <count line>. Sound: <diegetic sources>. Clean frame: no text, no subtitles, no on-screen graphics.
 ```
 
-Lock sentence (always one):
+Lock sentence (always one). Example, from the two-hander worked example in
+[dialogue-scenes.md](dialogue-scenes.md); the user's own cast replaces it:
 
 ```text
 Her face, her green cardigan, the kitchen and the lamp light stay exactly as in the opening frame.
 ```
 
-Count line (always one, names everyone allowed in frame):
+Count line (always one, names everyone allowed in frame). Examples:
 
 ```text
 Exactly one woman in frame, nobody else, no reflection of her.
-Exactly two people in frame: Mia on the left, Tom on the right; nobody else enters.
+Exactly two people in frame: Hana on the left, Kenji on the right; nobody else enters.
 ```
 
 When a character enters during the shot, add their locked description at
@@ -49,11 +50,12 @@ change ("the headlights sweep across the ceiling from left to right").
 
 Five to eight observable anchors, one asymmetric detail, permanent identity
 separate from the wardrobe of this film and the state of this scene.
+Example (Hana from the same worked example):
 
 ```text
-Mia: a woman in her late thirties, warm light-brown skin, oval face, thick straight black eyebrows, shoulder-length black curly hair with a centre part, a small gold hoop in her left ear only.
+Hana: a woman in her late thirties, light warm skin, oval face, thick straight black eyebrows, a black bob with a blunt fringe, a small silver stud in her left ear only.
 Wardrobe (this film): a faded green wool cardigan over a white t-shirt.
-State (this scene): eyes red from crying, hair pinned up.
+State (this scene): eyes red from crying, hair tucked behind her ears.
 ```
 
 Paste the identity and wardrobe lines verbatim into every still prompt she
@@ -70,7 +72,7 @@ so rewrite a pair in the film's own dialect before using it.
 | Family | Order that works | Dialogue | Sound | Image-to-video note |
 |---|---|---|---|---|
 | Veo 3.1, Fast, Lite | Camera, subject, action, context, style | `The woman on the left says: "We have to leave now." (no subtitles)` | `SFX: a door clicks shut.` `Ambient noise: rain on the window.` | Prompt the motion; the opening image holds the look. Bracketed time ranges work for up to four cuts in 8 s |
-| Kling v3 | Scene, characters, action, camera, audio, style | `[Character A: Mia, low tired voice]: "I sold the house."` then `After a pause, [Character B: Tom, flat voice]: "When."` | `Sound: ...` in plain words | "Treat the image as an anchor": say how the scene evolves from it. Plain directional verbs |
+| Kling v3 | Scene, characters, action, camera, audio, style | `[Character A: Hana, low tired voice]: "I sold the shop."` then `After a pause, [Character B: Kenji, flat voice]: "When."` | `Sound: ...` in plain words | "Treat the image as an anchor": say how the scene evolves from it. Plain directional verbs |
 | Seedance 2.0, 2.5, 1.5 | Subject first, 30 to 100 words; for 2.5 a production note (format, starting state, timeline, camera, continuity, audio, ending state) | Speaker described by position and clothing, line in straight quotes, what they do before and after | `Audio: room tone, a kettle ticking. No music.` | Motion starts at once: write "already in motion from the first frame". References by role in prose, never tags |
 | Hailuo 3, 3 Max, 2.3 | Prose with bracket camera commands after the action they move with | Hailuo 3 only, plain quoted line | Hailuo 3 only; 3 Max and 2.3 are silent | `[Push in]`, `[Pan left]`, `[Static shot]`; up to three in one bracket; one per beat |
 | Wan 2.7, 3.0 | Subject, scene, motion, then literal aesthetic words (light source, light type, time, shot size, lens, composition, colour tone) | Quoted line after the action | Plain `Sound:` line | Image-to-video formula: motion description plus camera movement |

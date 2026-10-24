@@ -108,6 +108,8 @@ premises photos add 2 per scene.
 
 ## 7. Prompt pairs (Veo)
 
+Examples: the user's own place, brand and photos replace the ones shown.
+
 **Pair 1: hands at work**
 
 Still:

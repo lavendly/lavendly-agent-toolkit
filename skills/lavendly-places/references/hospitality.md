@@ -110,6 +110,8 @@ Totals: photo scenes have no opening image, inserts 2 credits each, score
 
 ## 7. Prompt pairs (Veo)
 
+Examples: the user's own place, brand and photos replace the ones shown.
+
 **Pair 1: the room at morning** (photo scene; the still is for a concept)
 
 Still:

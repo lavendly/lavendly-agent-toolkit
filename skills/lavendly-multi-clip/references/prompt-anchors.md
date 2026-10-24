@@ -11,7 +11,8 @@ distinguishing marks. Written once, pasted byte for byte into every shot.
 <Name>, <age range>, <build>, <wardrobe: colour and material, two items>, <hair: colour, length, how worn>, <one mark: scar, glasses, a ring, a bag>.
 ```
 
-Example:
+Example (Mara, the worked example used through this file; the user's own
+character replaces her):
 
 ```text
 Mara, late twenties, slight and quick, a rust-red waxed cotton coat over a grey wool sweater, black hair cut at the jaw, a brass compass on a cord around her neck.

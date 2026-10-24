@@ -4,7 +4,7 @@ version: 0.2.0
 priority: normal
 description: |
   Direct a 15 to 90 s video of any format (ad, demo, tutorial, explainer, documentary, story, music video, social) on the Lavendly MCP: set the intent and continuity mode, lock the hero, plan each shot and what it hands to the next, write a still and a motion prompt per shot, plan the sound, cut, check each asset, each cut and the whole video against the intent, make the smallest repair.
-  Use when: "a video ad for my lamp", "direct this", "same product in every scene", "a tutorial people can follow", "the clips do not fit together", "it looks like AI", or any brief where look, continuity and a finished edit matter more than speed.
+  Use when: "a video ad for my thermos", "direct this", "same product in every scene", "a tutorial people can follow", "the clips do not fit together", "it looks like AI", or any brief where look, continuity and a finished edit matter more than speed.
   Chain: lavendly-multi-clip is the fast path for pasted anchors and no hero asset; lavendly-storyteller covers one shot under 12 s; lavendly-review owns the quality loop; lavendly-publish posts; lavendly-cost-aware owns spend approval.
   NOT for: one-shot clips, posting, films over 90 s (propose two), talking-head interviews, or media pasted into the chat (upload, then `list_assets`).
 argument-hint: "[brief] [hero asset url or 'generate the hero'] [duration 15..90] [aspect] [voice or 'native sound']"
@@ -71,8 +71,8 @@ This skill gives the agent that judgment and the exact calls for Lavendly.
 
 ### Hero lock
 
-- The hero is the one thing that must never change: the lamp, the bottle,
-  the character. Write its description once, 1 to 2 sentences, observable
+- The hero is the one thing that must never change (for example a thermos, a
+  bottle, a character). Write its description once, 1 to 2 sentences, observable
   only (shape, material, colour, size cues, one distinguishing mark), and
   paste it verbatim into every still-frame prompt with the words "from the
   reference" (opening images are made from text alone). In the motion prompt
@@ -85,7 +85,7 @@ This skill gives the agent that judgment and the exact calls for Lavendly.
   Seedance and Wan 2.6 and 2.7, 2 on the others, none on Veo 3.1 Lite, where
   a referenced scene is skipped uncharged and the render still says done).
   Give each reference one job in a sentence of the motion prompt ("reference
-  1 is the lamp's shape and finish only"). Hero first, then a style plate.
+  1 is the thermos's shape and finish only"). Hero first, then a style plate.
 - When the user changes the hero after generation, every generated scene is
   stale and the change is a paid re-roll. Say that before doing it.
 
@@ -128,9 +128,9 @@ This skill gives the agent that judgment and the exact calls for Lavendly.
 - The motion prompt describes change over time, because the clip animates
   its own opening image: the action with timing ("0 to 2 s", "2 to 5 s"),
   the one camera move, the end state, the sound inside the shot, and one lock
-  sentence for what must not change ("the lamp, the table and the window
+  sentence for what must not change ("the thermos, the bench and the window
   light stay exactly as in the opening frame"). The exact count of every
-  person and hero object ("exactly one lamp, nobody else in frame"). Light
+  person and hero object ("exactly one thermos, nobody else in frame"). Light
   repeated only when it changes during the shot. The model's own prompt
   dialect (Veo, Seedance, Kling, Hailuo and the rest) is in lavendly-models.
 - Concrete words only. The banned list and the replacements are in
@@ -266,8 +266,8 @@ by the frames alone.
 2. Show the direction and the shot list before creating anything; it is the
    cheap moment to redirect. Keep it to one screen: a line per scene, the
    hero description, the sound plan.
-3. Explain an important choice in half a sentence ("close on the switch so
-   the click is the hook"), never a lecture.
+3. Explain an important choice in half a sentence ("close on the cap so
+   the twist is the hook"), never a lecture.
 4. Silent polling; one line per phase change; a frame link per scene.
 5. The user's language in chat, English in prompts and tool arguments.
 6. Never present a failing or drifting scene as done.

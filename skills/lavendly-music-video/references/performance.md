@@ -49,7 +49,7 @@ performance clip split into pieces.
 | Slot | Bars | Size, angle, lens | Move | Action | Source |
 |---|---|---|---|---|---|
 | 1 | 1 | Wide, back-lit, 24mm | locked-off | Silhouette steps forward into the light | Take A, piece 1 |
-| 2 | 2 | Insert, 100mm | locked-off | The motif: a red scarf lifting in the wind | Clip 2, 5 s |
+| 2 | 2 | Insert, 100mm | locked-off | The motif: a silver ribbon lifting in the wind | Clip 2, 5 s |
 | 3 | 3 to 4 | Medium close-up, 50mm | slow orbit left to right | Profile, mic across the mouth, eyes closed | Clip 3, 5 s |
 | 4 | 5 | Medium, 35mm | locked-off | Facing the lens, one hand reaching out on the downbeat | Take A, piece 2 |
 | 5 | 6 | Four half-bar pieces | per piece | Burst: hair, hand, light flare, eyes | Clip 4, 5 s, split in four |
@@ -143,6 +143,9 @@ Typical cost (clips plus about 2 per opening image):
 | Seedance 2.0 Mini | 3 x 9 + 18 = 45, plus 8 | 7 x 9 + 18 = 81, plus 16 |
 
 ## 8. Prompt pairs
+
+Worked example: the pairs use one invented artist, Nova. The user's artist
+and their locked description replace her.
 
 ### Pair 1: the corridor (Seedance 2.0 Fast, chorus, with the artist reference)
 

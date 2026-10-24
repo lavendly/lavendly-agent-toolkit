@@ -70,6 +70,11 @@ skills/
   backticks are fine. `scripts/validate.mjs` scans every tracked text file.
 - No marketing tone. No exclamation marks, no emojis, no hype adjectives.
   Plain, concise, specific. Tables are welcome.
+- Examples are examples: label them, vary them across skills, and never reuse
+  one character or setting as a default. State the rule or slot first, then
+  the labelled example. A file that needs one running example introduces it as
+  a worked example the user's own film replaces. `scripts/validate.mjs` fails
+  when one example name appears in two skill folders.
 - Prompts the agent writes must avoid the banned words listed in each skill's
   `references/prompt-anchors.md` (cinematic, stunning, 8k and the rest).
   Replace them with concrete camera, light and material language.

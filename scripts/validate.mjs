@@ -14,6 +14,7 @@
 //      no " -- " used as a dash in markdown prose
 //   6. VERSION matches every manifest, package.json and CHANGELOG
 //   7. every plugin manifest finds the skills in skills/
+//   8. no example name (Mia, Pip and the like) appears in more than one skill folder
 //
 // Exit code 1 with a list of failures, 0 when clean.
 
@@ -339,6 +340,47 @@ for (const dirName of skillDirs) {
   // README mentions the skill
   if (readme && !readme.includes(dirName)) fail(`README.md does not mention ${dirName}`);
 
+}
+
+// Examples are examples: one invented name (a character, a place, a product)
+// lives in one skill folder only, so no example becomes the default. A name is
+// a capitalised word seen mid-sentence or after a quote that never appears in
+// lower case. Shared real terms go in the allowlist.
+const SHARED_NAMES = new Set([
+  // model families and providers (lavendly-models, every mcp-calls.md)
+  'Seedance', 'Wan', 'Veo', 'Lite', 'Pro', 'Kling', 'Grok', 'Gen', 'Hailuo', 'Runway', 'Luma',
+  'Pixverse', 'Sora', 'Google', 'Gemini', 'Nano', 'Banana', 'Lyria',
+  // voice names from the voice table every audio skill carries
+  'Rachel', 'Antoni', 'Elli', 'Josh', 'Arnold', 'Sam', 'Adam', 'Bella', 'Domi',
+  // platforms, plans, film stock
+  'Meta', 'Instagram', 'Starter', 'Enterprise', 'Super', 'Critical', 'Kodak', 'Portra',
+  // days, months, languages, regions, words that only open a quote
+  'Monday', 'Thursday', 'Friday', 'Sunday', 'June', 'October',
+  'English', 'Spanish', 'Japanese', 'Korean', 'Chinese', 'Dutch', 'Mediterranean', 'Europe',
+  'Okay', 'Hey',
+]);
+{
+  const lowerWords = new Set();
+  const midSentence = new Set();
+  const nameDirs = new Map();
+  for (const dirName of skillDirs) {
+    for (const file of walk(join(SKILLS_ROOT, dirName)).filter((p) => p.endsWith('.md'))) {
+      const text = readText(file);
+      for (const w of text.match(/(?<![\w/.-])[a-z]{3,}(?![\w/.-])/g) || []) lowerWords.add(w);
+      for (const m of text.matchAll(/(?:[a-z,;:] |")([A-Z][a-z]{2,})\b/g)) midSentence.add(m[1]);
+      for (const m of text.matchAll(/\b([A-Z][a-z]{2,})\b/g)) {
+        if (!nameDirs.has(m[1])) nameDirs.set(m[1], new Set());
+        nameDirs.get(m[1]).add(dirName);
+      }
+    }
+  }
+  let namesClean = true;
+  for (const [name, dirs] of nameDirs) {
+    if (dirs.size < 2 || SHARED_NAMES.has(name) || !midSentence.has(name) || lowerWords.has(name.toLowerCase())) continue;
+    fail(`example name "${name}" appears in ${dirs.size} skills (${[...dirs].join(', ')}); give each skill its own example, or allowlist a real shared term in SHARED_NAMES`);
+    namesClean = false;
+  }
+  if (namesClean) ok('no example name reused across skill folders');
 }
 
 // package.json ships the whole skills/ folder

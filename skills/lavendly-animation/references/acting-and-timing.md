@@ -14,7 +14,7 @@ and the limits of what one generated clip can act.
 | Follow-through and overlap | Parts keep moving after the body stops | "stops; its ears and tail keep swinging for a moment, then settle" |
 | Slow in and slow out | Moves ease out of rest and into rest | "eases into the move and settles gently at the end" |
 | Arcs | Living things move along curves | "the head turns in a soft arc"; "the ball bounces in shrinking arcs" |
-| Secondary action | A small action supports the main one | "hums while it walks, the scarf bouncing" (one, not several) |
+| Secondary action | A small action supports the main one | "hums while it walks, the neckerchief bouncing" (one, not several) |
 | Timing | Fewer frames feel fast and light, more feel slow and heavy | "a quick, light hop"; "a slow, heavy step" |
 | Exaggeration | Push the pose past real life, as far as the style allows | "its eyes go wide and its whole body jolts" (cartoon); subtle for a 3D feature look |
 | Solid drawing | Volume and weight stay constant | "keeps its round volume, no stretching of the face" |
@@ -96,8 +96,8 @@ feel must come from the generated clip.
 
 ## 7. Two characters in one shot
 
-- Fix sides for the scene and write them in every prompt: "Pip on the left,
-  facing right; Moss on the right, facing left".
+- Fix sides for the scene and write them in every prompt: for example "Nilo on
+  the left, facing right; the kingfisher on the right, facing left".
 - One acts, one reacts; stagger them: the reaction starts while the action
   finishes.
 - Never both doing big actions at once; the model merges them.

@@ -109,6 +109,8 @@ Totals: text-made openings at 2 credits each, score 2 or 3, voice 1.
 
 ## 7. Prompt pairs (Kling)
 
+Examples: the user's own place, brand and photos replace the ones shown.
+
 **Pair 1: the start**
 
 Still:

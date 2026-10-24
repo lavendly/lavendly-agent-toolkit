@@ -62,6 +62,8 @@ fully visible", not "no extra fingers".
 
 ## Wording for the user
 
+Examples follow; swap in the real scene, failure and price.
+
 Failure, one line per scene, plain words:
 
 "Scene 2 (bridge) failed: her hair turned brown and the left hand has extra

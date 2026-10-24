@@ -1,7 +1,9 @@
 # MCP call shapes: cinematic
 
-Exact arguments for a 30 s two-hander (Mia and Tom in a kitchen) on Seedance
-2.0 Fast with two character references and a location plate, then the
+Exact arguments, shown on one worked example: a 30 s two-hander on Seedance
+2.0 Fast with two character references and a location plate (Hana and Kenji
+in a narrow Osaka apartment kitchen at night; she has sold the family noodle
+shop, he slides the shop keys back). The user's own film replaces it. Then the
 genre-specific calls: app stills as opening images, frame chaining, the
 grade, speed ramps and comedy timing. Argument names are the live MCP
 names; placeholders are in angle brackets. Read real node ids from
@@ -38,10 +40,10 @@ list again.
 ## `import_asset`: the references
 
 ```json
-{ "kind": "image", "url": "https://example.com/mia-headshot.jpg", "filename": "mia-headshot.jpg" }
+{ "kind": "image", "url": "https://example.com/hana-headshot.jpg", "filename": "hana-headshot.jpg" }
 ```
 
-Repeat for Tom and for the kitchen plate. Each returns a hosted Lavendly url.
+Repeat for Kenji and for the kitchen plate. Each returns a hosted Lavendly url.
 A character reference is a clean, evenly lit, front or three-quarter head
 and shoulders on a plain background; a full-body sheet with several faces
 averages them into a stranger. Media pasted into the chat never reaches
@@ -57,21 +59,21 @@ its `/api/v1/storage/m/<key>` path.
 
 ```json
 {
-  "name": "The Keys",
-  "description": "30 s two-hander. Mia on the left, Tom on the right. She sold the house; he slides the keys back.",
+  "name": "The Shop Keys",
+  "description": "30 s two-hander. Hana on the left, Kenji on the right. She sold the family noodle shop; he slides the shop keys back.",
   "aspect": "16:9",
   "videoModel": "bytedance/seedance-2.0-fast",
   "shots": [
     { "prompt": "<motion prompt, shot 1: wide master>", "duration": 5 },
     { "prompt": "<motion prompt, shot 2: insert keys>", "duration": 5 },
-    { "prompt": "<motion prompt, shot 3: Mia line 1>", "duration": 5 },
-    { "prompt": "<motion prompt, shot 4: Tom line 2>", "duration": 5 },
-    { "prompt": "<motion prompt, shot 5: Mia line 3>", "duration": 5 },
-    { "prompt": "<motion prompt, shot 6: Tom reaction>", "duration": 5 },
+    { "prompt": "<motion prompt, shot 3: Hana line 1>", "duration": 5 },
+    { "prompt": "<motion prompt, shot 4: Kenji line 2>", "duration": 5 },
+    { "prompt": "<motion prompt, shot 5: Hana line 3>", "duration": 5 },
+    { "prompt": "<motion prompt, shot 6: Kenji reaction>", "duration": 5 },
     { "prompt": "<motion prompt, shot 7: wide, keys slide back>", "duration": 10 }
   ],
   "project_name": "<only when the user named a project>",
-  "idempotency_key": "wf-the-keys-2026-10-16"
+  "idempotency_key": "wf-the-shop-keys-2026-10-16"
 }
 ```
 
@@ -94,21 +96,21 @@ One call with the full `nodes` and `edges` arrays (they are replaced):
   "workflow_id": "<id>",
   "nodes": [
     "<every existing node, image nodes with their new data.prompt>",
-    { "id": "ref_mia", "type": "imageSource", "position": { "x": 80, "y": -420 },
-      "data": { "title": "Reference: Mia", "url": "<hosted url>", "imgSource": "upload", "reference": true } },
-    { "id": "ref_tom", "type": "imageSource", "position": { "x": 320, "y": -420 },
-      "data": { "title": "Reference: Tom", "url": "<hosted url>", "imgSource": "upload", "reference": true } },
+    { "id": "ref_hana", "type": "imageSource", "position": { "x": 80, "y": -420 },
+      "data": { "title": "Reference: Hana", "url": "<hosted url>", "imgSource": "upload", "reference": true } },
+    { "id": "ref_kenji", "type": "imageSource", "position": { "x": 320, "y": -420 },
+      "data": { "title": "Reference: Kenji", "url": "<hosted url>", "imgSource": "upload", "reference": true } },
     { "id": "ref_kitchen", "type": "imageSource", "position": { "x": 560, "y": -420 },
       "data": { "title": "Reference: kitchen", "url": "<hosted url>", "imgSource": "upload", "reference": true } }
   ],
   "edges": [
     "<every existing edge, the scene image edges first>",
-    { "id": "ref_mia->vid_3", "source": "ref_mia", "target": "vid_3", "data": { "mode": "reference" } },
+    { "id": "ref_hana->vid_3", "source": "ref_hana", "target": "vid_3", "data": { "mode": "reference" } },
     { "id": "ref_kitchen->vid_3", "source": "ref_kitchen", "target": "vid_3", "data": { "mode": "reference" } },
-    { "id": "ref_tom->vid_4", "source": "ref_tom", "target": "vid_4", "data": { "mode": "reference" } },
+    { "id": "ref_kenji->vid_4", "source": "ref_kenji", "target": "vid_4", "data": { "mode": "reference" } },
     { "id": "ref_kitchen->vid_4", "source": "ref_kitchen", "target": "vid_4", "data": { "mode": "reference" } },
-    { "id": "ref_mia->vid_1", "source": "ref_mia", "target": "vid_1", "data": { "mode": "reference" } },
-    { "id": "ref_tom->vid_1", "source": "ref_tom", "target": "vid_1", "data": { "mode": "reference" } },
+    { "id": "ref_hana->vid_1", "source": "ref_hana", "target": "vid_1", "data": { "mode": "reference" } },
+    { "id": "ref_kenji->vid_1", "source": "ref_kenji", "target": "vid_1", "data": { "mode": "reference" } },
     { "id": "ref_kitchen->vid_1", "source": "ref_kitchen", "target": "vid_1", "data": { "mode": "reference" } }
   ]
 }
@@ -122,7 +124,7 @@ Rules:
   on Veo 3.1 Lite. Priority when slots are short: the face of whoever speaks
   in the shot, then the other face, then the place, then a style plate.
 - Every wired reference gets one role sentence in that clip's motion prompt:
-  "Reference 1 is Mia's face and hair only; ignore its background and pose.
+  "Reference 1 is Hana's face and hair only; ignore its background and pose.
   Reference 2 is the kitchen's layout and light only."
 - On Veo 3.1 and Fast, a clip with references is generated at 8 s.
 - Reference images do not reach the opening images on this path (they are
@@ -141,7 +143,7 @@ image node; a node with a url is not regenerated:
   "nodes": [
     "<every node unchanged except:>",
     { "id": "img_3", "type": "imageSource", "position": { "x": 960, "y": 0 },
-      "data": { "title": "Opening: Mia line 1", "url": "<hosted still url>", "prompt": "<still prompt kept for the record>" } }
+      "data": { "title": "Opening: Hana line 1", "url": "<hosted still url>", "prompt": "<still prompt kept for the record>" } }
   ],
   "edges": ["<every edge unchanged>"]
 }

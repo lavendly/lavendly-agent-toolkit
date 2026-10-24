@@ -2,7 +2,8 @@
 
 A person speaking to camera: the creator format, the explainer host, the
 LinkedIn thought piece, an AI avatar presenter. Worked example: a cooking
-creator, Rosa, with a quick tip; and an AI host for a weekly series.
+creator, Rosa, with a quick tip; and an AI host for a weekly series. The
+user's own creator or host replaces them.
 
 ## 1. Purpose, audience, ending
 

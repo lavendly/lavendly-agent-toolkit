@@ -118,7 +118,10 @@ scene.
 - No clipping, abrupt cutoff or unexplained silence.
 - Every audible event has a plausible source or a deliberate design reason.
 
-## Rules learned on Pip of Whisperpine (2026-10-16)
+## Rules learned on a long animated short (2026-10-16)
+
+Example notes from one long creature film; they hold for any multi-shot
+film.
 
 - Every third shot is an insert of 3 or 4 s that changes the angle: a point
   of view, a macro on paws or hands, a view from above. Inserts cost little

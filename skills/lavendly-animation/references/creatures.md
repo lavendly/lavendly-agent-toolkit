@@ -1,6 +1,6 @@
 # Creatures: anatomy, gait, legs, mouths, eyes
 
-Animal and creature heroes fail in ways people do not: a fox that stands up
+Animal and creature heroes fail in ways people do not: a dog that stands up
 and runs on two legs, a fifth leg during a turn, a beak that grows teeth, two
 eyes looking two ways. Children notice all of it. Write the anatomy into the
 prompts; never leave it to the model.
@@ -35,15 +35,17 @@ reference 2 on 4-reference models.
 Add to the usual hero block: the leg count, how it stands, the tail, the
 ears and the eyes.
 
+Example:
+
 ```text
-Pip: a small round red fox cub standing on four legs, oversized pointed ears, cream chest and muzzle, black socks on all four paws, one bushy tail with a white tip, large amber eyes with one white catchlight each, a blue knitted scarf, a white tip on the left ear only.
+Nilo: a young round grey-lavender river hippo standing on four short legs, four round toes on each foot, a wide pink muzzle, small round ears, one short tail, small dark eyes with one white catchlight each, a yellow knotted neckerchief, a pale pink patch over the left eye only.
 ```
 
 ## 3. How animals stand and walk
 
 | Foot type | Who | What to write |
 |---|---|---|
-| Digitigrade (walks on its toes) | cats, dogs, foxes, wolves, most birds | "walks on its toes, heels high, the hind leg bends forward at the knee and back at the hock" |
+| Digitigrade (walks on its toes) | cats, dogs, wolves, most birds | "walks on its toes, heels high, the hind leg bends forward at the knee and back at the hock" |
 | Plantigrade (whole foot down) | bears, raccoons, hedgehogs, mice, rabbits at rest | "places the whole flat foot down with each step" |
 | Unguligrade (on hoof tips) | horses, deer, goats, cows | "steps on hard hooves, thin lower legs, the hock bends backward" |
 
@@ -60,7 +62,7 @@ hock). Fore legs bend at the elbow, which points backward.
 | Gallop | four beats with a moment of all feet off the ground | flight, chase | "gallops on all four legs, body stretching and folding, a moment with all paws off the ground" |
 | Bound | hind feet land together ahead of the fore feet | rabbits, squirrels, weasels | "bounds, the hind feet landing together ahead of the front paws" |
 | Hop | both hind feet push off together | frogs, kangaroos, small birds on the ground | "hops with both feet together" |
-| Pounce | crouch, wiggle, spring, front paws land first | foxes, cats | "crouches low, rear end wiggles once, springs forward and lands front paws first" |
+| Pounce | crouch, wiggle, spring, front paws land first | cats, dogs at play | "crouches low, rear end wiggles once, springs forward and lands front paws first" |
 
 Rules for every four-legged hero:
 
@@ -133,8 +135,8 @@ pick a line whose key word has a clear, open shape and to judge the result.
 ## 6. Eyes
 
 - Both eyes look the same way: "both eyes look up at the star together".
-- Name the pupil: round (dogs, foxes in stylised films, most heroes),
-  vertical slit (cats, a sly fox), horizontal bar (goats, sheep). Keep it
+- Name the pupil: round (dogs, hares and hippos in stylised films,
+  most heroes), vertical slit (cats), horizontal bar (goats, sheep). Keep it
   the same in every prompt.
 - One catchlight per eye, on the same side as the key light, in every shot.
 - Blinks: "blinks once, slowly" at most once per beat; constant blinking
@@ -148,13 +150,13 @@ pick a line whose key word has a clear, open shape and to judge the result.
 
 | Failure | Fix in the prompt or the plan |
 |---|---|
-| Animal stands up and runs on two legs | "on all four paws, a fox's trot, never upright" in every motion prompt with movement |
+| Animal stands up and runs on two legs | "on all four paws, a dog's trot, never upright" in every motion prompt with movement |
 | Five legs, or legs merging in a turn | slower gait, a cut instead of a turn, "four legs visible throughout, never more than four" |
 | Feet sliding on the ground | "each paw lands and stays planted until it lifts", a locked-off camera |
-| Two of the hero | "exactly one Pip in frame, nobody else, no copy of him"; no mirrors or water reflections unless bounded |
+| Two of the hero | "exactly one goat in frame, nobody else, no copy of her"; no mirrors or water reflections unless bounded |
 | Extra tail or ears changing shape | the tail and ear words of the hero block in the still; the head close-up as reference 1 |
 | Teeth or a scary open mouth | mouth closed by default; beaks "no teeth"; dialogue moved to narration |
-| Eyes looking two ways, uneven size | "both eyes the same size, both looking at the lantern" |
+| Eyes looking two ways, uneven size | "both eyes the same size, both looking at the carrot" |
 | Fur crawling, texture boiling | lower motion amount, shorter clip, "fur stays still except where the wind moves it" |
 | Creature grows larger than a bigger character | the size-reference frame; "the mouse stands no taller than the bear's paw" |
 | A new animal appears in a point of view shot | "a point of view through the grass, no animal or person in frame" |

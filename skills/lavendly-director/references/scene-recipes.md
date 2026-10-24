@@ -4,12 +4,12 @@ Starting points, not templates. Each gives the goal, a coverage pattern that
 fits 3 to 5 scenes of 4 to 8 s, the light, the sound and what to watch. Adapt
 to the hero, the place and the brief. Scene 1 is always the hook.
 
-## 1. Product reveal (the lamp, the bottle, the watch)
+## 1. Product reveal (for example a thermos, a bottle, a watch)
 
 Goal: considered, desirable, tactile; the same object in every frame.
 
-- Scene 1, hook: a detail or a controlled glimpse (the switch, a highlight on
-  the cap, the dome's grain). Macro or close, locked-off or a slow push-in.
+- Scene 1, hook: a detail or a controlled glimpse (for example the dent
+  on a cap, a highlight on a shoulder, the grain of brushed steel). Macro or close, locked-off or a slow push-in.
 - Scene 2, context: the product in its world (a nook, a bathroom shelf, a
   wrist), medium or wide, one practical light, the object doing its one thing.
 - Scene 3, hero: three-quarter angle on a clean background, the full form,

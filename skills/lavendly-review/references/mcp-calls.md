@@ -47,7 +47,7 @@ empty `scenes` means no plan was stored: infer the headings and say so.
 }
 ```
 
-Response:
+Example response:
 
 ```json
 {
@@ -127,8 +127,12 @@ where `get_schema` lists it; without it the call returns the mid frame.
 ## `quality_check` per cut
 
 ```json
-{ "workflow_id": "<id>", "node_id": "<scene N+1 video node id>", "previous_node_id": "<scene N video node id>", "same_scene": true, "present": ["Mia", "the brass lamp"] }
+{ "workflow_id": "<id>", "node_id": "<scene N+1 video node id>", "previous_node_id": "<scene N video node id>", "same_scene": true, "present": ["Meera", "the orange running vest"] }
 ```
+
+The `present` values are a worked example (Meera, a marathon runner at a
+rainy city-park start line, and her orange running vest); use the names from
+the scene plan of the film under review.
 
 Both scenes must be generated. Adds `cut: { previous_node_id, same_scene,
 cut_pass, findings, boundary, notes }`; each finding has `severity`,

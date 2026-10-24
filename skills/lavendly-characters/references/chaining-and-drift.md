@@ -30,8 +30,8 @@ identity tool on the MCP path and it decays with every hop.
 6. `estimate_cost`, announce, `generate_scene` for N+1 only.
 
 Write the continuation as a description of the opening frame and the
-movement still carrying ("Mia is mid-stride toward the door, as in the
-opening frame; she keeps walking..."). Do not open the prompt with "This
+movement still carrying (for example "Dara is mid-stride toward the door,
+as in the opening frame; she keeps walking..."). Do not open the prompt with "This
 shot continues the previous": the whole-film sequence lint can flag that
 opening as a continuation with no canvas link.
 
@@ -95,7 +95,10 @@ Open N's last frame and N+1's first frame side by side
 - [ ] Sharpness has not fallen visibly. If it has, the next scene starts
       from a clean keyframe.
 
-## 8. Worked example: Mia, three scenes, Seedance 2.0 Mini, 16:9
+## 8. Worked example: Dara, three scenes, Seedance 2.0 Mini, 16:9
+
+An invented cycle courier in Manchester; the user's own hero, place and
+shots replace her.
 
 References wired to every clip after the scene's own image: 1 = the face
 close-up, 2 = the full figure (scenes 1 and 2 only). Scene 1 starts from a
@@ -105,31 +108,31 @@ is a new angle from a fresh still (the chain resets).
 Scene 1, still-frame prompt:
 
 ```text
-Narrative short film still, 35mm look. Mia: a woman in her early thirties, warm light-brown skin, oval face, thick straight black eyebrows, shoulder-length black curly hair, a small gold hoop in her left ear only, mustard corduroy jacket, dark green canvas backpack. She stands in a bus shelter at dusk, facing left, hair damp. Medium shot, eye level. Cold blue streetlight from above left. Exactly one person. No text, no on-screen graphics.
+Narrative short film still, 35mm look. Dara: a woman in her mid twenties, deep brown skin, oval face, high cheekbones, thick arched black eyebrows, long black box braids tied back in a low knot, a small silver ring in her right nostril only, yellow rain shell, black courier bag. She stands under a railway arch at dusk, one hand on her bicycle, facing left, braids damp. Medium shot, eye level. Cold blue streetlight from above left. Exactly one person, one bicycle. No text, no on-screen graphics.
 ```
 
 Scene 1, motion prompt:
 
 ```text
-Reference 1 is Mia's face and hair only; ignore its grey background and pose. Reference 2 is Mia's jacket and backpack only. Already in motion from the first frame: Mia looks up the street, sees headlights, and steps to the kerb, her right hand on the backpack strap. Locked-off camera. Mia, the shelter and the blue streetlight stay exactly as in the opening frame. Exactly one Mia in frame, nobody else. Audio: rain on the shelter roof, a bus approaching, no music.
+Reference 1 is Dara's face and braids only; ignore its grey background and pose. Reference 2 is Dara's rain shell and courier bag only. Already in motion from the first frame: Dara looks up the street, sees the rain easing, and swings her right leg over the bicycle, one hand still on the handlebar. Locked-off camera. Dara, the arch and the blue streetlight stay exactly as in the opening frame. Exactly one Dara in frame, one bicycle, nobody else. Audio: rain dripping off the arch, a train passing overhead, no music.
 ```
 
 Scene 2, first frame: scene 1's last frame. Motion prompt:
 
 ```text
-Reference 1 is Mia's face and hair only; ignore its background. Mia stands at the kerb as in the opening frame; the bus doors fold open in front of her and she steps up inside, her right hand still on the backpack strap. Slow pan left that follows her and stops on the open doors. Mia and the streetlight stay exactly as in the opening frame. Exactly one Mia, nobody else in frame; the bus is empty. Audio: doors hissing, rain, no music.
+Reference 1 is Dara's face and braids only; ignore its background. Dara sits astride the bicycle under the arch as in the opening frame; she pushes off and rides out into the wet street, both hands on the handlebars. Slow pan left that follows her and stops on the wet cobbles. Dara and the streetlight stay exactly as in the opening frame. Exactly one Dara, nobody else in frame; the street is empty. Audio: tyres hissing on wet cobbles, rain, no music.
 ```
 
 Scene 3, still-frame prompt (a clean frame, new angle):
 
 ```text
-Narrative short film still, 35mm look. Mia: a woman in her early thirties, warm light-brown skin, oval face, thick straight black eyebrows, shoulder-length black curly hair, a small gold hoop in her left ear only, mustard corduroy jacket. She sits by a bus window, hair damp, backpack on her lap, looking out. Close-up, three-quarter from the aisle. Warm light from above, blue streetlights on the wet window. Exactly one person. No text, no on-screen graphics.
+Narrative short film still, 35mm look. Dara: a woman in her mid twenties, deep brown skin, oval face, high cheekbones, thick arched black eyebrows, long black box braids tied back in a low knot, a small silver ring in her right nostril only, yellow rain shell. She waits at a lit front door, braids damp, a parcel in both hands. Close-up, three-quarter from the side. Warm light from the doorway, blue streetlight on the wet brick behind. Exactly one person. No text, no on-screen graphics.
 ```
 
 Scene 3, motion prompt:
 
 ```text
-Reference 1 is Mia's face and hair only; ignore its grey background and pose. Mia breathes out, her shoulders drop, and a small smile starts at one corner of her mouth as she watches the street slide past. Locked-off camera. Mia, the window and the warm light stay exactly as in the opening frame. Exactly one Mia in frame, nobody else. Audio: bus engine hum, rain on the glass, no music.
+Reference 1 is Dara's face and braids only; ignore its grey background and pose. Dara breathes out, her shoulders drop, and a small smile starts at one corner of her mouth as the door light brightens on her face. Locked-off camera. Dara, the doorway and the warm light stay exactly as in the opening frame. Exactly one Dara in frame, nobody else. Audio: rain on the pavement, a door latch turning off screen, no music.
 ```
 
 One `generate_scene` call makes scene 3's opening image and then its clip,

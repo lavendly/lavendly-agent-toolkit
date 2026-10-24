@@ -1,7 +1,7 @@
 # Recipe: how-to and tutorial
 
 Steps toward a result the viewer can reproduce. Searchers, learners,
-customers of a product. Worked example: repotting a houseplant. Software
+customers of a product. Worked example: repotting a houseplant; the user's own task replaces it. Software
 tutorials are covered in section 9.
 
 ## 1. Purpose, audience, ending

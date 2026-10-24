@@ -2,7 +2,7 @@
 
 An opinion, an analysis or a take on a topic, trend or news, told with
 original pictures instead of someone else's footage. Worked example: "Why
-every new café looks the same" (a design take).
+every new café looks the same" (a design take). The user's own topic replaces it.
 
 ## 1. Purpose, audience, ending
 

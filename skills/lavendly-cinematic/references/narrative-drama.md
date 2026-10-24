@@ -11,6 +11,10 @@
 
 ## 2. Structures by length
 
+The shot lists are worked examples (a boy on a platform; Marisol, a woman
+in her forties, burying a phone in her back garden at dusk). The user's
+story replaces them and keeps the shape.
+
 Model lengths are for Veo 3.1 Fast (4 or 8 s; 6 s costs the same as 8 s).
 On Kling or Seedance, generate 5 s for a cut up to 5 s and 10 s up to 10 s.
 
@@ -158,7 +162,7 @@ Narrative short film, 35mm film look, one continuous take. Locked-off camera. 0 
 Still frame:
 
 ```text
-Narrative short film still, 35mm film look, fine grain. Close-up at a high angle, 85mm lens, shallow depth of field. Ana's hands, a woman in her forties: short unpainted nails, a thin silver ring on the right middle finger, the cuffs of a rust-red wool sweater. Both hands rest flat on fresh dark soil in a garden bed at dusk, a faint glow under the soil between them. Cool dusk light from above, a warm window glow from the right edge. Palette: rust, soil brown, slate blue.
+Narrative short film still, 35mm film look, fine grain. Close-up at a high angle, 85mm lens, shallow depth of field. Marisol's hands, a woman in her forties: short unpainted nails, a thin silver ring on the right middle finger, the cuffs of a rust-red wool sweater. Both hands rest flat on fresh dark soil in a garden bed at dusk, a faint glow under the soil between them. Cool dusk light from above, a warm window glow from the right edge. Palette: rust, soil brown, slate blue.
 ```
 
 Motion:
@@ -172,13 +176,13 @@ Narrative short film, 35mm film look, one continuous take. Very slow push-in tow
 Still frame:
 
 ```text
-Narrative short film still, 35mm film look. Medium close-up, eye level, 85mm lens. Ana: a woman in her forties, olive skin, dark hair tied back loosely, a small mole under her right eye, a rust-red wool sweater. She kneels in a garden at dusk, looking up and to screen right. Warm window glow falls on her face from the right, cool dusk sky behind. Palette: rust, slate blue, warm yellow.
+Narrative short film still, 35mm film look. Medium close-up, eye level, 85mm lens. Marisol: a woman in her forties, olive skin, dark hair tied back loosely, a small mole under her right eye, a rust-red wool sweater. She kneels in a garden at dusk, looking up and to screen right. Warm window glow falls on her face from the right, cool dusk sky behind. Palette: rust, slate blue, warm yellow.
 ```
 
 Motion:
 
 ```text
-Scene: a back garden at dusk. Character: Ana kneeling, looking up at a lit window off screen right. Action: she holds the look; her jaw sets; at 3 s she breathes out slowly through her nose and lowers her eyes to the soil in front of her. Camera: static, eye level. Audio: wind in the hedge, a television murmur from the house. Ana, her sweater and the light stay exactly as in the opening frame. Exactly one person in frame, nobody else. Clean frame: no text, no subtitles.
+Scene: a back garden at dusk. Character: Marisol kneeling, looking up at a lit window off screen right. Action: she holds the look; her jaw sets; at 3 s she breathes out slowly through her nose and lowers her eyes to the soil in front of her. Camera: static, eye level. Audio: wind in the hedge, a television murmur from the house. Marisol, her sweater and the light stay exactly as in the opening frame. Exactly one person in frame, nobody else. Clean frame: no text, no subtitles.
 ```
 
 Second family notes: on Seedance write the same beat in 30 to 100 words,

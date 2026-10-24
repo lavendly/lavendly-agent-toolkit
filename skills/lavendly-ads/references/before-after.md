@@ -117,6 +117,8 @@ opening image, the rest 2 credits each, score 2 or 3, voice 1.
 
 ## 8. Prompt pairs (Veo)
 
+Examples: the user's own product, brand and photos replace the ones shown.
+
 **Pair 1: the before photo, animated gently** (opens on the user's before
 photo; the after photo gets the identical motion prompt)
 

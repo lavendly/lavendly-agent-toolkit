@@ -4,16 +4,18 @@ Exact arguments for starting a show, making the next episode from the last
 one, recording the story so far, and scheduling approved episodes. Argument
 names are the live MCP names; placeholders in angle brackets. The
 episode's own build (shots, references, sound, estimate, generation,
-checks, render) follows the director's call shapes.
+checks, render) follows the director's call shapes. Worked example in this
+file: "Bisi's Rooftop", an invented kids comedy; the user's own show
+replaces it.
 
 ## Start the show
 
 ```json
 {
-  "name": "Pip of Whisperpine",
-  "description": "Bible v1. Kids fable, 60 s weekly, 16:9. Pip: small round red fox cub, oversized ears, cream chest and tail tip, amber eyes, notch in left ear, blue knitted scarf; on four paws. Moss: small grey owl, one white feather over the right eye. Style: storybook gouache, soft paper texture. Format: the hollow at dusk, the problem, two tries, a friend helps, goodnight sign-off.",
-  "primary_color": "#B5482E",
-  "secondary_color": "#EADBC8"
+  "name": "Bisi's Rooftop",
+  "description": "Bible v1. Kids comedy, 60 s weekly, 16:9. Auntie Bisi: Nigerian woman in her sixties, short grey hair, round tortoiseshell glasses, mole on left cheek, green and gold Ankara dress. Tunde: boy of ten, close-cropped hair, scar through right eyebrow, plain yellow football shirt. Style: flat 2D, soft painted textures. Format: rooftop at sunrise, the problem, two tries, Bisi's trick, sunset sign-off.",
+  "primary_color": "#3E7D4F",
+  "secondary_color": "#F2C94C"
 }
 ```
 
@@ -46,7 +48,7 @@ never reaches you, so ask the user to upload it to the Asset Library and
 list again.
 
 ```json
-{ "kind": "image", "url": "https://example.com/pip-head-closeup.png", "filename": "pip-head-closeup.png" }
+{ "kind": "image", "url": "https://example.com/bisi-head-closeup.png", "filename": "bisi-head-closeup.png" }
 ```
 
 `import_asset` per sheet, head close-up and place plate not already in the
@@ -62,16 +64,16 @@ its `/api/v1/storage/m/<key>` path.
 
 ```json
 {
-  "name": "Pip of Whisperpine S01E01: The First Lantern",
+  "name": "Bisi's Rooftop S01E01: The First Seedlings",
   "description": "S01E01. Bible v1.",
   "project_id": "<project id>",
   "aspect": "16:9",
   "videoModel": "bytedance/seedance-2.0-fast",
   "shots": [
-    { "prompt": "<recurring first shot: the hollow at dusk, locked text>", "duration": 5 },
+    { "prompt": "<recurring first shot: the rooftop at sunrise, locked text>", "duration": 5 },
     { "prompt": "<the problem>", "duration": 5 }
   ],
-  "idempotency_key": "wf-pip-s01e01"
+  "idempotency_key": "wf-bisi-s01e01"
 }
 ```
 
@@ -87,8 +89,8 @@ The scene plan, keyed by clip node id, before the first `generate_scene`:
 {
   "workflow_id": "<episode workflow id>",
   "scenes": {
-    "vid_1": { "heading": "the hollow, dusk", "present": ["Pip"], "hands_off": "Pip looks up at the dark lantern" },
-    "vid_2": { "heading": "the hollow, dusk", "present": ["Pip", "Moss"], "hands_off": "Moss lands on the stone" }
+    "vid_1": { "heading": "the rooftop, sunrise", "present": ["Tunde"], "hands_off": "Tunde looks at the dry seedlings" },
+    "vid_2": { "heading": "the rooftop, sunrise", "present": ["Tunde", "Auntie Bisi"], "hands_off": "Auntie Bisi hands Tunde the green watering can" }
   }
 }
 ```
@@ -107,7 +109,7 @@ same plan: `quality_check` with `node_id`, `previous_node_id`, `same_scene`
 ```json
 {
   "workflow_id": "<episode workflow id>",
-  "description": "S01E01. Bible v1. Story so far: Pip lights the oak's lantern alone for the first time. End state: Pip in the hollow, scarf on, one lantern lit on the flat stone; dusk turning to night. Next: the rain is coming."
+  "description": "S01E01. Bible v1. Story so far: Tunde arrives for the holidays and Auntie Bisi gives him one crate of tomato seedlings. End state: Tunde on the roof with the green watering can, the seedlings watered; Auntie Bisi by the water tank; sunset. Next: the can slips."
 }
 ```
 
@@ -135,7 +137,7 @@ Find the show and its latest episode:
 `list_workflows` takes no filter and ignores `limit`: it returns every
 workflow of the account, newest update first, each row with `name`,
 `description` and `project_id`. Keep the rows whose `project_id` is the
-show's project and whose name starts "Pip of Whisperpine S01E".
+show's project and whose name starts "Bisi's Rooftop S01E".
 Then:
 
 ```json
@@ -271,8 +273,8 @@ confirmation and the disclosure):
   "workflow_id": "<episode id>",
   "channel_id": "<channel id from list_channels>",
   "when": "2026-10-23T17:00:00+02:00",
-  "title": "Pip of Whisperpine, Episode 3: The Long Night",
-  "caption": "Pip and Moss find paw prints in the snow. A new episode every Friday."
+  "title": "Bisi's Rooftop, Episode 3: The Dry Week",
+  "caption": "Tunde and Auntie Bisi find the water tank empty. A new episode every Friday."
 }
 ```
 

@@ -42,8 +42,8 @@ At 120 BPM (1 bar = 2 s). Model lengths for Veo 3.1 Fast (4 s = 2 bars,
 
 | Slot | Bars | Size, angle, lens | Move | Action | Generate |
 |---|---|---|---|---|---|
-| 1 | 1 to 2 | Wide, 35mm | locked-off | A woman alone in a rowing boat on a still lake at dawn, holding a lantern | 4 s |
-| 2 | 3 | Close-up, 85mm | slow push-in | She blows the lantern out on the hook word | 4 s, trimmed to 2 |
+| 1 | 1 to 2 | Wide, 35mm | locked-off | A woman alone in a rowing boat on a still lake at dawn, holding a candle in a glass jar | 4 s |
+| 2 | 3 | Close-up, 85mm | slow push-in | She blows the candle out on the hook word | 4 s, trimmed to 2 |
 
 ### 15 s: verse tail and chorus entrance (128 BPM, 8 bars)
 
@@ -81,7 +81,7 @@ About 20 clips; the bridge and the outro are the longest holds.
 ## 4. Hook and payoff
 
 - Hook: a story image on the song's first strong moment, with a question in
-  it (why is she on the lake with a lantern at dawn).
+  it (why is she on the lake with a candle at dawn).
 - Payoff: the climax on the final chorus downbeat; the last image held to
   the last hit and framed like the first.
 
@@ -134,13 +134,13 @@ Typical cost (clips plus about 2 per opening image):
 Still frame:
 
 ```text
-Music video frame, overcast dawn, Super 8 film texture with light leaks. Wide shot, eye level, 35mm lens. Elin: a woman in her thirties, long straight blonde hair, a knitted cream sweater with a frayed left cuff. She sits alone in a small wooden rowing boat on a still lake, holding a lit paper lantern in both hands. Low mist on the water, pines on the far shore. Soft overcast dawn light. Palette: pale blue, peach, cream.
+Music video frame, overcast dawn, Super 8 film texture with light leaks. Wide shot, eye level, 35mm lens. Elin: a woman in her thirties, long straight blonde hair, a knitted cream sweater with a frayed left cuff. She sits alone in a small wooden rowing boat on a still lake, holding a lit candle in a glass jar in both hands. Low mist on the water, pines on the far shore. Soft overcast dawn light. Palette: pale blue, peach, cream.
 ```
 
 Motion:
 
 ```text
-Music video frame, overcast dawn, Super 8 film texture. Locked-off camera on a tripod. 0 to 4 s: the boat drifts slowly from right to left; mist rolls across the water; the lantern flame flickers. Elin does not move. Elin, the boat and the light stay exactly as in the opening frame. Exactly one person and one boat in frame, nobody else. Silent, no music generated. Clean frame: no text, no letters, no logos.
+Music video frame, overcast dawn, Super 8 film texture. Locked-off camera on a tripod. 0 to 4 s: the boat drifts slowly from right to left; mist rolls across the water; the candle flame flickers. Elin does not move. Elin, the boat and the light stay exactly as in the opening frame. Exactly one person and one boat in frame, nobody else. Silent, no music generated. Clean frame: no text, no letters, no logos.
 ```
 
 ### Pair 2: the crossroads (Veo 3.1 Fast, chorus end)

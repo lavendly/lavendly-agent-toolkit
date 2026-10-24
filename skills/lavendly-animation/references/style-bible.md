@@ -1,28 +1,28 @@
 # The style bible: locking an animation style across shots
 
 Animation forgives many things a live-action film cannot, but not a style
-that changes between shots. A fox drawn in watercolour in scene 1 and in
+that changes between shots. A hippo drawn in watercolour in scene 1 and in
 glossy 3D in scene 3 reads as two films. The style bible is written once,
 shown to the user with the intent card, and pasted into prompts word for
 word.
 
 ## 1. What the bible holds
 
-| Field | What to write | Example (watercolour fable) |
+| Field | What to write | Example (watercolour fable: Nilo, a young river hippo; the user's film replaces it) |
 |---|---|---|
 | Style line | One line, first in every prompt | Watercolour storybook animation, wet-edged washes, visible cold-press paper grain, soft pencil underdrawing |
-| Shape language | The dominant shapes and what they mean | Round, soft shapes for friends; tall thin pines; no sharp angles near the hero |
+| Shape language | The dominant shapes and what they mean | Round, soft shapes for friends; tall thin reeds; no sharp angles near the hero |
 | Proportion | Head to body, eye size, limb thickness | Head as wide as the body, eyes a third of the face height |
 | Line | Weight, colour, presence, where it breaks | Thin warm-grey pencil line, broken and loose, absent inside large washes |
 | Surface and material | How every surface reads | Paint pools darker at wash edges; the paper's white is the highlight |
-| Palette | 3 to 5 named colours, hex kept for the human | rust red (#B5532F), cream (#F3E7CF), lavender (#B9A7D6), pine green (#3F5E4A), warm yellow (#F2C14E) |
-| Value structure | Where the lights and darks sit | Mid-light overall; darks only in pine trunks and the night sky |
-| Light rule | Source, direction, softness, colour, per time of day | Dusk: low warm sun from the left, soft; night: the lantern is the only warm source, the sky lavender |
-| Motion feel | Smooth or stepped, holds, speed | Slow and gentle, held poses of 1 to 2 s, nothing faster than a trot |
+| Palette | 3 to 5 named colours, hex kept for the human | reed gold (#C9A54A), cream (#F3E7CF), lavender (#B9A7D6), river green (#5E7F6A), warm pink (#E3A6A0) |
+| Value structure | Where the lights and darks sit | Mid-light overall; darks only in the deep water and the night sky |
+| Light rule | Source, direction, softness, colour, per time of day | Dusk: low warm sun from the left, soft; night: the moon on the water is the only bright source, the sky lavender |
+| Motion feel | Smooth or stepped, holds, speed | Slow and gentle, held poses of 1 to 2 s, nothing faster than a slow wade |
 | Camera grammar | Which moves belong to the style | Locked-off and slow pans like turning a page; no handheld, no orbit |
 | Texture rule | What stays fixed while things move | The paper grain stays fixed to the frame; only the paint of moving things moves |
 | Forbidden list | The looks the model drifts into, as positive replacements | flat matte paint only (never glossy 3D), soft washes (never hard cel shadows), paper white highlights (never lens flare) |
-| Style plate | The one frame that defines the look | the forest edge at dusk with the lantern on a stump, no character |
+| Style plate | The one frame that defines the look | the reed-lined river bank at dusk, the water still, no character |
 
 The forbidden list is the most valuable field. It names what this model
 tends to slide into for this style and says the replacement positively.
@@ -111,13 +111,13 @@ After every scene lands, open its first and mid frames next to the plate.
 | Line weight changes between scenes | Repeat the line words exactly; wire the plate; keep the camera distance similar so line scale stays alike |
 | Stop-motion turned smooth | Put the motion-feel line second in the prompt, add "crisp frames with no motion blur" |
 
-## 7. Example bible, ready to paste
+## 7. Example bible (the worked example above), ready to paste
 
 ```text
 Style line: Watercolour storybook animation, wet-edged washes, visible cold-press paper grain, soft pencil underdrawing.
-Palette: rust red, cream, lavender, pine green, warm yellow.
+Palette: reed gold, cream, lavender, river green, warm pink.
 Light, dusk scenes: low warm sun from the left, soft, long lavender shadows.
-Light, night scenes: the one paper lantern is the only warm light, the sky deep lavender.
+Light, night scenes: the moon on the water is the only bright light, the sky deep lavender.
 Motion feel: slow, gentle motion, long holds; the paper texture stays fixed while the paint moves.
 Camera: locked-off or a slow pan; never handheld, never an orbit.
 Forbidden, written positively: flat matte paint only, soft washes, the paper white as the highlight.

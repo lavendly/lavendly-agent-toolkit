@@ -58,11 +58,14 @@ feeling.
 
 ## 3. Dialogue syntax per family
 
+The line is an example (Bram, an invented retired watchmaker); write the
+user's own speaker and words.
+
 | Family | Write |
 |---|---|
-| Veo 3.1, Fast, Lite | `Elias says, quiet and hoarse: "You came back." (no subtitles)` |
-| Kling v3, O1 | `[Character A: Elias, quiet hoarse voice]: "You came back."` and the same label in every clip |
-| Seedance | Under an audio line: `AUDIO: Elias, quiet and hoarse: "You came back."` |
+| Veo 3.1, Fast, Lite | `Bram says, quiet and hoarse: "You came back." (no subtitles)` |
+| Kling v3, O1 | `[Character A: Bram, quiet hoarse voice]: "You came back."` and the same label in every clip |
+| Seedance | Under an audio line: `AUDIO: Bram, quiet and hoarse: "You came back."` |
 | Wan, Hailuo 3, FLUX 3 | The speaker by name and position, the line in quotes, the delivery in words |
 
 Silent models (Hailuo 2.3, Hailuo 3 Max, Runway, HeyGen, Grok 1.5 and 1.5
@@ -98,6 +101,9 @@ Lite) never get a line: their faces move and nothing is heard.
 
 ## 6. Example motion prompt, Veo 3.1 Fast, 8 s
 
+An example only (Dara, the invented courier, at home); the user's scene
+replaces it.
+
 ```text
-Medium close-up, locked-off camera. Ana sits at the kitchen table, her coat still on, both hands around a cold cup. She looks at the cup, turns it once by the handle, then looks up toward the doorway. Ana says, quietly, almost to herself: "You could have called." (no subtitles) Her eyes stay on the doorway; she does not blink. Exactly one woman in frame, nobody else. Ana, her coat and the lamp light stay exactly as in the opening frame. SFX: the cup scraping on the table. Ambient noise: fridge hum, rain outside, no music. Clean frame: no text, no subtitles, no on-screen graphics.
+Medium close-up, locked-off camera. Dara sits at the kitchen table, her rain shell still on, both hands around a cold cup. She looks at the cup, turns it once by the handle, then looks up toward the doorway. Dara says, quietly, almost to herself: "You could have called." (no subtitles) Her eyes stay on the doorway; she does not blink. Exactly one woman in frame, nobody else. Dara, her rain shell and the lamp light stay exactly as in the opening frame. SFX: the cup scraping on the table. Ambient noise: fridge hum, rain outside, no music. Clean frame: no text, no subtitles, no on-screen graphics.
 ```

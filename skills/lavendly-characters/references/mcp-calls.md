@@ -3,7 +3,9 @@
 Exact arguments for carrying an identity through a film. Argument names are
 the live MCP names; every schema rejects unknown arguments. Node ids follow
 the server's naming for compiled shots (`img_` for image nodes, `vid_` for
-clip nodes); read the real ids from `get_workflow`.
+clip nodes); read the real ids from `get_workflow`. Names and values follow
+one worked example, Dara, an invented cycle courier; the user's own hero
+replaces them.
 
 ## `list_assets`: media already in Lavendly
 
@@ -29,7 +31,7 @@ list again.
 ## `import_asset`: the hero, a packshot, a sheet
 
 ```json
-{ "kind": "image", "url": "https://example.com/mia-face.jpg", "filename": "mia-face.jpg" }
+{ "kind": "image", "url": "https://example.com/dara-face.jpg", "filename": "dara-face.jpg" }
 ```
 
 Returns a hosted Lavendly url. Images up to 25 MB; url ingest is buffered up
@@ -47,7 +49,7 @@ its `/api/v1/storage/m/<key>` path.
 
 ```json
 {
-  "name": "Mia, casting",
+  "name": "Dara, casting",
   "description": "Face and full figure on grey, with screen tests.",
   "videoModel": "bytedance/seedance-2.0-mini",
   "aspect": "16:9",
@@ -55,7 +57,7 @@ its `/api/v1/storage/m/<key>` path.
     { "prompt": "<screen-test motion prompt, face>", "duration": 4 },
     { "prompt": "<screen-test motion prompt, quarter turn>", "duration": 4 }
   ],
-  "idempotency_key": "wf-mia-casting"
+  "idempotency_key": "wf-dara-casting"
 }
 ```
 
@@ -88,13 +90,13 @@ After `create_workflow` for the film and `get_workflow`, send one
       "id": "ref_1",
       "type": "imageSource",
       "position": { "x": 80, "y": -260 },
-      "data": { "title": "Reference: Mia, face", "url": "<hosted face url>", "imgSource": "upload", "reference": true }
+      "data": { "title": "Reference: Dara, face", "url": "<hosted face url>", "imgSource": "upload", "reference": true }
     },
     {
       "id": "ref_2",
       "type": "imageSource",
       "position": { "x": 320, "y": -260 },
-      "data": { "title": "Reference: Mia, outfit", "url": "<hosted full-figure url>", "imgSource": "upload", "reference": true }
+      "data": { "title": "Reference: Dara, outfit", "url": "<hosted full-figure url>", "imgSource": "upload", "reference": true }
     },
     "<every other node unchanged, with its position, group fields and data>"
   ],

@@ -116,6 +116,8 @@ tight.
 
 ## 7. Prompt pairs (Veo)
 
+Examples: the user's own place, brand and photos replace the ones shown.
+
 **Pair 1: garlic into the oil**
 
 Still:

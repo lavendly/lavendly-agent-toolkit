@@ -2,7 +2,8 @@
 
 A mechanism, a finding or a set of numbers made understandable and honest.
 Science channels, research communication, reports turned into video.
-Worked example: how little of Earth's water we can drink.
+Worked example: how little of Earth's water we can drink. The user's own
+subject replaces it.
 
 ## 1. Purpose, audience, ending
 

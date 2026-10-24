@@ -57,18 +57,18 @@ category words read better here than anywhere else:
 | Camera move | push in, pull back, pan left, pan right, tilt up, move left, move right, handheld, tracking, arc |
 | Stylisation | felt style, 3D cartoon, pixel art, puppet animation, claymation, 2D anime, watercolour, oil painting, black and white animation, tilt-shift, time-lapse |
 
-## Example 1: claymation fable, Wan 2.7, 16:9, 5 s
+## Example 1: puppet animation fable, Wan 2.7, 16:9, 5 s
 
 Still-frame prompt:
 
 ```text
-Claymation still, handmade plasticine with visible thumbprints. Pip, a small red fox with a cream chest, one white-tipped ear and round black bead eyes, sits on all four paws at the mouth of a felt burrow under a gnarled cardboard oak. Medium wide shot, low angle, left-weighted composition. Soft side light, dusk, warm tone, a paper moon low in a felt sky. No text, no on-screen graphics.
+Puppet animation still, handmade felt over a visible wire armature. Tiko, a small hummingbird puppet of emerald green felt with a ruby felt throat, a thin black wire beak and round black bead eyes, perches on a wire twig beside a paper trumpet flower. Medium wide shot, low angle, left-weighted composition. Soft side light, dusk, warm tone, a paper moon low in a felt sky. No text, no on-screen graphics.
 ```
 
 Motion prompt:
 
 ```text
-Pip lifts his nose, sniffs twice, then trots out of the burrow on all four paws toward the right of frame and stops on a flat stone. Slow pan right that follows him and stops when he stops. Pip, the oak and the dusk light stay exactly as in the opening frame. Exactly one fox, nobody else. Sound: soft paws on felt, a cricket, no music.
+Tiko's wings blur into a hover; he lifts off the twig, darts toward the right of frame in two short stepped moves, and holds in the air with his beak at the mouth of the paper flower. Slow pan right that follows him and stops when he stops. Tiko, the flower and the dusk light stay exactly as in the opening frame. Exactly one hummingbird, nobody else. Sound: a soft wing hum, a cricket, no music.
 ```
 
 ## Example 2: interior long take, Wan 3.0, 16:9, 20 s
@@ -92,7 +92,7 @@ The camera pushes in slowly from the doorway along the oak floor, past the sofa,
 | Washed out, generic look from a short prompt | Add the aesthetic control words: light source, light type, time, shot size, lens |
 | Image-to-video ignores the motion | Motion and camera only, one move |
 | Over-sharpened or oversaturated | "low contrast, desaturated, soft light" |
-| A second fox or a stray extra | The exact count line; the cast named |
+| A second bird or a stray extra | The exact count line; the cast named |
 
 ## When to pick
 

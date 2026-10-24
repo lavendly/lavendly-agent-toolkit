@@ -1,6 +1,9 @@
 # MCP call shapes: director
 
-Exact arguments for a three-scene product film with a supplied hero image.
+Exact arguments for a worked example: a three-scene product film for the
+Kestrel thermos (a brushed-steel camping thermos with a dented olive-green
+cap) in a harbour net shed before dawn, with a supplied hero image. The
+user's own film replaces it.
 Argument names are the live MCP names. Placeholders are in angle brackets.
 Node ids below follow the server's naming for compiled shots: a group
 `g_<suffix>`, an image node `img_<suffix>`, a clip node `vid_<suffix>`; read
@@ -41,9 +44,9 @@ list again.
 
 ```json
 {
-  "url": "https://example.com/lamp-reference.jpg",
+  "url": "https://example.com/kestrel-thermos-reference.jpg",
   "kind": "image",
-  "filename": "lamp-reference.jpg"
+  "filename": "kestrel-thermos-reference.jpg"
 }
 ```
 
@@ -62,8 +65,8 @@ its `/api/v1/storage/m/<key>` path.
 
 ```json
 {
-  "name": "Lumen, the lamp",
-  "description": "Three scenes: the switch, the nook, the hero shot. One lamp, one warm source.",
+  "name": "The Kestrel thermos, before dawn",
+  "description": "Three scenes: the cap, the bench, the hero shot. One thermos, one cool window source.",
   "aspect": "16:9",
   "videoModel": "google/veo-3.1-fast",
   "shots": [
@@ -72,7 +75,7 @@ its `/api/v1/storage/m/<key>` path.
     { "prompt": "<motion prompt, scene 3>", "duration": 4 }
   ],
   "project_name": "<only when the user named a project>",
-  "idempotency_key": "wf-lumen-2026-10-14"
+  "idempotency_key": "wf-kestrel-2026-10-14"
 }
 ```
 
@@ -101,8 +104,8 @@ Right after `get_workflow`, before any `generate_scene`:
 {
   "workflow_id": "<id>",
   "scenes": {
-    "vid_1": { "heading": "workshop, late afternoon", "present": ["Mia", "the brass lamp"], "hands_off": "Mia lifts the lamp toward the window" },
-    "vid_2": { "heading": "workshop, late afternoon", "present": ["Mia", "the brass lamp"], "hands_off": "the lamp lit on the sill" }
+    "vid_1": { "heading": "net shed, before dawn", "present": ["Idris", "Lucie", "the Kestrel thermos"], "hands_off": "Idris slides the thermos along the bench to Lucie" },
+    "vid_2": { "heading": "net shed, before dawn", "present": ["Idris", "Lucie", "the Kestrel thermos"], "hands_off": "the cap off, steam rising, the thermos upright between them" }
   }
 }
 ```
@@ -139,7 +142,7 @@ them), with these changes:
       "type": "imageSource",
       "position": { "x": 80, "y": -260 },
       "data": {
-        "title": "Reference: the lamp",
+        "title": "Reference: the Kestrel thermos",
         "url": "<hosted url from import_asset>",
         "imgSource": "upload",
         "reference": true
@@ -237,7 +240,7 @@ A voiceover attached by `url`, native dialogue and imported speech get none.
   "clip_id": "vid_1",
   "kind": "music",
   "scope": "film",
-  "mood": "Warm, sparse felt piano over a low string pad. Opens on a single held note as the switch clicks, builds gently through the room, lands on one sustained chord for the hero shot. Instrumental, never busy.",
+  "mood": "Warm, sparse felt piano over a low string pad. Opens on a single held note as the cap turns, builds gently through the net shed, lands on one sustained chord for the hero shot. Instrumental, never busy.",
   "duration": 18,
   "ducking": true,
   "volume": 0.35,
@@ -347,7 +350,7 @@ Reads `pass`, `score`, `failures`, `reroll_hint`, `story_pass`. A false
 The cut into a scene, once both scenes are generated:
 
 ```json
-{ "workflow_id": "<id>", "node_id": "vid_2", "previous_node_id": "vid_1", "same_scene": true, "present": ["Mia", "the brass lamp"] }
+{ "workflow_id": "<id>", "node_id": "vid_2", "previous_node_id": "vid_1", "same_scene": true, "present": ["Idris", "Lucie", "the Kestrel thermos"] }
 ```
 
 Adds `cut: { previous_node_id, same_scene, cut_pass, findings, boundary,

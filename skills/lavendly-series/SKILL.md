@@ -190,7 +190,7 @@ confidence is lower.
 1. Show the bible on one screen: cast lines, places, format beats, voice,
    score, the story so far. Show what changed since the last episode.
 2. Names and links in chat, never ids or JSON. Episodes by their names
-   ("Pip of Whisperpine, E04: The Lantern").
+   (for example "<Show>, E04: <Episode title>").
 3. One line of cost per episode and one per month at the cadence.
 4. Silent polling; one line per phase; a frame link per scene.
 5. After delivery, one line: the story-so-far entry written for this

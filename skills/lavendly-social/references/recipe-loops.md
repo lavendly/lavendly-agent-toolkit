@@ -2,8 +2,8 @@
 
 A video whose end flows back into its start, so the platform's autoplay
 replays it without a visible seam. Worked examples: a brass pendulum that
-completes one swing, a sleeping fox breathing in a ping-pong loop, and a
-spoken line loop.
+completes one swing, a sleeping dachshund breathing in a ping-pong loop,
+and a spoken line loop. The user's own subject replaces them.
 
 ## 1. Purpose, audience, ending
 
@@ -57,7 +57,7 @@ reversed copy).
 
 | # | Time | Shot | Lens | Move | Picture | Gen | Edit |
 |---|---|---|---|---|---|---|---|
-| 1 | 0 to 4 | Medium close-up | Telephoto | Slow push-in | A red fox asleep curled in snow, breathing, snowflakes drifting | 4 | Original |
+| 1 | 0 to 4 | Medium close-up | 85mm | Slow push-in | A dachshund asleep curled on a sunlit window seat, breathing, dust motes drifting | 4 | Original |
 | 2 | 4 to 8 | Same | Same | Reads as slow pull-out | The same clip | copy, no new credits | `edit_clip` reverse on the copy |
 
 ### 15 s (method C, a story loop)
@@ -120,22 +120,22 @@ Motion prompt:
 Clean studio tabletop film, soft even light, one continuous take. Close-up. 0 to 2 s: the pendulum swings from the far left to the far right of its arc, already in motion from the first frame. 2 to 4 s: it swings back and ends exactly at the far left, at the same height as the opening frame. Camera: locked-off, no movement. End state: the bob at the far left, as in the opening frame. The pendulum, the bracket, the wall and the light stay exactly as in the opening frame. Exactly one pendulum. SFX: one soft tick at each end of the swing. No music. Clean frame: no text, no subtitles, no on-screen graphics.
 ```
 
-**Pair 2, the sleeping fox (method B).**
+**Pair 2, the sleeping dog (method B).**
 
 Still-frame prompt:
 
 ```text
-Nature documentary, observational, natural light. A red fox with a thick orange winter coat lies asleep curled in fresh snow, its white-tipped tail over its nose, a few snowflakes resting on its fur. Medium close-up, long telephoto lens, background of soft white snow. Soft overcast light that does not change. Clean frame, no text.
+Quiet home footage, soft natural light. A short-haired red dachshund with a greying muzzle lies asleep curled on a painted white window seat, its tail tucked against its front paws, a folded grey blanket under it. Medium close-up, 85mm look, shallow depth of field, a plain pale wall and a soft out-of-focus window frame behind. Steady low morning sun through the glass that does not change, a few dust motes in the beam. Clean frame, no text.
 ```
 
 Motion prompt:
 
 ```text
-Nature documentary, observational, natural light, one continuous take. Medium close-up. 0 to 4 s: the fox's flank rises and falls slowly twice as it breathes; a few snowflakes drift down past it and settle. Camera: very slow push-in, stopping on the fox's face. End state: the fox still asleep, a little closer. The fox, the snow and the light stay exactly as in the opening frame. Exactly one fox. Ambient noise: near silence, soft wind. No music. Clean frame: no text, no subtitles, no on-screen graphics.
+Quiet home footage, soft natural light, one continuous take. Medium close-up. 0 to 4 s: the dog's flank rises and falls slowly twice as it breathes; a few dust motes drift slowly through the sunbeam. Camera: very slow push-in, stopping on the dog's face. End state: the dog still asleep, a little closer. The dog, the window seat and the light stay exactly as in the opening frame. Exactly one dog, eyes closed. Ambient noise: near silence, faint room tone. No music. Clean frame: no text, no subtitles, no on-screen graphics.
 ```
 
-Reversed, falling snowflakes rise; keep the flakes few and slow so the
-reverse half reads as drifting.
+Reversed, the dust motes drift the other way; keep them few and slow so
+the reverse half reads as drifting.
 
 **Second family, Seedance 2.0 Mini.** "ENDING STATE: the bob back at the far
 left, exactly as in the starting state" is the line that matters; Seedance

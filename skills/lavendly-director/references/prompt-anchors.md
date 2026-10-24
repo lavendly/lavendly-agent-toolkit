@@ -16,14 +16,15 @@ full block only when the hero enters during the shot.
 <Name or thing>: <shape>, <material and finish>, <colour>, <size cue>, <one distinguishing mark>.
 ```
 
-Examples:
+Examples, from one worked example used through this file (a product film
+for an invented thermos, set in a harbour net shed; the user's own hero replaces it):
 
 ```text
-The lamp: a table lamp with a matte stone-grey mushroom dome, a slim brass stem and a round brass base, warm light under the dome.
+The Kestrel thermos: a tall brushed-steel camping thermos with a black rubber grip band at its middle, an olive-green screw cap with one dent in its rim, a faint scratch near the base.
 ```
 
 ```text
-Elias: a lighthouse keeper in his seventies, short white beard, weathered face, grey flat cap, navy wool sweater, kind tired eyes.
+Idris: a fisherman in his fifties, broad shoulders, close-cropped grey hair and a short grey beard, salt-cracked hands, a yellow oilskin bib over a navy wool sweater, calm deep-set eyes.
 ```
 
 Never paraphrase the block per shot. A word changed is a different object.
@@ -37,10 +38,10 @@ animates from, so it must not show the payoff.
 <style phrase, one line>. <hero block> from the reference. <where it sits in the frame and what surrounds it>. <camera position: height, angle, distance>. <light: source, direction, softness, colour>. <materials and surface detail that must read>. <background and depth>. <room left for a title, if any>. No text, no on-screen graphics.
 ```
 
-Example, scene 1 of a lamp film:
+Example, scene 1 of the thermos film:
 
 ```text
-Premium product film still. The lamp: a table lamp with a matte stone-grey mushroom dome, a slim brass stem and a round brass base, warm light under the dome, from the reference. The lamp is off, centred on a dark oak side table, the dome filling the upper third of the frame. Camera at table height, three-quarter angle, close enough that the dome's grain reads. One soft window light from the left, cool, with the right side falling into shadow. Matte stone texture on the dome, brushed brass on the stem. Dark room behind, out of focus. No text, no on-screen graphics.
+Premium product film still. The Kestrel thermos: a tall brushed-steel camping thermos with a black rubber grip band at its middle, an olive-green screw cap with one dent in its rim, a faint scratch near the base, from the reference. The thermos stands capped, centred on a scrubbed wooden workbench beside coiled blue rope, the cap in the upper third of the frame. Camera at counter height, three-quarter angle, close enough that the vertical grain of the steel reads. One soft window light from the left, cool blue before dawn, with the right side falling into shadow. Brushed steel, matte olive paint on the cap, the dent catching one small highlight. Dark bakery behind, cooling racks out of focus. No text, no on-screen graphics.
 ```
 
 ## Motion prompt (the clip)
@@ -55,17 +56,17 @@ one lock sentence, exact counts.
 
 When the hero enters during the shot, add the hero block after the style
 phrase so the model can draw it. When the light changes during the shot,
-describe the change ("the warm lamp light blooms over the cool window
+describe the change ("the warm lamp light spreads over the cool window
 light").
 
 Example, the same scene:
 
 ```text
-Premium product film, one continuous take. 0 to 2 s: nothing moves but dust in the window light. 2 to 3 s: a hand enters from the right and presses the brass switch at the base once. 3 to 6 s: warm light blooms under the dome and spreads across the oak, the hand withdraws, the camera pushes in slowly until the dome fills the frame. The lamp, the oak table and the room stay exactly as in the opening frame. Exactly one lamp; the hand is the only other thing that enters. Sound: a soft brass click, room tone. Clean frame: no text, no on-screen graphics, no timestamps.
+Premium product film, one continuous take. 0 to 2 s: nothing moves but dust in the window light. 2 to 3 s: a hand enters from the right and turns the olive cap once. 3 to 6 s: the hand lifts the cap away and withdraws to the right, a thin column of steam rises from the open neck into the cool light, the camera pushes in slowly until the neck and the steam fill the frame. The thermos, the tiled counter and the room stay exactly as in the opening frame. Exactly one thermos; the hand is the only other thing that enters. Sound: a dry squeak of the cap thread, room tone, a low oven fan. Clean frame: no text, no on-screen graphics, no timestamps.
 ```
 
 Scene 2 continues in the same room: start the motion prompt with the exit
-state of scene 1 ("the lamp is already lit, the camera at rest on the dome")
+state of scene 1 ("the thermos is already open, steam rising, the camera at rest on its neck")
 so the cut carries.
 
 ## Dialogue in a clip
@@ -74,7 +75,7 @@ Write the line in quotes, with the speaker from the hero block and the
 delivery, inside the motion prompt, and keep that clip's native audio on:
 
 ```text
-He unfolds the letter and reads, half to himself, quiet and hoarse: "You said you would come back when the light was fixed." He looks up at the lens.
+Idris wipes his hands on his apron and says, half to himself, low and dry: "Nets first, then coffee, then the rest of the world." He looks across the bench at Lucie, his deckhand.
 ```
 
 One line per clip. The model speaks it; native dialogue gets no burned
@@ -98,25 +99,27 @@ figure in frame", "clean frame with no on-screen graphics".
 
 These appear uninvited and read as AI at once. Every motion prompt carries
 the clean-frame line; the rest are avoided by the positive instruction that
-makes them impossible.
+makes them impossible. The bracketed cases in the lower rows come from one
+worked example, a stop-motion film of a paper-craft blue whale; the user's
+own film replaces it.
 
 | Artefact | Where it comes from | Positive instruction |
 |---|---|---|
 | Phone UI, battery icon, timestamp, "REC" dot | "phone video", "handheld footage" | "clean frame with no on-screen graphics, no timestamps" |
 | Watermark, stray letters, pseudo-logos | any "product", "brand", "poster" | "no text, no logo" and leave labels blank |
 | Extra limbs, fused fingers | hands doing two things | one hand, one action, the contact point named |
-| Second copy of the hero | "and another" or a mirror | "the one lamp", reflections named and bounded |
+| Second copy of the hero | "and another" or a mirror | "the one thermos", reflections named and bounded |
 | Floating, sliding, morphing objects | several actions per clip | one action, start and end state stated |
 | Changing identity | a paraphrased hero block | the block verbatim, the reference wired |
 | Grain, bloom, flare, haze, teal-orange | "cinematic" | delete the word; name the one light source |
 | Random slow motion | "dramatic", "epic" | the speed stated: "at walking pace" |
-| An object nobody asked for (a golden key in a hollow tree) | an unnamed space: a hollow, a doorway, a box, a table, a pair of hands | say what is inside or on it, or "only light, nothing else" |
-| A second copy of a small object (two snowflakes, which one is he following?) | "a snowflake drifts away" with no count | "the one snowflake, the only light in the air" |
-| The object on the wrong side (the flake in front of the fox when it should be behind) | no depth order stated | "passes behind his head and shrinks away between the trunks" |
-| A movement the model finishes its own way (flakes around the tree instead of into it) | "the flakes stream toward the hollow" | "every flake flies straight into the hollow and vanishes; none goes around or behind" |
-| An animal running upright on two legs | "he runs after it" | "on all four paws, a fox's bounding gallop, never upright" |
-| An ending gesture nobody asked for (the fox checks his wrist) | the last beat left open | the last beat is one named action by the hero: "the flake lands on his nose; he says Hello?" |
-| Two of the hero, or a creature nobody introduced (two Pips; a brown animal in a point of view run) | the cast left open; a point of view with no hero named | "Exactly one Pip in frame, nobody else, no copy of him"; a point of view says "no animal or person in frame"; a new character gets its own introduction shot first |
+| An object nobody asked for (a golden key in a sunken paper chest) | an unnamed space: a hollow, a doorway, a box, a table, a pair of hands | say what is inside or on it, or "only light, nothing else" |
+| A second copy of a small object (two paper bubbles, which one is the whale following?) | "a bubble drifts away" with no count | "the one paper bubble, the only pale shape in the water" |
+| The object on the wrong side (the bubble in front of the whale when it should be behind) | no depth order stated | "passes behind its tail and shrinks away between the paper kelp" |
+| A movement the model finishes its own way (fish around the wreck instead of into it) | "the paper fish stream toward the wreck" | "every fish swims straight into the open hatch and vanishes; none goes around or behind" |
+| An animal running upright on two legs | "it runs after it" | for a four-legged animal: "on all four paws, a bounding gallop, never upright" |
+| An ending gesture nobody asked for (the whale waves a fin like a hand) | the last beat left open | the last beat is one named action by the hero: "the bubble pops against its snout; it lets out one low hum" |
+| Two of the hero, or a creature nobody introduced (two whales; a grey fish in a point of view swim) | the cast left open; a point of view with no hero named | "Exactly one whale in frame, nobody else, no copy of it"; a point of view says "no animal or person in frame"; a new character gets its own introduction shot first |
 | The hero unrecognisable, the shot darker than its neighbours | a long shot from behind; no light named | turn the face into view once; name the same light as the previous shot |
 
 ## Narration budget

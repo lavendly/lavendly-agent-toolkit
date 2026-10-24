@@ -15,13 +15,13 @@ piece slides into its final place and the frame holds like a finished page.
 ## 2. Structure by length
 
 Built on Kling v3 Standard (whole lengths 3 to 15 s; up to 5 s is one block).
-Example: Skiff, a paper fishing boat, finds the lighthouse in a paper storm.
+Example: Skiff, a paper fishing boat, finds the way home by moonlight through a paper storm.
 
 ### 6 s: one tableau
 
 | # | Time | Size | Angle | Lens feel | Move | Action | Cut | Generate |
 |---|---|---|---|---|---|---|---|---|
-| 1 | 0 to 6 | Wide | Straight-on, flat | flat artwork, deep focus | slow push-in | torn-paper waves rise and fall in layers; the boat rocks; the lighthouse beam sweeps once | 6 | 6 |
+| 1 | 0 to 6 | Wide | Straight-on, flat | flat artwork, deep focus | slow push-in | torn-paper waves rise and fall in layers; the boat rocks; a cut-paper moon peeks out from a cloud once | 6 | 6 |
 
 ### 15 s
 
@@ -29,7 +29,7 @@ Example: Skiff, a paper fishing boat, finds the lighthouse in a paper storm.
 |---|---|---|---|---|---|---|---|---|
 | 1 | 0 to 5 | Wide | Straight-on | flat artwork | slow truck right, layers at different speeds | the storm: three rows of torn-paper waves, Skiff tossed between them | 5 | 5 |
 | 2 | 5 to 10 | Medium | Straight-on | flat | locked-off | Skiff's paper sail tears loose and flaps on its pin | 5 | 5 |
-| 3 | 10 to 15 | Wide | Straight-on | flat | slow push-in | a paper beam of light swings across; the waves flatten; Skiff turns toward it | 5 | 5 |
+| 3 | 10 to 15 | Wide | Straight-on | flat | slow push-in | the paper cloud slides off the moon; the waves flatten; Skiff turns toward its light | 5 | 5 |
 
 ### 30 s
 
@@ -39,7 +39,7 @@ Example: Skiff, a paper fishing boat, finds the lighthouse in a paper storm.
 | 2 | 5 to 9 | Insert | Straight-on | flat | locked-off | a cut-paper cloud slides in and covers the moon | 4 | 4 |
 | 3 | 9 to 14 | Wide | Straight-on | flat | locked-off | torn-paper waves rise in layers and toss the boat | 5 | 5 |
 | 4 | 14 to 18 | Medium | Straight-on | flat | locked-off | the sail tears loose and flaps on its pin | 4 | 4 |
-| 5 | 18 to 23 | Wide | Straight-on | flat | slow push-in | the paper beam swings across the sky | 5 | 5 |
+| 5 | 18 to 23 | Wide | Straight-on | flat | slow push-in | the paper cloud slides off the moon; a silver paper path lies on the sea | 5 | 5 |
 | 6 | 23 to 30 | Wide | Straight-on | flat | locked-off | the waves lie flat one layer at a time; Skiff glides into the harbour; holds | 7 | 7 |
 
 ### 60 s
@@ -54,8 +54,8 @@ Example: Skiff, a paper fishing boat, finds the lighthouse in a paper storm.
 | 6 | 24 to 28 | Insert | Straight-on | flat | locked-off | rain of thin cut-paper strips falls in steps | 4 | 4 |
 | 7 | 28 to 33 | Medium | Straight-on | flat | locked-off | the sail tears loose and flaps on its pin | 5 | 5 |
 | 8 | 33 to 38 | Close-up | Straight-on | flat | locked-off | the tiny porthole; the lamp inside goes dark | 5 | 5 |
-| 9 | 38 to 44 | Wide | Straight-on | flat | slow push-in | a paper beam of light swings across the sky | 6 | 6 |
-| 10 | 44 to 49 | Medium | Straight-on | flat | locked-off | Skiff turns toward the beam | 5 | 5 |
+| 9 | 38 to 44 | Wide | Straight-on | flat | slow push-in | the paper clouds slide off the moon; a silver paper path lies on the sea | 6 | 6 |
+| 10 | 44 to 49 | Medium | Straight-on | flat | locked-off | Skiff turns onto the silver path | 5 | 5 |
 | 11 | 49 to 54 | Wide | Straight-on | flat | locked-off | the waves lie flat one layer at a time | 5 | 5 |
 | 12 | 54 to 60 | Wide | Straight-on | flat | locked-off | the harbour tableau assembles piece by piece; holds | 6 | 6 |
 
@@ -103,7 +103,7 @@ sun).
   at 2.0.
 - Score brief, fable: "Marimba, plucked strings and a music box at about 95
   BPM; calm at first, the strings tremble through the storm, a single
-  music-box phrase when the beam appears, a warm resolved chord in the
+  music-box phrase when the moon returns, a warm resolved chord in the
   harbour." Editorial: "Upright bass, brushed drums and a muted piano at
   about 100 BPM, light and curious, a small button at the end."
 - Mix: score 0.3 to 0.35 with `ducking: true` under narration.

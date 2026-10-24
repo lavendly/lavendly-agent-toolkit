@@ -20,8 +20,9 @@ Answer them in one line each and keep the answers for the whole video:
 4. Why is it being filmed? (to show a friend, to post a routine, to keep a
    memory, by accident)
 
-Example card: "Filmed by Ana herself at arm's length on a current phone
-front camera, a weekday morning in October, to post her morning routine."
+Example card, for Mei, a student vlogger: "Filmed by Mei herself at
+arm's length on a current phone front camera, a weekday morning in
+October, to post her morning routine."
 
 ## 2. Device looks
 
@@ -99,16 +100,18 @@ on-screen graphics." These are the artefacts that read as fake at once.
 
 ## 7. Prompt pattern (Veo 3.1 Fast)
 
+Example, for Mei, a student vlogger; the user's own subject replaces her.
+
 Still-frame prompt:
 
 ```text
-Phone video still, filmed at arm's length on a current phone front camera. Ana, a woman in her late twenties with a messy dark bun and an oversized grey hoodie, stands in a small kitchen holding a mug, looking at the kettle, not at the camera. Slight wide-angle distortion, her face in the upper middle of the frame. Grey morning window light and one ceiling bulb. A hoodie over a chair, two mugs in the sink. Clean frame, no text.
+Phone video still, filmed at arm's length on a current phone front camera. Mei, a student in her early twenties with a short black bob and an oversized grey hoodie, stands in a small shared-flat kitchen holding a mug, looking at the kettle, not at the camera. Slight wide-angle distortion, her face in the upper middle of the frame. Grey morning window light and one ceiling bulb. A hoodie over a chair, two mugs in the sink. Clean frame, no text.
 ```
 
 Motion prompt:
 
 ```text
-Phone video, one continuous take, unstabilised handheld phone camera at arm's length, colour straight from the phone. 0 to 2 s: Ana pours water from the kettle into the mug. 2 to 4 s: she turns the camera slightly toward the window; the picture brightens, then settles. Camera: handheld sway, no deliberate move. End state: the mug full, the window in the left of frame. Ana, the kitchen and the light stay as in the opening frame. Exactly one person. Sound: kettle pour, room echo, a scooter passing outside. No music. Clean frame: no text, no recording dot, no battery icon, no timestamp, no on-screen graphics.
+Phone video, one continuous take, unstabilised handheld phone camera at arm's length, colour straight from the phone. 0 to 2 s: Mei pours water from the kettle into the mug. 2 to 4 s: she turns the camera slightly toward the window; the picture brightens, then settles. Camera: handheld sway, no deliberate move. End state: the mug full, the window in the left of frame. Mei, the kitchen and the light stay as in the opening frame. Exactly one person. Sound: kettle pour, room echo, a scooter passing outside. No music. Clean frame: no text, no recording dot, no battery icon, no timestamp, no on-screen graphics.
 ```
 
 ## 8. Policy

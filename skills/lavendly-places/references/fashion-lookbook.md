@@ -118,6 +118,8 @@ only way to show the garment exactly.
 
 ## 8. Prompt pairs (Seedance)
 
+Examples: the user's own place, brand and photos replace the ones shown.
+
 **Pair 1: the studio look** (opens on the user's on-model photo when there
 is one)
 

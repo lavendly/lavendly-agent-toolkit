@@ -120,6 +120,8 @@ and 396, Wan 2.7 73 and 116, Veo 3.1 Lite 63 and 100.
 
 ## 7. Prompt pairs (Veo)
 
+Examples: the user's own place, brand and photos replace the ones shown.
+
 **Pair 1: the facade rising over the hedge** (photo scene; the still is
 for a concept film)
 

@@ -25,6 +25,10 @@
 
 ## 3. Structures by length
 
+The shot lists are worked examples (Ines and Yusuf meet over the last copy
+of a book in the 30 s list). The user's story replaces them and keeps the
+shape.
+
 Model lengths for Veo 3.1 Fast (4 or 8 s).
 
 ### 6 s: the look
@@ -147,13 +151,13 @@ Romantic drama, soft 35mm film look, one continuous take. Locked-off camera. 0 t
 Still frame:
 
 ```text
-Romantic drama still, soft 35mm film look. Medium two-shot in profile, 50mm lens. Rosa on the left facing right: a woman in her late twenties, freckles, auburn hair in a loose braid, a mustard raincoat. Sam on the right facing left: a man in his thirties, brown skin, close-cropped black hair, round tortoiseshell glasses, a grey wool coat. Both hold one hardback book between them in a warm bookshop. Warm lamp light from above, rain on the window behind. Palette: mustard, grey, warm amber.
+Romantic drama still, soft 35mm film look. Medium two-shot in profile, 50mm lens. Ines on the left facing right: a woman in her late twenties, freckles, auburn hair in a loose braid, a mustard raincoat. Yusuf on the right facing left: a man in his thirties, brown skin, close-cropped black hair, round tortoiseshell glasses, a grey wool coat. Both hold one hardback book between them in a warm bookshop. Warm lamp light from above, rain on the window behind. Palette: mustard, grey, warm amber.
 ```
 
 Motion:
 
 ```text
-Romantic drama, soft 35mm film look, one continuous take. Slow push-in from the two-shot toward the book between them. 0 to 2 s: Rosa keeps her fingers on the book and looks at it. 2 to 4 s: Rosa, the woman on the left in the mustard raincoat, says softly: "We could share it." (no subtitles) 4 to 8 s: Sam looks at her, not at the book, and smiles slowly. Both faces, their coats and the bookshop light stay exactly as in the opening frame. Exactly two people in frame, nobody else. Ambient noise: rain on glass, pages turning far off. Clean frame: no text, no subtitles, no title on the book cover.
+Romantic drama, soft 35mm film look, one continuous take. Slow push-in from the two-shot toward the book between them. 0 to 2 s: Ines keeps her fingers on the book and looks at it. 2 to 4 s: Ines, the woman on the left in the mustard raincoat, says softly: "We could share it." (no subtitles) 4 to 8 s: Yusuf looks at her, not at the book, and smiles slowly. Both faces, their coats and the bookshop light stay exactly as in the opening frame. Exactly two people in frame, nobody else. Ambient noise: rain on glass, pages turning far off. Clean frame: no text, no subtitles, no title on the book cover.
 ```
 
 ### Pair 3: the held moment (Kling v3 Pro)
@@ -170,8 +174,8 @@ Motion:
 Scene: a bookshop at night seen through its rain-streaked window. Characters: the woman in the mustard raincoat on the left and the man in the grey coat on the right, seated, the book between them. Action: she turns a page; he leans in a little to read; their shoulders almost touch. Camera: static, outside the window. Audio: rain on glass, a far car passing. The two people, the table and the lamp stay exactly as in the opening frame. Exactly two people in frame, nobody else. Clean frame: no text, no shop sign letters.
 ```
 
-Second family notes: on Seedance give reference 1 Rosa's face and coat only
-and reference 2 Sam's face and coat only, and say "ignore their backgrounds
+Second family notes: on Seedance give reference 1 Ines's face and coat only
+and reference 2 Yusuf's face and coat only, and say "ignore their backgrounds
 and poses".
 
 ## 9. Failure modes and fixes

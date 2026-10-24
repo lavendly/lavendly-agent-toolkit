@@ -219,7 +219,7 @@ split the film: dialogue scenes on one model, product scenes on another.
 
 ### Announcing the choice
 
-One line before the estimate, then the `estimate_cost` line:
+One line before the estimate, then the `estimate_cost` line. Example:
 
 ```text
 Kling v3 Pro for the two talking scenes (labelled speakers, native sound), Seedance 2.0 Mini for the two product shots (three references): 4 clips of 5 s, 66 credits with opening images. Veo 3.1 Fast would be 64 in 4 s clips but takes two references. Go ahead?
