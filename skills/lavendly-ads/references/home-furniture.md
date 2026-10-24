@@ -118,6 +118,8 @@ opening image, the rest 2 credits each, score 2 or 3, voice 1.
 
 ## 7. Prompt pairs
 
+Examples: the user's own product, brand and photos replace the ones shown.
+
 **Pair 1 (Veo): the switch**
 
 Still:

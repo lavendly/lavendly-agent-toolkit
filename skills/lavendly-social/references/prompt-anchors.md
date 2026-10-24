@@ -39,7 +39,7 @@ every surface that could carry writing named blank.
 | Phone camera | "unstabilised handheld phone camera, colour straight from the phone" |
 | No music in clip | "No music." |
 | Clean phone frame | "Clean frame: no text, no recording dot, no battery icon, no timestamp, no on-screen graphics." |
-| Reference roles | "Reference 1 is Ana's face only, from the close-up; ignore its background. Reference 2 is her grey hoodie only." |
+| Reference roles | Example, for Luca, a gear reviewer in his twenties: "Reference 1 is Luca's face only, from the close-up; ignore its background. Reference 2 is his grey hoodie only." |
 | Destination | "the sock lands in the basket and stays there" |
 | Ending on a beat | "she freezes mid-shrug for the last second" |
 
@@ -65,8 +65,8 @@ stays `native`.
 - One line per clip, 4 to 8 s clips, medium close-up, one face, locked
   camera, no head-turn instructions while speaking.
 - About 2 words per second of clip at most: 8 s holds 12 to 16 words.
-- Veo 3.1 Fast: `Ana looks into the lens and says, warm and quick: "Okay, I tried the forty-dollar pan." (no subtitles)` then the action after the line.
-- Kling v3: `[Ana, warm quick voice]: "Okay, I tried the forty-dollar pan."`; label every speaker the same way in every clip; for Chinese, English, Japanese, Korean or Spanish lines.
+- Veo 3.1 Fast, for instance: `Luca looks into the lens and says, warm and quick: "Okay, I tried the forty-dollar pan." (no subtitles)` then the action after the line.
+- Kling v3, for instance: `[Luca, warm quick voice]: "Okay, I tried the forty-dollar pan."`; label every speaker the same way in every clip; for Chinese, English, Japanese, Korean or Spanish lines.
 - The voice changes a little between clips. Keep the delivery words
   identical in every clip ("warm and quick, slightly husky") and keep the
   number of speaking clips small.

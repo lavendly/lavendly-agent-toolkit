@@ -128,6 +128,8 @@ confirmed in `estimate_cost` `per_scene`.
 
 ## 7. Prompt pairs (Kling)
 
+Examples: the user's own product, brand and photos replace the ones shown.
+
 **Pair 1: the lift**
 
 Still:

@@ -112,6 +112,8 @@ Totals: photo scenes have no opening image, inserts 2 credits each, score
 
 ## 8. Prompt pairs (Veo)
 
+Examples: the user's own place, brand and photos replace the ones shown.
+
 **Pair 1: the before and after push** (both photo scenes; the identical
 motion prompt on each)
 

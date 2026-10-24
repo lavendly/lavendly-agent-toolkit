@@ -2,7 +2,7 @@
 
 A recurring short-form series with no person on camera: a voice, one look,
 one format, published on a schedule. Worked example: "Objects with a
-secret", a series where each episode reveals what an old object was for.
+secret", a series where each episode reveals what an old object was for. The user's own series replaces it.
 For lessons and facts in depth, lavendly-explainer has the teaching rules.
 
 ## 1. Purpose, audience, ending

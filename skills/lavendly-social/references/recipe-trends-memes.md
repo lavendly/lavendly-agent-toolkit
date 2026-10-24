@@ -2,7 +2,7 @@
 
 Ride a recognisable format for reach, with original material. Worked
 example: "expectation versus reality" for a home espresso setup, and a
-deadpan reaction format.
+deadpan reaction format. The user's own subject replaces them.
 
 ## 1. Purpose, audience, ending
 

@@ -45,12 +45,15 @@ Cross-workflow render history, newest first. Use it to find "my last video".
 
 ## `publish_video`, now
 
+The title and caption below are a worked example, an invented film called
+"First tram, Lisbon"; the user's own title and caption replace them.
+
 ```json
 {
   "workflow_id": "<id>",
   "channel_id": "<channel id from list_channels>",
-  "title": "Mara crosses the city at dawn",
-  "caption": "Three shots, one morning. Market, bridge, station.\n#shortfilm #dawn",
+  "title": "First tram, Lisbon",
+  "caption": "Three shots, one morning. Depot, hill, river.\n#shortfilm #lisbon",
   "idempotency_key": "pub-<workflow id>-<channel id>"
 }
 ```
@@ -70,8 +73,8 @@ AI disclosure for the platform is set server-side.
   "workflow_id": "<id>",
   "channel_id": "<channel id from list_channels>",
   "when": "2026-10-01T09:00:00+02:00",
-  "title": "Mara crosses the city at dawn",
-  "caption": "Three shots, one morning. Market, bridge, station.\n#shortfilm #dawn"
+  "title": "First tram, Lisbon",
+  "caption": "Three shots, one morning. Depot, hill, river.\n#shortfilm #lisbon"
 }
 ```
 
@@ -94,7 +97,7 @@ send a bare `Z` time for a user who spoke in local time.
 ## Confirmation before either call
 
 ```text
-Ready to publish "Mara crosses the city at dawn" to Lavendly Studio (YouTube).
+Ready to publish "First tram, Lisbon" to Lavendly Studio (YouTube).
 Caption starts: "Three shots, one morning."
 Scheduled for Thursday 1 October at 09:00 (UTC+2).
 The platform's AI-generated label will be set automatically.

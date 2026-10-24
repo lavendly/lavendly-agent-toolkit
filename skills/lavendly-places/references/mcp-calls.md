@@ -6,6 +6,9 @@ MCP names; placeholders are in angle brackets. Read the real node ids from
 `get_workflow`; compiled shots use a group `g_<suffix>`, an image node
 `img_<suffix>` and a clip node `vid_<suffix>`.
 
+Names, titles, prompts and keys shown are example values; the user's own
+film replaces them.
+
 ## Probes
 
 `get_status`, `get_ledger`, free, once per session. `get_schema` when a

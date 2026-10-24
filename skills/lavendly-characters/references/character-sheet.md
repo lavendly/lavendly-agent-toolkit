@@ -67,18 +67,22 @@ screen test are both made again, at the same price). If one detail is wrong
 and the face is right, keep it and change the words to match the picture,
 or fix the detail in the app.
 
+The prompts below follow one worked example: Dara, an invented cycle
+courier, and Juno, an invented pangolin in a hand-drawn kids style. The
+user's own hero replaces them.
+
 ### Prompts for scene A (person)
 
 Still-frame prompt:
 
 ```text
-Character reference photo. Mia: a woman in her early thirties, warm light-brown skin, oval face, thick straight black eyebrows, shoulder-length black curly hair with a centre part, a small gold hoop in her left ear only, mustard corduroy jacket over a white t-shirt. Head and shoulders, front three-quarter view, eye level, neutral expression, mouth closed. Plain mid-grey background, even soft front light. No text, no on-screen graphics.
+Character reference photo. Dara: a woman in her mid twenties, deep brown skin, oval face, high cheekbones, thick arched black eyebrows, long black box braids tied back in a low knot, a small silver ring in her right nostril only, yellow rain shell over a grey hoodie. Head and shoulders, front three-quarter view, eye level, neutral expression, mouth closed. Plain mid-grey background, even soft front light. No text, no on-screen graphics.
 ```
 
 Motion prompt:
 
 ```text
-Locked-off camera, head and shoulders. Mia blinks once, then slowly turns her head to face the lens straight on and holds, mouth closed, calm. Mia, her hair and the grey background stay exactly as in the opening frame. Exactly one woman in frame, nobody else. Sound: quiet room tone only.
+Locked-off camera, head and shoulders. Dara blinks once, then slowly turns her head to face the lens straight on and holds, mouth closed, calm. Dara, her braids and the grey background stay exactly as in the opening frame. Exactly one woman in frame, nobody else. Sound: quiet room tone only.
 ```
 
 ### Prompts for scene B (person)
@@ -86,13 +90,13 @@ Locked-off camera, head and shoulders. Mia blinks once, then slowly turns her he
 Still-frame prompt:
 
 ```text
-Character reference photo. Mia: a woman in her early thirties, warm light-brown skin, shoulder-length black curly hair, mustard corduroy jacket over a white t-shirt, dark green canvas backpack, faded blue jeans, brown leather ankle boots. Full body, standing straight, arms relaxed, front view, camera at waist height, head to boots inside the frame with space around her. Plain mid-grey background, even soft light. No text, no on-screen graphics.
+Character reference photo. Dara: a woman in her mid twenties, deep brown skin, long black box braids tied back in a low knot, yellow rain shell over a grey hoodie, black canvas courier bag across her body, black cargo trousers rolled at the ankle, white high-top trainers. Full body, standing straight, arms relaxed, front view, camera at waist height, head to trainers inside the frame with space around her. Plain mid-grey background, even soft light. No text, no on-screen graphics.
 ```
 
 Motion prompt:
 
 ```text
-Locked-off camera, full figure. Mia turns slowly on the spot a quarter turn to her right until she stands in profile, then holds still. Her jacket, backpack, jeans and boots stay exactly the same. Exactly one woman in frame, nobody else. Sound: quiet room tone only.
+Locked-off camera, full figure. Dara turns slowly on the spot a quarter turn to her right until she stands in profile, then holds still. Her rain shell, courier bag, trousers and trainers stay exactly the same. Exactly one woman in frame, nobody else. Sound: quiet room tone only.
 ```
 
 ### Prompts for scene A (creature)
@@ -100,23 +104,23 @@ Locked-off camera, full figure. Mia turns slowly on the spot a quarter turn to h
 Still-frame prompt:
 
 ```text
-Character reference image, soft 3D clay look. Pip: a small red fox with a cream chest, one white-tipped left ear, round black bead eyes and a thick brush tail with a white tip, standing on all four paws. Head and shoulders, three-quarter view, eye level, mouth closed. Plain mid-grey background, even soft front light. No text, no on-screen graphics.
+Character reference image, hand-drawn 2D kids style, flat colour, soft pencil outlines. Juno: a small round pangolin, warm caramel scales with cream edges, round black eyes, a short pointed snout, a long tapered tail, standing on all four legs, one chipped scale above her left eye. Head and shoulders, three-quarter view, eye level, mouth closed. Plain mid-grey background, even soft front light. No text, no on-screen graphics.
 ```
 
 Motion prompt:
 
 ```text
-Locked-off camera. Pip opens his mouth wide in a slow yawn, closes it, and looks straight at the lens. Pip and the grey background stay exactly as in the opening frame. Exactly one fox, nobody else. Sound: a small yawn, quiet room tone.
+Locked-off camera. Juno opens her mouth in a small slow yawn, closes it, and looks straight at the lens. Juno and the grey background stay exactly as in the opening frame. Exactly one pangolin, nobody else. Sound: a small yawn, quiet room tone.
 ```
 
 ## 4. Size frame for two subjects
 
 ```text
-Character size reference photo. Pip, the small red fox with a cream chest and one white-tipped left ear, sits on all four paws beside Bramble, a large grey badger with a white face stripe; Pip's head reaches Bramble's shoulder. Full figures side by side, front view, camera at their eye height. Plain mid-grey background, even soft light. Exactly one fox and one badger. No text, no on-screen graphics.
+Character size reference image, hand-drawn 2D kids style. Juno, the small round pangolin with caramel scales and one chipped scale above her left eye, stands on all four legs beside Bo, a tall grey heron on two long thin legs, wings folded; Juno's head reaches Bo's knee. Full figures side by side, front view, camera low, both whole inside the frame. Plain mid-grey background, even soft light. Exactly one pangolin and one heron. No text, no on-screen graphics.
 ```
 
 Use it as a reference only in scenes where both appear, with the role
-sentence "Reference 2 is the size of Pip next to Bramble only".
+sentence "Reference 2 is the size of Juno next to Bo only".
 
 ## 5. A style plate (optional)
 

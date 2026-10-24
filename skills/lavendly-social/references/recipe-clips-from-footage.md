@@ -3,7 +3,7 @@
 Cut the best moments of a podcast, interview, talk or long video into
 vertical shorts, using the user's own footage. Worked example: a two-host
 podcast episode; the clip is the moment one host tells how she lived in a
-van for a year.
+van for a year. The user's own footage replaces it.
 
 ## 1. Purpose, audience, ending
 

@@ -34,6 +34,8 @@ decisions on top.
   study results need a source the user gave. Never invent one; ask.
 - Run the concept gate before any spend
   ([references/script-writing.md](references/script-writing.md) section 5).
+- Every name, product, place and story in this skill and its references is an
+  example. The user's brief replaces it; never carry one into their film.
 
 ## Sequence
 

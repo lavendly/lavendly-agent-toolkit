@@ -162,6 +162,8 @@ are in the clips). Add 1 credit when a narrated call to action is attached.
 
 ## 10. Prompt pairs (Veo)
 
+Examples: the user's own product, brand and photos replace the ones shown.
+
 **Pair 1: the selfie hook**
 
 Still:

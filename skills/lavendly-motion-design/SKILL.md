@@ -34,6 +34,8 @@ about what Lavendly's models and edits can do and what they cannot.
   screens, alpha or a full 360 spin, say the limit in one line before
   planning and offer the alternative
   ([references/limits-and-alternatives.md](references/limits-and-alternatives.md)).
+- Every name, product, place and story in this skill and its references is an
+  example. The user's brief replaces it; never carry one into their film.
 
 ## Sequence
 

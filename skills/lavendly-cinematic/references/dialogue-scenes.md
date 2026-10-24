@@ -16,29 +16,32 @@ is the coverage, the geometry and the per-model syntax that avoid it.
 
 ## 2. Geometry first
 
-Draw the scene before writing a prompt:
+Draw the scene before writing a prompt. Worked example used through this
+file: Hana and Kenji in a narrow Osaka apartment kitchen at night; she has
+sold the family noodle shop, he slides the shop keys back. The user's own
+scene replaces it.
 
-- Who sits or stands where, written as screen sides: "Mia on the left,
-  facing right; Tom on the right, facing left." Paste this sentence into
+- Who sits or stands where, written as screen sides, for instance "Hana on the left,
+  facing right; Kenji on the right, facing left." Paste this sentence into
   every still and motion prompt of the scene.
 - The line runs between their eyes. The camera stays on one side of it for
   the whole scene. Crossing needs a visible move or a neutral shot (straight
   down the line, or a wide from a new side shown in its own shot).
 - Eyelines: each looks toward the other's side of the frame at the other's
-  eye height. In Mia's single she looks screen right, slightly off the lens;
-  in Tom's single he looks screen left.
+  eye height. In Hana's single she looks screen right, slightly off the lens;
+  in Kenji's single he looks screen left.
 - Mirrored reverses: the two singles share size, lens, height and distance.
-  If Mia sits in the left third, Tom sits in the right third.
+  If Hana sits in the left third, Kenji sits in the right third.
 
 ## 3. Coverage on Lavendly
 
 | Shot | Size, lens | Use | Lines in it |
 |---|---|---|---|
 | Master two-shot | Wide or medium wide, 35mm, eye level | Geography, entrances, the silence before | None, or one short line |
-| Over the shoulder on Mia | Medium close-up, 50mm, from behind Tom's right shoulder | Lines where the relationship matters | Mia's line; Tom is a soft shoulder and the back of his head in the right foreground |
-| Over the shoulder on Tom | Mirror of the above | | Tom's line |
-| Single on Mia | Medium close-up or close-up, 85mm | The turn, the confession | Mia's line |
-| Single on Tom | Mirror | | Tom's line |
+| Over the shoulder on Hana | Medium close-up, 50mm, from behind Kenji's right shoulder | Lines where the relationship matters | Hana's line; Kenji is a soft shoulder and the back of his head in the right foreground |
+| Over the shoulder on Kenji | Mirror of the above | | Kenji's line |
+| Single on Hana | Medium close-up or close-up, 85mm | The turn, the confession | Hana's line |
+| Single on Kenji | Mirror | | Kenji's line |
 | Reaction | Close-up, 85mm | The payoff; the listener | None |
 | Insert | Macro or close, 100mm | The object of the scene (the ring, the letter) | None |
 
@@ -55,7 +58,7 @@ Rules:
   listener's clip carries the tail of the sound only if it was generated
   with that sound (otherwise keep the cut after the line).
 - Over-the-shoulder shots put two people in frame. Count them: "Exactly two
-  people in frame: Mia facing camera, the back of Tom's head and his right
+  people in frame: Hana facing camera, the back of Kenji's head and his right
   shoulder out of focus in the right foreground."
 
 ## 4. Structures by length
@@ -67,35 +70,35 @@ for up to 5 s, 10 s for up to 10 s.
 
 | # | Size, angle, lens | Move | Action | Cut | Generate |
 |---|---|---|---|---|---|
-| 1 | MCU, eye level, 85mm | locked-off | Mia looks up from the mug and says five words | 4 s | 4 s |
-| 2 | CU, eye level, 85mm | locked-off | Tom's reaction: he stops, looks down | 2 s | 4 s |
+| 1 | MCU, eye level, 85mm | locked-off | Hana looks up from the mug and says five words | 4 s | 4 s |
+| 2 | CU, eye level, 85mm | locked-off | Kenji's reaction: he stops, looks down | 2 s | 4 s |
 
 ### 15 s: the exchange
 
 | # | Size, angle, lens | Move | Action | Cut | Generate |
 |---|---|---|---|---|---|
 | 1 | Medium wide two-shot, 35mm | locked-off | They sit across the table; she turns the mug | 3 s | 4 s |
-| 2 | OTS on Mia, 50mm | locked-off | She says her line (5 words) | 4 s | 4 s |
-| 3 | OTS on Tom, 50mm | locked-off | He answers (3 words) | 3 s | 4 s |
-| 4 | CU Mia, 85mm | very slow push-in | No line; she takes in the answer | 5 s | 8 s |
+| 2 | OTS on Hana, 50mm | locked-off | She says her line (5 words) | 4 s | 4 s |
+| 3 | OTS on Kenji, 50mm | locked-off | He answers (3 words) | 3 s | 4 s |
+| 4 | CU Hana, 85mm | very slow push-in | No line; she takes in the answer | 5 s | 8 s |
 
 ### 30 s: a turn
 
 | # | Size, angle, lens | Move | Action | Cut | Generate |
 |---|---|---|---|---|---|
-| 1 | Wide master, 35mm | locked-off | Kitchen at night, both seated, silence | 4 s | 4 s |
-| 2 | Insert, 100mm | locked-off | The house keys on the table between them | 3 s | 4 s |
-| 3 | MCU Mia, 85mm | locked-off | Line 1 (5 words) | 4 s | 4 s |
-| 4 | MCU Tom, 85mm | locked-off | Line 2 (4 words), looks at the keys | 4 s | 4 s |
-| 5 | MCU Mia | locked-off | Line 3 (6 words), the turn | 5 s | 8 s |
-| 6 | CU Tom | slow push-in | Reaction, no line | 4 s | 4 s |
+| 1 | Wide master, 35mm | locked-off | Narrow apartment kitchen at night, both seated, silence | 4 s | 4 s |
+| 2 | Insert, 100mm | locked-off | The shop keys on the table between them | 3 s | 4 s |
+| 3 | MCU Hana, 85mm | locked-off | Line 1 (5 words) | 4 s | 4 s |
+| 4 | MCU Kenji, 85mm | locked-off | Line 2 (4 words), looks at the keys | 4 s | 4 s |
+| 5 | MCU Hana | locked-off | Line 3 (6 words), the turn | 5 s | 8 s |
+| 6 | CU Kenji | slow push-in | Reaction, no line | 4 s | 4 s |
 | 7 | Wide master | locked-off | He slides the keys back to her; held | 6 s | 8 s |
 
 ### 60 s: two turns
 
-Shots 1 to 7 above, then: 8 OTS on Tom, line 4 (5 words), 4 s; 9 OTS on
-Mia, line 5 (4 words), 4 s; 10 insert on her hand closing over the keys,
-3 s; 11 two-shot, she stands, 5 s; 12 single Tom, he does not look up, 4 s;
+Shots 1 to 7 above, then: 8 OTS on Kenji, line 4 (5 words), 4 s; 9 OTS on
+Hana, line 5 (4 words), 4 s; 10 insert on her hand closing over the keys,
+3 s; 11 two-shot, she stands, 5 s; 12 single Kenji, he does not look up, 4 s;
 13 wide from the doorway (a new side, shown as its own shot), she leaves
 frame, 6 s. Twelve to thirteen shots, eight to ten lines.
 
@@ -118,11 +121,11 @@ sides in every prompt. Fifteen to eighteen shots, twelve to fourteen lines.
 
 | Model | Syntax | Notes |
 |---|---|---|
-| Veo 3.1, Fast | `Mia, the woman on the left in the green cardigan, says quietly: "I sold the house." (no subtitles)` | English is the only evaluated language. Describe the speaker by position and clothing; one speaker per clip; "(no subtitles)" right after the line stops burned-in captions |
-| Kling v3 Pro, Standard | `[Character A: Mia, woman on the left, quiet hoarse voice]: "I sold the house."` then `After a pause, [Character B: Tom, man on the right, flat voice]: "When."` | Five languages (Chinese, English, Japanese, Korean, Spanish). Stable labels, no pronouns, action before the line, a timing word between lines. Up to two short lines per clip |
-| Seedance 2.0, 2.5 | `The woman on the left in the green cardigan says, quietly: "I sold the house." The man on the right stays silent and looks at the table.` | Say who stays silent. Prone to lip-sync drift and eyeline errors: keep lines short and the listener named |
-| Wan 2.7, 3.0 | `She looks up and says: "I sold the house."` | Test one clip first; keep to one short line |
-| Hailuo 3 | `The woman says: "I sold the house."` | Hailuo 3 only; 3 Max and 2.3 are silent |
+| Veo 3.1, Fast | `Hana, the woman on the left in the green cardigan, says quietly: "I sold the shop." (no subtitles)` | English is the only evaluated language. Describe the speaker by position and clothing; one speaker per clip; "(no subtitles)" right after the line stops burned-in captions |
+| Kling v3 Pro, Standard | `[Character A: Hana, woman on the left, quiet hoarse voice]: "I sold the shop."` then `After a pause, [Character B: Kenji, man on the right, flat voice]: "When."` | Five languages (Chinese, English, Japanese, Korean, Spanish). Stable labels, no pronouns, action before the line, a timing word between lines. Up to two short lines per clip |
+| Seedance 2.0, 2.5 | `The woman on the left in the green cardigan says, quietly: "I sold the shop." The man on the right stays silent and looks at the table.` | Say who stays silent. Prone to lip-sync drift and eyeline errors: keep lines short and the listener named |
+| Wan 2.7, 3.0 | `She looks up and says: "I sold the shop."` | Test one clip first; keep to one short line |
+| Hailuo 3 | `The woman says: "I sold the shop."` | Hailuo 3 only; 3 Max and 2.3 are silent |
 | FLUX 3 Video | Veo syntax | Sound on |
 | Runway, Hailuo 3 Max, HeyGen, Grok, HappyHorse | No native dialogue on Lavendly | Use for silent coverage (wides, inserts, reactions) only |
 
@@ -134,7 +137,7 @@ clip after listening in the render.
 ## 7. Identity across singles: three routes
 
 Opening images are made from text alone on the MCP path, so two close-ups of
-Mia can show two slightly different women. Pick the route by how strict the
+Hana can show two slightly different women. Pick the route by how strict the
 scene is.
 
 | Route | How | Cost | Strength |
@@ -178,7 +181,7 @@ picture turns to mush. A close-up is its own clip.
 | Best, English | Veo 3.1 | Best lip sync and delivery, 2 refs, 8 s with references | 3 x 47 + 94 = 235 plus 8 for opening images | 5 x 47 + 2 x 94 = 423 plus 14 |
 | Value, English | Veo 3.1 Fast | Same grammar, a third of the price | 3 x 14 + 28 = 70 plus 8 | 5 x 14 + 2 x 28 = 126 plus 14 |
 | Other languages | Kling v3 Pro | Labelled speakers in five languages, faces held from the still | 4 x 20 = 80 plus 8 | 6 x 20 + 40 = 160 plus 14 |
-| Two refs plus a location | Seedance 2.0 Fast | 4 references (Mia, Tom, the kitchen, a style plate) | 4 x 11 = 44 plus 8 | 6 x 11 + 22 = 88 plus 14 |
+| Two refs plus a location | Seedance 2.0 Fast | 4 references (Hana, Kenji, the kitchen, a style plate) | 4 x 11 = 44 plus 8 | 6 x 11 + 22 = 88 plus 14 |
 | Draft | Seedance 2.0 Mini | Cheapest with sound and 4 references | 4 x 9 = 36 plus 8 | 6 x 9 + 18 = 72 plus 14 |
 
 Opening images about 2 credits each; the estimate gives the exact figure. On
@@ -193,13 +196,13 @@ the singles only when identity matters more than the money.
 Still frame:
 
 ```text
-Narrative short film still, 35mm film look, fine grain. Medium close-up at eye level, 85mm lens, shallow depth of field. Mia: a woman in her late thirties, warm light-brown skin, shoulder-length black curly hair, small gold hoop in her left ear only, faded green cardigan. She sits at a small kitchen table at night, both hands around a mug, eyes on the mug. Warm pendant lamp above the table, soft; window behind her deep blue. Palette: amber, olive, navy.
+Narrative short film still, 35mm film look, fine grain. Medium close-up at eye level, 85mm lens, shallow depth of field. Hana: a woman in her late thirties, light warm skin, a black bob with a blunt fringe, small silver stud in her left ear only, faded green cardigan. She sits at a small table in a narrow kitchen at night, both hands around a mug, eyes on the mug. Warm pendant lamp above the table, soft; window behind her deep blue. Palette: amber, olive, navy.
 ```
 
 Motion:
 
 ```text
-Narrative short film, 35mm film look, one continuous take. Locked-off camera. 0 to 2 s: Mia keeps her eyes on the mug and turns it a quarter turn. 2 to 5 s: she lifts her eyes to someone off screen right and says quietly: "I sold the house." (no subtitles) 5 to 8 s: her jaw tightens and she holds the look without blinking. Her face, her cardigan, the kitchen and the lamp light stay exactly as in the opening frame. Exactly one person in frame, nobody else. Ambient noise: refrigerator hum, a clock ticking. Clean frame: no text, no subtitles, no on-screen graphics.
+Narrative short film, 35mm film look, one continuous take. Locked-off camera. 0 to 2 s: Hana keeps her eyes on the mug and turns it a quarter turn. 2 to 5 s: she lifts her eyes to someone off screen right and says quietly: "I sold the shop." (no subtitles) 5 to 8 s: her jaw tightens and she holds the look without blinking. Her face, her cardigan, the kitchen and the lamp light stay exactly as in the opening frame. Exactly one person in frame, nobody else. Ambient noise: refrigerator hum, a clock ticking. Clean frame: no text, no subtitles, no on-screen graphics.
 ```
 
 ### Pair 2: the answer (Veo 3.1 Fast, mirrored single)
@@ -207,13 +210,13 @@ Narrative short film, 35mm film look, one continuous take. Locked-off camera. 0 
 Still frame:
 
 ```text
-Narrative short film still, 35mm film look, fine grain. Medium close-up at eye level, 85mm lens, shallow depth of field. Tom: a man in his early forties, pale skin, short grey-brown hair, a two-day beard, a thin scar through his left eyebrow, a navy work shirt. He sits in the right third of frame facing screen left. Warm pendant lamp above, soft; dark hallway behind him. Palette: amber, olive, navy.
+Narrative short film still, 35mm film look, fine grain. Medium close-up at eye level, 85mm lens, shallow depth of field. Kenji: a man in his early forties, light skin, short black hair greying at the temples, a two-day beard, a thin scar through his left eyebrow, a navy work shirt. He sits in the right third of frame facing screen left. Warm pendant lamp above, soft; dark hallway behind him. Palette: amber, olive, navy.
 ```
 
 Motion:
 
 ```text
-Narrative short film, 35mm film look, one continuous take. Locked-off camera. 0 to 2 s: Tom is already looking at the keys on the table below frame; he does not look up. 2 to 4 s: he says, flat and low: "When." (no subtitles) 4 to 8 s: he looks up slowly toward screen left, at her eye height, and swallows once. His face, his shirt, the table and the lamp light stay exactly as in the opening frame. Exactly one person in frame, nobody else. Ambient noise: refrigerator hum, a clock ticking. Clean frame: no text, no subtitles, no on-screen graphics.
+Narrative short film, 35mm film look, one continuous take. Locked-off camera. 0 to 2 s: Kenji is already looking at the keys on the table below frame; he does not look up. 2 to 4 s: he says, flat and low: "When." (no subtitles) 4 to 8 s: he looks up slowly toward screen left, at her eye height, and swallows once. His face, his shirt, the table and the lamp light stay exactly as in the opening frame. Exactly one person in frame, nobody else. Ambient noise: refrigerator hum, a clock ticking. Clean frame: no text, no subtitles, no on-screen graphics.
 ```
 
 ### Pair 3: the exchange in one clip (Kling v3 Pro, Spanish)
@@ -243,7 +246,7 @@ clothing, and say "the other person stays silent" in each block.
 | Burned-in subtitles | "(no subtitles)" after each Veo line; the clean-frame line at the end |
 | Eyelines miss each other | Write the look direction and height in both singles; mirrored sizes |
 | The line is crossed | Same screen-side sentence in every prompt; never an orbit; a neutral shot before any new side |
-| Mia's face differs between singles | App stills for the hero close-ups; the identity line verbatim; references wired |
+| One character's face differs between singles | App stills for the hero close-ups; the identity line verbatim; references wired |
 | A third person appears in the background | The count line names everyone; the background described as empty ("the hallway behind him is empty and dark") |
 | Voices change timbre between clips | Identical delivery labels; level-match with native audio volume; keep long speech off screen |
 | Over-acting on the line | Behaviour words, "holds the look", a smaller size for a smaller gesture ([acting.md](acting.md)) |

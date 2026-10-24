@@ -19,16 +19,16 @@ tutorial step.
 
 | Field | Example (tutorial) | Example (ad) |
 |---|---|---|
-| Heading | Kitchen counter, morning | Study, late afternoon |
-| Purpose | Show where the filter cartridge sits | Hook: the click of the switch |
-| Subject, action, outcome | Hand lifts the lid; the empty slot is visible | Thumb presses the switch; the shade glows |
+| Heading | Kitchen counter, morning | Net shed bench, before dawn |
+| Purpose | Show where the filter cartridge sits | Hook: the twist of the cap |
+| Subject, action, outcome | Hand lifts the lid; the empty slot is visible | A hand turns the olive cap; steam rises from the neck |
 | Framing and move | Medium top-down, locked-off | Extreme close-up, slow push-in |
 | From the previous shot | The jug is on the counter, lid closed | Opens the film |
-| To the next shot | Lid open, slot empty, cartridge in the other hand | The lamp is lit, room still dark |
-| Entities in frame | Jug (ledger row J), cartridge (C) | Lamp (hero, ledger row L) |
+| To the next shot | Lid open, slot empty, cartridge in the other hand | The thermos is open, steam rising, harbour still dark |
+| Entities in frame | Jug (ledger row J), cartridge (C) | Thermos (hero, ledger row K) |
 | Cast change | None | None (a hand enters at 1 s, introduced by the motion) |
 | Must the viewer already know | What the cartridge looks like (shot 1) | Nothing |
-| Sound and timing | Narration 9 words over 4 s; native clicks | Native switch click at 1 s; score starts at 2 s |
+| Sound and timing | Narration 9 words over 4 s; native clicks | Native cap squeak at 1 s; score starts at 2 s |
 | Transition out | Hard cut on the hand's motion | Hard cut |
 | Duration | 4 s | 4 s |
 
@@ -55,17 +55,18 @@ either.
 
 ## 3. The continuity ledger
 
-One row per entity that must stay recognisable, one row per place. In
+One row per entity that must stay recognisable, one row per place. The
+example rows below use the thermos ad from the table above. In
 strict and flexible mode the ledger is the reference for every adjacent-shot
 check. In discontinuous mode keep only the motif rows.
 
 ```text
-Entity  Locked description (verbatim in prompts)          State after last landed shot     Where, facing
-L lamp  Brass arc lamp, linen drum shade, black cord...   lit, shade warm                  right third, switch toward camera
-H hand  Woman's right hand, short clear nails, rolled...  resting on the switch            enters from left
+Entity     Locked description (verbatim in prompts)            State after last landed shot   Where, facing
+K thermos  Brushed-steel thermos, dented olive-green cap...     open, cap on the bench         right third, dent toward camera
+H hand     Man's right hand, salt-cracked knuckles, rolled...   resting beside the cap         enters from right
 
-Place   Light source and direction        Time, weather   Geography                            Present
-Study   Window camera left, soft, warm    Late afternoon  Desk along the window, shelf behind  L, H
+Place      Light source and direction        Time, weather   Geography                                Present
+Net shed   Window camera left, soft, cool    Before dawn     Bench along the window, nets behind      K, H
 ```
 
 Rules:
@@ -93,11 +94,11 @@ Rules:
 ## 4. Two people talking
 
 - Fix each speaker's side of the frame for the whole scene and write it in
-  both prompts of every shot: "Mia on the left, facing right; Tom on the
-  right, facing left". The camera stays on one side of the line between
+  both prompts of every shot. Example: "Idris on the left, facing right;
+  Lucie on the right, facing left". The camera stays on one side of the line between
   them; crossing it needs a visible move.
-- Reverse shots mirror each other: if Mia's close-up has her in the left
-  third looking right, Tom's has him in the right third looking left, at
+- Reverse shots mirror each other: if Idris's close-up has him in the left
+  third looking right, Lucie's has her in the right third looking left, at
   the same size and height.
 - Eyelines meet: each speaker looks toward the side of the frame where the
   other one sits, at the other's eye height.

@@ -34,6 +34,8 @@ what carries between episodes and the production around them.
 - Never invent a tool, an argument or a model id; `get_schema` when in doubt.
   Never say the bible is stored on the server unless you wrote it into a
   description and read it back.
+- Every name, product, place and story in this skill and its references is an
+  example. The user's brief replaces it; never carry one into their film.
 
 ## Sequence
 
@@ -190,7 +192,7 @@ confidence is lower.
 1. Show the bible on one screen: cast lines, places, format beats, voice,
    score, the story so far. Show what changed since the last episode.
 2. Names and links in chat, never ids or JSON. Episodes by their names
-   ("Pip of Whisperpine, E04: The Lantern").
+   (for example "<Show>, E04: <Episode title>").
 3. One line of cost per episode and one per month at the cadence.
 4. Silent polling; one line per phase; a frame link per scene.
 5. After delivery, one line: the story-so-far entry written for this

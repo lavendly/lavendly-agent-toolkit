@@ -21,14 +21,15 @@ Names are how episodes are found again. Use one pattern and never vary it:
 
 ```text
 <Show> S01E03: <Episode title>
-Pip of Whisperpine S01E03: The Long Night
+Bisi's Rooftop S01E03: The Dry Week
 ```
 
-Zero-padded numbers sort correctly. The episode's `description` follows a
+The second line is a worked example (an invented kids comedy); the user's
+own show replaces it. Zero-padded numbers sort correctly. The episode's `description` follows a
 fixed shape too:
 
 ```text
-S01E03. Bible v2. Story so far: the rain put out the oak's lantern; Moss the owl lent a match; tonight the stream freezes. End state: Pip in the hollow, scarf on, one lantern lit; Moss on the lowest branch; snow on the ground. Next: who left the paw prints by the stream.
+S01E03. Bible v2. Story so far: Tunde cracked the green watering can; Auntie Bisi taped it; this week the water tank runs dry. End state: Tunde by the tomato crate, the taped can empty in his hand; Auntie Bisi in the stairwell doorway; the tomatoes drooping. Next: who left the tap open downstairs.
 ```
 
 Keep it under 400 characters (the server cuts longer text silently), write it with `update_workflow` after
@@ -73,14 +74,14 @@ The first lines of every episode plan are the starting states, written from
 the last episode's final frame and its description:
 
 ```text
-Pip: in the hollow, blue scarf on, fur dry, awake.
-Lantern 1: lit, on the flat stone. Lanterns 2 and 3: dark, inside the hollow.
-Moss: on the lowest branch, eyes closed.
-Place: the hollow at night, snow on the ground, moonlight from above.
+Tunde: by the tomato crate, yellow football shirt, muddy knees.
+The watering can: cracked down the left side, mended with silver tape, empty, by the water tank.
+Auntie Bisi: in the stairwell doorway, glasses pushed up on her head.
+Place: the rooftop at sunset, the tomato plants drooping, orange sky behind the parapet.
 ```
 
 Continuous story: these states open episode N+1. Time passed: the cold open
-shows the passage (the snow melted, a new morning) and the states reset as
+shows the passage (the tomatoes taller, a new morning) and the states reset as
 the story says.
 
 ## 6. Template-driven daily runs
@@ -168,7 +169,7 @@ user the table row for their choice before the pilot.
 | Places rearrange | The geography not written | The place line with its geography in every still |
 | The voice changes | A new voice picked | The voice id from the bible, every episode |
 | The music changes | A new score generated | The hosted score url reused, or the same brief |
-| Cast creep (extras, a second fox) | Open scenes | The count line; the forbidden list |
+| Cast creep (extras, a neighbour nobody wrote) | Open scenes | The count line; the forbidden list |
 
 Episode 1 is the reference: when a later episode drifts, compare its first
 frame with episode 1's, not with the episode before it.

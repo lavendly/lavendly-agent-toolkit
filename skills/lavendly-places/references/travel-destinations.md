@@ -123,6 +123,8 @@ Totals: text-made openings at 2 credits each (none on photo scenes), score
 
 ## 8. Prompt pairs (Veo)
 
+Examples: the user's own place, brand and photos replace the ones shown.
+
 **Pair 1: the harbour from the air**
 
 Still:

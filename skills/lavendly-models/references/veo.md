@@ -92,13 +92,13 @@ bracket, and the check reads each bracket.
 Still-frame prompt (image node):
 
 ```text
-Narrative short film still, 35mm look. Elias, a lighthouse keeper in his seventies, short white beard, weathered face, grey flat cap, navy wool sweater, sits at a scrubbed pine table holding a folded letter, eyes down. Medium close-up from just above eye level, shallow focus. One warm oil lamp on the table to his right, soft, deep shadow on his left cheek. Rain-streaked window behind him, dark blue night. No text, no on-screen graphics.
+Narrative short film still, 35mm look. Chen Wei, a street-food cook in his sixties, close-cropped grey hair, deep lines at the eyes, a white towel round his neck, faded blue apron, stands behind a steel wok at his night market stall in Taipei after closing, eyes down. Medium close-up from just above eye level, shallow focus. Warm string lights overhead, steam rising from the wok, deep shadow on his left cheek. Shuttered stalls behind, out of focus. No text, no on-screen graphics.
 ```
 
 Motion prompt (clip):
 
 ```text
-Medium close-up, locked-off camera. Elias unfolds the letter, reads for a moment, then lowers it to the table and looks up toward the window. He says, quiet and hoarse: "You said you would come back when the light was fixed." (no subtitles) He holds still after the line, eyes wet, jaw set. Exactly one man in frame, nobody else. Elias, the table and the lamp light stay exactly as in the opening frame. SFX: paper unfolding, the chair creaks once. Ambient noise: rain on glass, low wind, no music. Clean frame: no text, no subtitles, no on-screen graphics.
+Medium close-up, locked-off camera. Chen Wei wipes the wok rim with the towel, sets the ladle down, then looks up toward an empty stool at the end of the counter. He says, quiet and hoarse: "I kept your stool by the wok every night." (no subtitles) He holds still after the line, eyes wet, jaw set. Exactly one man in frame, nobody else. Chen Wei, the stall and the string lights stay exactly as in the opening frame. SFX: the ladle set down on steel, the gas burner hiss. Ambient noise: a distant scooter, the market winding down, no music. Clean frame: no text, no subtitles, no on-screen graphics.
 ```
 
 ## Example 2: product with effects, Veo 3.1 Fast, 16:9, 8 s, timestamp blocks
@@ -106,15 +106,15 @@ Medium close-up, locked-off camera. Elias unfolds the letter, reads for a moment
 Still-frame prompt:
 
 ```text
-Premium product film still. A table lamp with a matte stone-grey mushroom dome, a slim brass stem and a round brass base, switched off, centred on a dark oak side table. Camera at table height, three-quarter angle, the dome filling the upper third. One cool soft window light from the left, the right side in shadow. Matte stone grain on the dome, brushed brass on the stem. Dark room behind, out of focus. No text, no on-screen graphics.
+Premium product film still. A compact 35mm film camera with a matte olive-green body, a brushed silver top plate and a black lens barrel, centred on a dark oak side table. Camera at table height, three-quarter angle, the lens facing the left of frame. One cool soft window light from the left, the right side in shadow. Fine leatherette grain on the body, brushed lines on the silver plate. Dark room behind, out of focus. No text, no on-screen graphics.
 ```
 
 Motion prompt:
 
 ```text
-[00:00-00:03] Close-up at table height, locked-off: a thumb presses the brass switch at the base of the stone-grey lamp; warm light blooms under the dome. SFX: one soft brass click.
-[00:03-00:06] Medium shot from the side: the pool of warm light spreads across the dark oak and reaches the window frame. Ambient noise: quiet room tone, rain outside, no music.
-[00:06-00:08] Slow push-in until the dome fills the frame, then the camera holds. Exactly one lamp, the thumb the only other thing that enters. Clean frame: no text, no logo, no on-screen graphics.
+[00:00-00:03] Close-up at table height, locked-off: a thumb presses the silver shutter button on the olive-green camera. SFX: one crisp shutter click.
+[00:03-00:06] Medium shot from the side: the thumb winds the advance lever once and window light slides along the silver top plate. SFX: the lever ratchet. Ambient noise: quiet room tone, rain outside, no music.
+[00:06-00:08] Slow push-in until the lens fills the frame, then the camera holds. Exactly one camera, the thumb the only other thing that enters. Clean frame: no text, no logo, no on-screen graphics.
 ```
 
 ## Example 3: vertical social, Veo 3.1 Lite (Auto), 9:16, 4 s, no references

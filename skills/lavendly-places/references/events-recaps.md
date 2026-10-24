@@ -116,6 +116,8 @@ score 2 or 3, voice 1.
 
 ## 8. Prompt pairs (Veo)
 
+Examples: the user's own place, brand and photos replace the ones shown.
+
 **Pair 1: the stage before doors**
 
 Still:

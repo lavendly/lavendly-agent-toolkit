@@ -34,6 +34,8 @@ plan, ledger, three-level checks); this skill makes the place decisions.
   footage the user has, placement, length, aspect, the feeling, the call to
   action. The usual question: "Can you share photos of the place? I will
   animate them rather than invent it."
+- Every name, product, place and story in this skill and its references is an
+  example. The user's brief replaces it; never carry one into their film.
 
 ## Sequence
 

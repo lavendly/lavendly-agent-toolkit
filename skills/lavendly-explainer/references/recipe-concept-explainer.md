@@ -2,7 +2,7 @@
 
 Teach one concept (how, why, what is) so the viewer can explain it back.
 Classrooms, course platforms, YouTube education, edu-TikTok. Worked
-example: how a fridge keeps food cold.
+example: how a fridge keeps food cold. The user's own concept replaces it.
 
 ## 1. Purpose, audience, ending
 

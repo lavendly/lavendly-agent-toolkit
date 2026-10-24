@@ -2,7 +2,8 @@
 
 Three recipes. Each one is what you say, what the agent does, and where the
 money goes. Tool names are the live MCP names; everything the agent says to
-you comes back as names and links, never ids.
+you comes back as names and links, never ids. The briefs are worked
+examples: the agent follows yours, whatever its subject.
 
 ---
 

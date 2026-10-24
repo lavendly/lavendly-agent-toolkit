@@ -2,7 +2,7 @@
 
 A day, a routine or a vlog compressed into quick, lived-in moments from
 morning to night. Worked example: a day in the life of Ana, a fictional
-ceramicist with a small studio.
+ceramicist with a small studio. The user's own subject replaces her.
 
 ## 1. Purpose, audience, ending
 

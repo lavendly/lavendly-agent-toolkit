@@ -2,7 +2,8 @@
 
 Exact arguments and abbreviated responses for every tool this skill uses.
 Argument names are the live MCP names. Responses are shortened to the fields
-the skill reads. Placeholders are in angle brackets.
+the skill reads. Placeholders are in angle brackets. Filled values follow one
+worked example, an espresso bar at dawn; the user's own idea replaces it.
 
 ## 1. `get_status`
 

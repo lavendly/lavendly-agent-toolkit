@@ -17,17 +17,20 @@ url is the first frame; the next ones are references 1, 2, 3).
 
 ## Sentences by job
 
+The names are one worked cast (Dara, Bram, Juno and Bo, the bottle, the
+van); the user's own subjects replace them.
+
 | Job | Sentence |
 |---|---|
-| Face | Reference 1 is Mia's face and hair only; ignore its grey background, flat light and pose. |
-| Outfit, full figure | Reference 2 is Mia's jacket, backpack and boots only; take her face from reference 1; ignore its background and pose. |
-| Second character | Reference 2 is Tom's face, hair and coat only; he stands on the right; ignore its background. |
-| Creature | Reference 1 is Pip's face, ear markings and fur colour only; ignore its background and pose. |
+| Face | Reference 1 is Dara's face and braids only; ignore its grey background, flat light and pose. |
+| Outfit, full figure | Reference 2 is Dara's rain shell, courier bag and trainers only; take her face from reference 1; ignore its background and pose. |
+| Second character | Reference 2 is Bram's face, hair and cardigan only; he stands on the right; ignore its background. |
+| Creature | Reference 1 is Juno's face, scale pattern and colour only; ignore its background and pose. |
 | Mascot | Reference 1 is Bolt's shape, colour and face only; ignore its background. |
 | Product shape | Reference 1 is the bottle's shape, glass, cap and proportions only; ignore its background, light and any lettering. |
 | Product, another angle | Reference 2 is the bottle seen from the side, for its depth only. |
 | Vehicle | Reference 1 is the van's body shape, paint and trim only; ignore its background and the road. |
-| Size | Reference 2 is the size of Pip next to Bramble only. |
+| Size | Reference 2 is the size of Juno next to Bo only. |
 | Style plate | Reference 3 is the palette, grain and contrast only, not its content. |
 | Location | Reference 3 is the kitchen's layout, window and light only; nobody from it appears. |
 

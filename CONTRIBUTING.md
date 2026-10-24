@@ -60,17 +60,21 @@ messages either.
    explicit yes, never mint a new idempotency key to retry. Loosening any of
    these needs a reason in the PR description and a scenario in `evals/`.
 8. A behaviour change comes with a scenario in `evals/scenarios.md`.
-9. If a skill was added or renamed: `.claude-plugin/marketplace.json`, the
-   README tables and `INSTALL.md` are updated.
-10. `CHANGELOG.md` has a line under the unreleased heading.
+9. Examples are labelled and the names in them appear in no other skill
+   folder; the skill keeps the shared sections of `templates/SKILL.md`.
+10. If a skill was added or renamed: `.claude-plugin/marketplace.json`, the
+    README tables and `INSTALL.md` are updated.
+11. `CHANGELOG.md` has a line under the unreleased heading.
 
 ## Validation
 
 `scripts/validate.mjs` needs Node 18 or newer and no dependencies. It checks
 frontmatter, version sync across `VERSION`, the four manifests and
 `package.json`, reference links and orphans, the 300-line limit, the dash
-scan, the snake_case token scan and the marketplace paths. CI runs the same
-script on every push and pull request.
+scan, the snake_case token scan, the marketplace paths, the shared
+sections and examples line of each `SKILL.md`, and example names reused
+across skill folders. CI runs the same script on every push and pull
+request.
 
 ## Adding a skill
 

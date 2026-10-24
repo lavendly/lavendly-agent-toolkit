@@ -1,8 +1,10 @@
 # MCP call shapes: music video
 
-Exact arguments for the 30 s chorus cut in [beat-maths.md](beat-maths.md)
-section 8 (128 BPM, first downbeat at 0.470 s) on Seedance 2.0 Fast, from
-the track to the placed cut. Argument names are the live MCP names;
+Exact arguments, shown on one worked example: the 30 s chorus cut in
+[beat-maths.md](beat-maths.md) section 8 (128 BPM, first downbeat at
+0.470 s) on Seedance 2.0 Fast, for an invented artist, Nova, and her song
+"Silver". The user's own track and artist replace it. From the track to the
+placed cut. Argument names are the live MCP names;
 placeholders in angle brackets. Read real node ids from `get_workflow`.
 
 ## The track
@@ -61,7 +63,7 @@ its `/api/v1/storage/m/<key>` path.
     { "prompt": "<motion prompt: hand on the railing>", "duration": 5 },
     { "prompt": "<motion prompt: Take A, performance>", "duration": 10 },
     { "prompt": "<motion prompt: city lights b-roll>", "duration": 5 },
-    { "prompt": "<motion prompt: the red scarf motif>", "duration": 5 },
+    { "prompt": "<motion prompt: the silver ribbon motif>", "duration": 5 },
     { "prompt": "<motion prompt: burst source>", "duration": 5 },
     { "prompt": "<motion prompt: crane up, post-chorus>", "duration": 10 }
   ],

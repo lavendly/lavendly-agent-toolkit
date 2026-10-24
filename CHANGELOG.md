@@ -28,6 +28,22 @@ Added:
 
 Changed:
 
+- Examples are examples. One kids' series cast (a fox cub and his forest)
+  and a handful of names (a woman with a brass lamp, a lighthouse keeper and
+  others) had spread across several skills as if they were the default
+  subject. Each skill now states the rule first and labels its examples, and
+  each example cast lives in one skill only, varied across genre, age,
+  culture and setting. Files that need one running example introduce it as a
+  worked example the user's own film replaces. `CLAUDE.md` gains the rule and
+  `scripts/validate.mjs` fails when one example name appears in two skill
+  folders (with an allowlist for model, voice, platform and calendar names).
+  Eval scenarios and the cookbook follow.
+- Every `SKILL.md` carries one line saying its names, products, places and
+  stories are examples the user's brief replaces, so an agent that loads a
+  single skill reads the rule too. `templates/SKILL.md` is the skeleton a
+  new skill starts from; the validator checks the shared sections (Before
+  anything else, When to stop, UX rules, Reference docs) and the examples
+  line. `lavendly-cost-aware` renames its pre-flight heading to match.
 - Routines: a schedule the user set up with a channel and a credit cap is
   the user's yes to posting. `lavendly-series` (Routines rules, production
   section 6), `lavendly-publish` and `lavendly-cost-aware` now post the

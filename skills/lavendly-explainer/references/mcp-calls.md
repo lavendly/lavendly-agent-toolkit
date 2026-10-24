@@ -5,6 +5,9 @@ Argument names are the live MCP names; placeholders are in angle brackets.
 Read real node ids from `get_workflow`: compiled shots give a group, an
 image node (`img_` prefix) and a clip node (`vid_` prefix) per scene.
 
+Names, titles, prompts and keys shown are example values; the user's own
+film replaces them.
+
 ## Probes
 
 `get_status` and `get_ledger`, once per session, both free. `get_status`

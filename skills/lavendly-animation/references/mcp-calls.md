@@ -3,7 +3,9 @@
 Exact arguments for an animated film with a hero sheet and a style plate.
 Argument names are the live MCP names; placeholders are in angle brackets.
 Compiled shots get a group `g_<suffix>`, an image node `img_<suffix>` and a
-clip node `vid_<suffix>`; read the real ids from `get_workflow`.
+clip node `vid_<suffix>`; read the real ids from `get_workflow`. Worked example in this file: a
+three-scene watercolour fable about Nilo, a young river hippo afraid of deep
+water; the user's own film replaces it.
 
 ## 1. Probes (free, once per session)
 
@@ -34,11 +36,11 @@ never reaches you, so ask the user to upload it to the Asset Library and
 list again.
 
 ```json
-{ "kind": "image", "url": "https://example.com/pip-head-closeup.png", "filename": "pip-head.png" }
+{ "kind": "image", "url": "https://example.com/nilo-head-closeup.png", "filename": "nilo-head.png" }
 ```
 
 ```json
-{ "kind": "image", "url": "https://example.com/forest-style-plate.png", "filename": "style-plate.png" }
+{ "kind": "image", "url": "https://example.com/river-style-plate.png", "filename": "style-plate.png" }
 ```
 
 Each returns a hosted Lavendly url. Keep both. Media pasted in the chat never
@@ -55,8 +57,8 @@ its `/api/v1/storage/m/<key>` path.
 
 ```json
 {
-  "name": "Pip and the first star",
-  "description": "Watercolour fable, three scenes, one fox cub, one lantern.",
+  "name": "Nilo and the deep water",
+  "description": "Watercolour fable, three scenes, one young river hippo, one river.",
   "aspect": "16:9",
   "videoModel": "alibaba/wan-2.7",
   "shots": [
@@ -65,7 +67,7 @@ its `/api/v1/storage/m/<key>` path.
     { "prompt": "<motion prompt, scene 3>", "duration": 5 }
   ],
   "project_name": "<only when the user named a project or series>",
-  "idempotency_key": "wf-pip-first-star"
+  "idempotency_key": "wf-nilo-deep-water"
 }
 ```
 
@@ -106,7 +108,7 @@ One call; send the full `nodes` and `edges` arrays back with these changes:
       "id": "ref_hero",
       "type": "imageSource",
       "position": { "x": 80, "y": -260 },
-      "data": { "title": "Reference: Pip, head", "url": "<hosted hero url>", "imgSource": "upload", "reference": true }
+      "data": { "title": "Reference: Nilo, head", "url": "<hosted hero url>", "imgSource": "upload", "reference": true }
     },
     {
       "id": "ref_style",
@@ -164,7 +166,7 @@ charged.
   "clip_id": "vid_1",
   "kind": "voiceover",
   "scope": "film",
-  "text": "Pip has a lantern.\nBut where is the first star?\nThere it is. Goodnight, Pip.",
+  "text": "Nilo looks at the deep water.\nOne foot, then another.\nHe floats. Well done, Nilo.",
   "voice": "<an ElevenLabs voice from the list below, or omit for Rachel>",
   "subtitleStyle": "youtube",
   "idempotency_key": "vo-<workflow id>"

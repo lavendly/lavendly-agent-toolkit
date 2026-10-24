@@ -119,6 +119,8 @@ it exports at the 9:16 size; use 16:9.
 
 ## 7. Prompt pairs (Veo)
 
+Examples: the user's own product, brand and photos replace the ones shown.
+
 **Pair 1: the car park reflections**
 
 Still:

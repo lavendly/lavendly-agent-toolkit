@@ -628,9 +628,9 @@ between two identical framings in the middle of a line.
 ## Scenario 21: a friend appears, then vanishes (director, review)
 
 **Setup:** a 4-scene story. Scenes 1 to 3 are one café table in one
-afternoon. Scene 1 shows Mia alone. Scene 2 shows Mia and a friend talking,
-with no entrance. Scene 3 shows Mia alone again, the friend's cup still on
-the table. Scene 4 is Mia walking home that evening, alone.
+afternoon. Scene 1 shows Joon alone. Scene 2 shows Joon and a friend talking,
+with no entrance. Scene 3 shows Joon alone again, the friend's cup still on
+the table. Scene 4 is Joon walking home that evening, alone.
 
 **User request:**
 
@@ -646,7 +646,7 @@ the table. Scene 4 is Mia walking home that evening, alone.
   arrives; for scene 3, a re-rolled opening where the friend stands and
   leaves, or a narration line that explains it. Each paid re-roll is
   announced.
-- No finding for scene 4: a new place and a clear time jump, so Mia being
+- No finding for scene 4: a new place and a clear time jump, so Joon being
   alone needs no explanation.
 - The plan names who is present in every motion prompt of the café scene.
 
@@ -662,10 +662,10 @@ the table. Scene 4 is Mia walking home that evening, alone.
 
 ## Scenario 22: a conversation that flips sides (review)
 
-**Setup:** a 3-shot dialogue at a kitchen table. Shot 1: a two-shot, Ana on
-the left, Ben on the right. Shot 2: Ana's close-up, she is in the right
-third looking left. Shot 3: Ben's close-up, his line is heard but his mouth
-is closed and Ana's back is in frame.
+**Setup:** a 3-shot dialogue at a kitchen table. Shot 1: a two-shot, Leila on
+the left, Marcus on the right. Shot 2: Leila's close-up, she is in the right
+third looking left. Shot 3: Marcus's close-up, his line is heard but his mouth
+is closed and Leila's back is in frame.
 
 **User request:**
 
@@ -673,12 +673,12 @@ is closed and Ana's back is in frame.
 
 **Expected behaviour:**
 
-- High finding at the cut into shot 2: Ana has jumped to the other side of
-  the frame and her eyeline now points away from Ben.
+- High finding at the cut into shot 2: Leila has jumped to the other side of
+  the frame and her eyeline now points away from Marcus.
 - High finding on shot 3: the spoken line is not coming from the face in
   frame.
-- Fixes: re-roll shot 2 with her side and facing written ("Ana in the left
-  third, facing right"); for shot 3, either re-roll with Ben's face in frame
+- Fixes: re-roll shot 2 with her side and facing written ("Leila in the left
+  third, facing right"); for shot 3, either re-roll with Marcus's face in frame
   speaking or move the line onto a reaction shot the plan allows. Each paid
   re-roll is announced.
 
@@ -694,27 +694,27 @@ is closed and Ana's back is in frame.
 
 **User request:**
 
-> Make episode 2 of the Pip series: Pip and Wren find the lost lantern.
+> Make episode 2 of the Orbit Kids series: Sol and Pim fix the broken antenna.
 
-**Setup:** in episode 1, Wren the owl joined and Pip lost his red scarf.
+**Setup:** in episode 1, Pim the repair robot joined and Sol lost her yellow helmet.
 
 **Expected behaviour:**
 
-- Reuses the series bible: Pip's and Wren's locked descriptions, the
+- Reuses the series bible: Sol's and Pim's locked descriptions, the
   imported reference urls from episode 1 (no new character sheet), the same
   narration voice and score brief, the same opening and sign-off beats.
-- Starts Pip without the red scarf (it was lost) unless the story finds it
-  on screen; Wren is known, not introduced as a stranger.
+- Starts Sol without the yellow helmet (it was lost) unless the story finds it
+  on screen; Pim is known, not introduced as a stranger.
 - Same project as episode 1; a new workflow for episode 2.
 - Writes the story-so-far line for episode 2 after delivery.
 
 **Score:**
 
-- Pass: references reused, scarf state carried, Wren known, format beats
+- Pass: references reused, helmet state carried, Pim known, format beats
   kept.
-- Partial: references reused but the scarf is back without a reason, or a
+- Partial: references reused but the helmet is back without a reason, or a
   different voice.
-- Fail: a new character sheet generated for Pip, or episode 2 in a new
+- Fail: a new character sheet generated for Sol, or episode 2 in a new
   project with no link to episode 1.
 
 ---
@@ -800,15 +800,15 @@ is closed and Ana's back is in frame.
 
 ---
 
-## Scenario 28: design a recurring fox for a series (characters)
+## Scenario 28: design a recurring creature for a series (characters)
 
 **User request:**
 
-> Kids series, three episodes, a little fox called Pip and his badger friend. No pictures, design them.
+> Kids series, three episodes, a little hedgehog called Pocket and his tortoise friend. No pictures, design them.
 
 **Expected behaviour:**
 
-- Proposes casting scenes (face and full figure each; mouth open and closed; a size frame of Pip beside the badger), states the cost, waits.
+- Proposes casting scenes (face and full figure each; mouth open and closed; a size frame of Pocket beside the tortoise), states the cost, waits.
 - Locked descriptions carry an asymmetric mark and "on all four paws".
 - After approval, records the hosted sheet urls, the locked words and one voice per character for reuse; sheets are never regenerated per episode.
 
@@ -964,7 +964,7 @@ is closed and Ana's back is in frame.
 
 **User request:**
 
-> Start a weekly kids series about a fox cub who keeps the forest lanterns lit. 60 second episodes, 16:9.
+> Start a weekly kids series about a young sea turtle who runs the reef's lost-and-found. 60 second episodes, 16:9.
 
 **Expected behaviour:**
 
@@ -984,7 +984,7 @@ is closed and Ana's back is in frame.
 
 **User request:**
 
-> Make episode 4 of Pip of Whisperpine.
+> Make episode 4 of Harbour Cats.
 
 **Expected behaviour:**
 

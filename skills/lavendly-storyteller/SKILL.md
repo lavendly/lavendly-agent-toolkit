@@ -26,6 +26,8 @@ edits apply. With neither it ships the raw clip at the model's own size.
   is measured against that number.
 - Never invent a tool name or a model id. If the user names one you do not
   see, say so and call `get_schema`.
+- Every name, product, place and story in this skill and its references is an
+  example. The user's brief replaces it; never carry one into their film.
 
 ## Sequence
 

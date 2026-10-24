@@ -104,6 +104,8 @@ or concept rooms made from text add 2 credits each.
 
 ## 7. Prompt pairs (Veo)
 
+Examples: the user's own place, brand and photos replace the ones shown.
+
 **Pair 1: the living room glide** (photo scene; the still is for a concept
 or staged room)
 

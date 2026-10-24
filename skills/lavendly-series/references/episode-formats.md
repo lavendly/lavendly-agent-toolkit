@@ -12,7 +12,7 @@ makes episode 12 look like episode 1.
 | Beat | What it is | How to make it on Lavendly |
 |---|---|---|
 | Cold open | The first 2 to 5 s: a question or a moment that grabs, often answering the last cliffhanger | A normal shot; scene 1 of the workflow |
-| Recurring first shot | The same framing, place and move every episode (the hollow at dusk, the desk from above) | One locked still prompt and motion prompt; regenerated each episode. When the shot must be identical, reuse episode 1's opening image url on the image node and the same prompt, and pass the same `seed` in `generate_scene` options (honoured by Veo, Seedance, Wan, HappyHorse and Runway per the catalog; not verified) |
+| Recurring first shot | The same framing, place and move every episode (for example the rooftop at sunrise, the desk from above) | One locked still prompt and motion prompt; regenerated each episode. When the shot must be identical, reuse episode 1's opening image url on the image node and the same prompt, and pass the same `seed` in `generate_scene` options (honoured by Veo, Seedance, Wan, HappyHorse and Runway per the catalog; not verified) |
 | Title room | 2 to 3 s of quiet frame where the show's title can sit | A plain area in the frame ("an empty dusk sky across the upper third"); the MCP renders no titles; the user adds the card in the app, or the narrator says the title and captions carry it |
 | The episode's story | The beats of this episode on the skeleton | Free fields only |
 | Recap | One line or one shot that states the story so far | Only when this episode depends on it; a narration line over a new shot, never a pasted old clip |
@@ -20,11 +20,11 @@ makes episode 12 look like episode 1.
 | Sign-off | The same closing every episode: a line, a gesture, a sound motif | Locked line in the narration, locked final framing, the score's motif |
 
 Cliffhanger rules: the question is visible (not "what will happen?" but a
-lantern going out by itself); the next episode's cold open answers or
+watering can tipping over by itself); the next episode's cold open answers or
 deepens it within 5 s; never two cliffhangers in a row without an answer.
 
 Recap rules: one sentence, present tense, the one fact the episode needs
-("Last time, the rain put out the oak's lantern."); 6 to 8 words at the very
+(for example "Last time, the watering can cracked down the side."); 6 to 8 words at the very
 start or after the recurring first shot; never more than 10 percent of the
 runtime.
 
@@ -42,7 +42,7 @@ recurring sign-off.
 | 3 Payoff and sign-off | 10 to 15 s | framing (wide), sign-off gesture, motif | the end state, the cliffhanger image | 5 s |
 
 Narration: up to 32 words (2.3 per second), the sign-off line locked
-("See you tomorrow at the hollow." 6 words).
+(for example "See you tomorrow on the roof." 6 words).
 
 Cost on Seedance 2.0 Mini: 3 x 9 = 27, opening images about 6, narration
 about 1, the reused hosted score 0: about 34 per episode, about 1,020 for 30
@@ -90,7 +90,7 @@ split the episode into two parts.
 | Gentle light only (warm daylight, golden hour, lantern glow); never frightening low key | Young viewers and parents |
 | Cuts every 4 to 6 s; slow push-ins and static frames; no shaky camera, no fast cuts | Readable for small children |
 | Narration 1.8 to 2.1 words per second, simple words, repetition, one catchphrase per episode | Comprehension and recall |
-| A fixed opening (the hollow, the first star) and a fixed goodbye or goodnight sign-off | Ritual |
+| A fixed opening (for example the rooftop at sunrise, the first ripe tomato) and a fixed goodbye or goodnight sign-off | Ritual |
 | A small problem, two tries, help from a friend, a kind solution, a one-line moral | The fable shape children follow |
 | Medium shots over open-mouth close-ups; check every frame for extra eyes, odd teeth, extra limbs | Artefacts frighten children more than adults |
 | Animal heroes on all four paws unless the bible says otherwise | Models stand animals up |

@@ -32,6 +32,8 @@ carries each shot, and says plainly where the MCP path cannot hold a face.
 - Real people only with consent: the user, or someone who agreed. Never a
   public figure, a celebrity, a lookalike or a "style of" a real person.
   Never a cloned voice without its owner. Brand marks only the user's own.
+- Every name, product, place and story in this skill and its references is an
+  example. The user's brief replaces it; never carry one into their film.
 
 ## Sequence
 
@@ -110,8 +112,8 @@ Call shapes: [references/mcp-calls.md](references/mcp-calls.md).
 - Priority when slots are short: the face (or the product), then the
   outfit or the second character, then a style plate, then the place.
 - Every wired reference gets a role sentence in the motion prompt, in
-  wiring order, with what not to copy: "Reference 1 is Mia's face and hair
-  only; ignore its grey background, light and pose."
+  wiring order, with what not to copy. Example: "Reference 1 is Dara's face
+  and braids only; ignore its grey background, light and pose."
 - References never reach opening images on the MCP path; the still-frame
   prompt carries identity in words. Say this limit when the user expects a
   generated still to match a photo.
@@ -138,16 +140,17 @@ angle, its own still or its own chained frame.
   expression, placement, camera, light, background, the exact count, the
   clean-frame line. The start of the shot, never the payoff.
 - Motion prompt: what changes (the action with timing, the one camera move,
-  the end state), the role sentences, one lock sentence ("Mia, her coat and
-  the window light stay exactly as in the opening frame"), the exact count.
+  the end state), the role sentences, one lock sentence (for example "Dara,
+  her rain shell and the window light stay exactly as in the opening
+  frame"), the exact count.
   The full description only when the hero enters mid-shot.
 
 ### Exact counts against clones
 
 - Clones are the most common identity failure. Every still and motion
-  prompt states the count: "Exactly one Mia in frame, nobody else, no copy
-  of her." Two characters: "Exactly two people: Mia on the left, Tom on the
-  right; nobody else, no second copy of either."
+  prompt states the count. Example: "Exactly one Dara in frame, nobody else,
+  no copy of her." Two characters: "Exactly two people: Dara on the left,
+  Bram on the right; nobody else, no second copy of either."
 - Mirrors, windows and water are named and bounded ("her reflection in the
   dark window, nothing else"). A point of view shot says "nobody in frame".
 - A newcomer gets an introduction shot before acting; nobody vanishes

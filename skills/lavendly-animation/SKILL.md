@@ -14,7 +14,7 @@ argument-hint: "[story or brief] [style: 3d | anime | cartoon | clay | felt | pa
 
 An animated film holds together when one style, one character design and
 one motion feel run through every shot. Generated video drifts on all
-three: watercolour turns glossy, a fox stands up on two legs, stop-motion
+three: watercolour turns glossy, a dog stands up on two legs, stop-motion
 turns smooth. This skill gives the agent the field knowledge of animated
 filmmaking (style, shape, material, light, acting, timing, creatures,
 children's pacing) and the exact way each decision reaches Lavendly's models.
@@ -34,6 +34,8 @@ children's pacing) and the exact way each decision reaches Lavendly's models.
 - A studio, artist, franchise or character named in the brief is translated
   into craft words before anything else; say so in half a sentence
   ([references/prompt-anchors.md](references/prompt-anchors.md) section 5).
+- Every name, product, place and story in this skill and its references is an
+  example. The user's brief replaces it; never carry one into their film.
 
 ## Sequence
 
@@ -105,8 +107,8 @@ children's pacing) and the exact way each decision reaches Lavendly's models.
 - References by priority: the head close-up, then the full body or the
   product, then the style plate, then the location. Each gets one job in a
   sentence. Never wire references into a Veo 3.1 Lite (Auto) scene.
-- Every motion prompt states the count: "Exactly one Pip in frame, nobody
-  else, no copy of him." No two scenes start from the same frame.
+- Every motion prompt states the count, for example: "Exactly one Nilo in
+  frame, nobody else, no copy of him." No two scenes start from the same frame.
 - A four-legged hero moves on all four legs with its gait named, unless the
   brief makes it walk upright; then it is upright in every shot. Its hero
   block always includes "on all four paws" (or legs), even where it sits or

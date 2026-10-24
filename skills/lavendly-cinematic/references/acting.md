@@ -63,7 +63,7 @@ faces; a named eye path fixes most of them.
 | Body false to the person: a tired old man springs up | Action verbs without weight | "He gets up slowly, one hand on the table for support" |
 | Speech too clean: every word crisp, no breath | Long, formal lines | Shorter lines with a breath: "She starts, stops, then says:" |
 | Threat signalling: the villain glowers | "Menacing", "sinister" | "He smiles politely and refills her glass" |
-| Synchronised ensemble: everyone reacts at once | "They all react" | Stagger: "Tom looks up first; a second later Mia does" |
+| Synchronised ensemble: everyone reacts at once | "They all react" | Stagger. For instance, a family at a dinner table in Accra: "Kofi looks up first; a second later his sister Ama does" |
 | Dead pause: a frozen face between lines | A pause written as nothing | Give the pause a behaviour: "she turns the cup a quarter turn" |
 | Emotional reset: calm again at the start of the next shot | Each prompt written fresh | Start each prompt from the previous shot's end state |
 | Commenting: a wink, a knowing look at the lens | "Funny", "ironic" | "He does not look at the camera; he looks at the printer" |

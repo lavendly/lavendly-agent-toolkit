@@ -123,6 +123,8 @@ The MCP path sends at most 3 references besides the first frame.
 
 ## 7. Prompt pairs (Seedance)
 
+Examples: the user's own product, brand and photos replace the ones shown.
+
 **Pair 1: the walk toward the lens** (opens on the user's on-model photo
 when there is one; the still prompt is the fallback)
 

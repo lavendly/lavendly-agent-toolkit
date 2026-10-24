@@ -2,7 +2,7 @@
 
 "Top 5", "3 things I", "ranked", "worst to best": a numbered list where each
 item is one beat with the same treatment. Worked example: five kitchen
-tools a professional cook replaced first (the user's list).
+tools a professional cook replaced first (the user's own list replaces it).
 
 ## 1. Purpose, audience, ending
 

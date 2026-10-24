@@ -3,7 +3,7 @@
 The narrated knowledge short with no presenter: a voice, a picture per
 sentence, one look, one score. YouTube Shorts, TikTok, Reels and the
 "faceless channel" on long-form YouTube. Worked example throughout: why
-octopuses have three hearts.
+octopuses have three hearts. The user's own topic replaces it.
 
 ## 1. Purpose, audience, ending
 

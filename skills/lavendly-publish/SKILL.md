@@ -24,6 +24,8 @@ itself boring.
   link, or the user gave a `video_url`. No render, no post.
 - The film passed lavendly-review, or the user accepted flagged scenes in so
   many words. Say which.
+- Every name, product, place and story in this skill and its references is an
+  example. The user's brief replaces it; never carry one into their film.
 
 ## Sequence
 

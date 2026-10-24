@@ -146,13 +146,13 @@ Typical cost (clips plus about 2 per opening image):
 Still frame:
 
 ```text
-Science fiction film still, large-format camera look. Extreme wide shot, low angle, 24mm lens. Ines: a woman in her thirties in a dusty white field jacket and dark goggles pushed up on her forehead, standing small in the lower third at the edge of a white salt flat. A vast matte-black ring hangs motionless in the pale sky above the horizon. Low morning sun from the left, long shadows on the salt. Palette: salt white, cobalt, black.
+Science fiction film still, large-format camera look. Extreme wide shot, low angle, 24mm lens. Petra: a woman in her thirties in a dusty white field jacket and dark goggles pushed up on her forehead, standing small in the lower third at the edge of a white salt flat. A vast matte-black ring hangs motionless in the pale sky above the horizon. Low morning sun from the left, long shadows on the salt. Palette: salt white, cobalt, black.
 ```
 
 Motion:
 
 ```text
-Science fiction film shot, large-format camera look. Slow crane up and back over the whole shot, ending high above Ines. 0 to 3 s: Ines stands still; heat shimmer moves over the salt. 3 to 5 s: the ring turns a quarter turn on its axis, slowly and silently, and stops. Ines, the salt flat and the sun stay exactly as in the opening frame. Exactly one person in frame, nobody else. Sound: wind over the flat, a very low hum that rises as the ring turns. Clean frame: no text, no on-screen graphics.
+Science fiction film shot, large-format camera look. Slow crane up and back over the whole shot, ending high above Petra. 0 to 3 s: Petra stands still; heat shimmer moves over the salt. 3 to 5 s: the ring turns a quarter turn on its axis, slowly and silently, and stops. Petra, the salt flat and the sun stay exactly as in the opening frame. Exactly one person in frame, nobody else. Sound: wind over the flat, a very low hum that rises as the ring turns. Clean frame: no text, no on-screen graphics.
 ```
 
 ### Pair 2: the repair bay (Wan 2.7, 30 s shot 3, with a style plate)
@@ -174,17 +174,17 @@ Unit 7 solders a wire inside the brass music box with slow, precise movements, e
 Still frame:
 
 ```text
-Science fiction film still, large-format camera look. Medium close-up, eye level, 85mm lens. Ines: a woman in her thirties, sunburnt olive skin, short black hair, a thin scar across her chin, dusty white field jacket, goggles on her forehead. She looks up and slightly right, her face lit by a cold blue glow from above. Pale sky behind her, out of focus. Palette: cobalt, salt white, warm skin.
+Science fiction film still, large-format camera look. Medium close-up, eye level, 85mm lens. Petra: a woman in her thirties, sunburnt olive skin, short black hair, a thin scar across her chin, dusty white field jacket, goggles on her forehead. She looks up and slightly right, her face lit by a cold blue glow from above. Pale sky behind her, out of focus. Palette: cobalt, salt white, warm skin.
 ```
 
 Motion:
 
 ```text
-Science fiction film shot. Locked-off camera. 0 to 3 s: the blue light on Ines's face pulses slowly, twice. 3 to 6 s: she does not blink; her lips part; she breathes out once. 6 to 8 s: she lowers her goggles over her eyes with one hand. Ines, her jacket and the light stay exactly as in the opening frame. Exactly one person in frame, nobody else. SFX: a deep tone rising and falling with the pulse. Ambient noise: wind. Clean frame: no text, no subtitles, no on-screen graphics.
+Science fiction film shot. Locked-off camera. 0 to 3 s: the blue light on Petra's face pulses slowly, twice. 3 to 6 s: she does not blink; her lips part; she breathes out once. 6 to 8 s: she lowers her goggles over her eyes with one hand. Petra, her jacket and the light stay exactly as in the opening frame. Exactly one person in frame, nobody else. SFX: a deep tone rising and falling with the pulse. Ambient noise: wind. Clean frame: no text, no subtitles, no on-screen graphics.
 ```
 
 Second family notes: on Seedance, give each reference one job ("reference 1
-is Ines's face and jacket only; reference 2 is the salt flat location only;
+is Petra's face and jacket only; reference 2 is the salt flat location only;
 ignore their poses and light").
 
 ## 9. Failure modes and fixes

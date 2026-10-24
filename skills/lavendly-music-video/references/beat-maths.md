@@ -143,7 +143,7 @@ Model: Seedance 2.0 Fast (5 s or 10 s clips).
 | 3 | 7970 | 9845 | 1875 | Chorus bar 1: the artist wide, singing, back-lit | Take A, piece 1 |
 | 4 | 9845 | 11720 | 1875 | Bar 2: city lights b-roll | Clip 4, 5 s |
 | 5 | 11720 | 13595 | 1875 | Bar 3: the artist profile, eyes closed | Take A, piece 2 |
-| 6 | 13595 | 15470 | 1875 | Bar 4: motif (a red scarf in the wind) | Clip 5, 5 s |
+| 6 | 13595 | 15470 | 1875 | Bar 4: motif (a silver ribbon in the wind) | Clip 5, 5 s |
 | 7 to 10 | 15470 | 19220 | 4 x 937.5 | Bars 5 and 6: burst, four jump cuts on half bars | Clip 6, 5 s, split in four |
 | 11 | 19220 | 22970 | 3750 | Bars 7 and 8: the artist wide, held | Take A, piece 3 |
 | 12 | 22970 | 30470 | 7500 | Post-chorus: crane up from the rooftop, held to the end | Clip 7, 10 s |

@@ -23,7 +23,7 @@ the names exactly.
 
 ```json
 {
-  "name": "Night market, 15 s",
+  "name": "Ferry deck, 15 s",
   "description": "Three scenes, Seedance 2.0 Mini, vertical.",
   "videoModel": "bytedance/seedance-2.0-mini",
   "aspect": "9:16",
@@ -33,7 +33,7 @@ the names exactly.
     { "prompt": "<motion prompt, scene 3>", "duration": 5 }
   ],
   "project_name": "<only when the user named a project>",
-  "idempotency_key": "wf-night-market-2026-10-16"
+  "idempotency_key": "wf-ferry-deck-2026-10-16"
 }
 ```
 

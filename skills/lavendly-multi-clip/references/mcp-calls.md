@@ -1,7 +1,9 @@
 # MCP call shapes: multi-clip
 
-Exact arguments and abbreviated responses for a three-shot film. Argument
-names are the live MCP names. Placeholders are in angle brackets.
+Exact arguments and abbreviated responses for a three-shot film, shown on
+one worked example: Mara crossing a city at dawn, the same film as in
+[prompt-anchors.md](prompt-anchors.md). The user's own film replaces it.
+Argument names are the live MCP names. Placeholders are in angle brackets.
 
 ## Probes
 

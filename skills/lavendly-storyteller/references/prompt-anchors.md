@@ -80,7 +80,7 @@ Present tense. Concrete. One image per sentence. Never "in this video",
 | Weak | Better |
 |---|---|
 | Imagine a barista starting her day in a beautiful coffee bar. | Steam lifts off the portafilter. The first drops fall, dark and slow. |
-| In this video we see a fox exploring a magical forest. | A fox stops at the tree line. Snow holds the last of the light. |
+| In this video we see a cormorant drying off at a magical harbour. | A cormorant spreads its wings on a harbour post. Fog lifts off the water. |
 | Welcome to the most amazing sunrise you have ever seen. | The sun clears the ridge. The valley turns from grey to copper. |
 
 ## Music prompt

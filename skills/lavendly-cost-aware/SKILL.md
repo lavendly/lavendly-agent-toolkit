@@ -16,7 +16,9 @@ Money rules. This skill has `priority: high`: when it disagrees with a domain
 skill about whether to spend, this skill wins. It never picks a shot or a
 voice; it decides whether the call happens and with which model.
 
-## Pre-flight, before the first paid call
+## Before anything else
+
+Pre-flight, before the first paid call.
 
 | Step | Call | Read | Rule |
 |---|---|---|---|
@@ -28,6 +30,9 @@ voice; it decides whether the call happens and with which model.
 Every run states its budget before spending: the user's cap, or in unattended
 mode the operator's cap from the brief. If unattended and no cap is given,
 use 10 percent of the working balance and say so in the report.
+
+- Every name, product, place and story in this skill and its references is an
+  example. The user's brief replaces it; never carry one into their film.
 
 ## Spend rules
 

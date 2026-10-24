@@ -3,7 +3,7 @@
 "POV: you are ..." puts the viewer inside a situation: the camera is their
 eyes, their hands are at the bottom of the frame, other people talk to the
 lens. Worked example: POV, your first morning at a bakery and the oven is
-already smoking. FPV flight is covered in section 9.
+already smoking; the user's own situation replaces it. FPV flight is covered in section 9.
 
 ## 1. Purpose, audience, ending
 

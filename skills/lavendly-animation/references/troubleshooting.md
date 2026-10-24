@@ -28,8 +28,8 @@ Never retry a paid call with a new idempotency key.
 | Stop-motion looks smooth | the motion-feel line is missing or late | put "stop-motion at 12 frames per second, crisp frames with no motion blur" second |
 | Paper or paint texture crawls | texture not locked | "the paper texture stays fixed; only the pieces move"; less motion |
 | The hero's colours or ear marks change | hero block paraphrased, or the head reference not wired | the block verbatim in every still; the head close-up as reference 1 |
-| Two copies of the hero | no count line, a mirror, or water reflection | "exactly one Pip in frame, nobody else, no copy of him"; bound reflections |
-| An animal stands up and runs on two legs | the gait was not named | "on all four paws, a fox's trot, never upright" ([creatures.md](creatures.md)) |
+| Two copies of the hero | no count line, a mirror, or water reflection | "exactly one Nilo in frame, nobody else, no copy of him"; bound reflections |
+| An animal stands up and runs on two legs | the gait was not named | "on all four legs, a goat's trot, never upright" ([creatures.md](creatures.md)) |
 | Extra legs during a turn | a turn in place inside one clip | cut the turn, or "four legs visible throughout, never more than four" |
 | Teeth or a stretched jaw when a creature talks | on-screen speech | move the line to narration; "mouth closed" |
 | Eyes look in two directions | not stated | "both eyes look at the star together" |

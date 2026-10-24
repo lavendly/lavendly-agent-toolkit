@@ -2,7 +2,7 @@
 
 Observe rather than stage: animals, places, processes and people at work,
 with natural sound up front and sparse narration. Worked example: a red
-fox hunting mice under snow.
+fox hunting mice under snow. The user's own subject replaces it.
 
 ## 1. Purpose, audience, ending
 

@@ -39,28 +39,32 @@ picture.
 
 ### Lock sentences
 
+Examples:
+
 ```text
-The fox, the clearing and the lantern light stay exactly as in the opening frame.
+The hippo, the river bank and the dusk light stay exactly as in the opening frame.
 The paper texture and the line work stay fixed; only the characters move.
 The clay keeps its fingerprints and the set does not move.
 ```
 
 ### Count lines
 
+Examples:
+
 ```text
-Exactly one Pip in frame, nobody else, no copy of him.
-Exactly two characters in frame, Pip on the left and Moss on the right, nobody else.
-The one lantern is the only light in the forest.
+Exactly one Nilo in frame, nobody else, no copy of him.
+Exactly two characters in frame, Nilo on the left and the kingfisher on the right, nobody else.
+The one low sun is the only light on the river.
 ```
 
 ### Reference role sentences
 
 One job per wired image, with what to ignore. Order of priority when slots
 are short: the hero's face or head, then the hero's full body or the
-object, then the style plate, then the location.
+object, then the style plate, then the location. Examples:
 
 ```text
-Reference 1 is Pip's head and face only: fur colours, ear shape, eye shape; ignore its background and pose.
+Reference 1 is Nilo's head and face only: skin colours, ear shape, eye shape; ignore its background and pose.
 Reference 2 is the style plate: match its palette, paper grain and line weight only, not its content.
 ```
 
@@ -75,8 +79,10 @@ still-frame prompt. For an animated character:
 <Name>: <species or object>, <body shape and proportion>, <colour of each main area>, <eyes: shape, colour, catchlight>, <one garment or accessory>, <one asymmetric mark>.
 ```
 
+Example:
+
 ```text
-Pip: a small round red fox cub, oversized pointed ears, cream chest and muzzle, black socks on all four paws, large amber eyes with one white catchlight each, a blue knitted scarf, a white tip on the left ear only.
+Nilo: a young round grey-lavender river hippo, short legs, a wide pink muzzle, small round ears, small dark eyes with one white catchlight each, a yellow knotted neckerchief, a pale pink patch over the left eye only.
 ```
 
 Never paraphrase it per shot; a changed word is a different character.
@@ -123,11 +129,11 @@ Never write the model name, the duration or the aspect in the prompt.
 | Family | How to write the motion prompt |
 |---|---|
 | Veo | Shot, subject, action, context, style, in that order. Dialogue in quotes after the speaker and delivery, followed by "(no subtitles)". Sounds on labelled lines: "SFX: a soft boing." and "Ambient noise: crickets." Say "No music." when the score is added in the edit. Up to four timed beats of at least 2 s in one 8 s clip. |
-| Seedance | 30 to 100 words, the subject first, strong precise verbs ("hops", "tiptoes", "flops"). Motion lands in the first two seconds, so say the action is under way from the first frame. Reference roles in plain sentences ("Reference 1 controls only the fox's face and colours; do not copy its background"). No @-tags. |
+| Seedance | 30 to 100 words, the subject first, strong precise verbs ("hops", "tiptoes", "flops"). Motion lands in the first two seconds, so say the action is under way from the first frame. Reference roles in plain sentences ("Reference 1 controls only the hero's face and colours; do not copy its background"). No @-tags. |
 | Kling | Scene, characters, action, camera, audio, style. Plain directional verbs (push in, pan left, tilt up). Treat the opening image as the anchor and say how it evolves. Two characters get stable labels and no pronouns. |
 | Wan | Subject, scene, motion, then aesthetic words, then the style word. Literal category words land well here: "claymation", "felt style", "2D anime", "watercolour", "puppet animation", "3D cartoon", "rim light", "low contrast". For a clip from its own opening image: motion plus camera only. |
 | Hailuo | Prose, with a bracket camera command right after the action it belongs to: "[Static shot]", "[Push in]", "[Pan left]", at most three in one bracket. Hailuo rewrites prompts by default and Lavendly cannot switch that off: keep the prose plain and short. |
-| Runway | Motion only, simple, the subject in general terms ("the fox"). Positive phrasing only; it does not read negatives. Silent: sound comes from the edit. |
+| Runway | Motion only, simple, the subject in general terms ("the hippo"). Positive phrasing only; it does not read negatives. Silent: sound comes from the edit. |
 | Grok | The first sentence reads like a still (subject, setting, light, framing), then the motion. Treat as silent. |
 | FLUX 3, HappyHorse | No published prompt guide: use the Veo order in plain prose. |
 
@@ -136,10 +142,10 @@ Never write the model name, the duration or the aspect in the prompt.
 | Banned | Write instead |
 |---|---|
 | cinematic, filmic | the move and the lens feel: "slow push-in, shallow focus, virtual 50mm" |
-| stunning, breathtaking, gorgeous, beautiful, amazing, epic | the thing itself: "lantern glow on wet fur" |
+| stunning, breathtaking, gorgeous, beautiful, amazing, epic | the thing itself: "low sun on wet grey skin" |
 | masterpiece, award-winning, trending | delete |
 | 8k, 4k, ultra realistic, hyperrealistic, photorealistic, highly detailed | delete; name the material: "matte plasticine, wool fibres" |
-| dynamic, energetic, dramatic, insane, mind-blowing | the motion: "the cub bolts left, ears flat" |
+| dynamic, energetic, dramatic, insane, mind-blowing | the motion: "the hare bolts left, ears flat" |
 | vibrant (as filler), vibe, aesthetic | the colours and the light: "saturated tomato red, soft daylight" |
 | "<studio>-style", "in the style of <artist>", any franchise or character name | the traits (section 5) |
 

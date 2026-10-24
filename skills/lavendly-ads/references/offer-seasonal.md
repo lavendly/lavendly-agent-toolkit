@@ -118,6 +118,8 @@ and a 1:1 version are two workflows; the prompts carry over.
 
 ## 8. Prompt pairs (Seedance 2.0 Fast)
 
+Examples: the user's own product, brand and photos replace the ones shown.
+
 **Pair 1: the box slides into frame**
 
 Still:

@@ -37,6 +37,8 @@ Lavendly.
 - Rights: the user's own song or one they hold a licence for. Name the rule
   once when they name a commercial release; never publish without their
   confirmation that they hold the rights.
+- Every name, product, place and story in this skill and its references is an
+  example. The user's brief replaces it; never carry one into their film.
 
 ## How the track enters Lavendly
 
