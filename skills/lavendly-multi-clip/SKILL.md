@@ -138,6 +138,25 @@ Exact JSON: [references/mcp-calls.md](references/mcp-calls.md).
 - A failing scene is re-rolled once, alone, by `node_id`. Never regenerate
   the whole film for one bad shot.
 
+### Assembling finished shots
+
+When the shots already exist (generated earlier, re-shot or uploaded) and
+you cut them into one film, the canvas must read like the timeline. The user
+edits in the Studio, so a render that plays fine is not enough.
+
+- One named scene per shot, in film order, named for the beat, laid out left
+  to right in play order.
+- Group the scenes with `create_sequence` per act or mood.
+- Pre-cut every shot to its own short file, upload it, then `import_asset`.
+  Never point several nodes at one long clip with different trims: the cards
+  look identical and the preview stalls on cuts that start mid-file.
+- Place clips back to back: each start is the previous start plus its
+  duration, no gaps and no overlaps.
+- One film-wide music track with `"scope": "film"`, checked with
+  `get_workflow_audio`.
+- Open the workflow in the Studio and check the canvas and the timeline agree
+  before saying it is done.
+
 ## Compatibility
 
 `attach_track` synthesizes the voiceover from `text` and the score from `mood`
