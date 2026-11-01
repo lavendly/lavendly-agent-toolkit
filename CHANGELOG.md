@@ -8,6 +8,14 @@ covers every skill and manifest (see `VERSION`).
 
 Added:
 
+- `lavendly-cinematic` gains the global escalation montage recipe: one
+  event and the world reacting to it in five stages (the trigger, media
+  frenzy, public debate, mass reaction, global escalation), one clip per
+  shot and one sequence per stage, cuts on the beat grid of one score with
+  stage changes on phrase lines, every chyron and card drawn in post, one
+  voiceover track for every spoken line with the music ducked, one place per
+  thread with fixed references, invented networks and names only. Eval
+  scenario 57.
 - Eleven skills, from a three-part research round (the published video
   skills, Lavendly's platform read from code, and genre craft with each
   model's own prompting guidance):

@@ -3,8 +3,8 @@ name: lavendly-cinematic
 version: 0.2.0
 priority: normal
 description: |
-  Genre craft for narrative video on the Lavendly MCP: short film and drama, trailers, horror and thriller, sci-fi, action, romance, noir and mystery, comedy sketches, dialogue scenes, period pieces. Chooses the arc and beat count by length, coverage, performance, lens, light, grade, sound and model, and writes prompts in each model's dialect.
-  Use when: "a short film about", "a trailer for my story", "a horror short", "two people arguing", "make it feel like a movie", "a 1920s scene", "a sketch".
+  Genre craft for narrative video on the Lavendly MCP: short film and drama, trailers, horror and thriller, sci-fi, action, romance, noir and mystery, comedy sketches, dialogue scenes, period pieces, escalation montages of invented news coverage. Chooses the arc and beat count by length, coverage, performance, lens, light, grade, sound and model, and writes prompts in each model's dialect.
+  Use when: "a short film about", "a trailer for my story", "a horror short", "two people arguing", "make it feel like a movie", "a 1920s scene", "a sketch", "the whole world reacting to one event".
   Chain: runs the lavendly-director process; lavendly-cost-aware wins spend; lavendly-series for episodes; lavendly-music-video when a song leads.
   NOT for: ads, music videos, explainers, one film over 90 s, real people or franchise characters, lip sync to a recording.
 argument-hint: "[story or logline] [genre] [length 6..90 s] [aspect] [cast and their look] [dialogue language or 'no dialogue']"
@@ -207,6 +207,7 @@ policy):
 
 - [references/narrative-drama.md](references/narrative-drama.md): narrative short film and drama.
 - [references/trailers-teasers.md](references/trailers-teasers.md): trailers, teasers, bumpers.
+- [references/global-escalation-montage.md](references/global-escalation-montage.md): one event and the world reacting, invented news coverage in five stages, one clip per shot on the beat grid, text in post.
 - [references/horror-thriller.md](references/horror-thriller.md): horror, thriller, found footage.
 - [references/sci-fi.md](references/sci-fi.md): science fiction.
 - [references/action.md](references/action.md): chases, fights implied, stunts.
