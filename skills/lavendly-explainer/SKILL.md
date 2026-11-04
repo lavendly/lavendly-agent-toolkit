@@ -3,8 +3,8 @@ name: lavendly-explainer
 version: 0.2.0
 priority: normal
 description: |
-  Make explainers, lessons, how-tos, documentaries, history, science, news explainers and staff training on the Lavendly MCP: script first at 2.5 words per second, a picture that shows each claim, numbers spoken not drawn, illustrative footage labelled.
-  Use when: "explain how vaccines work", "a 60 s history of the printing press", "how to repot a plant", "a nature short about otters", "turn this report into a video", "onboarding video for staff".
+  Make explainers, lessons, how-tos, documentaries, history, science, research paper explainers, news explainers and staff training on the Lavendly MCP: script first at 2.5 words per second, a picture that shows each claim, numbers spoken not drawn, illustrative footage labelled.
+  Use when: "explain how vaccines work", "turn this preprint into a 60 s short", "a 60 s history of the printing press", "how to repot a plant", "a nature short about otters", "turn this report into a video", "onboarding video for staff".
   Chain: lavendly-director runs the process; lavendly-storyteller for one shot; lavendly-social for hook-led Shorts.
   NOT for: AI footage shown as real news or archive, real people's likeness, charts or UI drawn by the model, films over 90 s, media pasted in chat.
 argument-hint: "[topic or script] [sub-genre] [duration 15..90] [aspect 16:9|9:16] [audience] [sources]"
@@ -72,6 +72,7 @@ decisions on top.
 | Observe animals, places, people, processes | [references/recipe-documentary-nature.md](references/recipe-documentary-nature.md) | 16:9, 30 to 90 s | Natural sound, sparse narration |
 | A past event, era or invention | [references/recipe-history.md](references/recipe-history.md) | 16:9, 60 to 90 s | Narration and score |
 | A mechanism, a finding, a set of numbers | [references/recipe-science-data.md](references/recipe-science-data.md) | 16:9 or 9:16, 30 to 60 s | Narration |
+| One research paper: the question, the trick, the number, the limits | [references/recipe-paper-explainer.md](references/recipe-paper-explainer.md) | 9:16 or 1:1, 30 to 60 s | Narration, minimal score |
 | A current story, what happened and why it matters | [references/recipe-news-explainer.md](references/recipe-news-explainer.md) | 9:16 or 1:1, 30 to 60 s | Narration, neutral bed |
 | A procedure, policy or skill for staff | [references/recipe-corporate-training.md](references/recipe-corporate-training.md) | 16:9, 60 to 90 s per objective | Narration, boxed captions |
 
@@ -120,6 +121,9 @@ of the first and the guards of both.
   monitor turned away from the camera", "printed lines too soft to read").
 - Data is spoken and shown in captions from the narration; a physical
   comparison may show direction (more, less, rising) but never a value.
+- One exception: the paper explainer recipe draws labelled technical
+  illustrations (at most three one-word labels per still, checked in the
+  frame); its numbers, names and titles still stay out of the picture.
 - Real screens, real charts, real documents and real footage are imported
   by the user (`list_assets` or `import_asset`) and placed as ready clips. Leave negative
   space for titles the user adds in the app; say where.
@@ -240,4 +244,5 @@ no burned captions; say so and offer the synthesized voice instead.
 - [references/recipe-history.md](references/recipe-history.md)
 - [references/recipe-science-data.md](references/recipe-science-data.md)
 - [references/recipe-news-explainer.md](references/recipe-news-explainer.md)
+- [references/recipe-paper-explainer.md](references/recipe-paper-explainer.md)
 - [references/recipe-corporate-training.md](references/recipe-corporate-training.md)

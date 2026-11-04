@@ -8,6 +8,14 @@ covers every skill and manifest (see `VERSION`).
 
 Added:
 
+- `lavendly-explainer` gains the paper explainer recipe: one research
+  paper in under a minute as technical illustration (ink line art with
+  hatched shading on cream paper, one accent colour, at most three one-word
+  labels per still checked in the frame), nine beats from the question to
+  the limits and the publication status, every claim tagged with its origin
+  (simulation, real trials, the authors), numbers and names in the
+  narration, the captions and two cards drawn in post, one clip per shot
+  with a locked-off camera and one moving element. Eval scenario 58.
 - `lavendly-cinematic` gains the global escalation montage recipe: one
   event and the world reacting to it in five stages (the trigger, media
   frenzy, public debate, mass reaction, global escalation), one clip per
