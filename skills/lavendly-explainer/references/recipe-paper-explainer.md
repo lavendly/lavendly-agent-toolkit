@@ -229,6 +229,9 @@ STARTING STATE: a side-view ink drawing of a robot arm holding a peg above a tig
 | The whole page pans or zooms | "Camera: locked-off, no movement" and nothing about "reveal" or "push" |
 | The script runs over the picture | Cut words, never speed the voice; the server freezes the last frame when the voice is longer |
 | A simulation result reads as a real one | Add the origin to the sentence and the sim tag to the drawing |
+| A photoreal hand with a marker enters while a line or ring "draws itself" | Say the element "fades in" or "appears" instead of "draws"; add "no hand, no pen, no marker, no person"; when it still appears, keep the clean stretch of the take and hold its last frame (the renderer holds a clip on its last frame to fill its box) |
+| The page curls, shows a notebook edge or a desk, or turns into a photograph | The opening frame says the paper "fills the entire frame edge to edge, no page edges, no notebook, no desk"; a still that already shows an edge is redrawn, never re-rolled |
+| The captions skip a word the voice says | Read the voice track's words with `get_workflow_audio` before the first render; a dropped word is put back with its timing through `update_workflow` on the voice node, then render again (free) |
 
 ## 12. Policy guards
 
@@ -246,3 +249,35 @@ STARTING STATE: a side-view ink drawing of a robot arm holding a peg above a tig
   never drawn as logos or likenesses.
 - A paper on health, finance or safety stays general information; "talk
   to a professional" when the audience could act on it.
+
+## 13. A finished film: the drone race
+
+The showcase film for this recipe, made in Lavendly with Veo 3.1 Fast:
+https://lavendly.ai/showcase/paper-explainer.mp4 (32 s, 9:16). The paper
+is the vision-only racing drone that beat three champion pilots
+(Kaufmann and others, Nature, 2023); every fact below is from the paper.
+Eight shots of 4 s, 74 words, captions `reels`, clips `off`, score at 0.2
+with ducking, two cards left blank for post (beats 3 and 9).
+
+| # | Beat | Picture | Moving element |
+|---|---|---|---|
+| 1 | Question | The quadrotor before a square gate, labels camera and gate | An orange ring around the camera lens |
+| 2 | Who | A blank sheet on a desk (title card in post) | Nothing; the sheet holds |
+| 3 | Trick | The quadrotor among dotted gates on a grid, boxed sim tag | An orange circle draws the lap |
+| 4 | Transfer | The quadrotor drawn solid before a real gate, boxed real tag | An orange flown path beside the dotted plan |
+| 5 | Number | Twenty-five small square outlines, five by five | Fifteen fill orange, in order, then stop |
+| 6 | Comparison | Two hatched bars, labels drone and pilot, no values | An orange ring around the shorter bar's end |
+| 7 | Limits | The quadrotor on the ground below the gate, a second gate ghosted | The drone settles; nothing else moves |
+| 8 | Status and ask | A sketched paper sheet, cream space below (summary card in post) | An orange stamp ring lands |
+
+Script: "Can a drone beat champion pilots using only its own camera? A
+Zurich robotics lab built one. The trick: it learned to race entirely in
+simulation. Then about fifty seconds of real flight corrected the
+simulator. Against three champions, it won fifteen of twenty-five races.
+Its fastest lap beat the best human by half a second. But one crash ends
+its race, and it knows one track. Published in Nature. Link in the
+caption."
+
+What it cost to get clean: three of the eight takes grew a photoreal hand
+with a marker, one blank sheet curled and gained hands, and the transcript
+dropped four words; the fixes are the last three rows of section 11.

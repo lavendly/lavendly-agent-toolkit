@@ -8,6 +8,11 @@ covers every skill and manifest (see `VERSION`).
 
 Added:
 
+- `lavendly-explainer` paper explainer recipe gains its finished showcase
+  film, the drone that beat champion pilots (Nature, 2023): the eight shots
+  as made, the script, and three failure modes found making it (a hand
+  with a marker when a line "draws itself", a page that curls or shows a
+  desk, captions that skip a spoken word) with their fixes.
 - `lavendly-explainer` gains the paper explainer recipe: one research
   paper in under a minute as technical illustration (ink line art with
   hatched shading on cream paper, one accent colour, at most three one-word
