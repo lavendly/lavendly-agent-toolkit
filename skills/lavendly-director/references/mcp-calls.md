@@ -182,9 +182,41 @@ locks the look; the words lock the identity when the model leans on text.
 Only for a film with more than about six scenes or distinct chapters: one
 sequence per heading of the sequence plan, with the scene (group) ids from
 `get_workflow` in order. Organisation only; nothing about the cut changes.
-Returns `{ id, name, scene_ids }`. `list_sequences` reads them back,
-`update_sequence` takes `sequence_id` with a new `name` or the full new
-`scene_ids`, and `delete_sequence` removes the rectangle and keeps the scenes.
+Returns `{ id, name, scene_ids }`. `update_sequence` takes `sequence_id` with
+a new `name` or the full new `scene_ids`, and `delete_sequence` removes the
+rectangle and keeps the scenes. Past about 12 scenes this is not optional:
+every scene belongs to exactly one sequence, two or more scenes each, named
+for the story beat.
+
+## `list_sequences`: the film outline
+
+```json
+{ "workflow_id": "<workflow_id>" }
+```
+
+Returns the film outline, not bare ids, all in film order:
+
+```json
+{
+  "scene_count": 14,
+  "seconds": 84,
+  "sequences": [
+    { "id": "<id>", "name": "Cold open", "scene_ids": ["g_<a>", "g_<b>"],
+      "scenes": [ { "id": "g_<a>", "index": 1, "name": "<name>", "clips": 1, "seconds": 6, "status": "complete" } ],
+      "seconds": 12, "status": "in-progress" }
+  ],
+  "unsequenced": [ { "id": "g_<c>", "index": 13, "name": "<name>", "clips": 1, "seconds": 6, "status": "empty" } ]
+}
+```
+
+A scene is `{ id, index, name, clips, seconds, status }`. `status` is one of
+`empty`, `planned`, `generating`, `in-progress`, `failed`, `complete`.
+`unsequenced` lists scenes that sit in no sequence; on a long film it is empty
+once the sequences are done.
+
+On a film past about 12 scenes, call `list_sequences` first to see where the
+film stands (what is complete, what is failed, which scenes sit in no
+sequence) before `get_workflow` or opening scenes.
 
 ## `set_clip_native_audio`: per clip
 
