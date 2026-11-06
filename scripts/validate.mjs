@@ -82,8 +82,8 @@ const FIELDS = new Set([
   'lut_id',
   // get_scene_frame response key (server/index.mjs frame_url)
   'frame_url',
-  // create_sequence and update_sequence arguments
-  'scene_ids', 'sequence_id',
+  // create_sequence and update_sequence arguments, refusal codes and their fields (server/sequences.mjs)
+  'scene_ids', 'sequence_id', 'not_contiguous', 'scene_in_sequence', 'sequence_too_small', 'scene_id', 'sequence_name',
   // get_status models.tts_voices (server/index.mjs _status handler)
   'tts_voices',
   // sequence lint rule ids in whole-film quality_check (shared/sequenceLint.mjs)

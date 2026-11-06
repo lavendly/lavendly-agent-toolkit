@@ -46,15 +46,15 @@ This skill gives the agent that judgment and the exact calls for Lavendly.
 | 5 | show | The intent card, the shot list and the hero description to the user; wait for "go" |
 | 6 | `list_assets`, `import_asset` | The hero image and any style plate the user supplied: already in Lavendly, `list_assets` (show the name when more than one fits); a public URL, `import_asset`; use the returned url as is |
 | 7 | `create_workflow` | `shots: [{prompt, duration}]` in order, `aspect`, `videoModel`, `project_name` when named, `idempotency_key` |
-| 8 | `get_workflow`, `set_scene_plan` | Collect, per scene in order: the group, the image node (`img_` prefix) and the clip node (`vid_` prefix); then store the plan, per clip node: `heading` (the plan's heading word for word), `present` (exactly who is seen), `hands_off`. A later session starts with `get_scene_plan` |
+| 8 | `set_scene_plan` | Collect, per scene in order, from the `create_workflow` reply (or `list_sequences` later): the group, the image node (`img_` prefix) and the clip node (`vid_` prefix); `get_workflow` only for a scene you will edit. Then store the plan, per clip node: `heading` (the plan's heading word for word), `present` (exactly who is seen), `hands_off`. A later session starts with `get_scene_plan` |
 | 9 | `update_workflow` | Set each image node's `prompt` to the still-frame prompt; add one reference node for the hero and wire it into every clip and every image node (see [references/mcp-calls.md](references/mcp-calls.md)) |
 | 10 | `set_clip_native_audio` | Per clip: `native` for scenes with on-screen sound or dialogue, `mix` under narration, `off` for a music edit |
 | 11 | `attach_track`, `get_workflow_audio` | Narration (one voice, captions via `subtitleStyle`) and one score (`ducking: true`), both with `"scope": "film"`, confirmed with `get_workflow_audio` to reach every clip (only if not, `update_workflow` edges to the missing clips); `fade_out_ms` on the music node |
 | 12 | `estimate_cost` | Announce in one line: shots, model by its display name, clip credits, opening image credits (a number), voice and music synthesis charged separately when attached, total, balance after; get approval |
 | 13 | `generate_scene` | Scene by scene in order (`node_id`), so each scene can be checked before the next is paid for; `max_credits` is that scene's line of `per_scene` plus its opening image |
 | 14 | `get_generation_status`, `get_scene_frame` | Silent polling; a frame per scene as it lands; update the ledger from its last frame |
-| 15 | `quality_check`, `get_scene_frame` | Each scene (level A), then its cut (level B): `quality_check` with `previous_node_id`, `same_scene` (same heading) and `present`; report each finding with its why and fix, and open both boundary frames before paying for a re-roll on a high one |
-| 16 | `edit_clip`, `split_clip`, `move_clip` | The cut: trims, fades for a dip to black, order (clips play back to back), an overlap plus matching fades for a dissolve |
+| 15 | `quality_check`, `get_scene_frame` | On a long film read `list_sequences` first. Each scene (level A), then its cut (level B): `quality_check` with `previous_node_id`, `same_scene` (same heading) and `present`; report each finding with its why and fix, and open both boundary frames before paying for a re-roll on a high one |
+| 16 | `edit_clip`, `split_clip`, `move_clip` | On a long film read `list_sequences` first. The cut: trims, fades for a dip to black, order (clips play back to back), an overlap plus matching fades for a dissolve |
 | 17 | `create_render` | Free; `get_render` until done |
 | 18 | `quality_check`, `get_workflow_audio` | The whole video (level C) against the intent card, with its measured `loudness`; repair, render again, re-check; then deliver: link, length, what the viewer will see, any finding the user accepted; "captions requested" (ask the user to check), never "captions are on" |
 
@@ -108,9 +108,9 @@ This skill gives the agent that judgment and the exact calls for Lavendly.
   orbits drift the hero).
 - Over 30 s: show the plan for the asked length and, in the same message,
   the cost and a 30 s version, and build the one the user picks.
-- Over about six scenes, or at distinct chapters, group scenes with `create_sequence` (ids from `get_workflow`).
-  Past about 12 scenes it is required: one sequence per story beat, named for it ("Cold open", "The chase"), two or more
-  scenes each, every scene in exactly one: the Studio shows one card per sequence and lists scenes under its headers.
+- Over about six scenes, or at distinct chapters, group scenes with `create_sequence` (ids from the `create_workflow` reply or `list_sequences`).
+  Past about 12 scenes it is required: one sequence per story beat, named for it ("Cold open", "The chase"), two or more scenes that sit
+  next to each other in film order, every scene in exactly one (a single closing card may stay outside); the Studio shows one card per sequence.
 - One primary action per clip. A clip that needs two actions is two clips.
 - Change shot size between neighbours (detail, then wide, then medium); two
   equal sizes in a row read as a slideshow. Pick framing and angle from
