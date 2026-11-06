@@ -181,12 +181,19 @@ locks the look; the words lock the identity when the model leans on text.
 
 Only for a film with more than about six scenes or distinct chapters: one
 sequence per heading of the sequence plan, with the scene (group) ids from
-`get_workflow` in order. Organisation only; nothing about the cut changes.
-Returns `{ id, name, scene_ids }`. `update_sequence` takes `sequence_id` with
-a new `name` or the full new `scene_ids`, and `delete_sequence` removes the
-rectangle and keeps the scenes. Past about 12 scenes this is not optional:
-every scene belongs to exactly one sequence, two or more scenes each, named
-for the story beat.
+the `create_workflow` reply or `list_sequences`. The scenes must sit next to
+each other in film order and belong to no other sequence; the server answers
+400 `not_contiguous` (with the skipped indices in `gap`) or
+`scene_in_sequence` (with `scene_id`, `sequence_id`, `sequence_name`)
+otherwise. Pass `move: true` to take scenes out of their current sequence,
+which must keep two (else 400 `sequence_too_small`). Organisation only;
+nothing about the cut changes. Returns `{ id, name, scene_ids }`.
+`update_sequence` takes `sequence_id` with a new `name` (up to 48
+characters) or the full new `scene_ids` under the same rules, and
+`delete_sequence` removes the rectangle and keeps the scenes. Past about 12
+scenes this is not optional: every scene belongs to exactly one sequence,
+two or more neighbouring scenes each, named for the story beat; a single
+closing card may stay outside.
 
 ## `list_sequences`: the film outline
 
@@ -210,7 +217,10 @@ Returns the film outline, not bare ids, all in film order:
 ```
 
 A scene is `{ id, index, name, clips, seconds, status }`. `status` is one of
-`empty`, `planned`, `generating`, `in-progress`, `failed`, `complete`.
+`empty`, `planned`, `generating`, `in-progress`, `failed`, `complete`. Find a
+scene by its `name` in the outline and address it by its stable `id`;
+`index` shifts when a scene is inserted. The order of `scene_ids` is
+cosmetic (the server stores it in film order); film order is position.
 `unsequenced` lists scenes that sit in no sequence; on a long film it is empty
 once the sequences are done.
 
