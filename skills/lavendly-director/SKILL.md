@@ -101,16 +101,16 @@ This skill gives the agent that judgment and the exact calls for Lavendly.
 - Coverage serves comprehension: an establishing shot when the place
   matters, an insert when a detail carries the step or the feature, a
   reaction when the feeling carries the beat. Never a shot added for length.
-- Introduce before use: the product before its feature, the tool before the
-  step, the person before their reaction.
+- Introduce before use: the product before its feature, the tool before the step, the person before their reaction.
 - A camera move asked for in every shot (an orbit, a drone pass, a whip
   pan) goes on the one shot it serves, usually the hero or payoff shot. Say
   in half a sentence why the others differ (identical moves read as a loop,
   orbits drift the hero).
 - Over 30 s: show the plan for the asked length and, in the same message,
   the cost and a 30 s version, and build the one the user picks.
-- Over about six scenes, or distinct chapters: group each plan heading's scenes into a sequence on the canvas with
-  `create_sequence` (scene ids from `get_workflow`, the heading as its name); it is a named rectangle, organisation only.
+- Over about six scenes, or at distinct chapters, group scenes with `create_sequence` (ids from `get_workflow`).
+  Past about 12 scenes it is required: one sequence per story beat, named for it ("Cold open", "The chase"), two or more
+  scenes each, every scene in exactly one: the Studio shows one card per sequence and lists scenes under its headers.
 - One primary action per clip. A clip that needs two actions is two clips.
 - Change shot size between neighbours (detail, then wide, then medium); two
   equal sizes in a row read as a slideshow. Pick framing and angle from
