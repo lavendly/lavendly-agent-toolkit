@@ -135,7 +135,10 @@ day).
 ## 7. Micro-drama series (vertical, 60 to 90 s)
 
 Episodes of a serial drama for vertical feeds: every episode ends on a
-cliffhanger, every episode opens on its answer.
+cliffhanger, every episode opens on its answer. The full episode recipe
+(the twelve-slot skeleton, stacked staging, sound, models and prompt pairs)
+is the micro drama recipe in lavendly-cinematic; this section holds what
+carries between episodes.
 
 - Cold open on the last cliffhanger, answered in 5 s.
 - Two or three dialogue scenes, each with one turn (see lavendly-cinematic

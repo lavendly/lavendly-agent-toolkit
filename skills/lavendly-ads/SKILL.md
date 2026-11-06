@@ -4,7 +4,7 @@ version: 0.2.0
 priority: normal
 description: |
   Make product and brand ads on the Lavendly MCP: the category recipe, one promise in the hook and the call to action, the real packshot as the product's first frame, model and length per placement, sound in budget, honest claims, no rendered text.
-  Use when: "an ad for my serum", "a 15 s TikTok ad", "UGC-style ad", "before and after", "a launch teaser", "a promo for my app", "a Black Friday video".
+  Use when: "an ad for my serum", "a 15 s TikTok ad", "UGC-style ad", "before and after", "a launch teaser", "a promo for my app", "a Black Friday video", "remake this ad with my product", "the same ad in Spanish".
   Chain: lavendly-director runs the process; lavendly-models and lavendly-characters for dialects; lavendly-cost-aware wins spend; lavendly-review checks; lavendly-publish posts.
   NOT for: places, travel or events (lavendly-places), creator talking heads (lavendly-social), stories (lavendly-cinematic), fake reviews or AI results as proof.
 argument-hint: "[product and promise] [packshot url] [placement: tiktok, reels, shorts, feed, youtube] [length 6..60] [offer]"
@@ -77,6 +77,7 @@ checks); this skill makes the ad decisions on top of it.
 | "coming soon", "launch", "teaser", a reveal date | [references/launch-teaser.md](references/launch-teaser.md) |
 | an app, a SaaS tool, software | [references/app-saas.md](references/app-saas.md) |
 | a sale, a code, a holiday, a seasonal drop | [references/offer-seasonal.md](references/offer-seasonal.md) |
+| "remake this ad", "like that ad but my product", the same ad in another language or ratio | [references/ad-remake.md](references/ad-remake.md) |
 
 Two recipes can stack: a UGC-style ad for a serum takes the format from
 UGC and the light and product rules from beauty.
@@ -207,7 +208,8 @@ voice or music in the Lavendly app (Asset Library), then find it with
 - `sufficient` is false, or the user declines the estimate.
 - The user asks for AI people as real customers, AI results as proof, a
   competitor's ad cloned, a celebrity or another brand's logo: say why in
-  one line and offer the honest version.
+  one line and offer the honest version (for a clone, the remake of its
+  structure in [references/ad-remake.md](references/ad-remake.md)).
 - No packshot and the user needs the exact product: wait for the photo.
 - The same failure twice on one scene (label melts, product changes shape):
   change the direction (packshot frame, smaller move) before more spend.
@@ -233,4 +235,4 @@ voice or music in the Lavendly app (Asset Library), then find it with
 - [references/mcp-calls.md](references/mcp-calls.md): packshot import, first frame and reference wiring, audio, trims, end hold, variant renders.
 - [references/prompt-anchors.md](references/prompt-anchors.md): product block, still and motion templates per model family, banned words, materials, macro and product light vocabulary.
 - [references/troubleshooting.md](references/troubleshooting.md): ad failures and errors with fixes.
-- Recipes: [references/beauty-skincare.md](references/beauty-skincare.md), [references/tech-gadgets.md](references/tech-gadgets.md), [references/food-drink.md](references/food-drink.md), [references/fashion-apparel.md](references/fashion-apparel.md), [references/automotive.md](references/automotive.md), [references/jewellery-watches.md](references/jewellery-watches.md), [references/home-furniture.md](references/home-furniture.md), [references/health-fitness.md](references/health-fitness.md), [references/ugc-style.md](references/ugc-style.md), [references/before-after.md](references/before-after.md), [references/launch-teaser.md](references/launch-teaser.md), [references/app-saas.md](references/app-saas.md), [references/offer-seasonal.md](references/offer-seasonal.md).
+- Recipes: [references/beauty-skincare.md](references/beauty-skincare.md), [references/tech-gadgets.md](references/tech-gadgets.md), [references/food-drink.md](references/food-drink.md), [references/fashion-apparel.md](references/fashion-apparel.md), [references/automotive.md](references/automotive.md), [references/jewellery-watches.md](references/jewellery-watches.md), [references/home-furniture.md](references/home-furniture.md), [references/health-fitness.md](references/health-fitness.md), [references/ugc-style.md](references/ugc-style.md), [references/before-after.md](references/before-after.md), [references/launch-teaser.md](references/launch-teaser.md), [references/app-saas.md](references/app-saas.md), [references/offer-seasonal.md](references/offer-seasonal.md), [references/ad-remake.md](references/ad-remake.md).

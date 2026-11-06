@@ -8,6 +8,18 @@ covers every skill and manifest (see `VERSION`).
 
 Added:
 
+- `lavendly-ads` gains the ad remake recipe: an ad that already works
+  rebuilt around the user's product, from a shot log of the original (its
+  beats at their seconds, sizes, moves, the proof beat, the ending's hold)
+  to a swap plan that changes one field per variant (product, cast,
+  language, ratio, style); someone else's ad gives only its structure,
+  never its product, logo, music, script or people. Eval scenario 59.
+- `lavendly-cinematic` gains the micro drama recipe: vertical serial
+  episodes of 60 to 90 s with a cold open that answers the last
+  cliffhanger, one turn, and a cliffhanger held on a face; a twelve-slot
+  skeleton, stacked staging for two people in 9:16, the listener's shot
+  after every line, dialogue limits, models with credits, prompt pairs.
+  The series skill's micro-drama section now points to it. Eval scenario 60.
 - `lavendly-explainer` paper explainer recipe gains its finished showcase
   film, the drone that beat champion pilots (Nature, 2023): the eight shots
   as made, the script, and three failure modes found making it (a hand
