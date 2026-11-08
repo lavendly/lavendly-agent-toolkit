@@ -8,6 +8,13 @@ covers every skill and manifest (see `VERSION`).
 
 Added:
 
+- `lavendly-ads` gains the animal skit recipe: a funny pet video where
+  animals act like people without words, a bad habit is caught with a
+  whistle and a pointed paw, and the real product, in the same room in
+  every scene, is the fix. Cast and set bible, one hero from a reference
+  crop, no product during the bad habit, clean product use, gestures that
+  aim at their target, muffled to full score with one animal sound, frames
+  reviewed before any clip is paid for. Eval scenario 63.
 - `lavendly-motion-design` product launch recipe gains section 14, notes
   from a finished launch film: script rules (the viewer's pain first, setup
   in the buyer's words, never an unsure product, every product line named,

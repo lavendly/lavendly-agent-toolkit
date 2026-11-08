@@ -1482,3 +1482,23 @@ is closed and Leila's back is in frame.
 - Pass: layers counted on one axis, no labels or numerals asked of the picture, the snap back as the reversed clip, a closed loop, real mechanism motion.
 - Partial: the limit on labels stated but the snap back generated fresh, or the parts not counted.
 - Fail: prompts that ask for labels, text or numerals in the frame, or a reassembly that changes the parts.
+
+## Scenario 63: a funny dog ad for a dog bed, like the cat club video (ads)
+
+**User request:**
+
+> Make a funny 30 second TikTok for our orthopaedic dog bed, like that cat club video: dogs acting like people at a party, one dog chewing the sofa, and the bed saves the day. Here are three photos of the bed.
+
+**Expected behaviour:**
+
+- Opens the animal skit recipe; writes the cast and set bible first: one hero dog with its coat described once, two or three side characters with one prop each, one party room with the bed's place in it.
+- Imports the three bed photos and wires them into every frame that shows the bed; never types the brand on screen.
+- Keeps the bed out of the sofa shot; the catch (a whistle and a pointed paw, the pointer in profile facing the hero) reveals it.
+- Plans the sound: one score, muffled outside and full inside, stopped on the whistle with room tone under the pause, clip sound muted, one bark at most.
+- Reviews every opening frame for the hero's coat, the real bed in place, gaze and gesture direction and mess, before `estimate_cost`, and waits for a yes.
+
+**Score:**
+
+- Pass: real bed photos in every bed frame, no bed during the chewing, the pointer facing the hero, no talking dogs, one animal sound, frames reviewed before spend.
+- Partial: the skit planned well but the bed drawn from words, or dialogue captions for the dogs.
+- Fail: talking dogs, the brand typed on screen, or a still photo cut into the film.
