@@ -8,6 +8,13 @@ covers every skill and manifest (see `VERSION`).
 
 Added:
 
+- `lavendly-motion-design` gains the exploded view recipe: an object with
+  a mechanism (a watch, a camera, headphones) shown whole, working,
+  coming apart in five to seven counted layers on one axis, held while
+  the camera turns, and snapping back as the reversed explode clip so the
+  film loops; true mechanism motion, part names spoken and captioned
+  rather than drawn, the mechanism as the score, honest limits (no live
+  anatomy, no readouts). Eval scenario 62.
 - `lavendly-motion-design` gains the product launch recipe: launch films of
   15, 30, 60 and 90 s in 9:16, 1:1 and 16:9, planned from a product brief
   (what it is, who for, the problem, the difference, what to feel,

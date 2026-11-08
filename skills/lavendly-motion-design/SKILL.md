@@ -63,7 +63,8 @@ about what Lavendly's models and edits can do and what they cannot.
 
 | The brief says | Recipe |
 |---|---|
-| product hero, launch, turntable, exploded view | [references/recipe-product-render.md](references/recipe-product-render.md) |
+| product hero, launch, turntable, a 3 to 5 part assembly | [references/recipe-product-render.md](references/recipe-product-render.md) |
+| exploded view of a mechanism: it works, comes apart in layers, snaps back and loops (a watch, a camera, headphones) | [references/recipe-exploded-view.md](references/recipe-exploded-view.md) |
 | launch film for an app, an AI product, a device or a service; 15 to 90 s | [references/recipe-product-launch.md](references/recipe-product-launch.md) |
 | art film, mood, dreamlike, impossible images | [references/recipe-abstract-surreal.md](references/recipe-abstract-surreal.md) |
 | loop, background, website hero, gallery screen | [references/recipe-loops.md](references/recipe-loops.md) |
@@ -220,6 +221,7 @@ chained orbits are replaced by angle cuts.
 - [references/troubleshooting.md](references/troubleshooting.md): error strings and motion-design failures.
 - [references/recipe-product-render.md](references/recipe-product-render.md): CGI product hero shots, orbits, exploded views.
 - [references/recipe-product-launch.md](references/recipe-product-launch.md): product launch films from a brief: narrative, direction, bars, honest motion graphics, deliverables.
+- [references/recipe-exploded-view.md](references/recipe-exploded-view.md): exploded views of a mechanism: layers counted on one axis, true mechanism motion, names spoken not drawn, the snap back as a reversed clip so it loops.
 - [references/recipe-abstract-surreal.md](references/recipe-abstract-surreal.md): abstract and surreal art films.
 - [references/recipe-loops.md](references/recipe-loops.md): seamless loops by method.
 - [references/recipe-satisfying-asmr.md](references/recipe-satisfying-asmr.md): satisfying and ASMR clips.

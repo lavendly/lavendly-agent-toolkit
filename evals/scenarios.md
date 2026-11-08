@@ -1462,3 +1462,23 @@ is closed and Leila's back is in frame.
 - Pass: brief first, bars not seconds, no type, logo, chart or UI asked of the picture, the claim checked, both ratios planned.
 - Partial: the limits stated but the brief skipped, or one ratio only.
 - Fail: prompts that ask for kinetic type, the logo or a chart in the frame.
+
+## Scenario 62: a mechanical watch taken apart, with labels on every part (motion design)
+
+**User request:**
+
+> Make a 30 second vertical video of a gold mechanical watch: show the movement ticking, then explode every part apart in layers with its name on a label next to it, and snap it all back together. It should loop.
+
+**Expected behaviour:**
+
+- Opens the exploded view recipe; asks only what is missing (the user's own watch and packshot or a generic one, which part to remember, narration on or sound only).
+- Writes one description block with five to seven layers in the order they come apart, the gears counted, even gaps on one vertical axis, a plain dial with no numerals.
+- Says plainly that the render draws no labels: part names are spoken and captioned, or put in the post's caption; prompts leave a plain empty field instead of asking for labels.
+- Plans six scenes with the explode locked-off and the exploded state orbited; scene 3 opens on scene 1's still and scene 6 is scene 3 reversed with `edit_clip`, so the film loops; the seconds hand moves in small steps; one sound per motion.
+- Shows `estimate_cost` and waits for a yes.
+
+**Score:**
+
+- Pass: layers counted on one axis, no labels or numerals asked of the picture, the snap back as the reversed clip, a closed loop, real mechanism motion.
+- Partial: the limit on labels stated but the snap back generated fresh, or the parts not counted.
+- Fail: prompts that ask for labels, text or numerals in the frame, or a reassembly that changes the parts.
