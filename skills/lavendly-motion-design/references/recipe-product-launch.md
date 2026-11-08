@@ -218,7 +218,8 @@ field with nothing in it").
   name and the action are the last two lines.
 - Captions on (`subtitleStyle`, one style per film) so the film reads
   muted; they burn only from a synthesized voiceover.
-- Mix: score 0.3 to 0.35 with `ducking` under the voice; narrated clips
+- Mix: score 0.3 to 0.35 with `ducking` under the voice (about 10 dB
+  under speech); narrated clips
   `mix` at 0.4; effect-led clips `native`. Exports are normalized to
   -14 LUFS.
 
@@ -310,6 +311,8 @@ Run it on the render, not only on single clips.
   clear over the score.
 - Platform fit: the right ratio, length and safe area for where it runs;
   the end card held at least 2 s.
+- Motion: numbers count up in motion, every scene keeps moving, named
+  tools show their real logos, no card passes through another.
 
 ## 13. Failure modes and fixes
 
@@ -323,7 +326,56 @@ Run it on the render, not only on single clips.
 | The reveal has no weight | half a bar of silence and one locked shot before it |
 | Too many features | three in 30 s, five in 90 s; the rest go to a second film |
 
-## 14. Policy guards
+## 14. Notes from a finished launch film
+
+A 60 s launch film for a support product went through five rounds of
+founder notes. What each round fixed, kept as rules:
+
+Script
+- Open on the viewer's own pain, and name what their customers do instead
+  today (the assistants they already ask).
+- Say how setup feels to the buyer ("upload your business files"), never
+  how it is built ("add one line of script").
+- Never show the product unsure or failing. A handoff to a person is "a
+  real person, when it matters".
+- Name every product line in the brief (answers, and forms for leads,
+  surveys and hiring), and end on the relationship the product gives plus
+  the call to action.
+- Numbers exactly as the user's site states them ("less than two
+  seconds", not "about two").
+
+Picture
+- The real interface must be sharp: capture it at three times screen
+  density, one element at a time; never enlarge a screenshot or reuse a
+  compressed one when the live page exists. Rebuild what sits behind a
+  login with the same copy and colours.
+- Put the product where it really ships (a chat widget at the bottom
+  centre when that is how it sits on a customer site).
+- Named tools appear with their real logos on transparent backgrounds.
+- Numbers count up in motion, large and turning in space; never a number
+  printed on a flat card.
+- Every scene keeps moving for its whole length (a slow push-in, a drift);
+  no frame sits still.
+- No moving card passes through another plane: the card that leaves falls
+  back behind, the one that stays holds in front.
+
+Sound
+- A bright, warm voice; a long read can play 7 to 10 percent faster.
+- A joyful score with the tempo named in the brief. Scores come back near
+  30 s: extend them by whole 8-bar phrases and keep the kick on the cut
+  grid.
+- One designed sound per visual event: a pop as each item lands, ticks
+  under a counting number, a whoosh into each scene, a low hit on the key
+  word, a chime when an answer appears, a click on a button.
+- The score about 10 dB under the voice; the first mix, at 7 dB under,
+  was judged too loud.
+
+Workflow
+- One timing table (the voice's word times, scene starts on the beat
+  nearest each sentence, key-word moments) drives the cuts, the captions
+  and the sounds, so a new voice changes numbers in one place.
+
+## 15. Policy guards
 
 - Every claim, number and comparison is the user's and true; the film
   never shows the product doing what it cannot do.
