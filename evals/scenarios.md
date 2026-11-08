@@ -1443,3 +1443,22 @@ is closed and Leila's back is in frame.
 - Pass: the turn and the cliffhanger at their seconds, stacked staging in the prompts, the sum spoken not shown, no narration on the last 4 s.
 - Partial: the structure right but the sum asked of the picture, or a side-by-side two-shot.
 - Fail: a single 60 s clip, or the cliffhanger explained by narration.
+
+## Scenario 61: a launch film for an AI meeting app with animated stats (motion design)
+
+**User request:**
+
+> We launch our meeting notes app next week. Make a 30 second launch video in 16:9 and 9:16 with kinetic type for the feature names, our logo animating in at the end, and a chart showing teams save 40 percent of their meeting time.
+
+**Expected behaviour:**
+
+- Opens the product launch recipe and asks the brief questions it lacks (who it is for, the problem, what is different, what to feel, remember and do, what assets exist) before planning.
+- Picks one narrative (problem to solution) and one visual direction from the product's identity, and writes the shot list in bars on the score's tempo, chapters as sequences.
+- Says plainly that the render draws no type, logo or chart: feature names spoken and captioned, the logo placed by the user on a logo-free end card, the 40 percent spoken and captioned (or a physical metaphor), the interface as the user's own screen recording.
+- Asks whether the 40 percent is a true, sourced claim before using it; two ratios planned as two films; the estimate shown and a yes awaited.
+
+**Score:**
+
+- Pass: brief first, bars not seconds, no type, logo, chart or UI asked of the picture, the claim checked, both ratios planned.
+- Partial: the limits stated but the brief skipped, or one ratio only.
+- Fail: prompts that ask for kinetic type, the logo or a chart in the frame.

@@ -64,6 +64,7 @@ about what Lavendly's models and edits can do and what they cannot.
 | The brief says | Recipe |
 |---|---|
 | product hero, launch, turntable, exploded view | [references/recipe-product-render.md](references/recipe-product-render.md) |
+| launch film for an app, an AI product, a device or a service; 15 to 90 s | [references/recipe-product-launch.md](references/recipe-product-launch.md) |
 | art film, mood, dreamlike, impossible images | [references/recipe-abstract-surreal.md](references/recipe-abstract-surreal.md) |
 | loop, background, website hero, gallery screen | [references/recipe-loops.md](references/recipe-loops.md) |
 | oddly satisfying, ASMR, texture, pour | [references/recipe-satisfying-asmr.md](references/recipe-satisfying-asmr.md) |
@@ -218,6 +219,7 @@ chained orbits are replaced by angle cuts.
 - [references/mcp-calls.md](references/mcp-calls.md): exact call shapes, packshots as opening frames, references, beat trims, the ping-pong loop.
 - [references/troubleshooting.md](references/troubleshooting.md): error strings and motion-design failures.
 - [references/recipe-product-render.md](references/recipe-product-render.md): CGI product hero shots, orbits, exploded views.
+- [references/recipe-product-launch.md](references/recipe-product-launch.md): product launch films from a brief: narrative, direction, bars, honest motion graphics, deliverables.
 - [references/recipe-abstract-surreal.md](references/recipe-abstract-surreal.md): abstract and surreal art films.
 - [references/recipe-loops.md](references/recipe-loops.md): seamless loops by method.
 - [references/recipe-satisfying-asmr.md](references/recipe-satisfying-asmr.md): satisfying and ASMR clips.

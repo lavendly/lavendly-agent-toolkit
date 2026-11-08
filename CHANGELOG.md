@@ -8,6 +8,13 @@ covers every skill and manifest (see `VERSION`).
 
 Added:
 
+- `lavendly-motion-design` gains the product launch recipe: launch films of
+  15, 30, 60 and 90 s in 9:16, 1:1 and 16:9, planned from a product brief
+  (what it is, who for, the problem, the difference, what to feel,
+  remember and do); eight narratives, eight visual directions, nine
+  product categories, shot lists written in bars, motion graphics planned
+  honestly (captions from the voiceover, imported screen recordings, end
+  cards), sound identity, a quality checklist. Eval scenario 61.
 - `lavendly-ads` gains the ad remake recipe: an ad that already works
   rebuilt around the user's product, from a shot log of the original (its
   beats at their seconds, sizes, moves, the proof beat, the ending's hold)
