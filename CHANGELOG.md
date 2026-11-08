@@ -8,6 +8,13 @@ covers every skill and manifest (see `VERSION`).
 
 Added:
 
+- `lavendly-motion-design` product launch recipe gains section 14, notes
+  from a finished launch film: script rules (the viewer's pain first, setup
+  in the buyer's words, never an unsure product, every product line named,
+  numbers exactly as stated), picture rules (sharp captures, real logos,
+  numbers counting in motion, constant movement, no planes crossing), sound
+  rules (one designed sound per visual event, score about 10 dB under the
+  voice) and one timing table for cuts, captions and sounds.
 - `lavendly-motion-design` gains the exploded view recipe: an object with
   a mechanism (a watch, a camera, headphones) shown whole, working,
   coming apart in five to seven counted layers on one axis, held while
